@@ -8,7 +8,7 @@
     using System.Globalization;
     using System.Text.Json.Serialization;
     using System.Text.Json;
-    using LOLInfo.Models;
+    using LOLInfo.Models.RiotModel;
 
     public static class Serialize
     {
