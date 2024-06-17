@@ -1,29 +1,40 @@
 ﻿namespace LOLInfo.ViewModels
 {
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Net.Http;
-    using System.Net.Http.Json;
     using System.Runtime.CompilerServices;
+    using System.Windows.Controls;
 
-    using IViewModels;
+    using LOLInfo.Views;
 
-    using Models.RiotModel;
-
-    using Utils;
-
-    internal class MainViewModel : IMainViewModel
+    public class MainViewModel : INotifyPropertyChanged
     {
-        private readonly HttpClient _client = new();
+        private Page _currentPage;
 
-        public async Task<List<Champion>> GetAllChampions()
+        public Page CurrentPage
         {
-            var response = await this._client.GetFromJsonAsync<JsonRiotFormat>(RiotUri.General());
+            get => _currentPage;
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
 
-            var champions = response?.ChampionsList?.Values.ToList();
+        public MainViewModel()
+        {
+            CurrentPage = new AllChampionPage();
+        }
 
-            return champions ?? [];
+        public void Navigate(Page page)
+        {
+            CurrentPage = page;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

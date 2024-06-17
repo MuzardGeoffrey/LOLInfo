@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\bg\A6000000.png" />
+    <None Remove="Resources\bg\F5141416.png" />
     <None Remove="Resources\champion\centered\Aatrox_0.jpg" />
     <None Remove="Resources\champion\loading\Aatrox_0.jpg" />
     <None Remove="Resources\champion\loading\Aatrox_1.jpg" />
@@ -5381,6 +5383,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\bg\A6000000.png" />
+    <Resource Include="Resources\bg\F5141416.png" />
     <Resource Include="Resources\champion\centered\Aatrox_0.jpg" />
     <Resource Include="Resources\champion\loading\Aatrox_0.jpg" />
     <Resource Include="Resources\champion\loading\Aatrox_1.jpg" />

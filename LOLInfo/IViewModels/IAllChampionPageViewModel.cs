@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 using LOLInfo.Models.RiotModel;
 
-public interface IMainViewModel
+public interface IAllChampionPageViewModel
 {
     public Task<List<Champion>> GetAllChampions();
 }
