@@ -1,40 +1,92 @@
-﻿<Page x:Class="LOLInfo.Views.AllChampionPage"
+<Page x:Class="LOLInfo.Views.AllChampionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:local="clr-namespace:LOLInfo.Views"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
+      xmlns:vm="clr-namespace:LOLInfo.ViewModels"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="AllChampionPage">
+
     <Page.Resources>
         <utils:ImagePathConverter x:Key="ImagePathConverter" />
     </Page.Resources>
 
     <Grid>
-        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <ItemsControl x:Name="ChampionItemsControl">
+        <Grid.RowDefinitions>
+            <!-- Barre d'outils (tri) -->
+            <RowDefinition Height="Auto" />
+            <!-- Grille des champions -->
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- ── Barre d'outils ──────────────────────────────────────────── -->
+        <Border Grid.Row="0"
+                Background="#F5F5F5"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1"
+                Padding="12,8">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <!-- Tri -->
+                <TextBlock Text="Trier par :"
+                           VerticalAlignment="Center"
+                           Margin="0,0,8,0"
+                           FontSize="12"
+                           Foreground="#555555" />
+                <ComboBox ItemsSource="{Binding SortOptions}"
+                          SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
+                          DisplayMemberPath="Value"
+                          Width="160"
+                          VerticalAlignment="Center" />
+
+            </StackPanel>
+        </Border>
+
+        <!-- ── Grille des champions ───────────────────────────────────── -->
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+
+            <!--
+                ItemsSource est lié à ChampionsView (ICollectionView) et non à Champions.
+                C'est la CollectionView qui porte le tri (et plus tard les filtres).
+            -->
+            <ItemsControl x:Name="ChampionItemsControl"
+                          ItemsSource="{Binding ChampionsView}">
+
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border>
-                            <Button x:Name="_ChampionDetailButton" Click="ButtonChampion_OnClick">
+                        <Border Margin="4">
+                            <Button x:Name="_ChampionDetailButton"
+                                    Click="ButtonChampion_OnClick"
+                                    Padding="6">
                                 <Button.Content>
                                     <StackPanel>
-                                        <Image Source="{Binding  Image.Full, Converter={StaticResource ImagePathConverter}}" Width="60" Height="60" Margin="0,0,0,5" />
-                                        <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+                                        <Image Source="{Binding Image.Full,
+                                                        Converter={StaticResource ImagePathConverter},
+                                                        ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
+                                               Width="60" Height="60"
+                                               Margin="0,0,0,5" />
+                                        <TextBlock Text="{Binding Name}"
+                                                   HorizontalAlignment="Center"
+                                                   FontSize="11" />
                                     </StackPanel>
                                 </Button.Content>
                             </Button>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+
             </ItemsControl>
         </ScrollViewer>
+
     </Grid>
 </Page>
