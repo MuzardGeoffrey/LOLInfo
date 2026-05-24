@@ -1,40 +1,30 @@
 ﻿namespace LOLInfo.ViewModels
 {
     using System.ComponentModel;
-    using System.Runtime.CompilerServices;
     using System.Windows.Controls;
 
-    using LOLInfo.Views;
+    using LOLInfo.Services;
 
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : BaseViewModel
     {
-        private Page _currentPage;
+        private readonly IViewManager _viewManager;
 
-        public Page CurrentPage
+        public MainViewModel(IViewManager viewManager)
         {
-            get => _currentPage;
-            set
-            {
-                _currentPage = value;
-                OnPropertyChanged();
-            }
+            _viewManager = viewManager;
+            _viewManager.PropertyChanged += OnViewManagerPropertyChanged;
         }
 
-        public MainViewModel()
-        {
-            CurrentPage = new AllChampionPage();
-        }
+        /// <summary>
+        /// Page courante affichée dans le Frame de MainWindow.
+        /// Délègue à ViewManager qui gère la navigation.
+        /// </summary>
+        public Page CurrentPage => _viewManager.CurrentPage;
 
-        public void Navigate(Page page)
+        private void OnViewManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            CurrentPage = page;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            if (e.PropertyName == nameof(IViewManager.CurrentPage))
+                OnPropertyChanged(nameof(CurrentPage));
         }
     }
 }

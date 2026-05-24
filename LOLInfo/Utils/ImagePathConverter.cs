@@ -3,10 +3,6 @@
     using System.Globalization;
     using System.Windows.Media.Imaging;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows.Data;
 
     public class ImagePathConverter : IValueConverter
@@ -15,9 +11,27 @@
         {
             if (value is string imagePath)
             {
-                // Ajoutez ici le préfixe ou le suffixe au chemin de l'image
-                string prefix = "pack://application:,,,/resources/champion/miniature/"; // Exemple de préfixe pour les ressources intégrées
-                return new BitmapImage(new Uri($"{prefix}{imagePath}"));
+                string prefix = "pack://application:,,,/resources/";
+                if (parameter is string imageType)
+                {
+                    switch (imageType)
+                    {
+                        case "spell":
+                            return new BitmapImage(new Uri($"{prefix}spell/{imagePath}"));
+                            break;
+
+                        case "passive":
+                            return new BitmapImage(new Uri($"{prefix}passive/{imagePath}"));
+                            break;
+
+                        case "miniature":
+                            return new BitmapImage(new Uri($"{prefix}champion/miniature/{imagePath}"));
+
+                        default:
+                            return value;
+                            break;
+                    }
+                }
             }
             return value;
         }
@@ -26,5 +40,14 @@
         {
             throw new NotImplementedException();
         }
+    }
+
+    public static class ImageConstant
+    {
+        public static string PASSIVE = "passive";
+
+        public static string SPELL = "spell";
+
+        public static string MINIATURE = "miniature";
     }
 }

@@ -1,67 +1,42 @@
 ﻿namespace LOLInfo.Views
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using System.Windows;
     using System.Windows.Controls;
-    using System.Windows.Data;
-    using System.Windows.Documents;
-    using System.Windows.Input;
-    using System.Windows.Media;
-    using System.Windows.Media.Imaging;
-    using System.Windows.Navigation;
-    using System.Windows.Shapes;
 
     using LOLInfo.IViewModels;
-    using LOLInfo.Models.RiotModel;
-    using LOLInfo.ViewModels;
+    using LOLInfo.IViews;
+    using LOLInfo.Services;
 
-    using Image = System.Windows.Controls.Image;
+    using Models.RiotModel;
 
     /// <summary>
     /// Logique d'interaction pour AllChampionPage.xaml
     /// </summary>
-    public partial class AllChampionPage : Page
+    public partial class AllChampionPage : Page, IAllChampionView
     {
-        private readonly IAllChampionPageViewModel _allChampionPageViewModel = new AllChampionPageViewModel();
-        public ObservableCollection<Champion> Champions = [];
+        private readonly IViewManager _viewManager;
+        private readonly IAllChampionViewModel _viewModel;
 
-        public AllChampionPage()
+        public AllChampionPage(IViewManager viewManager, IAllChampionViewModel allChampionViewModel)
         {
-            InitializeComponent();
-            this.DataContext = this;
-            GetAllChampion();
-            ChampionItemsControl.ItemsSource = Champions;
-        }
-
-        private async void GetAllChampion()
-        {
-            var champions = await this._allChampionPageViewModel.GetAllChampions();
-            foreach (var champion in champions)
-            {
-                this.Champions?.Add(champion);
-            }
-
-            Console.WriteLine("Control");
-        }
-
-        private void Image_Loaded(object sender, RoutedEventArgs e)
-        {
-            if (sender is not Image img) return;
-            var bitmapImage = new BitmapImage
-            {
-                UriSource = new Uri("ms-appx:///Assets/load01.gif")
-            };
-            img.Source = bitmapImage;
+            this.InitializeComponent();
+            this._viewManager = viewManager;
+            this._viewModel = allChampionViewModel;
+            this.DataContext = this._viewModel;
+            // Lancement du chargement async sans bloquer le thread UI
+            _ = this._viewModel.GetAllChampions();
         }
 
         private void ButtonChampion_OnClick(object sender, RoutedEventArgs e)
         {
-            NavigationService?.Navigate(new DetailChampionPage());
+            if (sender is not Button button) return;
+
+            if (button.DataContext is not Champion champion) return;
+
+            // On utilise l'Id (ex: "MissFortune") et non le Name ("Miss Fortune")
+            // car l'URL de l'API Riot est basée sur l'Id du champion.
+            if (champion.Id != null)
+                this._viewManager.NavigateToDetail(champion.Id);
         }
     }
 }

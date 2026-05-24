@@ -6,8 +6,8 @@
 
         private const string PathGeneral = "champion.json";
 
-        public static string Detail(string championName) => $"{PathApiRiot}{championName}.json";
+        public static string DETAIL(string championName) => $"{PathApiRiot}champion/{championName}.json";
 
-        public static string General() => $"{PathApiRiot}{PathGeneral}";
+        public static string GENERAL() => $"{PathApiRiot}{PathGeneral}";
     }
 }
