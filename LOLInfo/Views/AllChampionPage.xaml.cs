@@ -1,4 +1,4 @@
-﻿namespace LOLInfo.Views
+namespace LOLInfo.Views
 {
     using System.Windows;
     using System.Windows.Controls;
@@ -6,8 +6,7 @@
     using LOLInfo.IViewModels;
     using LOLInfo.IViews;
     using LOLInfo.Services;
-
-    using Models.RiotModel;
+    using LOLInfo.ViewModels;
 
     /// <summary>
     /// Logique d'interaction pour AllChampionPage.xaml
@@ -23,7 +22,6 @@
             this._viewManager = viewManager;
             this._viewModel = allChampionViewModel;
             this.DataContext = this._viewModel;
-            // Lancement du chargement async sans bloquer le thread UI
             _ = this._viewModel.GetAllChampions();
         }
 
@@ -31,12 +29,12 @@
         {
             if (sender is not Button button) return;
 
-            if (button.DataContext is not Champion champion) return;
+            // Le DataContext est maintenant un ChampionListItemViewModel,
+            // pas directement un Champion.
+            if (button.DataContext is not ChampionListItemViewModel item) return;
 
-            // On utilise l'Id (ex: "MissFortune") et non le Name ("Miss Fortune")
-            // car l'URL de l'API Riot est basée sur l'Id du champion.
-            if (champion.Id != null)
-                this._viewManager.NavigateToDetail(champion.Id);
+            if (item.Champion.Id != null)
+                this._viewManager.NavigateToDetail(item.Champion.Id);
         }
     }
 }

@@ -4,24 +4,47 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
-      xmlns:vm="clr-namespace:LOLInfo.ViewModels"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="900"
       Title="AllChampionPage">
 
     <Page.Resources>
         <utils:ImagePathConverter x:Key="ImagePathConverter" />
+
+        <!-- Style du bouton étoile : fond transparent, pas de bordure -->
+        <Style x:Key="FavoriteButtonStyle" TargetType="ToggleButton">
+            <Setter Property="Background"       Value="Transparent" />
+            <Setter Property="BorderThickness"  Value="0" />
+            <Setter Property="Cursor"           Value="Hand" />
+            <Setter Property="FontSize"         Value="14" />
+            <Setter Property="Padding"          Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <TextBlock x:Name="Star"
+                                   Text="☆"
+                                   Foreground="#AAAAAA"
+                                   FontSize="16"
+                                   HorizontalAlignment="Center" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Star" Property="Text"       Value="★" />
+                                <Setter TargetName="Star" Property="Foreground" Value="#F5A623" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <!-- Barre d'outils (tri) -->
-            <RowDefinition Height="Auto" />
-            <!-- Grille des champions -->
-            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />  <!-- Barre d'outils -->
+            <RowDefinition Height="*" />     <!-- Grille des champions -->
         </Grid.RowDefinitions>
 
-        <!-- ── Barre d'outils ──────────────────────────────────────────── -->
+        <!-- ── Barre d'outils ─────────────────────────────────────────── -->
         <Border Grid.Row="0"
                 Background="#F5F5F5"
                 BorderBrush="#E0E0E0"
@@ -41,6 +64,21 @@
                           Width="160"
                           VerticalAlignment="Center" />
 
+                <!-- Séparateur -->
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"
+                           Margin="12,0" />
+
+                <!-- Filtre Favoris -->
+                <ToggleButton IsChecked="{Binding ShowFavoritesOnly, Mode=TwoWay}"
+                              VerticalAlignment="Center"
+                              Padding="10,4"
+                              Cursor="Hand">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="★" Foreground="#F5A623" FontSize="13" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="Favoris" FontSize="12" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ToggleButton>
+
             </StackPanel>
         </Border>
 
@@ -50,8 +88,8 @@
                       VerticalScrollBarVisibility="Auto">
 
             <!--
-                ItemsSource est lié à ChampionsView (ICollectionView) et non à Champions.
-                C'est la CollectionView qui porte le tri (et plus tard les filtres).
+                ItemsSource est lié à ChampionsView (ICollectionView).
+                Le DataContext de chaque item est un ChampionListItemViewModel.
             -->
             <ItemsControl x:Name="ChampionItemsControl"
                           ItemsSource="{Binding ChampionsView}">
@@ -64,23 +102,41 @@
 
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
+                        <!-- DataContext = ChampionListItemViewModel -->
                         <Border Margin="4">
-                            <Button x:Name="_ChampionDetailButton"
-                                    Click="ButtonChampion_OnClick"
-                                    Padding="6">
-                                <Button.Content>
+                            <Grid Width="80">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <!-- Bouton de navigation vers le détail -->
+                                <Button Grid.Row="0"
+                                        x:Name="_ChampionDetailButton"
+                                        Click="ButtonChampion_OnClick"
+                                        Padding="6"
+                                        ToolTip="{Binding Champion.Title}">
                                     <StackPanel>
-                                        <Image Source="{Binding Image.Full,
+                                        <Image Source="{Binding Champion.Image.Full,
                                                         Converter={StaticResource ImagePathConverter},
                                                         ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
                                                Width="60" Height="60"
-                                               Margin="0,0,0,5" />
-                                        <TextBlock Text="{Binding Name}"
+                                               Margin="0,0,0,4" />
+                                        <TextBlock Text="{Binding Champion.Name}"
                                                    HorizontalAlignment="Center"
-                                                   FontSize="11" />
+                                                   FontSize="11"
+                                                   TextTrimming="CharacterEllipsis" />
                                     </StackPanel>
-                                </Button.Content>
-                            </Button>
+                                </Button>
+
+                                <!-- Bouton étoile (favori) -->
+                                <ToggleButton Grid.Row="1"
+                                              Style="{StaticResource FavoriteButtonStyle}"
+                                              IsChecked="{Binding IsFavorite, Mode=OneWay}"
+                                              Command="{Binding ToggleFavoriteCommand}"
+                                              HorizontalAlignment="Center"
+                                              Margin="0,2,0,0" />
+                            </Grid>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
