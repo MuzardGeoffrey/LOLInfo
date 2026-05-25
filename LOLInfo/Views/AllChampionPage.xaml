@@ -4,12 +4,20 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
+      xmlns:models="clr-namespace:LOLInfo.Models"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="900"
       Title="AllChampionPage">
 
     <Page.Resources>
         <utils:ImagePathConverter x:Key="ImagePathConverter" />
+
+        <!--
+            Convertisseur d'égalité pour les RadioButton liés à un enum.
+            Principe : IsChecked = (valeur du bouton == valeur du ViewModel).
+            Quand on coche un bouton, il envoie sa valeur au ViewModel.
+        -->
+        <utils:EnumToBoolConverter x:Key="EnumToBoolConverter" />
 
         <!-- Style du bouton étoile : fond transparent, pas de bordure -->
         <Style x:Key="FavoriteButtonStyle" TargetType="ToggleButton">
@@ -36,6 +44,14 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Style commun pour les RadioButton de filtre -->
+        <Style x:Key="FilterRadioStyle" TargetType="RadioButton">
+            <Setter Property="Margin"           Value="0,0,6,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize"         Value="12" />
+            <Setter Property="Cursor"           Value="Hand" />
+        </Style>
     </Page.Resources>
 
     <Grid>
@@ -50,27 +66,52 @@
                 BorderBrush="#E0E0E0"
                 BorderThickness="0,0,0,1"
                 Padding="12,8">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 
-                <!-- Tri -->
-                <TextBlock Text="Trier par :"
-                           VerticalAlignment="Center"
-                           Margin="0,0,8,0"
-                           FontSize="12"
-                           Foreground="#555555" />
-                <ComboBox ItemsSource="{Binding SortOptions}"
-                          SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
-                          DisplayMemberPath="Value"
-                          Width="160"
-                          VerticalAlignment="Center" />
+            <!--
+                WrapPanel : si la fenêtre est trop étroite, les éléments
+                passent à la ligne automatiquement.
+            -->
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
 
-                <!-- Séparateur -->
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"
-                           Margin="12,0" />
+                <!-- ── Recherche par nom ────────────────────────────── -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="🔍"
+                               VerticalAlignment="Center"
+                               Margin="0,0,6,0"
+                               FontSize="13" />
+                    <!--
+                        UpdateSourceTrigger=PropertyChanged :
+                        le ViewModel reçoit le texte à chaque frappe,
+                        pas seulement quand le TextBox perd le focus.
+                    -->
+                    <TextBox Width="160"
+                             VerticalAlignment="Center"
+                             Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="12" />
+                </StackPanel>
 
-                <!-- Filtre Favoris -->
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Tri ──────────────────────────────────────────── -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="Trier :"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"
+                               FontSize="12"
+                               Foreground="#555555" />
+                    <ComboBox ItemsSource="{Binding SortOptions}"
+                              SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
+                              DisplayMemberPath="Value"
+                              Width="140"
+                              VerticalAlignment="Center" />
+                </StackPanel>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Filtre Favoris ────────────────────────────────── -->
                 <ToggleButton IsChecked="{Binding ShowFavoritesOnly, Mode=TwoWay}"
                               VerticalAlignment="Center"
+                              Margin="0,0,16,0"
                               Padding="10,4"
                               Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
@@ -79,7 +120,79 @@
                     </StackPanel>
                 </ToggleButton>
 
-            </StackPanel>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Filtre Type de dégâts ─────────────────────────── -->
+                <!--
+                    Chaque RadioButton est lié à la même propriété SelectedDamageType,
+                    mais avec une valeur de comparaison différente (ConverterParameter).
+                    EnumToBoolConverter transforme : IsChecked = (SelectedDamageType == ConverterParameter).
+                    Quand on coche un bouton, le convertisseur ConvertBack() envoie
+                    la valeur enum correspondante au ViewModel.
+                    GroupName isole ce groupe des autres RadioButtons de la page.
+                -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="Dégâts :"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"
+                               FontSize="12"
+                               Foreground="#555555" />
+                    <RadioButton Content="Tous"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="DamageFilter"
+                                 IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:DamageTypeFilter.Tous}}" />
+                    <RadioButton Content="AD"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="DamageFilter"
+                                 IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:DamageTypeFilter.AD}}" />
+                    <RadioButton Content="AP"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="DamageFilter"
+                                 IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:DamageTypeFilter.AP}}" />
+                    <RadioButton Content="Mixte"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="DamageFilter"
+                                 IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:DamageTypeFilter.Mixte}}" />
+                </StackPanel>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Filtre Portée ─────────────────────────────────── -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Portée :"
+                               VerticalAlignment="Center"
+                               Margin="0,0,8,0"
+                               FontSize="12"
+                               Foreground="#555555" />
+                    <RadioButton Content="Tous"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="RangeFilter"
+                                 IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:RangeTypeFilter.Tous}}" />
+                    <RadioButton Content="Mêlée"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="RangeFilter"
+                                 IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:RangeTypeFilter.Melee}}" />
+                    <RadioButton Content="Distance"
+                                 Style="{StaticResource FilterRadioStyle}"
+                                 GroupName="RangeFilter"
+                                 IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
+                                             Converter={StaticResource EnumToBoolConverter},
+                                             ConverterParameter={x:Static models:RangeTypeFilter.Range}}" />
+                </StackPanel>
+
+            </WrapPanel>
         </Border>
 
         <!-- ── Grille des champions ───────────────────────────────────── -->

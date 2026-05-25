@@ -60,7 +60,7 @@ namespace LOLInfo.ViewModels
             }
         }
 
-        // ── Filtre Favoris ────────────────────────────────────────────────
+        // ── Filtre : Favoris ─────────────────────────────────────────────
 
         private bool _showFavoritesOnly;
 
@@ -71,7 +71,60 @@ namespace LOLInfo.ViewModels
             {
                 _showFavoritesOnly = value;
                 OnPropertyChanged(nameof(ShowFavoritesOnly));
-                _logger.LogDebug("Filtre favoris : {ShowFavoritesOnly}", value ? "activé" : "désactivé");
+                _logger.LogDebug("Filtre favoris : {Value}", value ? "activé" : "désactivé");
+                ChampionsView?.Refresh();
+            }
+        }
+
+        // ── Filtre : Nom ─────────────────────────────────────────────────
+
+        private string _nameFilter = string.Empty;
+
+        /// <summary>
+        /// Texte tapé dans la barre de recherche.
+        /// Le setter déclenche un Refresh() de la CollectionView
+        /// pour que l'affichage se mette à jour instantanément.
+        /// </summary>
+        public string NameFilter
+        {
+            get => _nameFilter;
+            set
+            {
+                _nameFilter = value ?? string.Empty;
+                OnPropertyChanged(nameof(NameFilter));
+                _logger.LogDebug("Filtre nom : '{NameFilter}'", _nameFilter);
+                ChampionsView?.Refresh();
+            }
+        }
+
+        // ── Filtre : Type de dégâts ──────────────────────────────────────
+
+        private DamageTypeFilter _selectedDamageType = DamageTypeFilter.Tous;
+
+        public DamageTypeFilter SelectedDamageType
+        {
+            get => _selectedDamageType;
+            set
+            {
+                _selectedDamageType = value;
+                OnPropertyChanged(nameof(SelectedDamageType));
+                _logger.LogDebug("Filtre dégâts : {Value}", value);
+                ChampionsView?.Refresh();
+            }
+        }
+
+        // ── Filtre : Portée ──────────────────────────────────────────────
+
+        private RangeTypeFilter _selectedRangeType = RangeTypeFilter.Tous;
+
+        public RangeTypeFilter SelectedRangeType
+        {
+            get => _selectedRangeType;
+            set
+            {
+                _selectedRangeType = value;
+                OnPropertyChanged(nameof(SelectedRangeType));
+                _logger.LogDebug("Filtre portée : {Value}", value);
                 ChampionsView?.Refresh();
             }
         }
@@ -98,11 +151,16 @@ namespace LOLInfo.ViewModels
             var champions = await _httpRiot.GetAllChampions();
 
             // Chaque Champion est wrappé dans un ChampionListItemViewModel
-            // qui porte son propre IsFavorite + ToggleFavoriteCommand.
+            // qui porte son propre IsFavorite, ToggleFavoriteCommand,
+            // DamageType (calculé) et IsRanged (calculé).
             _items = new ObservableCollection<ChampionListItemViewModel>();
             foreach (var champion in champions)
                 _items.Add(new ChampionListItemViewModel(champion, _favoritesService));
 
+            // CollectionViewSource.GetDefaultView() retourne un ICollectionView
+            // (en pratique un ListCollectionView pour les ObservableCollection).
+            // On y branche notre prédicat de filtre : ApplyFilter sera appelé
+            // pour chaque item à chaque Refresh().
             ChampionsView = CollectionViewSource.GetDefaultView(_items);
             ChampionsView.Filter = ApplyFilter;
 
@@ -145,15 +203,36 @@ namespace LOLInfo.ViewModels
         // ── Filtre ───────────────────────────────────────────────────────
 
         /// <summary>
-        /// Prédicat passé à CollectionView.Filter.
-        /// Actuellement : filtre favoris uniquement.
-        /// Les autres filtres (nom, tags, etc.) seront ajoutés ici.
+        /// Prédicat central : appelé par la CollectionView pour chaque item
+        /// à chaque Refresh(). Retourne true = visible, false = caché.
+        ///
+        /// Tous les filtres sont combinés en AND :
+        /// un champion doit passer TOUS les filtres actifs pour être affiché.
+        ///
+        /// Ordre des conditions : du plus rapide au plus coûteux,
+        /// pour court-circuiter le plus tôt possible via l'opérateur &&.
         /// </summary>
         private bool ApplyFilter(object obj)
         {
             if (obj is not ChampionListItemViewModel item) return false;
 
-            if (ShowFavoritesOnly && !item.IsFavorite) return false;
+            // 1. Filtre favori — lecture directe d'un bool
+            if (ShowFavoritesOnly && !item.IsFavorite)
+                return false;
+
+            // 2. Filtre type de dégâts — comparaison d'enum (valeur calculée à la construction)
+            if (SelectedDamageType != DamageTypeFilter.Tous && item.DamageType != SelectedDamageType)
+                return false;
+
+            // 3. Filtre portée — comparaison bool (valeur calculée à la construction)
+            if (SelectedRangeType == RangeTypeFilter.Melee  &&  item.IsRanged) return false;
+            if (SelectedRangeType == RangeTypeFilter.Range  && !item.IsRanged) return false;
+
+            // 4. Filtre nom — comparaison de chaîne, insensible à la casse
+            //    Placé en dernier car Contains est légèrement plus coûteux.
+            if (!string.IsNullOrEmpty(NameFilter) &&
+                !(item.Champion.Name?.Contains(NameFilter, StringComparison.OrdinalIgnoreCase) ?? false))
+                return false;
 
             return true;
         }

@@ -14,16 +14,36 @@ namespace LOLInfo.IViewModels
         /// </summary>
         ICollectionView ChampionsView { get; }
 
+        // ── Tri ──────────────────────────────────────────────────────────
+
         /// <summary>Options de tri disponibles (enum + libellé).</summary>
         List<KeyValuePair<SortOption, string>> SortOptions { get; }
 
         /// <summary>Option de tri actuellement sélectionnée.</summary>
         KeyValuePair<SortOption, string> SelectedSortOption { get; set; }
 
+        // ── Filtres ───────────────────────────────────────────────────────
+
         /// <summary>
-        /// Quand true, la CollectionView n'affiche que les champions en favori.
+        /// Texte saisi par l'utilisateur pour filtrer par nom.
+        /// Vide = pas de filtre nom.
+        /// </summary>
+        string NameFilter { get; set; }
+
+        /// <summary>
+        /// Quand true, n'affiche que les champions en favori.
         /// </summary>
         bool ShowFavoritesOnly { get; set; }
+
+        /// <summary>
+        /// Filtre sur le type de dégâts principal (Tous / AD / AP / Mixte).
+        /// </summary>
+        DamageTypeFilter SelectedDamageType { get; set; }
+
+        /// <summary>
+        /// Filtre sur la portée (Tous / Melee / Range).
+        /// </summary>
+        RangeTypeFilter SelectedRangeType { get; set; }
 
         Task GetAllChampions();
     }

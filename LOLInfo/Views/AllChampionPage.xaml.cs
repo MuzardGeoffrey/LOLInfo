@@ -22,7 +22,7 @@ namespace LOLInfo.Views
             this._viewManager = viewManager;
             this._viewModel = allChampionViewModel;
             this.DataContext = this._viewModel;
-            _ = this._viewModel.GetAllChampions();
+            this._viewModel.GetAllChampions();
         }
 
         private void ButtonChampion_OnClick(object sender, RoutedEventArgs e)
