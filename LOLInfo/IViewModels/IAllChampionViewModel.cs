@@ -9,20 +9,21 @@ namespace LOLInfo.IViewModels
     public interface IAllChampionViewModel
     {
         /// <summary>
-        /// Vue triée (et plus tard filtrée) de la collection de champions.
-        /// Lier l'ItemsControl à cette propriété plutôt qu'à Champions directement.
+        /// Vue triée et filtrée de la liste des champions.
+        /// Lier l'ItemsControl à cette propriété.
         /// </summary>
         ICollectionView ChampionsView { get; }
 
-        /// <summary>
-        /// Liste des options de tri disponibles (clé enum + libellé affiché).
-        /// </summary>
+        /// <summary>Options de tri disponibles (enum + libellé).</summary>
         List<KeyValuePair<SortOption, string>> SortOptions { get; }
 
-        /// <summary>
-        /// Option de tri sélectionnée. Le setter déclenche ApplySort().
-        /// </summary>
+        /// <summary>Option de tri actuellement sélectionnée.</summary>
         KeyValuePair<SortOption, string> SelectedSortOption { get; set; }
+
+        /// <summary>
+        /// Quand true, la CollectionView n'affiche que les champions en favori.
+        /// </summary>
+        bool ShowFavoritesOnly { get; set; }
 
         Task GetAllChampions();
     }
