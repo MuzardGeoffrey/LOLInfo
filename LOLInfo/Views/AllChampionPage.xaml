@@ -11,29 +11,19 @@
 
     <Page.Resources>
         <utils:ImagePathConverter x:Key="ImagePathConverter" />
-
-        <!--
-            Convertisseur d'égalité pour les RadioButton liés à un enum.
-            Principe : IsChecked = (valeur du bouton == valeur du ViewModel).
-            Quand on coche un bouton, il envoie sa valeur au ViewModel.
-        -->
         <utils:EnumToBoolConverter x:Key="EnumToBoolConverter" />
 
-        <!-- Style du bouton étoile : fond transparent, pas de bordure -->
+        <!-- Style du bouton étoile -->
         <Style x:Key="FavoriteButtonStyle" TargetType="ToggleButton">
-            <Setter Property="Background"       Value="Transparent" />
-            <Setter Property="BorderThickness"  Value="0" />
-            <Setter Property="Cursor"           Value="Hand" />
-            <Setter Property="FontSize"         Value="14" />
-            <Setter Property="Padding"          Value="0" />
+            <Setter Property="Background"      Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Cursor"          Value="Hand" />
+            <Setter Property="FontSize"        Value="14" />
+            <Setter Property="Padding"         Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
-                        <TextBlock x:Name="Star"
-                                   Text="☆"
-                                   Foreground="#AAAAAA"
-                                   FontSize="16"
-                                   HorizontalAlignment="Center" />
+                        <TextBlock x:Name="Star" Text="☆" Foreground="#AAAAAA" FontSize="16" HorizontalAlignment="Center" />
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="Star" Property="Text"       Value="★" />
@@ -45,119 +35,101 @@
             </Setter>
         </Style>
 
-        <!-- Style commun pour les RadioButton de filtre -->
+        <!-- Style partagé des RadioButton de filtre -->
         <Style x:Key="FilterRadioStyle" TargetType="RadioButton">
-            <Setter Property="Margin"           Value="0,0,6,0" />
+            <Setter Property="Margin"            Value="0,0,6,0" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize"         Value="12" />
-            <Setter Property="Cursor"           Value="Hand" />
+            <Setter Property="FontSize"          Value="12" />
+            <Setter Property="Cursor"            Value="Hand" />
+        </Style>
+
+        <!-- Style partagé des CheckBox de filtre -->
+        <Style x:Key="FilterCheckStyle" TargetType="CheckBox">
+            <Setter Property="Margin"            Value="0,0,8,0" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="FontSize"          Value="12" />
+            <Setter Property="Cursor"            Value="Hand" />
+        </Style>
+
+        <!-- Style du libellé de section dans la toolbar -->
+        <Style x:Key="FilterLabelStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin"            Value="0,0,8,0" />
+            <Setter Property="FontSize"          Value="12" />
+            <Setter Property="Foreground"        Value="#555555" />
         </Style>
     </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />  <!-- Barre d'outils -->
+            <RowDefinition Height="Auto" />  <!-- Toolbar ligne 1 : filtres rapides -->
+            <RowDefinition Height="Auto" />  <!-- Toolbar ligne 2 : filtres avancés -->
             <RowDefinition Height="*" />     <!-- Grille des champions -->
         </Grid.RowDefinitions>
 
-        <!-- ── Barre d'outils ─────────────────────────────────────────── -->
+        <!-- ══════════════════════════════════════════════════════════════
+             LIGNE 1 : Recherche, Tri, Favoris, Dégâts, Portée
+             ══════════════════════════════════════════════════════════════ -->
         <Border Grid.Row="0"
                 Background="#F5F5F5"
                 BorderBrush="#E0E0E0"
                 BorderThickness="0,0,0,1"
                 Padding="12,8">
-
-            <!--
-                WrapPanel : si la fenêtre est trop étroite, les éléments
-                passent à la ligne automatiquement.
-            -->
             <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
 
-                <!-- ── Recherche par nom ────────────────────────────── -->
+                <!-- Recherche par nom -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="🔍"
-                               VerticalAlignment="Center"
-                               Margin="0,0,6,0"
-                               FontSize="13" />
+                    <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,6,0" FontSize="13" />
                     <!--
-                        UpdateSourceTrigger=PropertyChanged :
-                        le ViewModel reçoit le texte à chaque frappe,
-                        pas seulement quand le TextBox perd le focus.
+                        UpdateSourceTrigger=PropertyChanged : le setter est appelé
+                        à chaque frappe clavier, pas seulement à la perte de focus.
+                        Cela donne la recherche en temps réel.
                     -->
-                    <TextBox Width="160"
-                             VerticalAlignment="Center"
-                             Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             FontSize="12" />
+                    <TextBox Width="160" VerticalAlignment="Center" FontSize="12"
+                             Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
 
-                <!-- ── Tri ──────────────────────────────────────────── -->
+                <!-- Tri -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Trier :"
-                               VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               FontSize="12"
-                               Foreground="#555555" />
-                    <ComboBox ItemsSource="{Binding SortOptions}"
+                    <TextBlock Text="Trier :" Style="{StaticResource FilterLabelStyle}" />
+                    <ComboBox Width="140" VerticalAlignment="Center"
+                              ItemsSource="{Binding SortOptions}"
                               SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
-                              DisplayMemberPath="Value"
-                              Width="140"
-                              VerticalAlignment="Center" />
+                              DisplayMemberPath="Value" />
                 </StackPanel>
 
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
 
-                <!-- ── Filtre Favoris ────────────────────────────────── -->
+                <!-- Favoris -->
                 <ToggleButton IsChecked="{Binding ShowFavoritesOnly, Mode=TwoWay}"
-                              VerticalAlignment="Center"
-                              Margin="0,0,16,0"
-                              Padding="10,4"
-                              Cursor="Hand">
+                              VerticalAlignment="Center" Margin="0,0,16,0"
+                              Padding="10,4" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="★" Foreground="#F5A623" FontSize="13" Margin="0,0,5,0" VerticalAlignment="Center"/>
-                        <TextBlock Text="Favoris" FontSize="12" VerticalAlignment="Center"/>
+                        <TextBlock Text="★" Foreground="#F5A623" FontSize="13" Margin="0,0,5,0" VerticalAlignment="Center" />
+                        <TextBlock Text="Favoris" FontSize="12" VerticalAlignment="Center" />
                     </StackPanel>
                 </ToggleButton>
 
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
 
-                <!-- ── Filtre Type de dégâts ─────────────────────────── -->
-                <!--
-                    Chaque RadioButton est lié à la même propriété SelectedDamageType,
-                    mais avec une valeur de comparaison différente (ConverterParameter).
-                    EnumToBoolConverter transforme : IsChecked = (SelectedDamageType == ConverterParameter).
-                    Quand on coche un bouton, le convertisseur ConvertBack() envoie
-                    la valeur enum correspondante au ViewModel.
-                    GroupName isole ce groupe des autres RadioButtons de la page.
-                -->
+                <!-- Filtre Dégâts -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Dégâts :"
-                               VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               FontSize="12"
-                               Foreground="#555555" />
-                    <RadioButton Content="Tous"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="DamageFilter"
+                    <TextBlock Text="Dégâts :" Style="{StaticResource FilterLabelStyle}" />
+                    <RadioButton Content="Tous"  Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.Tous}}" />
-                    <RadioButton Content="AD"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="DamageFilter"
+                    <RadioButton Content="AD"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.AD}}" />
-                    <RadioButton Content="AP"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="DamageFilter"
+                    <RadioButton Content="AP"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.AP}}" />
-                    <RadioButton Content="Mixte"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="DamageFilter"
+                    <RadioButton Content="Mixte" Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.Mixte}}" />
@@ -165,28 +137,18 @@
 
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
 
-                <!-- ── Filtre Portée ─────────────────────────────────── -->
+                <!-- Filtre Portée -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Portée :"
-                               VerticalAlignment="Center"
-                               Margin="0,0,8,0"
-                               FontSize="12"
-                               Foreground="#555555" />
-                    <RadioButton Content="Tous"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="RangeFilter"
+                    <TextBlock Text="Portée :" Style="{StaticResource FilterLabelStyle}" />
+                    <RadioButton Content="Tous"     Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Tous}}" />
-                    <RadioButton Content="Mêlée"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="RangeFilter"
+                    <RadioButton Content="Mêlée"    Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Melee}}" />
-                    <RadioButton Content="Distance"
-                                 Style="{StaticResource FilterRadioStyle}"
-                                 GroupName="RangeFilter"
+                    <RadioButton Content="Distance" Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Range}}" />
@@ -195,54 +157,134 @@
             </WrapPanel>
         </Border>
 
-        <!-- ── Grille des champions ───────────────────────────────────── -->
-        <ScrollViewer Grid.Row="1"
+        <!-- ══════════════════════════════════════════════════════════════
+             LIGNE 2 : Classes, Difficulté, Ressources
+             ══════════════════════════════════════════════════════════════ -->
+        <Border Grid.Row="1"
+                Background="#EFEFEF"
+                BorderBrush="#E0E0E0"
+                BorderThickness="0,0,0,1"
+                Padding="12,6">
+            <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <!-- ── Classes (Tags) ─────────────────────────────────── -->
+                <!--
+                    ItemsControl itère sur TagFilters (IReadOnlyList<FilterItemViewModel>).
+                    Le DataContext de chaque CheckBox est le FilterItemViewModel correspondant.
+                    IsChecked est bindé à IsSelected en TwoWay :
+                      - cocher la case → IsSelected = true → PropertyChanged levé
+                      - AllChampionViewModel reçoit la notification → Refresh()
+                -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="Classes :" Style="{StaticResource FilterLabelStyle}" />
+                    <ItemsControl ItemsSource="{Binding TagFilters}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <!-- DataContext = FilterItemViewModel -->
+                                <CheckBox Content="{Binding Label}"
+                                          IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          Style="{StaticResource FilterCheckStyle}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Difficulté ─────────────────────────────────────── -->
+                <!--
+                    Deux Sliders liés à DifficultyMin et DifficultyMax.
+                    Minimum="0" Maximum="10" TickFrequency="1" IsSnapToTickEnabled="True"
+                    forcent des valeurs entières.
+
+                    Le TextBlock affiche la valeur en temps réel via binding.
+
+                    Note : Slider.Value est un double. Le setter de DifficultyMin/Max
+                    reçoit un double converti automatiquement en int par WPF.
+                -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="Difficulté :" Style="{StaticResource FilterLabelStyle}" />
+
+                    <TextBlock Style="{StaticResource FilterLabelStyle}" Margin="0,0,4,0"
+                               Text="{Binding DifficultyMin}" />
+                    <Slider Width="80" VerticalAlignment="Center" Margin="0,0,8,0"
+                            Minimum="0" Maximum="10"
+                            TickFrequency="1" IsSnapToTickEnabled="True"
+                            Value="{Binding DifficultyMin, Mode=TwoWay}" />
+
+                    <TextBlock Text="→" Style="{StaticResource FilterLabelStyle}" Margin="0,0,4,0" />
+
+                    <Slider Width="80" VerticalAlignment="Center" Margin="0,0,4,0"
+                            Minimum="0" Maximum="10"
+                            TickFrequency="1" IsSnapToTickEnabled="True"
+                            Value="{Binding DifficultyMax, Mode=TwoWay}" />
+                    <TextBlock Style="{StaticResource FilterLabelStyle}" Margin="0"
+                               Text="{Binding DifficultyMax}" />
+                </StackPanel>
+
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
+
+                <!-- ── Ressources (Partype) ───────────────────────────── -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Ressource :" Style="{StaticResource FilterLabelStyle}" />
+                    <ItemsControl ItemsSource="{Binding PartypeFilters}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox Content="{Binding Label}"
+                                          IsChecked="{Binding IsSelected, Mode=TwoWay}"
+                                          Style="{StaticResource FilterCheckStyle}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+            </WrapPanel>
+        </Border>
+
+        <!-- ══════════════════════════════════════════════════════════════
+             GRILLE DES CHAMPIONS
+             ══════════════════════════════════════════════════════════════ -->
+        <ScrollViewer Grid.Row="2"
                       HorizontalScrollBarVisibility="Disabled"
                       VerticalScrollBarVisibility="Auto">
-
-            <!--
-                ItemsSource est lié à ChampionsView (ICollectionView).
-                Le DataContext de chaque item est un ChampionListItemViewModel.
-            -->
-            <ItemsControl x:Name="ChampionItemsControl"
-                          ItemsSource="{Binding ChampionsView}">
-
+            <ItemsControl x:Name="ChampionItemsControl" ItemsSource="{Binding ChampionsView}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <!-- DataContext = ChampionListItemViewModel -->
                         <Border Margin="4">
                             <Grid Width="80">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-
-                                <!-- Bouton de navigation vers le détail -->
-                                <Button Grid.Row="0"
-                                        x:Name="_ChampionDetailButton"
+                                <Button Grid.Row="0" x:Name="_ChampionDetailButton"
                                         Click="ButtonChampion_OnClick"
-                                        Padding="6"
-                                        ToolTip="{Binding Champion.Title}">
+                                        Padding="6" ToolTip="{Binding Champion.Title}">
                                     <StackPanel>
                                         <Image Source="{Binding Champion.Image.Full,
                                                         Converter={StaticResource ImagePathConverter},
                                                         ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
-                                               Width="60" Height="60"
-                                               Margin="0,0,0,4" />
+                                               Width="60" Height="60" Margin="0,0,0,4" />
                                         <TextBlock Text="{Binding Champion.Name}"
                                                    HorizontalAlignment="Center"
                                                    FontSize="11"
                                                    TextTrimming="CharacterEllipsis" />
                                     </StackPanel>
                                 </Button>
-
-                                <!-- Bouton étoile (favori) -->
                                 <ToggleButton Grid.Row="1"
                                               Style="{StaticResource FavoriteButtonStyle}"
                                               IsChecked="{Binding IsFavorite, Mode=OneWay}"
@@ -253,7 +295,6 @@
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-
             </ItemsControl>
         </ScrollViewer>
 
