@@ -1,99 +1,298 @@
-﻿<Page x:Class="LOLInfo.Views.DetailChampionPage"
+<Page x:Class="LOLInfo.Views.DetailChampionPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
+      xmlns:vm="clr-namespace:LOLInfo.ViewModels"
       mc:Ignorable="d"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="900"
       Title="DetailChampionPage">
+
     <Page.Resources>
         <utils:ImagePathConverter x:Key="ImagePathConverter" />
-    </Page.Resources>
-    <Grid>
-        <TabControl Margin="10">
-            <TabItem Header="GENERAL">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="95*"></RowDefinition>
-                        <RowDefinition Height="307*">
-                        </RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" x:Name="ChampionIcon" Source="{Binding  ChampionSelected.Result.Image.Full, Converter={StaticResource ImagePathConverter}, ConverterParameter='miniature'}" HorizontalAlignment="Left" Height="60" Margin="10,10,10,10" Width="60" />
-                    <Label Grid.Row="0" x:Name="ChampionName" Content="{Binding ChampionSelected.Result.Name}" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" />
-                    <Label Grid.Row="0" x:Name="ChampionTitle" Content="{Binding ChampionSelected.Result.Title}" HorizontalAlignment="Left" Margin="90,30,0,15" VerticalAlignment="Top" Height="33" Width="127" />
-                    <TextBlock Grid.Row="0" x:Name="ChampionLore" Text="{Binding ChampionSelected.Result.Lore}" HorizontalAlignment="Right" Margin="300,10,25,0" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" />
 
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding ChampionSelected.Result.Tags, UpdateSourceTrigger=PropertyChanged}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel>
-                                    <Label Content="{Binding }" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="20,20,20,20" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                    <Label Grid.Row="1" x:Name="Role" Content="Roles Principaux" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                </Grid>
-            </TabItem>
+        <!--
+            BooleanToVisibilityConverter est fourni par WPF.
+            Il transforme true → Visible, false → Collapsed.
+            Utilisé pour masquer les sections Stats et Leveltip du passif.
+        -->
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <!--
+            DataTemplate unique pour SpellViewModel.
+            Utilisé par les 5 onglets (Passif, Q, W, E, R).
+            Modifier ici pour changer l'apparence de TOUS les sorts à la fois.
+        -->
+        <DataTemplate x:Key="SpellTemplate" DataType="{x:Type vm:SpellViewModel}">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16">
+                <StackPanel>
+
+                    <!-- ── En-tête : icône + nom + description ─────────── -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!--
+                            L'icône utilise un MultiBinding impossible à faire ici.
+                            On utilise un style avec DataTrigger sur IsPassive
+                            pour choisir le bon ConverterParameter.
+                            Alternative simple : deux Image superposées via Trigger.
+                        -->
+                        <Border Grid.Column="0"
+                                Width="72" Height="72"
+                                CornerRadius="6"
+                                BorderBrush="#444"
+                                BorderThickness="1">
+                            <!--
+                                Passif et sorts actifs utilisent désormais le même dossier spell/.
+                                Plus besoin de différencier IsPassive pour le chemin d'image.
+                            -->
+                            <Image Source="{Binding IconPath,
+                                           Converter={StaticResource ImagePathConverter},
+                                           ConverterParameter={x:Static utils:ImageConstant.SPELL}}" />
+                        </Border>
+
+                        <!-- Nom + description -->
+                        <StackPanel Grid.Column="1" Margin="12,0,0,0" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Name}"
+                                       FontSize="16"
+                                       FontWeight="SemiBold"
+                                       Margin="0,0,0,6" />
+                            <TextBlock Text="{Binding Description}"
+                                       FontSize="12"
+                                       Foreground="#444"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </Grid>
+
+                    <!-- ── Stats : cooldown / coût / portée ─────────────── -->
+                    <!--
+                        Visibility liée à HasStats (false pour le passif).
+                        BoolToVis : true → Visible, false → Collapsed.
+                    -->
+                    <Border Visibility="{Binding HasStats, Converter={StaticResource BoolToVis}}"
+                            Background="#F0F0F0"
+                            CornerRadius="4"
+                            Padding="12,8"
+                            Margin="0,0,0,12">
+                        <WrapPanel Orientation="Horizontal">
+
+                            <!-- Cooldown -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                                <TextBlock Text="⏱ Recharge : "
+                                           FontSize="12" FontWeight="SemiBold"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding CooldownBurn}"
+                                           FontSize="12"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <!-- Coût -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,24,0">
+                                <TextBlock Text="💧 Coût : "
+                                           FontSize="12" FontWeight="SemiBold"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding CostBurn}"
+                                           FontSize="12"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <!-- Portée -->
+                            <StackPanel Orientation="Horizontal"
+                                        Visibility="{Binding RangeBurn, Converter={StaticResource BoolToVis}}">
+                                <TextBlock Text="🎯 Portée : "
+                                           FontSize="12" FontWeight="SemiBold"
+                                           VerticalAlignment="Center" />
+                                <TextBlock Text="{Binding RangeBurn}"
+                                           FontSize="12"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+
+                        </WrapPanel>
+                    </Border>
+
+                    <!-- ── Gain par niveau (Leveltip) ─────────────────────── -->
+                    <!--
+                        Visibility liée à HasLeveltip (false si liste vide).
+                        ItemsControl itère sur LeveltipRows.
+                        Chaque ligne = un LeveltipRowViewModel : Label + Effect.
+                    -->
+                    <StackPanel Visibility="{Binding HasLeveltip, Converter={StaticResource BoolToVis}}">
+
+                        <TextBlock Text="Gain par niveau"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Margin="0,0,0,6" />
+
+                        <ItemsControl ItemsSource="{Binding LeveltipRows}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:LeveltipRowViewModel}">
+                                    <!--
+                                        Grille à deux colonnes :
+                                        - Col 0 (fixe 180px) : libellé de la stat
+                                        - Col 1 (*)          : valeurs par niveau
+                                        La largeur fixe aligne tous les labels verticalement.
+                                    -->
+                                    <Grid Margin="0,2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding Label}"
+                                                   FontSize="12"
+                                                   Foreground="#555"
+                                                   VerticalAlignment="Center" />
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Effect}"
+                                                   FontSize="12"
+                                                   FontWeight="SemiBold"
+                                                   VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </DataTemplate>
+
+    </Page.Resources>
+
+    <!-- ── Layout principal ──────────────────────────────────────────────── -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />  <!-- En-tête champion -->
+            <RowDefinition Height="*" />     <!-- Onglets -->
+        </Grid.RowDefinitions>
+
+        <!-- ── En-tête : icône + nom + titre ──────────────────────────── -->
+        <Border Grid.Row="0"
+                Background="#1A1A2E"
+                Padding="16,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Image Grid.Column="0"
+                       Source="{Binding Champion.Image.Full,
+                                Converter={StaticResource ImagePathConverter},
+                                ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
+                       Width="56" Height="56"
+                       Margin="0,0,12,0" />
+
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                    <TextBlock Text="{Binding Champion.Name}"
+                               FontSize="22" FontWeight="Bold"
+                               Foreground="White" />
+                    <TextBlock Text="{Binding Champion.Title}"
+                               FontSize="13"
+                               Foreground="#AAAAAA" />
+                </StackPanel>
+
+                <Button Grid.Column="2"
+                        x:Name="BackButton"
+                        Content="← Retour"
+                        Click="BackButton_OnClick"
+                        VerticalAlignment="Center"
+                        Padding="12,6"
+                        Background="#3A3A5C"
+                        Foreground="White"
+                        BorderThickness="0"
+                        Cursor="Hand" />
+            </Grid>
+        </Border>
+
+        <!-- ── Onglets ─────────────────────────────────────────────────── -->
+        <TabControl Grid.Row="1" Margin="0">
             <TabItem Header="Sorts">
-                <Grid Background="#FFE5E5E5">
-                    <TabControl TabStripPlacement="Left">
-                        <TabControl.Resources>
-                            <Style TargetType="{x:Type TabItem}">
-                                <Setter Property="HeaderTemplate">
-                                    <Setter.Value>
-                                        <DataTemplate>
-                                            <ContentPresenter Content="{TemplateBinding Content}">
-                                                <ContentPresenter.LayoutTransform>
-                                                    <RotateTransform Angle="270" />
-                                                </ContentPresenter.LayoutTransform>
-                                            </ContentPresenter>
-                                        </DataTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Setter Property="Padding" Value="3" />
-                            </Style>
-                        </TabControl.Resources>
-                        <TabItem Header="Passive" x:Name="Passive">
-                            <Grid>
-                                <Image x:Name="PassiveImage" HorizontalAlignment="Left" Height="80" Margin="22,23,0,0" VerticalAlignment="Top" Width="80" Source="{Binding ChampionSelected.Result.Passive.Image.Full, Converter={StaticResource ImagePathConverter}, ConverterParameter='passive'}" />
-                                <Label x:Name="PassiveName" Content="{Binding ChampionSelected.Result.Passive.Name}" Margin="22,126,636,236"></Label>
-                                <TextBlock x:Name="PassiveDescription"  Text="{Binding ChampionSelected.Result.Passive.Description}" Margin="175,37,50,299"></TextBlock>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="QSpell" x:Name="QSpell">
-                            <Grid>
-                                <Image x:Name="SpellImage" HorizontalAlignment="Left" Height="80" Margin="22,23,0,0" VerticalAlignment="Top" Width="80" Source="{Binding ChampionSelected.Result.Spells[0].Image.Full, Converter={StaticResource ImagePathConverter}, ConverterParameter='spell'}" />
-                                <Label x:Name="SpellName" Content="{Binding ChampionSelected.Result.Spells[0].Name}" Margin="22,126,636,236"></Label>
-                                <TextBlock x:Name="SpellDescription"  Text="{Binding ChampionSelected.Result.Spells[0].Description}" Margin="175,37,50,299"></TextBlock>
-                                <Label x:Name="SpellRange"  Content="{Binding ChampionSelected.Result.Spells[0].Range}" Margin="24,225,642,142"></Label>
-                                <Label x:Name="SpellRangeLabel"  Content="Range" Margin="25,194,641,173"></Label>
-                                <Label x:Name="SpellCooldownLabel"  Content="Cooldown" Margin="425,202,199,163"></Label>
-                                <Label x:Name="SpellCooldownValue"  Content="{Binding ChampionSelected.Result.Spells[0].Cooldown}" Margin="426,226,198,139"></Label>
-                                <Label x:Name="SpellDamageLabel"  Content="Damage" Margin="431,126,220,244"></Label>
-                                <Label x:Name="SpellDamageValue"  Content="{Binding ChampionSelected.Result.Spells[0].Effect}" Margin="433,154,218,216"></Label>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="WSpell" x:Name="WSpell">
-                        </TabItem>
-                        <TabItem Header="ESpell" x:Name="ESpell">
-                        </TabItem>
-                        <TabItem Header="Ultimate" x:Name="Ultimate">
-                        </TabItem>
-                    </TabControl>
+                <!--
+                    Onglet Sorts : TabControl secondaire avec onglets à gauche.
+                    Chaque onglet est lié à un SpellViewModel de la liste Spells.
+                    Le contenu est rendu via SpellTemplate (DataTemplate unique).
+                -->
+                <TabControl TabStripPlacement="Left">
+                    <TabControl.Resources>
+                        <!-- Rotation des en-têtes d'onglets latéraux -->
+                        <Style TargetType="TabItem">
+                            <Setter Property="HeaderTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <ContentPresenter Content="{TemplateBinding Content}">
+                                            <ContentPresenter.LayoutTransform>
+                                                <RotateTransform Angle="270" />
+                                            </ContentPresenter.LayoutTransform>
+                                        </ContentPresenter>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="8,4" />
+                            <Setter Property="FontSize" Value="12" />
+                        </Style>
+                    </TabControl.Resources>
+
+                    <!--
+                        Chaque TabItem est lié à un item de Spells via DataContext.
+                        L'en-tête affiche Key ("Passif", "Q", "W", "E", "R").
+                        Le contenu utilise ContentTemplate="{StaticResource SpellTemplate}"
+                        qui est le DataTemplate unique défini dans Page.Resources.
+                    -->
+                    <!--
+                        DataContext est déjà le SpellViewModel (Spells[N]).
+                        Header doit donc binder sur Key directement,
+                        pas sur Spells[N].Key (qui cherche Spells sur SpellViewModel).
+                    -->
+                    <TabItem Header="{Binding Key}"
+                             DataContext="{Binding Spells[0]}"
+                             ContentTemplate="{StaticResource SpellTemplate}"
+                             Content="{Binding}" />
+
+                    <TabItem Header="{Binding Key}"
+                             DataContext="{Binding Spells[1]}"
+                             ContentTemplate="{StaticResource SpellTemplate}"
+                             Content="{Binding}" />
+
+                    <TabItem Header="{Binding Key}"
+                             DataContext="{Binding Spells[2]}"
+                             ContentTemplate="{StaticResource SpellTemplate}"
+                             Content="{Binding}" />
+
+                    <TabItem Header="{Binding Key}"
+                             DataContext="{Binding Spells[3]}"
+                             ContentTemplate="{StaticResource SpellTemplate}"
+                             Content="{Binding}" />
+
+                    <TabItem Header="{Binding Key}"
+                             DataContext="{Binding Spells[4]}"
+                             ContentTemplate="{StaticResource SpellTemplate}"
+                             Content="{Binding}" />
+
+                </TabControl>
+            </TabItem>
+
+            <TabItem Header="Général">
+                <Grid Background="#F5F5F5" Margin="16">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Champion.Blurb}"
+                                   TextWrapping="Wrap"
+                                   FontSize="13"
+                                   Foreground="#333" />
+                    </StackPanel>
                 </Grid>
             </TabItem>
+
             <TabItem Header="Stats">
-                <Grid Background="#FFE5E5E5">
-                </Grid>
+                <Grid Background="#F5F5F5" />
             </TabItem>
+
         </TabControl>
-        <Button x:Name="BackButton" Content="Back" HorizontalAlignment="Right" Margin="0,0,25,10" VerticalAlignment="Top" Click="BackButton_OnClick" />
     </Grid>
 </Page>

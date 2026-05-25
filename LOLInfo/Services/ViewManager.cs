@@ -11,6 +11,7 @@
 
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
+    using Microsoft.Extensions.Logging.Abstractions;
 
     public class ViewManager : IViewManager
     {
@@ -55,7 +56,8 @@
             var detailViewModel = new DetailChampionViewModel(
                 App.Current.Services.GetRequiredService<IViewManager>(),
                 App.Current.Services.GetRequiredService<IRiotClient>(),
-                championName
+                championName,
+                App.Current.Services.GetRequiredService<ILogger<DetailChampionViewModel>>()
             );
 
             this.CurrentPage = new DetailChampionPage(

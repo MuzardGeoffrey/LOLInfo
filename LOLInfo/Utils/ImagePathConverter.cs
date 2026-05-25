@@ -9,31 +9,37 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is string imagePath)
+            // Garde : chemin absent ou vide (ex : SpellViewModel.Empty() avant chargement).
+            // On retourne null → WPF n'affiche rien, pas d'exception.
+            if (value is not string imagePath || string.IsNullOrWhiteSpace(imagePath))
+                return null!;
+
+            if (parameter is not string imageType)
+                return value;
+
+            string prefix = "pack://application:,,,/resources/";
+
+            try
             {
-                string prefix = "pack://application:,,,/resources/";
-                if (parameter is string imageType)
+                return imageType switch
                 {
-                    switch (imageType)
-                    {
-                        case "spell":
-                            return new BitmapImage(new Uri($"{prefix}spell/{imagePath}"));
-                            break;
+                    // "passive" redirige vers spell/ depuis la refacto des icônes
+                    "spell" or "passive" =>
+                        new BitmapImage(new Uri($"{prefix}spell/{imagePath}")),
 
-                        case "passive":
-                            return new BitmapImage(new Uri($"{prefix}passive/{imagePath}"));
-                            break;
+                    "miniature" =>
+                        new BitmapImage(new Uri($"{prefix}champion/miniature/{imagePath}")),
 
-                        case "miniature":
-                            return new BitmapImage(new Uri($"{prefix}champion/miniature/{imagePath}"));
-
-                        default:
-                            return value;
-                            break;
-                    }
-                }
+                    _ => value
+                };
             }
-            return value;
+            catch (Exception ex)
+            {
+                // URI malformée ou ressource absente : on trace sans planter l'UI.
+                System.Diagnostics.Debug.WriteLine(
+                    $"[ImagePathConverter] Impossible de charger '{imagePath}' (type={imageType}) : {ex.Message}");
+                return null!;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

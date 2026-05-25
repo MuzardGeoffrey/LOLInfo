@@ -37,11 +37,19 @@ public class Spell
     [JsonPropertyName("datavalues")]
     public Datavalues? Datavalues { get; set; }
 
+    // Structure réelle de l'API Riot :
+    //   effect[0]   = null          (placeholder, le tableau est 1-indexé)
+    //   effect[1..] = [v1,v2,v3,v4,v5]  (valeurs par niveau pour chaque composante)
+    // → List<List<int>?>  : liste dont le premier élément peut être null,
+    //   les suivants étant des listes d'entiers.
     [JsonPropertyName("effect")]
-    public List<int>? Effect { get; set; }
+    public List<List<int>?>? Effect { get; set; }
 
+    // effectBurn[0] = null  (même convention que effect)
+    // effectBurn[1..] = "valeur" (chaîne formatée par niveau)
+    // → List<string?> : les éléments peuvent être null.
     [JsonPropertyName("effectBurn")]
-    public List<string>? EffectBurn { get; set; }
+    public List<string?>? EffectBurn { get; set; }
 
     [JsonPropertyName("vars")]
     public List<object>? Vars { get; set; }

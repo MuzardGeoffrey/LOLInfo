@@ -31,26 +31,31 @@ namespace LOLInfo.Models
 
         // ── Mapping partype API → catégorie ──────────────────────────────
 
-        /// <summary>Valeurs Riot qui correspondent à la ressource Mana.</summary>
+        // Les valeurs ci-dessous correspondent aux noms retournés par l'API
+        // en locale fr_FR (https://ddragon.leagueoflegends.com/cdn/.../fr_FR/champion/*.json).
+        // Si vous passez à en_US, remplacez par les équivalents anglais :
+        //   "Mana" → "Mana"  |  "Aucune" → "None"  |  "Énergie" → "Energy"
+
+        /// <summary>Valeurs Riot (fr_FR) qui correspondent à la ressource Mana.</summary>
         private static readonly HashSet<string> ManaValues = new()
         {
             "Mana",
         };
 
-        /// <summary>Valeurs Riot qui correspondent à "aucune ressource".</summary>
+        /// <summary>Valeurs Riot (fr_FR) qui correspondent à "aucune ressource".</summary>
         private static readonly HashSet<string> AucunValues = new()
         {
-            "None",
+            "Aucune",   // fr_FR — anglais : "None"
         };
 
-        /// <summary>Valeurs Riot qui correspondent à l'Énergie.</summary>
+        /// <summary>Valeurs Riot (fr_FR) qui correspondent à l'Énergie.</summary>
         private static readonly HashSet<string> EnergieValues = new()
         {
-            "Energy",
+            "Énergie",  // fr_FR — anglais : "Energy"
         };
 
         // Tout ce qui n'est dans aucun des sets ci-dessus → Autre
-        // (Rage, Courage, Shield, Blood Well, Crimson Rush, Flow, Heat…)
+        // (Rage, Courage, Bouclier, Afflux sanguin, Puits de sang, Agressivité…)
 
         // ── Résolution ───────────────────────────────────────────────────
 
