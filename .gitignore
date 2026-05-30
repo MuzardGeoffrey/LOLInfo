@@ -361,3 +361,8 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Assets images locaux — non utilisés par l'app (toutes les images sont chargées
+# depuis le CDN DataDragon via ImagePathConverter). Conservés hors du dépôt pour
+# éviter ~700 Mo de poids mort.
+LOLInfo/Resources/
