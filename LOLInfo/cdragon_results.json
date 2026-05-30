@@ -1,0 +1,3827 @@
+{
+  "version": "16.11.1",
+  "total_champions": 172,
+  "ok": [
+    "Udyr",
+    "Urgot",
+    "Leona",
+    "Twitch",
+    "Lee Sin",
+    "Lissandra",
+    "Lillia",
+    "Annie",
+    "Varus",
+    "Lucian",
+    "Anivia",
+    "Vayne",
+    "Lulu",
+    "Veigar",
+    "Lux",
+    "Vel'Koz",
+    "Malphite",
+    "Vex",
+    "Maokai",
+    "Malzahar",
+    "Vi",
+    "Viego",
+    "Viktor",
+    "Amumu",
+    "Mel",
+    "Maître Yi",
+    "Vladimir",
+    "Milio",
+    "Aphelios",
+    "Volibear",
+    "Miss Fortune",
+    "Ashe",
+    "Warwick",
+    "Xayah",
+    "Mordekaiser",
+    "Wukong",
+    "Aurora",
+    "Morgana",
+    "Xerath",
+    "Aurelion Sol",
+    "Xin Zhao",
+    "Azir",
+    "Naafiri",
+    "Bard",
+    "Yasuo",
+    "Nami",
+    "Bel'Veth",
+    "Blitzcrank",
+    "Yorick",
+    "Nasus",
+    "Yone",
+    "Nautilus",
+    "Brand",
+    "Yunara",
+    "Neeko",
+    "Braum",
+    "Yuumi",
+    "Nidalee",
+    "Briar",
+    "Caitlyn",
+    "Zaahen",
+    "Zac",
+    "Nilah",
+    "Camille",
+    "Nocturne",
+    "Cassiopeia",
+    "Nunu et Willump",
+    "Zeri",
+    "Olaf",
+    "Cho'Gath",
+    "Ziggs",
+    "Orianna",
+    "Corki",
+    "Zed",
+    "Darius",
+    "Ornn",
+    "Zoé",
+    "Pantheon",
+    "Zilean",
+    "Diana",
+    "Poppy",
+    "Pyke",
+    "Draven",
+    "Dr. Mundo",
+    "Ekko",
+    "Qiyana",
+    "Zyra",
+    "Elise",
+    "Rakan",
+    "Quinn",
+    "Evelynn",
+    "Rammus",
+    "Ezreal",
+    "Fiddlesticks",
+    "Rell",
+    "Rek'Sai",
+    "Fiora",
+    "Renata Glasc",
+    "Fizz",
+    "Renekton",
+    "Galio",
+    "Gangplank",
+    "Rumble",
+    "Garen",
+    "Riven",
+    "Rengar",
+    "Ryze",
+    "Gragas",
+    "Gnar",
+    "Samira",
+    "Sejuani",
+    "Senna",
+    "Gwen",
+    "Hecarim",
+    "Graves",
+    "Séraphine",
+    "Ahri",
+    "Hwei",
+    "Sett",
+    "Alistar",
+    "Illaoi",
+    "Heimerdinger",
+    "Shaco",
+    "Akshan",
+    "Shen",
+    "Ambessa",
+    "Shyvana",
+    "Janna",
+    "Ivern",
+    "Jarvan IV",
+    "Singed",
+    "Irelia",
+    "Sion",
+    "Sivir",
+    "Jax",
+    "Skarner",
+    "Jayce",
+    "Aatrox",
+    "Jhin",
+    "Smolder",
+    "Jinx",
+    "Sona",
+    "Soraka",
+    "Kalista",
+    "Karma",
+    "Sylas",
+    "Kai'Sa",
+    "Syndra",
+    "Karthus",
+    "Tahm Kench",
+    "Swain",
+    "Kassadin",
+    "Katarina",
+    "Kayle",
+    "Akali",
+    "Talon",
+    "Taric",
+    "Kayn",
+    "Taliyah",
+    "Teemo",
+    "Thresh",
+    "Kennen",
+    "Tristana",
+    "Kindred",
+    "Kha'Zix",
+    "Trundle",
+    "Kled",
+    "Tryndamere",
+    "Kog'Maw",
+    "Twisted Fate",
+    "K'Santé",
+    "LeBlanc"
+  ],
+  "not_found": [],
+  "errors": [],
+  "no_spell_calcs": [],
+  "all_unknown_types": {
+    "ByCharLevelInterpolationCalculationPart": 139,
+    "StatByCoefficientCalculationPart": 689,
+    "ClampSubPartsCalculationPart": 6,
+    "ByCharLevelBreakpointsCalculationPart": 178,
+    "{ee18a47b}": 3,
+    "ProductOfSubPartsCalculationPart": 46,
+    "StatBySubPartCalculationPart": 41,
+    "ByCharLevelFormulaCalculationPart": 11,
+    "SumOfSubPartsCalculationPart": 21,
+    "AbilityResourceByCoefficientCalculationPart": 8,
+    "{f3cbe7b2}": 4,
+    "BuffCounterByNamedDataValueCalculationPart": 24,
+    "BuffCounterByCoefficientCalculationPart": 20,
+    "{b22609db}": 1
+  },
+  "all_unknown_stats": {
+    "-1": 357,
+    "12": 45,
+    "18": 1
+  },
+  "all_empty_formulas": [],
+  "all_parse_errors": [],
+  "total_spells": 4730,
+  "total_spells_with_calcs": 821,
+  "total_formulas": 1632,
+  "sample_formulas": {
+    "Udyr": {
+      "UdyrE": {
+        "MoveSpeedBonus": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{aedeb4cc}": "[ClampSubPartsCalculationPart?]",
+        "MoveSpeed": "0.19/0.25/0.31/0.37/0.43/0.49/0.55 + [StatByCoefficientCalculationPart?]"
+      },
+      "UdyrR": {
+        "PercentHPBlast": "[ByCharLevelInterpolationCalculationPart?] + +0.00035/0.00035/0.00035/0.00035/0.00035/0.00035/0.00035 stat#-1",
+        "StormDamage": "4/20/36/52/68/84/100 + [StatByCoefficientCalculationPart?]",
+        "EmpoweredSlow": "0.05",
+        "PulseDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{817f8a73}": "[ByCharLevelInterpolationCalculationPart?]",
+        "DamageToMinions_Scaling": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{af259c48}": "[ByCharLevelInterpolationCalculationPart?]",
+        "MonsterCap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "UdyrQ": {
+        "EmpoweredTotalAS": "0.08/0.2/0.32/0.44/0.56/0.68/0.8 + [{ee18a47b}?]",
+        "MonsterCap": "15 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{af259c48}": "[ByCharLevelInterpolationCalculationPart?]",
+        "MaxHPOnHit1": "0.02/0.03/0.04/0.05/0.06/0.07/0.08 + +0.00035/0.00035/0.00035/0.00035/0.00035/0.00035/0.00035 vit.att",
+        "EmpoweredLightningBonus": "[{ee18a47b}?] + +6e-05/6e-05/6e-05/6e-05/6e-05/6e-05/6e-05 stat#-1",
+        "{ec11b8c6}": "[ByCharLevelInterpolationCalculationPart?]",
+        "EmpoweredLightningBonusMax": "[ProductOfSubPartsCalculationPart?]",
+        "OnHitDamage": "0/6/12/18/24/30/36 + [StatByCoefficientCalculationPart?] + +0.008/0.01/0.012/0.014/0.016/0.018/0.02 stat#12",
+        "Q2TotalOnHitHPDamage": "0.02/0.03/0.04/0.05/0.06/0.07/0.08 + [ByCharLevelInterpolationCalculationPart?] + +0.0005/0.0005/0.0005/0.0005/0.0005/0.0005/0.0005 vit.att + [StatByCoefficientCalculationPart?]",
+        "LightningDamageToMinionsMin": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "UdyrW": {
+        "TotalShield": "25/45/65/85/105/125/145 + +0.017/0.02/0.023/0.026/0.029/0.032/0.035 stat#12 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "LifeOnHit": "+0.012/0.012/0.012/0.012/0.012/0.012/0.012 stat#12 + +0.08/0.08/0.08/0.08/0.08/0.08/0.08 stat#-1",
+        "{bbb9794b}": "[ByCharLevelInterpolationCalculationPart?]",
+        "HealPerSecond": "[StatByCoefficientCalculationPart?]",
+        "Omnivamp": "0.25",
+        "RecastShield": "[ByCharLevelInterpolationCalculationPart?] + 25/45/65/85/105/125/145 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{5fcd3b84}": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "UdyrPassive": {
+        "{6a8aaac9}": "[ByCharLevelInterpolationCalculationPart?]",
+        "AttackSpeed": "0.3",
+        "{1cfcbfbe}": "[ByCharLevelInterpolationCalculationPart?]",
+        "{1800f4cb}": "[ByCharLevelInterpolationCalculationPart?]",
+        "UltCD": "[ByCharLevelBreakpointsCalculationPart?]",
+        "LightningDamage": "0 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{73fab8fe}": "10 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{5e1424c3}": "20 + [StatByCoefficientCalculationPart?]",
+        "{01dc7936}": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Urgot": {
+      "UrgotW": {
+        "DamagePerShot": "12/12/12/12/12/12/12 + +0.17/0.2/0.23/0.27/0.31/0.34/0.38 vit.att",
+        "RangeCheck": "450 + [StatByCoefficientCalculationPart?]"
+      },
+      "UrgotE": {
+        "ETotalShieldHealth": "35/55/75/95/115/135/155 + +1.5/1.4/1.4/1.4/1.4/1.4/1.4 vit.att + +0/0.14/0.14/0.14/0.14/0.14/0.14 stat#12",
+        "EDamage": "60/90/120/150/180/210/240 + [StatByCoefficientCalculationPart?]"
+      },
+      "UrgotR": {
+        "RCalculatedDamage": "100/100/225/350/475/600/725 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      },
+      "UrgotQ": {
+        "TotalDamage": "-20/25/70/115/160/205/250 + [StatByCoefficientCalculationPart?]"
+      },
+      "UrgotPassive": {
+        "PerLegCD": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ADDamage": "[StatBySubPartCalculationPart?]",
+        "PercentHPRatio": "[ByCharLevelBreakpointsCalculationPart?]",
+        "MonsterCap": "[ByCharLevelInterpolationCalculationPart?]",
+        "TriggerRange": "650 + [StatByCoefficientCalculationPart?]",
+        "CastRange": "700 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Leona": {
+      "LeonaSunlightPassive": {
+        "TotalDamage": "[ByCharLevelFormulaCalculationPart?]"
+      },
+      "LeonaShieldOfDaybreak": {
+        "TotalDamageTooltip": " + [StatByCoefficientCalculationPart?]"
+      },
+      "LeonaZenithBlade": {
+        "TotalDamageTooltip": " + [StatByCoefficientCalculationPart?]"
+      },
+      "LeonaSolarFlare": {
+        "{f4c90e5c}": "20/30/40/50/60/70/80 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1",
+        "ExplosionCalculatedDamage": "75/150/225/300/375/450/525 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "LeonaSolarBarrier": {
+        "BonusArmorTooltip": " + [StatByCoefficientCalculationPart?]",
+        "BonusMRTooltip": " + [StatByCoefficientCalculationPart?]",
+        "TotalDamageTooltip": " + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      }
+    },
+    "Twitch": {
+      "TwitchDeadlyVenomMarker": {
+        "DamagePerSecond": "[ByCharLevelBreakpointsCalculationPart?] + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1"
+      },
+      "TwitchExpunge": {
+        "PhysicalDamagePerStack": "10/15/20/25/30/35/40 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 vit.att",
+        "MagicDamagePerStack": "+0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "MaxPhysicalDamage": "10/20/30/40/50/60/70 + [ProductOfSubPartsCalculationPart?] + [StatBySubPartCalculationPart?]"
+      },
+      "TwitchVenomCask": {
+        "TotalSlowAmount": "25/30/35/40/45/50/55 + +0.06/0.06/0.06/0.06/0.06/0.06/0.06 stat#-1"
+      }
+    },
+    "Lee Sin": {
+      "LeeSinPassive": {
+        "EnergyReturn": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "LeeSinQOne": {
+        "InitialDamage": "35/65/95/125/155/185/215 + [StatByCoefficientCalculationPart?]",
+        "RecastDamage": "35/65/95/125/155/185/215 + +0.95/0.95/0.95/0.95/0.95/0.95/0.95 vit.att"
+      },
+      "LeeSinR": {
+        "Damage": "-50/175/400/625/850/1075/1300 + [StatByCoefficientCalculationPart?]"
+      },
+      "LeeSinEOne": {
+        "InitialDamage": "10/35/60/85/110/135/160 + [StatByCoefficientCalculationPart?]"
+      },
+      "LeeSinWOne": {
+        "ShieldAmount": "15/60/105/150/195/240/285 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Lissandra": {
+      "LissandraW": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "LissandraR": {
+        "CalculatedDamage": "50/150/250/350/450/550/650 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1",
+        "HealAmount": "50/100/150/200/250/300/350 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1"
+      },
+      "LissandraE": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "LissandraQ": {
+        "TotalDamage": "?(Damage) + [StatByCoefficientCalculationPart?]"
+      },
+      "LissandraPassive": {
+        "TotalDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Lillia": {
+      "LilliaR": {
+        "TotalDamage": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]"
+      },
+      "LilliaE": {
+        "ImpactDamageTotal": "35/60/85/110/135/160/185 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "LilliaPDoT": {
+        "{77823978}": "[ByCharLevelInterpolationCalculationPart?]",
+        "HealPerSecond": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{44c2f9d7}": "10/10/10/10/10/10/10 + [StatByCoefficientCalculationPart?]",
+        "{8abdf228}": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "DotPercentTotal": "0.05/0.05/0.05/0.05/0.05/0.05/0.05",
+        "MonsterDamageCap": "[ByCharLevelInterpolationCalculationPart?]",
+        "{18849f10}": "0.25/0.25/0.25/0.25/0.25/0.25/0.25 + [StatByCoefficientCalculationPart?]"
+      },
+      "LilliaP": {
+        "DotPercentTotal": "5/5/5/5/5/5/5 + [StatByCoefficientCalculationPart?]",
+        "MonsterDamageCap": "[ByCharLevelInterpolationCalculationPart?]",
+        "{b5d0316f}": "6.5 + [StatByCoefficientCalculationPart?]",
+        "ChampionHeal": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "LilliaQ": {
+        "TotalDamage": "25/35/45/55/65/75/85 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "PranceSpeed": "0.02/0.03/0.04/0.05/0.06/0.07/0.08 + [StatByCoefficientCalculationPart?]",
+        "BonusTrueDamage": "25/35/45/55/65/75/85 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1"
+      },
+      "LilliaW": {
+        "FlatDamage": "60/80/100/120/140/160/180 + [StatByCoefficientCalculationPart?]",
+        "FlatDamageSweetSpot": "60/80/100/120/140/160/180 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Annie": {
+      "AnnieR": {
+        "InitialBurstDamage": "25/150/275/400/525/650/775 + [StatByCoefficientCalculationPart?]",
+        "TibbersAuraDamage": "4/8/12/16/20/24/28 + [StatByCoefficientCalculationPart?]",
+        "TibbersAADamage": "15/30/45/60/75/90/105 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1",
+        "TibbersTotalHP": "[ProductOfSubPartsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TibbersTotalResists": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AnniePassive": {
+        "StunDuration": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AnnieQ": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "AnnieE": {
+        "DamageReturn": "15/25/35/45/55/65/75 + [StatByCoefficientCalculationPart?]",
+        "MoveSpeedCalc": "[ByCharLevelInterpolationCalculationPart?]",
+        "ShieldBlockTotal": "25/60/95/130/165/200/235 + [StatByCoefficientCalculationPart?]"
+      },
+      "AnnieW": {
+        "TotalDamage": "30/70/110/150/190/230/270 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Varus": {
+      "VarusE": {
+        "TotalDamage": "30/60/90/120/150/180/210 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att"
+      },
+      "VarusW": {
+        "PercentHPPerStack": "0.025/0.03/0.035/0.04/0.045/0.05/0.055 + [StatBySubPartCalculationPart?]",
+        "QEmpowerPercentHP": "0.04/0.06/0.08/0.1/0.12/0.14/0.16",
+        "OnHitDamage": "-1/8/17/26/35/44/53 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 vit.att"
+      },
+      "VarusPassive": {
+        "MinionAS": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ChampionAS": "0.5/0.5/0.5/0.5/0.5/0.5/0.5",
+        "ASDuration": "[ByCharLevelBreakpointsCalculationPart?]",
+        "MinionAD": "+1000%/1000%/1000%/1000%/1000%/1000%/1000% armure",
+        "MinionAP": "+1000%/1000%/1000%/1000%/1000%/1000%/1000% armure",
+        "ChampionAD": "+2500%/2500%/2500%/2500%/2500%/2500%/2500% armure",
+        "ChampionAP": "+2500%/2500%/2500%/2500%/2500%/2500%/2500% armure"
+      },
+      "VarusQ": {
+        "TotalDamageMax": "10/80/150/220/290/360/430 + +1.5/1.5/1.5/1.5/1.5/1.5/1.5 vit.att"
+      },
+      "VarusR": {
+        "TotalDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Lucian": {
+      "LucianR": {
+        "DamagePerBullet": "0/15/30/45/60/75/90 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1",
+        "TotalNumShots": "[SumOfSubPartsCalculationPart?]"
+      },
+      "LucianW": {
+        "TotalDamage": "40/75/110/145/180/215/250 + [StatByCoefficientCalculationPart?]"
+      },
+      "LucianPassive": {
+        "TotalDamage": "[StatBySubPartCalculationPart?]",
+        "MinionDamage": "[StatByCoefficientCalculationPart?]",
+        "PassiveTotalDamage": "15/15/15/15/15/15/15 + [StatByCoefficientCalculationPart?]"
+      },
+      "LucianQ": {
+        "TotalDamage": "45/80/115/150/185/220/255 + +1/1/1/1/1/1/1 vit.att"
+      }
+    },
+    "Anivia": {
+      "GlacialStorm": {
+        "TotalDamagePerSecond": "15/30/45/60/75/90/105 + [StatByCoefficientCalculationPart?]",
+        "EnhancedSlow": "20/20/30/40/50/60/70"
+      },
+      "RebirthMarker": {
+        "BonusResists": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "FlashFrost": {
+        "TotalPassthroughDamage": "30/50/70/90/110/130/150 + [StatByCoefficientCalculationPart?]",
+        "TotalExplosionDamage": "25/60/95/130/165/200/235 + [StatByCoefficientCalculationPart?]"
+      },
+      "Frostbite": {
+        "TotalDamage": "30/55/80/105/130/155/180 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Vayne": {
+      "VayneCondemn": {
+        "TotalDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?]"
+      },
+      "VayneTumble": {
+        "ADRatioBonus": "+0.65/0.75/0.85/0.95/1/1.1/1.2 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "VayneSilveredBolts": {
+        "TotalDamage": "0.05/0.06/0.07/0.08/0.09/0.1/0.11"
+      }
+    },
+    "Lulu": {
+      "LuluQ": {
+        "TotalDamage": "25/60/95/130/165/200/235 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "BonusMissileDamage": "25/60/95/130/165/200/235 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "LuluW": {
+        "TotalMS": " + [StatByCoefficientCalculationPart?]"
+      },
+      "LuluE": {
+        "TotalDamage": "30/70/110/150/190/230/270 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalShield": "30/70/110/150/190/230/270 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "LuluR": {
+        "TotalBonusHealth": "125/275/425/575/725/875/1025 + [StatByCoefficientCalculationPart?]"
+      },
+      "LuluPassive": {
+        "TotalDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#-1"
+      }
+    },
+    "Veigar": {
+      "VeigarBalefulStrike": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +0.45/0.5/0.55/0.6/0.65/0.7/0.75 stat#-1"
+      },
+      "VeigarPassive": {
+        "APPerStack": "1"
+      },
+      "VeigarDarkMatter": {
+        "TotalDamage": "30/85/140/195/250/305/360 + +0.6/0.7/0.8/0.9/1/1.1/1.2 stat#-1"
+      },
+      "VeigarR": {
+        "MinDamage": "100/175/250/325/400/475/550 + +0.6/0.65/0.7/0.75/0.8/0.85/0.9 stat#-1"
+      }
+    },
+    "Lux": {
+      "LuxPrismaticWave": {
+        "TotalShieldTT": "25/40/55/70/85/100/115 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "LuxLightBinding": {
+        "TotalDamageTT": "40/80/120/160/200/240/280 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1"
+      },
+      "LuxIlluminationPassive": {
+        "TotalDamage": "[ByCharLevelFormulaCalculationPart?] + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1"
+      },
+      "LuxLightStrikeKugel": {
+        "TotalDamageTT": "20/65/115/165/215/265/315 + [StatByCoefficientCalculationPart?]",
+        "{ee9714e4}": "20/25/30/35/40/45/50"
+      },
+      "LuxR": {
+        "TotalDamage": "200/300/400/500/600/700/800 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Vel'Koz": {
+      "VelkozQ": {
+        "TotalDamage": "40/80/120/160/200/240/280 + [StatByCoefficientCalculationPart?]"
+      },
+      "VelkozE": {
+        "TotalDamage": "40/70/100/130/160/190/220 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "VelkozW": {
+        "InitialDamage": "10/30/50/70/90/110/130 + [StatByCoefficientCalculationPart?]",
+        "SecondaryDamage": "15/45/75/105/135/165/195 + [StatByCoefficientCalculationPart?]"
+      },
+      "VelkozR": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "VelkozPassive": {
+        "TotalDamage": "[StatByCoefficientCalculationPart?] + [ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Malphite": {
+      "MalphiteShield": {
+        "PassiveCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalShield": "[StatByCoefficientCalculationPart?]"
+      },
+      "Obduracy": {
+        "TotalBonusDamage": "20/30/40/50/60/70/80 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1 + +15%/15%/15%/15%/15%/15%/15% AD",
+        "ThunderclapSplash": "5/15/25/35/45/55/65 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +15%/15%/15%/15%/15%/15%/15% AD",
+        "{71941255}": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "UFSlash": {
+        "TotalDamage": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]"
+      },
+      "SeismicShard": {
+        "QDamageCalc": "20/70/120/170/220/270/320 + [StatByCoefficientCalculationPart?]"
+      },
+      "Landslide": {
+        "EDamageCalc": "25/60/95/130/165/200/235 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Vex": {
+      "VexR2": {
+        "RecastDamageCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "VexR": {
+        "RDamageCalc": "25/75/125/175/225/275/325 + [StatByCoefficientCalculationPart?]",
+        "RecastDamageCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "VexP": {
+        "GloomProcCalc": "[ByCharLevelInterpolationCalculationPart?] + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1",
+        "FearDuration": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{c21c264c}": "25000",
+        "DoomCD": "[ByCharLevelBreakpointsCalculationPart?]",
+        "GloomMinionMod": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "VexW": {
+        "ShieldCalc": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]",
+        "WDamageCalc": "40/80/120/160/200/240/280 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "VexE": {
+        "EDamageCalc": "30/50/70/90/110/130/150 + +0.35/0.4/0.45/0.5/0.55/0.6/0.65 stat#-1"
+      },
+      "VexQ": {
+        "QDamageCalc": "25/70/115/160/205/250/295 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "{7b4a4737}": "25/70/115/160/205/250/295 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Maokai": {
+      "MaokaiPassive": {
+        "PassiveCooldown": "[ByCharLevelInterpolationCalculationPart?]",
+        "PassiveHealingTotal": "[StatBySubPartCalculationPart?]"
+      },
+      "MaokaiR": {
+        "TotalDamage": "75/150/225/300/375/450/525 + [StatByCoefficientCalculationPart?]"
+      },
+      "MaokaiQ": {
+        "TotalDamage": "30/75/120/165/210/255/300 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "TotalPercentHealth": "0.015/0.02/0.025/0.03/0.035/0.04/0.045"
+      },
+      "MaokaiW": {
+        "TotalDamage": "35/60/85/110/135/160/185 + [StatByCoefficientCalculationPart?]"
+      },
+      "MaokaiE": {
+        "EmpoweredSaplingDuration": "30/30/30/30/30/30/30 + [StatByCoefficientCalculationPart?]",
+        "TotalDamage": "25/50/75/100/125/150/175 + +?stat#-1 + [StatByCoefficientCalculationPart?]",
+        "TotalEmpoweredDamage": "50/100/150/200/250/300/350 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "EmpoweredSlowAmount": "0.45/0.45/0.45/0.45/0.45/0.45/0.45 + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "SaplingMoveSpeed": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Malzahar": {
+      "MalzaharW": {
+        "{c2505620}": "[ByCharLevelInterpolationCalculationPart?]",
+        "VoidlingBonusDamageTooltip": "10/12/14/16/18/20/22 + [ByCharLevelInterpolationCalculationPart?] + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      },
+      "MalzaharWCancel": {
+        "{c2505620}": "[ByCharLevelInterpolationCalculationPart?]",
+        "VoidlingBonusDamageTooltip": "10/12/14/16/18/20/22 + [ByCharLevelInterpolationCalculationPart?] + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      },
+      "MalzaharQ": {
+        "TotalDamageTooltip": "70/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]"
+      },
+      "MalzaharPassive": {
+        "ShieldCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "MalzaharR": {
+        "ZoneDamageTooltip": "1/2/3/4/5/6/7 + +0.005/0.005/0.005/0.005/0.005/0.005/0.005 stat#-1",
+        "TotalDamageTooltip": "50/125/200/275/350/425/500 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "MalzaharE": {
+        "TotalDamage": "45/80/115/150/185/220/255 + [StatByCoefficientCalculationPart?]",
+        "ManaRestore": "[AbilityResourceByCoefficientCalculationPart?]",
+        "MinionExecuteThreshold": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Vi": {
+      "ViR": {
+        "Damage": "50/150/250/350/450/550/650 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att"
+      },
+      "ViQ": {
+        "TotalDamage": "20/40/60/80/100/120/140 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att"
+      },
+      "ViE": {
+        "TotalDamageTooltip": "-10/10/30/50/70/90/110 + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att + [StatByCoefficientCalculationPart?]",
+        "{36ebd3cf}": "[StatByCoefficientCalculationPart?] + -1"
+      },
+      "ViPassive": {
+        "TotalShield": "[StatByCoefficientCalculationPart?]",
+        "ShieldCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "ViW": {
+        "TotalDamageTooltip": "3/4/5/6/7/8/9 + +0.035/0.035/0.035/0.035/0.035/0.035/0.035 vit.att"
+      }
+    },
+    "Viego": {
+      "ViegoE": {
+        "TotalMovespeed": "0.22/0.25/0.28/0.3/0.32/0.35/0.38 + +0.0004/0.0004/0.0004/0.0004/0.0004/0.0004/0.0004 stat#-1"
+      },
+      "ViegoR": {
+        "TotalDamage": "+1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att",
+        "TotalPercentHealth": "8/12/16/20/24/28/32 + [StatByCoefficientCalculationPart?]"
+      },
+      "ViegoPassive": {
+        "PercentHealthHeal": "2/2/2/2/2/2/2 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ViegoW": {
+        "TotalDamage": "25/80/135/190/245/300/355 + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "ViegoQ": {
+        "TotalDamage": "10/25/40/55/70/85/100 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att",
+        "SecondAttackDamage": "[StatByCoefficientCalculationPart?] + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1",
+        "TotalPercentHealthOnHit": "1/2/3/4/5/6/7",
+        "HealthCritDamage": "1 + [ProductOfSubPartsCalculationPart?]"
+      }
+    },
+    "Viktor": {
+      "ViktorE": {
+        "LaserDamage": "30/70/110/150/190/230/270 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "AftershockDamage": "-10/20/50/80/110/140/170 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1",
+        "{86b88e5d}": "-10/20/50/80/110/140/170 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "ViktorR": {
+        "InitialBurstDamage": "100/100/175/250/325/400/475 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "SubsequentBurstDamage": "25/65/105/145/185/225/265 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "{d3c6a7eb}": "3"
+      },
+      "ViktorQ": {
+        "TotalMissileDamage": "45/60/75/90/105/120/135 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "AttackTotalDMG": "-5/20/45/70/95/120/145 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "{147c7de9}": "[StatByCoefficientCalculationPart?]",
+        "ShieldLevelScaling": "[ByCharLevelInterpolationCalculationPart?] + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1"
+      }
+    },
+    "Amumu": {
+      "CurseoftheSadMummy": {
+        "RCalculatedDamage": "100/200/300/400/500/600/700 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "AuraofDespair": {
+        "{c8e45bc3}": "10/10/10/10/10/10/10",
+        "TotalHealthDamage": "0.75/1/1.2/1.5/1.8/2/2.2 + +0.005/0.005/0.005/0.005/0.005/0.005/0.005 stat#-1"
+      },
+      "Tantrum": {
+        "DamageReduction": "0/5/7/9/11/13/15 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TantrumDamage": "35/65/95/125/155/185/215 + [StatByCoefficientCalculationPart?]"
+      },
+      "BandageToss": {
+        "TotalDamage": "45/70/95/120/145/170/195 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Mel": {
+      "MelW": {
+        "DamagePercent": "0.35/0.4/0.45/0.5/0.55/0.6/0.65 + [StatByCoefficientCalculationPart?]",
+        "ShieldAmount": "50/80/110/140/170/200/230 + [StatByCoefficientCalculationPart?]"
+      },
+      "MelR": {
+        "PassiveStackDamage": "2/3/4/5/6/7/8 + [StatByCoefficientCalculationPart?]",
+        "PassiveFlatDamage": "50/60/70/80/90/100/110 + [StatByCoefficientCalculationPart?]",
+        "UltStackDamage": "1/4/7/10/13/16/19 + [StatByCoefficientCalculationPart?]",
+        "UltFlatDamage": "50/125/200/275/350/425/500 + [StatByCoefficientCalculationPart?]",
+        "MinionModTooltip": "[SumOfSubPartsCalculationPart?]"
+      },
+      "MelQ": {
+        "TotalExplosionDamage": "3/5/7/9/11/13/15 + [StatByCoefficientCalculationPart?]",
+        "AllDamageHit": "[{f3cbe7b2}?] + [ProductOfSubPartsCalculationPart?]",
+        "MonsterModTooltip": "[SumOfSubPartsCalculationPart?]",
+        "InitialExplosionDamage": "35/60/85/110/135/160/185 + [StatByCoefficientCalculationPart?]"
+      },
+      "MelE": {
+        "Damage": "15/60/105/150/195/240/285 + [StatByCoefficientCalculationPart?]",
+        "AreaDamagePerSecond": "4/16/28/40/52/64/76 + +0.08/0.08/0.08/0.08/0.08/0.08/0.08 stat#-1",
+        "MinionModTooltip": "[SumOfSubPartsCalculationPart?]"
+      }
+    },
+    "Maître Yi": {
+      "MasterYiPassive": {
+        "TotalDamage": "[StatByCoefficientCalculationPart?]"
+      },
+      "AlphaStrike": {
+        "TotalDamage": "0/20/40/60/80/100/120 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att",
+        "SubesquentDamage": "[SumOfSubPartsCalculationPart?]",
+        "BasicAttackCDR": "[ProductOfSubPartsCalculationPart?]",
+        "SingleCritTotalDamage": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "Meditate": {
+        "TotalHeal": "40/120/200/280/360/440/520 + [StatByCoefficientCalculationPart?]",
+        "InitialDR": "[SumOfSubPartsCalculationPart?]"
+      },
+      "WujuStyle": {
+        "TotalDamage": "15/20/25/30/35/40/45 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 vit.att"
+      }
+    },
+    "Vladimir": {
+      "VladimirE": {
+        "MinDamageTooltip": " + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MaxDamageTooltip": " + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "ChargeHealthTooltip": "[StatByCoefficientCalculationPart?]"
+      },
+      "VladimirBloodGorged": {
+        "ApproximateAPBonusAvoidingRecursion": "[ProductOfSubPartsCalculationPart?]",
+        "ApproximateHPBonusAvoidingRecursion": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "VladimirHemoplague": {
+        "Damage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "VladimirSanguinePool": {
+        "TotalDamage": "25/80/135/190/245/300/355 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#12"
+      },
+      "VladimirQ": {
+        "BaseDamageTooltip": " + [StatByCoefficientCalculationPart?]",
+        "BaseHealTooltip": " + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "{097cda4f}": "[ByCharLevelInterpolationCalculationPart?]",
+        "EmpoweredHealPercent": "5 + [StatByCoefficientCalculationPart?]",
+        "MovementSpeedOnQ2": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Milio": {
+      "MilioQ": {
+        "Damage": "20/80/140/200/260/320/380 + [StatByCoefficientCalculationPart?]",
+        "SlowAmountPercent": "0.35/0.4/0.45/0.5/0.55/0.6/0.65 + [StatByCoefficientCalculationPart?]"
+      },
+      "MilioR": {
+        "HealCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "MilioE": {
+        "ShieldCalc": "15/45/75/105/135/165/195 + [StatByCoefficientCalculationPart?]"
+      },
+      "MilioW": {
+        "RangePercent": "0.075/0.1/0.12/0.15/0.17/0.2/0.22",
+        "HealingOverTime": "50/70/90/110/130/150/170 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1"
+      }
+    },
+    "Aphelios": {
+      "ApheliosR": {
+        "MaxDamage": "75/125/175/225/275/325/375 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "InfernumRBonusDamage": "0/50/100/150/200/250/300 + [StatByCoefficientCalculationPart?]",
+        "GravitumRBonusSlow": "0.99/0.99/0.99/0.99/0.99/0.99/0.99",
+        "CritDamageModCalc": "1 + [ProductOfSubPartsCalculationPart?]",
+        "InfernumRPenalty": "0.9",
+        "{36ebd3cf}": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Volibear": {
+      "VolibearR": {
+        "ADRatio": "[StatByCoefficientCalculationPart?]",
+        "{4402b0fa}": "100/300/500/700/900/1100/1300 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "APRatioTooltip": "+1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1",
+        "TowerDamageTooltip": "0/300/500/700/900/1100/1300 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "SweetSpotDamageTooltip": "100/300/500/700/900/1100/1300 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "{d9a2963e}": "0/175/350/525/700/875/1050"
+      },
+      "VolibearQ": {
+        "CalculatedDamage": "0/10/20/30/40/50/60 + [StatByCoefficientCalculationPart?] + +1.6/1.6/1.6/1.6/1.6/1.6/1.6 vit.att",
+        "ADRatioTooltip": "+1.6/1.6/1.6/1.6/1.6/1.6/1.6 vit.att",
+        "MinSpeedCalc": "0.085/0.12/0.16/0.19/0.22/0.26/0.29",
+        "MaxSpeedCalc": "0.17/0.24/0.31/0.38/0.45/0.52/0.59",
+        "{10404951}": "+1.6/1.6/1.6/1.6/1.6/1.6/1.6 vit.att + 0/10/20/30/40/50/60"
+      },
+      "VolibearP": {
+        "ChainLightningDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1",
+        "AttackSpeedCalc": "0.05/0.05/0.05/0.05/0.05/0.05/0.05 + [StatByCoefficientCalculationPart?]",
+        "{ebe98aa3}": "0.05/0.05/0.05/0.05/0.05/0.05/0.05 + [StatByCoefficientCalculationPart?]"
+      },
+      "VolibearW": {
+        "TotalDamage": "-20/5/30/55/80/105/130 + [StatByCoefficientCalculationPart?] + +0.06/0.06/0.06/0.06/0.06/0.06/0.06 stat#12",
+        "PercentMissingHealthHealingRatio": "0.05/0.08/0.11/0.14/0.17/0.2/0.23"
+      },
+      "VolibearE": {
+        "ShieldValue": "[StatBySubPartCalculationPart?] + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1",
+        "CalculatedDamage": "50/80/110/140/170/200/230 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "APRatioTooltip": "+0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "ShieldAPRatioTooltip": "+0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1",
+        "TotalDamageTooltip": "50/80/110/140/170/200/230 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "MonsterDamageCap": "35/150/265/380/495/610/725 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      }
+    },
+    "Miss Fortune": {
+      "MissFortuneScattershot": {
+        "TotalDamagePerSecond": "20/35/50/65/80/95/110 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "TotalSlowAmount": "0.4/0.4/0.4/0.4/0.4/0.4/0.4 + +0.0006/0.0006/0.0006/0.0006/0.0006/0.0006/0.0006 stat#-1"
+      },
+      "MissFortuneRicochetShot": {
+        "TotalDamageTooltip": "-5/20/45/70/95/120/145 + +1/1/1/1/1/1/1 vit.att + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "{5a1fd353}": "[StatByCoefficientCalculationPart?]"
+      },
+      "MissFortunePassive": {
+        "TotalDamage": "[StatBySubPartCalculationPart?]"
+      },
+      "MissFortuneViciousStrikes": {
+        "LoveTapRefund": "2/2/2/2/2/2/2"
+      },
+      "MissFortuneBulletTime": {
+        "PhysicalDamagePerWave": "10/20/30/40/50/60/70 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1"
+      }
+    },
+    "Ashe": {
+      "AsheQ": {
+        "EmpoweredDamage": "+1/1.1/1.1/1.2/1.2/1.3/1.4 vit.att"
+      },
+      "EnchantedCrystalArrow": {
+        "RMainDamage": "0/200/400/600/800/1000/1200 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1"
+      },
+      "VolleyRank3": {
+        "TotalDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "VolleyRank2": {
+        "TotalDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "VolleyRank5": {
+        "TotalDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "VolleyRank4": {
+        "TotalDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "Volley": {
+        "TotalDamage": "25/60/95/130/165/200/235 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "AsheSpiritOfTheHawk": {
+        "ChargeCooldown": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "AshePassive": {
+        "SlowAmount": "[ByCharLevelInterpolationCalculationPart?]",
+        "EmpoweredSlowAmount": "[ByCharLevelInterpolationCalculationPart?]",
+        "DamageBonus": "1 + [StatBySubPartCalculationPart?]"
+      }
+    },
+    "Warwick": {
+      "WarwickP": {
+        "OnHitDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 vit.att + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1"
+      },
+      "WarwickR": {
+        "DamageCumulative": "0/175/350/525/700/875/1050 + [StatByCoefficientCalculationPart?]"
+      },
+      "WarwickQ": {
+        "BaseBiteDamage": "+1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Xayah": {
+      "XayahE": {
+        "FeatherDamage": "35/50/65/80/95/110/125 + +?vit.att"
+      },
+      "XayahQ": {
+        "TotalDamage": "30/45/60/75/90/105/120 + [StatByCoefficientCalculationPart?]"
+      },
+      "XayahR": {
+        "Damage": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Mordekaiser": {
+      "MordekaiserQ": {
+        "QDamage": "45/80/115/150/185/220/255 + [ByCharLevelBreakpointsCalculationPart?] + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "MordekaiserW": {
+        "HealthDecay": "+0.005/0.005/0.005/0.005/0.005/0.005/0.005 stat#12",
+        "MaxHealthTooltip": "[StatByCoefficientCalculationPart?]",
+        "MinHealthTooltip": "[StatByCoefficientCalculationPart?]"
+      },
+      "MordekaiserE": {
+        "TotalDamage": "45/60/75/90/105/120/135 + [StatByCoefficientCalculationPart?]"
+      },
+      "MordekaiserPassive": {
+        "AuraDamagePerStack": "5 + [StatByCoefficientCalculationPart?]",
+        "PercentHealthForAura": "[ByCharLevelInterpolationCalculationPart?]",
+        "MaxAuraMonsterDamage": "[ByCharLevelInterpolationCalculationPart?]",
+        "BonusAPAuto": "[StatByCoefficientCalculationPart?]",
+        "PassiveMovementSpeed": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Wukong": {
+      "MonkeyKingNimbus": {
+        "TotalDamage": "40/80/120/160/200/240/280 + [StatByCoefficientCalculationPart?]"
+      },
+      "MonkeyKingSpinToWin": {
+        "DamagePerSecondTotal": "+1.4/1.4/1.4/1.4/1.4/1.4/1.4 vit.att",
+        "{26c20668}": "0.02/0.04/0.06/0.08/0.1/0.12/0.14",
+        "MonsterCap": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "MonkeyKingPassive": {
+        "BonusArmor": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "MonkeyKingDoubleAttack": {
+        "TotalDamage": "-5/20/45/70/95/120/145 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att",
+        "BonusDamageTT": "-5/20/45/70/95/120/145 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      }
+    },
+    "Aurora": {
+      "AuroraE": {
+        "DamageCalc": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "AuroraR": {
+        "DamageCalc": "75/175/275/375/475/575/675 + [StatByCoefficientCalculationPart?]"
+      },
+      "AuroraQ": {
+        "Damage": "20/45/70/95/120/145/170 + [StatByCoefficientCalculationPart?]",
+        "{f7c018c7}": "20/45/70/95/120/145/170 + [StatByCoefficientCalculationPart?]",
+        "Q2DamageMax": "20/45/70/95/120/145/170 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Morgana": {
+      "MorganaQ": {
+        "TotalDamage": "25/80/135/190/245/300/355 + [StatByCoefficientCalculationPart?]"
+      },
+      "MorganaR": {
+        "TotalDamage": "125/200/275/350/425/500/575 + [StatByCoefficientCalculationPart?]"
+      },
+      "MorganaW": {
+        "TotalMinDamage": "5/18/31/44/57/70/83 + +?stat#-1"
+      },
+      "MorganaE": {
+        "TotalShieldStrength": "45/100/155/210/265/320/375 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Xerath": {
+      "XerathLocusOfPower2": {
+        "TooltipTotalDamage": "120/170/220/270/320/370/420 + [StatByCoefficientCalculationPart?]",
+        "RampDamageCalc": "15/20/25/30/35/40/45 + [StatByCoefficientCalculationPart?]"
+      },
+      "XerathArcanopulseChargeUp": {
+        "TooltipTotalDamage": "35/75/115/155/195/235/275 + [StatByCoefficientCalculationPart?]"
+      },
+      "XerathMageSpear": {
+        "TooltipTotalDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]"
+      },
+      "XerathAscended2": {
+        "MinionManaRestoreTT": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "XerathArcaneBarrage2": {
+        "TotalDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Aurelion Sol": {
+      "AurelionSolQ": {
+        "DamagePerSecond": "30/45/60/75/90/105/120 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "BurstDamage": "50/60/70/80/90/100/110 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "BurstBonusTrueDamageToChamps": "[BuffCounterByNamedDataValueCalculationPart?]",
+        "LevelBasedRangeScaling": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AurelionSolR2": {
+        "MaxDamageTooltip": "100/300/500/700/900/1100/1300 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "MinDamageTooltip": "125/200/275/350/425/500/575 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "{047a61eb}": "150/250/350/450/550/650/750 + +1/1/1/1/1/1/1 stat#-1",
+        "{06c03ad2}": "[ProductOfSubPartsCalculationPart?] + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "AurelionSolR": {
+        "MaxDamageTooltip": "50/150/250/350/450/550/650 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1",
+        "{1d7ce9ef}": "[ProductOfSubPartsCalculationPart?] + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "AurelionSolE": {
+        "DamagePerSecond": "5/10/15/20/25/30/35 + +0.12/0.12/0.12/0.12/0.12/0.12/0.12 stat#-1",
+        "{b0a79c98}": "275/275/275/275/275/275/275 + [BuffCounterByCoefficientCalculationPart?]",
+        "CurrentExecutionThreshold": "5/5/5/5/5/5/5 + [BuffCounterByNamedDataValueCalculationPart?]",
+        "{57c521f0}": "150/150/150/150/150/150/150 + [BuffCounterByNamedDataValueCalculationPart?]",
+        "{7741d788}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "LevelBasedRangeScaling": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{5dfac189}": "[ProductOfSubPartsCalculationPart?] + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "AurelionSolPassive": {
+        "QPassiveScaling": "[BuffCounterByNamedDataValueCalculationPart?]",
+        "EPassiveScalingExecute": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "AurelionSolW": {
+        "DashSpeed": "340/340/340/340/340/340/340 + [StatByCoefficientCalculationPart?]",
+        "{ffd78035}": "340/340/340/340/340/340/340 + [StatByCoefficientCalculationPart?]",
+        "{e3ddb2ca}": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "AurelionSolWToggle": {
+        "DashSpeed": "340/340/340/340/340/340/340 + [StatByCoefficientCalculationPart?]",
+        "{ffd78035}": "340/340/340/340/340/340/340 + [StatByCoefficientCalculationPart?]",
+        "{e3ddb2ca}": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Xin Zhao": {
+      "XinZhaoE": {
+        "ChargeDamage": "25/50/75/100/125/150/175 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1"
+      },
+      "XinZhaoW": {
+        "SlashDamage": "20/30/40/50/60/70/80 + [StatByCoefficientCalculationPart?]",
+        "ThrustDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MinionMod": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalSlowDuration": "1.5/1.5/1.5/1.5/1.5/1.5/1.5 + [StatByCoefficientCalculationPart?]"
+      },
+      "XinZhaoR": {
+        "TotalDamage": "-25/75/175/275/375/475/575 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "XinZhaoQ": {
+        "BonusDamage": "0/15/30/45/60/75/90 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att"
+      },
+      "XinZhaoP": {
+        "TotalDamage": "[StatBySubPartCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "TotalHealing": "[StatBySubPartCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "HealHPRatio": "[ByCharLevelBreakpointsCalculationPart?]",
+        "HealAPRatio": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Azir": {
+      "AzirW": {
+        "SecondaryTargetDamageMod": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalDamage": "35/50/65/80/95/110/125 + [ByCharLevelBreakpointsCalculationPart?] + +0.28/0.35/0.43/0.5/0.57/0.65/0.73 stat#-1"
+      },
+      "AzirQWrapper": {
+        "TotalDamage": "40/60/80/100/120/140/160 + +0.3/0.35/0.4/0.45/0.5/0.55/0.6 stat#-1"
+      },
+      "AzirEWrapper": {
+        "TotalShield": "30/70/110/150/190/230/270 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "TotalDamage": "30/70/110/150/190/230/270 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "AzirR": {
+        "TotalDamage": "0/200/400/600/800/1000/1200 + [StatByCoefficientCalculationPart?]"
+      },
+      "AzirPassive": {
+        "TowerDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "BonusResists": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Naafiri": {
+      "NaafiriP": {
+        "PackmateSpawnCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "PackmateCap": "[ByCharLevelBreakpointsCalculationPart?]",
+        "PackmateTotalDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 vit.att",
+        "MinionExecuteThreshold": "[ByCharLevelBreakpointsCalculationPart?]",
+        "AOEDamageModifier": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "NaafiriQ": {
+        "TotalDamageFirstCast": "30/35/40/45/50/55/60 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att",
+        "TotalMinDamageSecondCast": "18/30/42/55/68/80/92 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "TotalHealSecondCast": "30/45/60/75/90/105/120 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "TotalBleedDamage": "10/35/60/85/110/135/160 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att",
+        "MinionExecuteThreshold": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalMaxDamageSecondCast": "18/30/42/55/68/80/92 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att"
+      },
+      "NaafiriW": {
+        "TotalDamage": "75/150/225/300/375/450/525 + [StatByCoefficientCalculationPart?]",
+        "ArmorShred": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ShieldTotal": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]"
+      },
+      "NaafiriR": {
+        "BonusAD": "+0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      },
+      "NaafiriE": {
+        "TotalDamageFirstSlash": "5/15/25/35/45/55/65 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "TotalDamageSecondSlash": "35/60/85/110/135/160/185 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att"
+      }
+    },
+    "Bard": {
+      "BardPTooltip_D_nS": {
+        "MeepDamageNoChime": "35/35/35/35/35/35/35 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "ChimesForSlowUpgrade": "0/5/5/5/5/5/5",
+        "ChimesForSplashDamageUpgrade": "0/5/5/5/5/5/5",
+        "ChimesForSplashAreaUpgrade": "0/5/5/5/5/5/5"
+      },
+      "BardQ": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "BardW": {
+        "InitialHeal": "0/25/50/75/100/125/150 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "MaxHeal": "12/50/88/125/1.6e+02/200/2.4e+02 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "Calc_MoveSpeed": "0.17/0.2/0.22/0.25/0.28/0.3/0.32 + +0.0006/0.0006/0.0006/0.0006/0.0006/0.0006/0.0006 stat#-1"
+      }
+    },
+    "Yasuo": {
+      "YasuoQ1Wrapper": {
+        "TotalDamage": "-5/20/45/70/95/120/145 + +1/1/1/1/1/1/1 vit.att",
+        "TotalDamageCrit": "-5/20/45/70/95/120/145 + [StatBySubPartCalculationPart?]"
+      },
+      "YasuoE": {
+        "TotalDamage": "55/70/85/100/115/130/145 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "YasuoR": {
+        "Damage": "50/200/350/500/650/800/950 + [StatByCoefficientCalculationPart?]"
+      },
+      "YasuoPassive": {
+        "ShieldValue": "[ByCharLevelInterpolationCalculationPart?]",
+        "{74ce5438}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "CurrentCritDamage": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Nami": {
+      "NamiW": {
+        "TotalDamage": "25/60/95/130/165/200/235 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalHeal": "30/55/80/105/130/155/180 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "BounceScaling": "-20/-20/-20/-20/-20/-20/-20 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1"
+      },
+      "NamiQ": {
+        "TotalDamageTT": "35/90/145/200/255/310/365 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "NamiE": {
+        "AoeMod": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalDamage": "10/20/30/40/50/60/70 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "TotalSlow": "10/15/20/25/30/35/40 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#-1"
+      },
+      "NamiR": {
+        "TotalDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "NamiPassive": {
+        "TotalMSBonus": "100/100/100/100/100/100/100 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Bel'Veth": {
+      "BelvethQ": {
+        "BaseDamage": "-5/0/5/10/15/20/25 + +1/1/1/1/1/1/1 vit.att",
+        "{290ee56e}": "[StatByCoefficientCalculationPart?]"
+      },
+      "BelvethR": {
+        "FinalOnHitDamage": "2/6/10/14/18/22/26 + [StatByCoefficientCalculationPart?]",
+        "MaxHealthOnDevour": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TotalExplosionDamage": "100/150/200/250/300/350/400 + [StatByCoefficientCalculationPart?]"
+      },
+      "BelvethPassive": {
+        "AttackSpeedPerStack": "[ByCharLevelInterpolationCalculationPart?]",
+        "SheenSpeedPerStack": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "BelvethW": {
+        "Damage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "BelvethE": {
+        "TotalStrikes": "6/6/6/6/6/6/6 + [ProductOfSubPartsCalculationPart?]",
+        "DamagePerStrike": "5/6/7/8/9/10/11 + [StatByCoefficientCalculationPart?]",
+        "TotalLifesteal": "?(BonusLifesteal) + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Blitzcrank": {
+      "PowerFist": {
+        "TotalDamage": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{a9d6b924}": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "StaticField": {
+        "ActiveDamage": "150/275/400/525/650/775/900 + +1/1/1/1/1/1/1 stat#-1",
+        "PassiveDamage": "0/50/100/150/200/250/300 + +0.2/0.3/0.4/0.5/0.6/0.7/0.8 stat#-1 + [AbilityResourceByCoefficientCalculationPart?]"
+      },
+      "RocketGrab": {
+        "TotalDamage": "60/110/160/210/260/310/360 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1"
+      },
+      "Overdrive": {
+        "{c01903c1}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "ManaBarrierIcon": {
+        "ShieldAmount": "[AbilityResourceByCoefficientCalculationPart?]"
+      }
+    },
+    "Yorick": {
+      "YorickQ": {
+        "QHeal": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BonusDamage": "10/30/50/70/90/110/130 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      },
+      "YorickR": {
+        "YorickBigGhoulHealth": "[ByCharLevelBreakpointsCalculationPart?] + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#12",
+        "YorickBigGhoulDamage": "25/50/75/100/125/150/175 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att",
+        "YorickMaidenResists": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "YorickE": {
+        "Calc_MinimumDamage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]",
+        "Calc_HealthDamage": "5.5/6/6.5/7/7.5/8/8.5 + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1",
+        "Calc_Slow": "0.3/0.3/0.3/0.3/0.3/0.3/0.3",
+        "Calc_MonsterCapDamage": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]"
+      },
+      "YorickPassive": {
+        "YorickPassiveGhoulHealth": "[ByCharLevelInterpolationCalculationPart?] + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#12",
+        "YorickPassiveGhoulDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att",
+        "YorickPassiveSpawnThreshold": "[ByCharLevelBreakpointsCalculationPart?]",
+        "AOEDamageModifier": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BonusAttackSpeed": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Nasus": {
+      "NasusPassive": {
+        "LifestealTooltip": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "NasusQ": {
+        "TotalDamage": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?] + [BuffCounterByCoefficientCalculationPart?]",
+        "CritDamage": "[ProductOfSubPartsCalculationPart?] + [BuffCounterByCoefficientCalculationPart?]"
+      },
+      "NasusE": {
+        "TotalDotDamage": "10/10/16/22/28/34/34 + [StatByCoefficientCalculationPart?]",
+        "InitialDamage": "50/50/80/110/140/170/170 + [StatByCoefficientCalculationPart?]"
+      },
+      "NasusR": {
+        "DamageCalc": "?(AoeDamagePercent) + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Yone": {
+      "YoneQ": {
+        "QDamage": "0/25/50/75/100/125/150 + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att",
+        "TotalDamageCrit": "0/25/50/75/100/125/150 + [StatBySubPartCalculationPart?]"
+      },
+      "YoneR": {
+        "Damage": "0/200/400/600/800/1000/1200 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att"
+      },
+      "YoneE": {
+        "{df232269}": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "YoneW": {
+        "WDamage": "0/10/20/30/40/50/60 + [StatByCoefficientCalculationPart?]",
+        "{8dfeb810}": "[StatByCoefficientCalculationPart?]",
+        "WShield": "[ByCharLevelInterpolationCalculationPart?] + +?vit.att",
+        "MinimumDamageMinions": "[ByCharLevelBreakpointsCalculationPart?]",
+        "MonsterDamageCap": "[ByCharLevelFormulaCalculationPart?]"
+      },
+      "YonePassive": {
+        "CurrentCritDamage": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Nautilus": {
+      "NautilusPiercingGaze": {
+        "DotDamageCalc": "20/30/40/50/60/70/80 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "ShieldCalc": "40/50/60/70/80/90/100 + +0.07/0.08/0.09/0.1/0.11/0.12/0.13 stat#12"
+      },
+      "NautilusSplashZone": {
+        "DamageCalc": "20/55/90/125/160/195/230 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "MonsterBonusCalc": "85/125/165/205/245/285/325 + [StatByCoefficientCalculationPart?]"
+      },
+      "NautilusAnchorDrag": {
+        "QDamageCalc": "40/85/130/175/220/265/310 + [StatByCoefficientCalculationPart?]"
+      },
+      "NautilusGrandLine": {
+        "PrimaryTargetDamage": "25/150/275/400/525/650/775 + [StatByCoefficientCalculationPart?]",
+        "SecondaryTargetDamage": "75/125/175/225/275/325/375 + [StatByCoefficientCalculationPart?]"
+      },
+      "NautilusPassive": {
+        "BonusDamage": "[ByCharLevelFormulaCalculationPart?]",
+        "TotalDamageTooltip": "[ByCharLevelFormulaCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "RootDuration": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Brand": {
+      "BrandPassive": {
+        "ManaRestore": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ExplosionDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{4124b2bf}": "[ProductOfSubPartsCalculationPart?]",
+        "{afbf404a}": "[ProductOfSubPartsCalculationPart?]",
+        "JungleMonsterExplosionFlatCap": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "BrandW": {
+        "TotalDamage": "30/75/120/165/210/255/300 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "BrandE": {
+        "EDamageCalc": "30/55/80/105/130/155/180 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "BrandR": {
+        "TotalDamage": "25/100/175/250/325/400/475 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "BrandQ": {
+        "TotalDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Yunara": {
+      "YunaraQ": {
+        "Calc_Passive_Damage": "0/5/10/15/20/25/30 + [StatByCoefficientCalculationPart?]",
+        "Calc_Attack_Speed": "0.1/0.2/0.3/0.4/0.5/0.6/0.7",
+        "Calc_Damage": "0/5/10/15/20/25/30 + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_Spread": "+0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att",
+        "Calc_Minion_Execute_Threshold": "0.3",
+        "Calc_Minion_Execute_Amp": "2.5"
+      },
+      "YunaraE": {
+        "Calc_Move_Speed": "0.25/0.3/0.35/0.4/0.45/0.5/0.55"
+      },
+      "YunaraW": {
+        "Calc_Damage_Initial": "15/55/95/135/175/215/255 + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "Calc_Slow": "0.99/0.99/0.99/0.99/0.99/0.99/0.99",
+        "Calc_Minion_Damage_Mod": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "YunaraR": {
+        "Calc_RW_Damage": "160/160/320/480/640/800/960 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1",
+        "Calc_RW_Slow_Amount": "0.99/0.99/0.99/0.99/0.99/0.99/0.99",
+        "{42964db5}": "1200/1350/1500/1650/1800/1950/2100",
+        "Calc_RW_Cooldown_Reduction": "0.8/0.8/0.8/0.8/0.8/0.8/0.8"
+      }
+    },
+    "Neeko": {
+      "NeekoW2": {
+        "PassiveBonusDamageCalc": "20/50/80/110/140/170/200 + [StatByCoefficientCalculationPart?]"
+      },
+      "NeekoW": {
+        "PassiveBonusDamageCalc": "-5/30/65/100/135/170/205 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "NeekoR": {
+        "TotalDamage": "-50/150/350/550/750/950/1150 + [StatByCoefficientCalculationPart?]",
+        "BaseShield": "50/75/100/125/150/175/200 + [StatByCoefficientCalculationPart?]",
+        "ShieldMultiplier": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?]"
+      },
+      "NeekoQ": {
+        "ExplosionDamage": "10/60/110/160/210/260/310 + [StatByCoefficientCalculationPart?]",
+        "SecondDamage": "10/35/60/85/110/135/160 + [StatByCoefficientCalculationPart?]"
+      },
+      "NeekoE": {
+        "BaseDamage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Braum": {
+      "BraumW": {
+        "GrantedAllyArmor": "15/20/25/30/35/40/45 + +12%/12%/12%/12%/12%/12%/12% AD",
+        "GrantedAllyMR": "15/20/25/30/35/40/45 + +12%/12%/12%/12%/12%/12%/12% PV",
+        "GrantedBraumArmor": "15/20/25/30/35/40/45 + +36%/36%/36%/36%/36%/36%/36% AD",
+        "GrantedBraumMR": "15/20/25/30/35/40/45 + +36%/36%/36%/36%/36%/36%/36% PV"
+      },
+      "BraumQ": {
+        "TotalDamage": "30/75/120/165/210/255/300 + +0.025/0.025/0.025/0.025/0.025/0.025/0.025 stat#12"
+      },
+      "BraumRWrapper": {
+        "TotalDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "BraumPassive": {
+        "TotalDamage": "[ByCharLevelFormulaCalculationPart?]",
+        "StunCD": "[ByCharLevelBreakpointsCalculationPart?]",
+        "StunDuration": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Yuumi": {
+      "YuumiQRelease": {
+        "MinAmountToHeal": "25/35/45/55/65/75/85 + [StatByCoefficientCalculationPart?]"
+      },
+      "YuumiQ": {
+        "TotalMissileDamage": "25/60/95/130/165/200/235 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "TotalMissileDamageEmpowered": "25/80/135/190/245/300/355 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "OnHitDamageCalc": "[StatByCoefficientCalculationPart?] + 8/10/12/14/16/18/20"
+      },
+      "YuumiW": {
+        "AttachCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "CCAttachLockout": "5",
+        "HealthOnHit": "2/3/4/5/6/7/8 + [StatByCoefficientCalculationPart?]"
+      },
+      "YuumiP": {
+        "PassiveCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{656dde8a}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "HealAmount": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "YuumiR": {
+        "TotalMissileDamage": "25/75/125/175/225/275/325 + [StatByCoefficientCalculationPart?]",
+        "TotalHealPerWave": "10/30/50/70/90/110/130 + [StatByCoefficientCalculationPart?]",
+        "AllyHealingPerc": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "YuumiE": {
+        "TotalShielding": "40/65/90/115/140/165/190 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "TotalAttackSpeed": "22/25/28/30/32/35/38 + [StatByCoefficientCalculationPart?]"
+      },
+      "YuumiEURF": {
+        "TotalShielding": "40/65/90/115/140/165/190 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "TotalAttackSpeed": "22/25/28/30/32/35/38 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Nidalee": {
+      "JavelinToss": {
+        "HumanMinimumDamage": "50/70/90/110/130/150/170 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "{38f95809}": "-20/5/30/55/80/105/130"
+      },
+      "PrimalSurge": {
+        "TotalHealing": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]"
+      },
+      "AspectOfTheCougar": {
+        "TotalPounceDamage": "10/55/100/145/190/235/280 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "TotalSwipeDamage": "10/70/130/190/250/310/370 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "TotalTakedownDamage": "-20/5/30/55/80/105/130 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 vit.att + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "Bushwhack": {
+        "MaxTraps": "[ByCharLevelBreakpointsCalculationPart?] + ?(ModesBonusMaxTraps)",
+        "DamagePerSecond": " + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Briar": {
+      "BriarW": {
+        "TotalAttackBonusDamage": "-10/5/20/35/50/65/80 + [StatByCoefficientCalculationPart?]",
+        "TotalAoEDamage": "+0.5/0.6/0.7/0.8/0.9/1/1.1 vit.att",
+        "TotalAttackPercentMissingHealth": "9/9/9/9/9/9/9 + [StatByCoefficientCalculationPart?]",
+        "AttackMaxHPHeal": "[StatByCoefficientCalculationPart?]"
+      },
+      "BriarQ": {
+        "TotalDamage": "35/60/85/110/135/160/185 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "BriarR": {
+        "Damage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]",
+        "TotalResists": "+0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      },
+      "BriarE": {
+        "Damage": "45/80/115/150/185/220/255 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "WallHitDamage": "65/140/215/290/365/440/515 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PercentMaxHPHeal": "+0.085/0.1/0.12/0.13/0.14/0.16/0.17 stat#12"
+      }
+    },
+    "Caitlyn": {
+      "CaitlynPassive": {
+        "HeadShotBonusDamage": "[StatBySubPartCalculationPart?]",
+        "HeadShotMinionBonusDamage": "[StatBySubPartCalculationPart?]",
+        "BrushAttackTotal": "[SumOfSubPartsCalculationPart?]",
+        "{36ebd3cf}": "[StatByCoefficientCalculationPart?]",
+        "{42962485}": "[SumOfSubPartsCalculationPart?]"
+      },
+      "CaitlynE": {
+        "NetDamage": "30/80/130/180/230/280/330 + [StatByCoefficientCalculationPart?]"
+      },
+      "CaitlynW": {
+        "HeadShotBonusDamage": "35/35/80/125/170/215/260 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att"
+      },
+      "CaitlynR": {
+        "RTotalDamage": "125/300/475/650/825/1000/1175 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "CaitlynQ": {
+        "InitialDamage": "10/50/90/130/170/210/250 + [StatBySubPartCalculationPart?]"
+      }
+    },
+    "Zaahen": {
+      "ZaahenQ": {
+        "InitialDamage": "0/15/30/45/60/75/90 + +0.15/0.2/0.25/0.3/0.35/0.4/0.45 vit.att",
+        "SecondHitDamage": "0/25/50/75/100/125/150 + +0.15/0.2/0.25/0.3/0.35/0.4/0.45 vit.att"
+      },
+      "ZaahenE": {
+        "BaseDamageCalc": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?]"
+      },
+      "ZaahenR": {
+        "DamageEndCalc": "100/250/400/550/700/850/1000 + +2/2/2/2/2/2/2 vit.att"
+      },
+      "ZaahenW": {
+        "InitialDamage": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?]",
+        "SecondaryDamage": "10/30/50/70/90/110/130 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Zac": {
+      "ZacR": {
+        "DamagePerBounce": "50/120/190/260/330/400/470 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "DurationTooltip": "[ProductOfSubPartsCalculationPart?]",
+        "MaxDamageTooltip": "+0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1 + 50/120/190/260/330/400/470 + [ProductOfSubPartsCalculationPart?]"
+      },
+      "ZacW": {
+        "DisplayPercentDamage": "3/4/5/6/7/8/9 + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1",
+        "TooltipHealthCost": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "ZacQ": {
+        "TotalDamage": "30/60/90/120/150/180/210 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#12",
+        "MaxDamageTooltip": "[ProductOfSubPartsCalculationPart?]",
+        "HealthCostTooltip": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "ZacE": {
+        "MaxStun": "[ProductOfSubPartsCalculationPart?]",
+        "Damage": "60/60/105/150/195/240/240 + [StatByCoefficientCalculationPart?]",
+        "HealthCostTooltip": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "ZacPassiveChunkDrop": {
+        "HealPercent": "[ByCharLevelInterpolationCalculationPart?]",
+        "ReviveBlobletDuration": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Nilah": {
+      "NilahQ": {
+        "DamageCalc": "-10/0/10/20/30/40/50 + +1/1/1/1/1/1/1 vit.att",
+        "AttackTotalDamageTooltip": "[StatByCoefficientCalculationPart?]",
+        "BonusAttackSpeedCalc": "[ByCharLevelInterpolationCalculationPart?]",
+        "CritLifesteal": "+0.2/0.2/0.2/0.2/0.2/0.2/0.2 crit",
+        "CritArmorPen": "+0.3/0.3/0.3/0.3/0.3/0.3/0.3 crit"
+      },
+      "NilahE": {
+        "DashDamage": "50/60/70/80/90/100/110 + [StatByCoefficientCalculationPart?]"
+      },
+      "NilahR": {
+        "DamageCalc": "25/125/225/325/425/525/625 + [StatByCoefficientCalculationPart?]",
+        "ShieldCalc": "15/65/115/165/215/265/315 + [StatByCoefficientCalculationPart?]",
+        "DamagePerTickCalc": "5/15/25/35/45/55/65 + [StatByCoefficientCalculationPart?]",
+        "ChampHealingPercent": "0.2 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Camille": {
+      "CamillePassive": {
+        "PassiveCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ShieldAmount": "+0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#12"
+      },
+      "CamilleE": {
+        "TotalDamage": "30/60/90/120/150/180/210 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 vit.att"
+      },
+      "CamilleQ": {
+        "DamageConversionPercentage": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BonusDamage": "+?vit.att"
+      },
+      "CamilleW": {
+        "OuterEdgeTooltip": "0.055/0.06/0.065/0.07/0.075/0.08/0.085 + +0.00025/0.00025/0.00025/0.00025/0.00025/0.00025/0.00025 vit.att",
+        "BaseDamageTotal": "35/60/85/110/135/160/185 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att",
+        "MonsterHealthDamageCap": "300"
+      }
+    },
+    "Nocturne": {
+      "NocturneP": {
+        "TotalDamageNoCrit": "[StatByCoefficientCalculationPart?]",
+        "TotalHealing": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TotalDamageCrit": "[StatByCoefficientCalculationPart?]"
+      },
+      "NocturneDuskbringer": {
+        "TotalDamage": "20/65/110/155/200/245/290 + [StatByCoefficientCalculationPart?]"
+      },
+      "NocturneParanoia2": {
+        "Damage": "150/150/275/400/525/650/775 + [StatByCoefficientCalculationPart?]"
+      },
+      "NocturneParanoia": {
+        "Damage": "150/150/275/400/525/650/775 + [StatByCoefficientCalculationPart?]"
+      },
+      "NocturneUnspeakableHorror": {
+        "TotalDamage": "35/80/125/170/215/260/305 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Cassiopeia": {
+      "CassiopeiaPassive": {
+        "PercentHasteMod": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "CassiopeiaQ": {
+        "TooltipTotalDamage": "30/75/110/145/180/215/250 + [StatByCoefficientCalculationPart?]"
+      },
+      "CassiopeiaE": {
+        "HealCalc": "+0.085/0.1/0.12/0.13/0.14/0.16/0.17 stat#-1",
+        "BonusPoisonedDamage": "-5/20/45/70/95/120/145 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "BasicDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1"
+      },
+      "CassiopeiaW": {
+        "DamagePerSecond": "20/20/25/30/35/40/45 + [StatByCoefficientCalculationPart?]"
+      },
+      "CassiopeiaR": {
+        "RDamage": "50/150/250/350/450/550/650 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      }
+    },
+    "Nunu et Willump": {
+      "NunuW": {
+        "MaximumSnowballDamage": "135/180/225/270/315/360/405 + +1.5/1.5/1.5/1.5/1.5/1.5/1.5 stat#-1",
+        "MaximumStunDuration": "0.5/0.5/0.5/0.5/0.5/0.5/0.5 + 0.75/0.75/0.75/0.75/0.75/0.75/0.75"
+      },
+      "NunuPassive": {
+        "CleaveDamage": "+0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att"
+      },
+      "NunuE": {
+        "TotalSnowballDamage": "7.5/15/22/30/38/45/52 + [StatByCoefficientCalculationPart?]",
+        "TotalRootDamage": "10/20/30/40/50/60/70 + [StatByCoefficientCalculationPart?]",
+        "RootDuration": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "NunuR": {
+        "TotalShieldAmount": "55/65/75/85/95/105/115 + +0.2/0.3/0.4/0.5/0.6/0.7/0.8 stat#12 + [StatByCoefficientCalculationPart?]",
+        "MaximumDamage": "625/625/925/1275/1275/1275/1275 + [StatByCoefficientCalculationPart?]"
+      },
+      "NunuQ": {
+        "MonsterHealing": "35/65/95/125/155/185/215 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#12 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 stat#-1",
+        "TotalChampionDamage": "20/60/100/140/180/220/260 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#12 + +0.65/0.65/0.65/0.65/0.65/0.65/0.65 stat#-1"
+      }
+    },
+    "Zeri": {
+      "ZeriPassive": {
+        "PassiveAttackSpeed": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "ZeriQMis": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriQMisEmpoweredPierce": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriQ": {
+        "ActiveDamageThatCanCrit": "18/22/26/30/34/38/42 + +1/1/1/1.1/1.1/1.1/1.1 vit.att",
+        "MinDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "CurrentCritDamage": "[StatByCoefficientCalculationPart?]",
+        "PassiveMaxDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveMaxChargePercentHealth": "[ByCharLevelInterpolationCalculationPart?]",
+        "PassiveExecuteThreshold": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriQMisPierce": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriQMisEmpowered": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriW": {
+        "TotalDamage": "-10/30/70/110/150/190/230 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + [StatByCoefficientCalculationPart?]"
+      },
+      "ZeriR": {
+        "TotalBonusDamage": "0/5/10/15/20/25/30 + [StatByCoefficientCalculationPart?]",
+        "TotalActiveDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "ChainPhysicalDamage": "+0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att"
+      },
+      "ZeriE": {
+        "DashSpeed": "600 + [StatByCoefficientCalculationPart?]",
+        "BonusDamageTotal": "20/22/24/26/28/30/32 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "{93e3e1a0}": "600 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Olaf": {
+      "OlafRagnarok": {
+        "AD": "0/10/20/30/40/50/60 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att"
+      },
+      "OlafRecklessStrike": {
+        "TotalDamage": "25/70/115/160/205/250/295 + [StatByCoefficientCalculationPart?]",
+        "{fcf1daee}": "10/28/46/64/82/100/118 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      },
+      "OlafAxeThrowCast": {
+        "TotalDamage": "20/70/120/170/220/270/320 + [StatByCoefficientCalculationPart?]",
+        "TooltipCDRefund": "2.5/2.5/2.5/2.5/2.5/2.5/2.5"
+      },
+      "OlafFrenziedStrikes": {
+        "ShieldCalc": "-20/10/40/70/100/130/160 + [StatBySubPartCalculationPart?]",
+        "MaxShieldCalc": "-20/10/40/70/100/130/160 + [StatBySubPartCalculationPart?]"
+      },
+      "OlafBerzerkerRage": {
+        "MaxAttackSpeed": "[ByCharLevelInterpolationCalculationPart?]",
+        "MaxLifeSteal": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Cho'Gath": {
+      "Feast": {
+        "RMonsterDamage": "1200/1200/1200/1200/1200/1200/1200 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "RDamage": "125/300/475/650/825/1000/1175 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "BonusAttackRange": "[BuffCounterByNamedDataValueCalculationPart?]",
+        "{9f798bd0}": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "VorpalSpikes": {
+        "FlatDamageCalc": "0/20/40/60/80/100/120 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "MaxHealthPercentCalc": "2.2/2.5/2.8/3.2/3.5/3.9/4.2 + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "FeralScream": {
+        "TotalDamageTooltip": " + [StatByCoefficientCalculationPart?]"
+      },
+      "Rupture": {
+        "TotalDamageTooltip": "25/80/135/190/245/300/355 + [StatByCoefficientCalculationPart?]"
+      },
+      "Carnivore": {
+        "ChogathCarnivoreHeal": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ChogathCarnivoreMana": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Ziggs": {
+      "ZiggsQ": {
+        "TotalDamage": "30/80/130/180/230/280/330 + +0.55/0.6/0.65/0.7/0.75/0.8/0.85 stat#-1"
+      },
+      "ZiggsR": {
+        "EmpoweredDamage": "100/300/500/700/900/1100/1300 + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "ZiggsE": {
+        "TotalDamage": "-10/30/70/110/150/190/230 + +0.2/0.25/0.3/0.35/0.4/0.45/0.5 stat#-1"
+      },
+      "ZiggsW": {
+        "TotalDamage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]"
+      },
+      "ZiggsPassiveBuff": {
+        "TotalDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "SpellCdr": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Orianna": {
+      "OrianaRedactCommand": {
+        "TotalDamageTooltip": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?]",
+        "TotalShieldTooltip": "20/55/90/125/160/195/230 + [StatByCoefficientCalculationPart?]"
+      },
+      "OrianaDissonanceCommand": {
+        "TotalDamage": "30/70/110/150/190/230/270 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "OriannaP": {
+        "TotalDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1"
+      },
+      "OrianaIzunaCommand": {
+        "TotalDamageTooltip": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?]"
+      },
+      "OrianaDetonateCommand": {
+        "TotalDamage": "100/250/400/550/700/850/1000 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Corki": {
+      "MissileBarrage": {
+        "RSmallMissileDamage": "10/90/170/250/330/410/490 + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 vit.att",
+        "AttackRefund": "1 + [StatByCoefficientCalculationPart?]"
+      },
+      "PhosphorusBomb": {
+        "TotalDamage": "15/60/105/150/195/240/285 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "GGun": {
+        "TotalDamage": "30/80/130/180/230/280/330 + +2.4/2.4/2.4/2.4/2.4/2.4/2.4 vit.att"
+      },
+      "CarpetBomb": {
+        "MaximumDamage": "75/150/225/300/375/450/525 + +1.5/1.5/1.5/1.5/1.5/1.5/1.5 stat#-1 + +2/2/2/2/2/2/2 vit.att",
+        "DashSpeed": "650/650/650/650/650/650/650 + +1/1/1/1/1/1/1 vit.dépl"
+      },
+      "RapidReload": {
+        "BasicAttackTOOLTIP": "+0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      }
+    },
+    "Zed": {
+      "ZedPassive": {
+        "{6a1a62e9}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{ad3d785f}": "[{f3cbe7b2}?] + 0.02/0.02/0.02/0.02/0.02/0.02/0.02",
+        "TotalDamage": "[StatBySubPartCalculationPart?]"
+      },
+      "ZedR": {
+        "{43a019eb}": "7.5/7.5/7.5/7.5/7.5/7.5/7.5 + 0.5",
+        "RCalculatedDamage": "[StatByCoefficientCalculationPart?]"
+      },
+      "ZedQ": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "ZedE": {
+        "TotalDamage": "48/70/92/115/1.4e+02/160/1.8e+02 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att"
+      }
+    },
+    "Darius": {
+      "DariusNoxianTacticsONH": {
+        "EmpoweredAttackDamage": "[StatBySubPartCalculationPart?]"
+      },
+      "DariusHemoMarker": {
+        "BleedDamagePerStack": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "NoxianMightBonusAD": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "DariusCleave": {
+        "BladeDamage": "10/50/80/110/140/170/200 + [StatBySubPartCalculationPart?]"
+      },
+      "DariusExecute": {
+        "Damage": "0/125/250/375/500/625/750 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Ornn": {
+      "OrnnW": {
+        "BrittlePercentMaxHPCalc": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMinimumDamage": "[ProductOfSubPartsCalculationPart?]",
+        "TotalMonsterDamageCap": "40/52/64/76/88/100/112"
+      },
+      "OrnnR": {
+        "RDamageCalc": "75/125/175/225/275/325/375 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "MinStun": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "OrnnP": {
+        "{7325018d}": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "OrnnQ": {
+        "TotalDamage": "-5/20/45/70/95/120/145 + [StatByCoefficientCalculationPart?]"
+      },
+      "OrnnE": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +40%/40%/40%/40%/40%/40%/40% AD + +40%/40%/40%/40%/40%/40%/40% PV"
+      }
+    },
+    "Zoé": {
+      "ZoeE": {
+        "TotalDamageTooltip": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]",
+        "BreakDamageTooltip": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "ZoeW": {
+        "MissileDamageTooltip": "5/15/25/35/45/55/65 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1"
+      },
+      "ZoeQ": {
+        "TotalDamageTooltip": "20/50/80/110/140/170/200 + [ByCharLevelBreakpointsCalculationPart?] + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "ZoePassive": {
+        "PassiveDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      }
+    },
+    "Pantheon": {
+      "PantheonW": {
+        "DamageCalc": "25/0/0/0/0/0/0 + [StatByCoefficientCalculationPart?]",
+        "{1b016817}": "[StatBySubPartCalculationPart?]",
+        "MaxHealthDamageCalc": "0.055/0.06/0.065/0.07/0.075/0.08/0.085 + [StatByCoefficientCalculationPart?] + +0.00015/0.00015/0.00015/0.00015/0.00015/0.00015/0.00015 stat#-1"
+      },
+      "PantheonQ": {
+        "HoldDamageCalc": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TapDamageCalc": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "EmpoweredDamageCalc": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{6fc04dc0}": "40/85/130/175/220/265/310 + [StatByCoefficientCalculationPart?]",
+        "ExecuteDamageCalcModified": "[SumOfSubPartsCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "PantheonE": {
+        "DamageCalc": "[StatByCoefficientCalculationPart?]",
+        "ShieldDamageCalc": "5/55/105/155/205/255/305 + [StatByCoefficientCalculationPart?]",
+        "HealCalc": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "ResistsCalc": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "PantheonR": {
+        "DamageCalc": "100/300/500/700/900/1100/1300 + +1/1/1/1/1/1/1 stat#-1"
+      }
+    },
+    "Zilean": {
+      "HeightenedLearning": {
+        "{e359ec0d}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalXP": "[BuffCounterByCoefficientCalculationPart?]"
+      },
+      "ZileanQ": {
+        "TotalDamage": "30/75/115/165/230/300/380 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 stat#-1"
+      },
+      "ChronoShift": {
+        "RTotalHeal": "350/600/850/1100/1350/1600/1850 + +2/2/2/2/2/2/2 stat#-1"
+      }
+    },
+    "Diana": {
+      "DianaOrbs": {
+        "ShieldValue": "30/45/60/75/90/105/120 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +0.11/0.11/0.11/0.11/0.11/0.11/0.11 stat#12",
+        "TotalDamage": "8/20/32/44/56/68/80 + +0.18/0.18/0.18/0.18/0.18/0.18/0.18 stat#-1"
+      },
+      "DianaQ": {
+        "TotalDamage": "35/70/105/140/175/210/245 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "DianaR": {
+        "RExplosionDamage": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]",
+        "RMultiHitAmplification": "?(MultiHitAmp) + [StatByCoefficientCalculationPart?]"
+      },
+      "DianaTeleport": {
+        "TotalDamage": "30/50/70/90/110/130/150 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "DianaPassive": {
+        "CleaveDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "BonusAS": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Poppy": {
+      "PoppyR": {
+        "Damage": "200/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]"
+      },
+      "PoppyW": {
+        "BonusArmor": "+12%/12%/12%/12%/12%/12%/12% AD",
+        "BonusMR": "+12%/12%/12%/12%/12%/12%/12% PV",
+        "InterruptDamage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "PoppyQ": {
+        "BaseDamage": "30/30/55/80/105/130/130 + [StatByCoefficientCalculationPart?]"
+      },
+      "PoppyPassive": {
+        "ActualCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalDamage": "[ByCharLevelInterpolationCalculationPart?]",
+        "ShieldValue": "[StatBySubPartCalculationPart?]"
+      },
+      "PoppyE": {
+        "TackleDamage": "0/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Pyke": {
+      "PykeQ": {
+        "TotalDamage": "50/100/150/200/250/300/350 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 vit.att"
+      },
+      "PykePassive": {
+        "DamageStorageMax": "80 + [StatByCoefficientCalculationPart?]",
+        "OneEnemyCalc": "0.09/0.09/0.09/0.09/0.09/0.09/0.09 + [StatByCoefficientCalculationPart?]",
+        "AdditionalBonusCalc": "0.4/0.4/0.4/0.4/0.4/0.4/0.4 + [StatByCoefficientCalculationPart?]"
+      },
+      "PykeR": {
+        "RDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "RADDamage": "[StatByCoefficientCalculationPart?]",
+        "RLethalityDamage": "[StatByCoefficientCalculationPart?]",
+        "RBaseDamage": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "PykeE": {
+        "StunDuration": "1.2/1.2/1.2/1.2/1.2/1.2/1.2 + [StatByCoefficientCalculationPart?]",
+        "TotalDamage": "100/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]"
+      },
+      "PykeW": {
+        "{601654a1}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "MoveSpeed": "45/45/45/45/45/45/45 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Draven": {
+      "DravenSpinning": {
+        "TotalDamage": "35/40/45/50/55/60/65 + +0.65/0.75/0.85/0.95/1/1.1/1.2 vit.att"
+      },
+      "DravenDoubleShot": {
+        "TotalDamage": "40/75/110/145/180/215/250 + [StatByCoefficientCalculationPart?]"
+      },
+      "DravenPassive": {
+        "DravenPassiveGoldEarned": "[BuffCounterByCoefficientCalculationPart?]",
+        "DravenPassiveHighestBounty": "[BuffCounterByCoefficientCalculationPart?]"
+      },
+      "DravenRCast": {
+        "RCalculatedDamage": "100/200/300/400/500/600/700 + +0.9/1.1/1.3/1.5/1.7/1.9/2.1 vit.att",
+        "RPassiveTrueDamage": "[BuffCounterByNamedDataValueCalculationPart?]"
+      }
+    },
+    "Dr. Mundo": {
+      "DrMundoP": {
+        "PassiveCooldown": "[ByCharLevelBreakpointsCalculationPart?]",
+        "MaxHealthRegen": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "DrMundoE": {
+        "AdditionalDamage": "-5/5/15/25/35/45/55 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#12",
+        "MaxDamageAmpTooltip": "1.4/1.4/1.4/1.4/1.4/1.4/1.4 + -1",
+        "PassiveBonusAD": "+1.7/2/2.3/2.6/2.9/3.2/3.5 stat#12"
+      },
+      "DrMundoWRecast": {
+        "TotalDamage": "[StatByCoefficientCalculationPart?] + 10/15/20/25/30/35/40 + [StatByCoefficientCalculationPart?]"
+      },
+      "DrMundoW": {
+        "TotalDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]",
+        "GrayHealthStorageInitial": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "DrMundoQ": {
+        "HealthRestoreOnHitChampionMonster": "[ProductOfSubPartsCalculationPart?]",
+        "HealthRestoreOnHitMinion": "[ProductOfSubPartsCalculationPart?]"
+      }
+    },
+    "Ekko": {
+      "EkkoPassive": {
+        "BonusMS": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ThreeHitDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "SpeedDuration": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "EkkoR": {
+        "TotalDamage": "50/200/350/500/650/800/950 + [StatByCoefficientCalculationPart?]",
+        "TotalBaseHeal": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]"
+      },
+      "EkkoW": {
+        "MissingHealthPercent": "3/3/3/3/3/3/3 + [StatByCoefficientCalculationPart?]",
+        "TotalShield": " + [StatByCoefficientCalculationPart?]"
+      },
+      "EkkoQ": {
+        "InitialDamage": "65/80/95/110/125/140/155 + [StatByCoefficientCalculationPart?]",
+        "RecallDamage": "15/40/65/90/115/140/165 + [StatByCoefficientCalculationPart?]"
+      },
+      "EkkoE": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Qiyana": {
+      "QiyanaW": {
+        "CleaveDamage": "0/8/16/24/32/40/48 + [StatByCoefficientCalculationPart?]",
+        "OnHitDamage": "0/8/16/24/32/40/48 + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      },
+      "QiyanaR": {
+        "Damage": "0/100/200/300/400/500/600 + [StatByCoefficientCalculationPart?]",
+        "MissingHealthDamageRock": "0.1/0.1/0.1/0.1/0.1/0.1/0.1",
+        "MonsterCap": "250/500/750/1000/1250/1500/1750 + [StatByCoefficientCalculationPart?]"
+      },
+      "QiyanaQ_Grass": {
+        "EnchantedDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "VanillaDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "{7dc40c72}": "0.06 + [StatByCoefficientCalculationPart?]",
+        "FalloffDamage": "0.75/0.75/0.75/0.75/0.75/0.75/0.75"
+      },
+      "QiyanaQ_Water": {
+        "EnchantedDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "VanillaDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "{7dc40c72}": "0.06 + [StatByCoefficientCalculationPart?]",
+        "FalloffDamage": "0.75/0.75/0.75/0.75/0.75/0.75/0.75"
+      },
+      "QiyanaQ": {
+        "EnchantedDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "VanillaDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "{7dc40c72}": "0.06 + [StatByCoefficientCalculationPart?]",
+        "FalloffDamage": "0.75/0.75/0.75/0.75/0.75/0.75/0.75"
+      },
+      "QiyanaQ_Rock": {
+        "EnchantedDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "VanillaDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "{7dc40c72}": "0.06 + [StatByCoefficientCalculationPart?]",
+        "FalloffDamage": "0.75/0.75/0.75/0.75/0.75/0.75/0.75"
+      },
+      "QiyanaPassive": {
+        "FinalDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "ICD": "[ByCharLevelInterpolationCalculationPart?]",
+        "{222614ec}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "QiyanaE": {
+        "Damage": "10/50/90/130/170/210/250 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      }
+    },
+    "Zyra": {
+      "ZyraR": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "ZyraQ": {
+        "InitialDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "ZyraE": {
+        "TotalDamage": "25/60/95/130/165/200/235 + [StatByCoefficientCalculationPart?]"
+      },
+      "ZyraP": {
+        "SeedCooldown": "[ByCharLevelInterpolationCalculationPart?]",
+        "PlantDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "monstermod": "[ByCharLevelInterpolationCalculationPart?]",
+        "{c951f1e1}": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Elise": {
+      "EliseHumanE": {
+        "TotalStunDuration": "1.4/1.6/1.8/2/2.2/2.4/2.6"
+      },
+      "EliseSpiderQCast": {
+        "MissingHPDamage": "8/8/8/8/8/8/8 + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1",
+        "MonsterDamageCapCalc": "45/65/85/105/125/145/165 + [StatByCoefficientCalculationPart?]"
+      },
+      "EliseHumanW": {
+        "TotalDamage": "20/60/100/140/180/220/260 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1"
+      },
+      "EliseR": {
+        "PassiveTotalDamage": "2/12/22/32/42/52/62 + [StatByCoefficientCalculationPart?]",
+        "PassiveTotalHealing": "4/6/8/10/12/14/16 + [StatByCoefficientCalculationPart?]",
+        "SpiderlingTotalDamage": "0/10/20/30/40/50/60 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1"
+      },
+      "ElisePassive": {
+        "{38943004}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "EliseHumanQ": {
+        "HumanPercentHealth": "4/4/4/4/4/4/4 + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1",
+        "MonsterDamageCapCalc": "45/65/85/105/125/145/165 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Rakan": {
+      "RakanW": {
+        "TotalDamage": "20/70/120/170/220/270/320 + [StatByCoefficientCalculationPart?]"
+      },
+      "RakanQ": {
+        "TotalDamage": "25/70/115/160/205/250/295 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "TotalHeal": "[ByCharLevelInterpolationCalculationPart?] + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "{b88e1204}": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "RakanE": {
+        "TotalShield": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]"
+      },
+      "RakanPassive": {
+        "TotalShield": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "ShieldCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "RakanR": {
+        "TotalDamageTooltip": "100/100/200/300/0/0/0 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Quinn": {
+      "QuinnR": {
+        "Damage": "30/60/90/120/150/180/210 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 vit.att"
+      },
+      "QuinnPassive": {
+        "BonusDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "{929bc6f6}": "75"
+      },
+      "QuinnE": {
+        "TotalDamage": "40/40/65/90/115/140/140 + [StatByCoefficientCalculationPart?]"
+      },
+      "QuinnQ": {
+        "TotalDamage": "30/65/100/135/170/205/240 + +0.75/0.8/0.85/0.9/0.95/1/1 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      }
+    },
+    "Evelynn": {
+      "EvelynnQ": {
+        "MissileDamage": "20/25/30/35/40/45/50 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1",
+        "TotalBonusDamage": "5/15/25/35/45/55/65 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1"
+      },
+      "EvelynnW": {
+        "MonsterDamageTotalTOOLTIP": "200/250/300/350/400/450/500 + [StatByCoefficientCalculationPart?]"
+      },
+      "EvelynnR": {
+        "Damage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "EvelynnPassive": {
+        "HealingThresholdTOOLTIP": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "HealPerSecondTOOLTIP": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "EvelynnE": {
+        "PercentHealthBaseTOOLTIP": "3/3/3/3/3/3/3 + [StatByCoefficientCalculationPart?]",
+        "PercentHealthEmpoweredTOOLTIP": "4/4/4/4/4/4/4 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Rammus": {
+      "DefensiveBallCurl": {
+        "ReturnDamageCalc": "15/15/15/15/15/15/15 + +10%/10%/10%/10%/10%/10%/10% AD + +10%/10%/10%/10%/10%/10%/10% PV",
+        "BonusArmorTooltip": "[ProductOfSubPartsCalculationPart?] + +22%/30%/38%/45%/52%/60%/68% AD",
+        "BonusMRTooltip": "[ProductOfSubPartsCalculationPart?] + +22%/30%/38%/45%/52%/60%/68% PV",
+        "RecastDamageTooltip": "15/15/15/15/15/15/15 + +10%/10%/10%/10%/10%/10%/10% AD + +10%/10%/10%/10%/10%/10%/10% PV"
+      },
+      "PowerBall": {
+        "PowerBallDamage": "40/80/120/160/200/240/280 + +1/1/1/1/1/1/1 stat#-1",
+        "MinimumMoveSpeed": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "Tremors2": {
+        "InitialDamageCalc": "50/150/250/350/450/550/650 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "PulseDamageCalc": "?(PulseBaseDamage) + [StatByCoefficientCalculationPart?]",
+        "TooltipMaxDamageCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]",
+        "MaxSlow": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "PuncturingTaunt": {
+        "MonsterDamageCalc": "60/80/100/120/140/160/180 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "RammusP": {
+        "TotalDamage": "+15%/15%/15%/15%/15%/15%/15% AD + +15%/15%/15%/15%/15%/15%/15% PV"
+      }
+    },
+    "Ezreal": {
+      "EzrealE": {
+        "Damage": "30/80/130/180/230/280/330 + [StatByCoefficientCalculationPart?] + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1"
+      },
+      "EzrealQ": {
+        "Damage": "-5/20/45/70/95/120/145 + +1.3/1.3/1.3/1.3/1.3/1.3/1.3 vit.att + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "EzrealW": {
+        "Damage": "25/80/135/190/245/300/355 + [StatByCoefficientCalculationPart?] + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 stat#-1"
+      },
+      "EzrealR": {
+        "Damage": "150/350/550/750/950/1150/1350 + [StatByCoefficientCalculationPart?] + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 stat#-1",
+        "DamageMinionMonster": "75/150/225/300/375/450/525 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Fiddlesticks": {
+      "FiddleSticksW": {
+        "DrainDamageCalc": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?]"
+      },
+      "FiddleSticksQ": {
+        "TotalPercentHealthDamage": "0.035/0.04/0.045/0.05/0.055/0.06/0.065 + [StatByCoefficientCalculationPart?]"
+      },
+      "FiddleSticksR": {
+        "DamageDone": "50/150/250/350/450/550/650 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "APRatioFullDuration": "+0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "APRatioTick": "+0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "{d0d3db7f}": "50/150/250/350/450/550/650 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "FiddleSticksE": {
+        "Damage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Rell": {
+      "RellP": {
+        "StealFloor": "[ByCharLevelInterpolationCalculationPart?]",
+        "OnHitDamage": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "RellW_Dismount": {
+        "DismountDamage": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?]",
+        "Shield": "20/20/40/60/80/100/120 + +0.11/0.11/0.11/0.11/0.11/0.11/0.11 stat#12",
+        "FlipDamage": "10/10/25/40/55/70/85 + [StatByCoefficientCalculationPart?]",
+        "{a71a11d7}": "[ClampSubPartsCalculationPart?]"
+      },
+      "RellW_MountUp": {
+        "{a71a11d7}": "[ClampSubPartsCalculationPart?]"
+      },
+      "RellE": {
+        "MaxHealthDamageCalc": "0.045/0.05/0.055/0.06/0.065/0.07/0.075 + [StatByCoefficientCalculationPart?]",
+        "PercentHealthDamageCap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "RellQ": {
+        "Damage": "20/60/100/140/180/220/260 + [StatByCoefficientCalculationPart?]"
+      },
+      "RellR": {
+        "DamagePerSecond": "25/75/125/175/225/275/325 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Rek'Sai": {
+      "RekSaiE": {
+        "EmpoweredDamage": "65/100/135/170/205/240/275 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att",
+        "DashSpeed": "500/500/500/500/500/500/500 + +1/1/1/1/1/1/1 vit.dépl",
+        "{009db1c8}": "10/10/10/10/10/10/10"
+      },
+      "RekSaiPassive": {
+        "HealAmount": "[StatBySubPartCalculationPart?]"
+      },
+      "RekSaiQ": {
+        "TotalDamageTooltip": "+0.25/0.3/0.35/0.4/0.45/0.5/0.55 vit.att",
+        "BurrowDamageTooltip": "20/50/80/110/140/170/200 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "RekSaiR": {
+        "RBaseDamageCalc": "50/150/250/350/450/550/650 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "RekSaiW": {
+        "UnburrowDamage": "5/30/55/80/105/130/155 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Fiora": {
+      "FioraPassive": {
+        "PassiveHealAmount": "[ByCharLevelInterpolationCalculationPart?]",
+        "PassiveDamageTotal": "0.03/0.03/0.03/0.03/0.03/0.03/0.03 + +0.0004/0.0004/0.0004/0.0004/0.0004/0.0004/0.0004 vit.att"
+      },
+      "FioraQ": {
+        "TotalDamage": "60/70/80/90/100/110/120 + [StatBySubPartCalculationPart?]"
+      },
+      "FioraR": {
+        "HealPerSecondCalc": "50/75/100/125/150/175/200 + [StatByCoefficientCalculationPart?]"
+      },
+      "FioraW": {
+        "StabDamage": "70/110/150/190/230/270/310 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Renata Glasc": {
+      "RenataE": {
+        "TotalDamage": "35/65/95/125/155/185/215 + [StatByCoefficientCalculationPart?]",
+        "{fe737c05}": "30/30/30/30/30/30/30",
+        "ShieldCalc": "35/50/65/80/95/110/125 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "RenataPassive": {
+        "PercentAmpCalc": "[ByCharLevelBreakpointsCalculationPart?] + +0.0002/0.0002/0.0002/0.0002/0.0002/0.0002/0.0002 stat#-1",
+        "PercentAmpCalcSelf": "[ByCharLevelBreakpointsCalculationPart?] + +0.0002/0.0002/0.0002/0.0002/0.0002/0.0002/0.0002 stat#-1"
+      },
+      "RenataW": {
+        "ASCalc": "5/10/15/20/25/30/35 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1",
+        "MSCalc": "7.5/10/12/15/18/20/22 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1",
+        "{85d7d7f0}": "10/10/10/10/10/10/10",
+        "FinalASCalc": "5/10/15/20/25/30/35 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1",
+        "FinalMSCalc": "7.5/10/12/15/18/20/22 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1"
+      },
+      "RenataQ": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Fizz": {
+      "FizzE": {
+        "EDamage": "30/80/130/180/230/280/330 + [StatByCoefficientCalculationPart?]"
+      },
+      "FizzPassive": {
+        "DamageReductionCalc": "4/4/4/4/4/4/4 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1",
+        "MonsterDamageReductionCalc": "14/14/14/14/14/14/14 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1"
+      },
+      "FizzW": {
+        "DoTDamage": "15/30/45/60/75/90/105 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1",
+        "ActiveDamage": "25/50/75/100/125/150/175 + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1",
+        "OnHitBuffDamage": "15/20/25/30/35/40/45 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "FizzR": {
+        "SmallSharkDamage": "60/180/300/420/540/660/780 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "FizzQ": {
+        "QDamage": " + [StatByCoefficientCalculationPart?]",
+        "TotalDamage": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Renekton": {
+      "RenektonPreExecute": {
+        "HitDamage": "-10/5/20/35/50/65/80 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 vit.att"
+      },
+      "RenektonSliceAndDice": {
+        "BasicDamage": "10/40/70/100/130/160/190 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att",
+        "EmpDamage": "25/70/115/160/205/250/295 + +1.4/1.4/1.4/1.4/1.4/1.4/1.4 vit.att",
+        "DashSpeed": "750/750/750/750/750/750/750 + [StatByCoefficientCalculationPart?]"
+      },
+      "RenektonCleave": {
+        "BasicDamage": "30/60/90/120/150/180/210 + +1/1/1/1/1/1/1 vit.att",
+        "EmpDamage": "45/90/135/180/225/270/315 + +1.4/1.4/1.4/1.4/1.4/1.4/1.4 vit.att",
+        "NonChampHealing": "1/2/3/4/5/6/7 + +0.02/0.02/0.02/0.02/0.02/0.02/0.02 vit.att",
+        "ChampHealing": "4/12/20/28/36/44/52 + +0.17/0.17/0.17/0.17/0.17/0.17/0.17 vit.att"
+      },
+      "RenektonReignOfTheTyrant": {
+        "TotalDamagePerSecond": "-30/60/150/240/330/420/510 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Galio": {
+      "GalioR": {
+        "TotalDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "GalioW": {
+        "TotalPassiveShield": "+0.06/0.075/0.09/0.1/0.12/0.14/0.15 stat#12",
+        "MagicDamageReduction": "0.2/0.25/0.3/0.35/0.4/0.45/0.5 + +?stat#-1 + +0%/0%/0%/0%/0%/0%/0% PV + +?stat#12",
+        "MinTotalDamage": "10/20/30/40/50/60/70 + [StatByCoefficientCalculationPart?]",
+        "PassiveShieldOOCTimer": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "GalioPassive": {
+        "TotalDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveCooldownModified": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "GalioQ": {
+        "QMissileDamage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]",
+        "{85f4c0e9}": "2/2/2/2/2/2/2 + [StatByCoefficientCalculationPart?]",
+        "SuperQMonsterMaxDamageTotal": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "GalioE": {
+        "TotalDamage": "65/100/135/170/205/240/275 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Gangplank": {
+      "GangplankRWithRaiseMorale": {
+        "OneWaveDamage": "10/40/70/100/130/160/190 + [StatByCoefficientCalculationPart?]",
+        "DeathsDaughterDamage": "30/120/210/300/390/480/570 + [StatByCoefficientCalculationPart?]"
+      },
+      "GangplankR": {
+        "OneWaveDamage": "10/40/70/100/130/160/190 + [StatByCoefficientCalculationPart?]",
+        "DeathsDaughterDamage": "30/120/210/300/390/480/570 + [StatByCoefficientCalculationPart?]"
+      },
+      "GangplankQWrapper": {
+        "ShotDamage": "-20/10/40/70/100/130/160 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "GangplankE": {
+        "FinalSlowAmount": "30/40/50/60/70/80/90",
+        "BarrelDecayTime": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "GangplankW": {
+        "BaseHealth": "20/45/70/95/120/145/170 + [StatByCoefficientCalculationPart?]"
+      },
+      "GangplankPassive": {
+        "TotalDamage": "[ByCharLevelInterpolationCalculationPart?] + +1/1/1/1/1/1/1 vit.att",
+        "MoveSpeed": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Rumble": {
+      "RumbleShield": {
+        "TotalShield": "-5/25/55/85/115/145/175 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 stat#12",
+        "EmpoweredMS": "0.05/0.1/0.15/0.2/0.25/0.3/0.35"
+      },
+      "RumbleFlameThrower": {
+        "FlatDamage": "35/60/85/110/135/160/185 + +1/1/1/1/1/1/1 stat#-1",
+        "EmpoweredHealth": "0.055/0.06/0.065/0.07/0.075/0.08/0.085",
+        "MonsterCap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "RumbleGrenade": {
+        "TotalDamage": "30/55/80/105/130/155/180 + [StatByCoefficientCalculationPart?]"
+      },
+      "RumbleCarpetBomb": {
+        "DamagePerSecond": "40/120/200/280/360/440/520 + [StatByCoefficientCalculationPart?]"
+      },
+      "RumbleHeatSystem": {
+        "TotalBaseDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "OverheatAS": "[ByCharLevelInterpolationCalculationPart?]",
+        "MonsterCapScaling": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Garen": {
+      "GarenPassive": {
+        "RegenCalc": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "GarenW": {
+        "TotalShield": "45/65/85/105/125/145/165 + +0.18/0.18/0.18/0.18/0.18/0.18/0.18 stat#12",
+        "ResistsForTooltip": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "GarenQ": {
+        "TotalDamage": "0/30/60/90/120/150/180 + +1.5/1.5/1.5/1.5/1.5/1.5/1.5 vit.att"
+      },
+      "GarenE": {
+        "TotalDamage": "1/4/7/10/13/16/19 + +0.37/0.4/0.43/0.46/0.49/0.52/0.55 vit.att",
+        "NumberOfStrikes": "7/7/7/7/7/7/7"
+      }
+    },
+    "Riven": {
+      "RivenTriCleave": {
+        "FirstSlashDamage": "15/45/75/105/135/165/195 + +0.55/0.6/0.65/0.7/0.75/0.8/0.85 vit.att"
+      },
+      "RivenMartyr": {
+        "TotalDamage": "30/65/95/125/155/185/215 + [StatByCoefficientCalculationPart?]"
+      },
+      "RivenFeint": {
+        "TotalShield": "45/70/95/120/145/170/195 + [StatByCoefficientCalculationPart?]"
+      },
+      "RivenPassive": {
+        "TotalDamage": "[StatBySubPartCalculationPart?]"
+      },
+      "RivenFengShuiEngine": {
+        "MinDamage": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]",
+        "MaxDamage": "150/300/450/600/750/900/1050 + [StatByCoefficientCalculationPart?]",
+        "BonusAD": "+0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att"
+      }
+    },
+    "Rengar": {
+      "RengarW": {
+        "BonusMonsterDamage": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalDamage": "20/50/80/110/140/170/200 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1",
+        "TotalDamageEmpowered": "[ByCharLevelFormulaCalculationPart?] + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "RengarQ": {
+        "EmpoweredQAS": "[ByCharLevelBreakpointsCalculationPart?]",
+        "QBonusDamage": "-15/20/55/90/125/160/195 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 vit.att",
+        "{d4a43abe}": "[ByCharLevelBreakpointsCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att",
+        "{95c7ca04}": "[SumOfSubPartsCalculationPart?]",
+        "{f2ca2500}": "[SumOfSubPartsCalculationPart?]",
+        "QTotalDamage": "-15/20/55/90/125/160/195 + [StatByCoefficientCalculationPart?] + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 vit.att",
+        "EmpoweredQTotalDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att"
+      },
+      "RengarE": {
+        "TotalDamage": "10/55/100/145/190/235/280 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att",
+        "TotalEmpoweredDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att"
+      },
+      "RengarR": {
+        "BonusDamage": "[StatByCoefficientCalculationPart?]"
+      },
+      "RengarPassive": {
+        "EmpoweredMS": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Ryze": {
+      "RyzeW": {
+        "WDamageCalc": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?] + [AbilityResourceByCoefficientCalculationPart?]"
+      },
+      "RyzeQWrapper": {
+        "QDamageCalc": "55/75/95/115/135/155/175 + [StatByCoefficientCalculationPart?] + [AbilityResourceByCoefficientCalculationPart?]"
+      },
+      "RyzeE": {
+        "EDamageCalc": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?] + [AbilityResourceByCoefficientCalculationPart?]"
+      },
+      "RyzePassive": {
+        "{92bc0080}": "[StatByCoefficientCalculationPart?]",
+        "PassiveManaCalcTooltip": "+10/10/10/10/10/10/10 stat#-1"
+      }
+    },
+    "Gragas": {
+      "GragasW": {
+        "DamageReduction": "6/10/14/18/22/26/30 + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 stat#-1",
+        "TotalDamage": "-10/20/50/80/110/140/170 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "GragasQToggle": {
+        "MinDamage": "40/80/120/160/200/240/280 + [StatByCoefficientCalculationPart?]"
+      },
+      "GragasQ": {
+        "MinDamage": "40/80/120/160/200/240/280 + [StatByCoefficientCalculationPart?]"
+      },
+      "GragasE": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "GragasR": {
+        "DamageDone": "100/200/300/400/500/600/700 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "GragasPassive": {
+        "HealAmount": "+0.055/0.055/0.055/0.055/0.055/0.055/0.055 stat#12",
+        "HealCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Gnar": {
+      "GnarW": {
+        "MiniTotalDamage": "0/0/10/20/30/40/50 + [StatByCoefficientCalculationPart?]",
+        "MegaTotalDamage": "15/45/75/105/135/165/195 + [StatByCoefficientCalculationPart?]"
+      },
+      "GnarR": {
+        "Damage": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "GnarQ": {
+        "MiniTotalDamage": "5/5/45/85/125/165/205 + [StatByCoefficientCalculationPart?]",
+        "MegaTotalDamage": "45/45/90/135/180/225/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "GnarPassive": {
+        "TotalAttackRange": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMS": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalAS": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMegaGnarHealth": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMegaGnarArmor": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMegaGnarMR": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalMegaGnarAD": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "GnarBigQ": {
+        "MegaTotalDamage": "0/45/90/135/180/225/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "GnarE": {
+        "MiniTotalDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?]",
+        "MegaTotalDamage": "45/80/115/150/185/220/255 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Samira": {
+      "SamiraE": {
+        "DashDamage": "40/50/60/70/80/90/100 + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraR": {
+        "DamageCalc": "0/20/40/60/80/100/120 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att"
+      },
+      "SamiraQ": {
+        "DamageCalc": "-5/0/5/10/15/20/25 + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att"
+      },
+      "SamiraQSword": {
+        "DamageCalc": "[StatByCoefficientCalculationPart?] + 60/90/120/150/180/210/240"
+      },
+      "SamiraQGun": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraQBufferedSword": {
+        "DamageCalc": "[StatByCoefficientCalculationPart?] + 60/90/120/150/180/210/240"
+      },
+      "SamiraEBuff": {
+        "DashDamage": "40/50/60/70/80/90/100 + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraPassiveCombo": {
+        "QueenMaxDashRange": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BonusMeleeDamage": "[StatByCoefficientCalculationPart?] + [ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "SamiraW": {
+        "DamageCalc": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraPJuggle": {
+        "DamagePerBullet": "[StatByCoefficientCalculationPart?]"
+      },
+      "SamiraTauntMissile": {
+        "Damage": "-5/5/15/25/35/45/55 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraPSwordJuggle": {
+        "DamagePerBullet": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SamiraPassive": {
+        "QueenMaxDashRange": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BonusMeleeDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "MSBonusNew": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Sejuani": {
+      "SejuaniR": {
+        "TotalDamageTooltip": " + [StatByCoefficientCalculationPart?]",
+        "MinorDamageTooltip": " + [StatByCoefficientCalculationPart?]"
+      },
+      "SejuaniPassive": {
+        "PercentHPDamage": "0.1/0.1/0.1/0.1/0.1/0.1/0.1",
+        "TotalArmorTooltip": "10/10/10/10/10/10/10 + +75%/75%/75%/75%/75%/75%/75% AD",
+        "TotalMRTooltip": "10/10/10/10/10/10/10 + +75%/75%/75%/75%/75%/75%/75% PV",
+        "FrostArmorOOC": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "SejuaniE": {
+        "TotalDamage": "5/55/105/155/205/255/305 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "SejuaniW": {
+        "FirstHitDamageTooltip": "-5/5/15/25/35/45/55 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 stat#12",
+        "SecondHitDamageTooltip": "-15/5/25/45/65/85/105 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1 + +0.08/0.08/0.08/0.08/0.08/0.08/0.08 stat#12"
+      },
+      "SejuaniQ": {
+        "TotalDamageTooltip": "40/90/140/190/240/290/340 + +0.75/0.75/0.75/0.75/0.75/0.75/0.75 stat#-1"
+      }
+    },
+    "Senna": {
+      "SennaR": {
+        "TotalDamage": "100/250/400/550/700/850/1000 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1 + [StatByCoefficientCalculationPart?]",
+        "TotalShield": "80/120/160/200/240/280/320 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + [BuffCounterByCoefficientCalculationPart?]"
+      },
+      "SennaE": {
+        "TotalMS": "0.2/0.2/0.2/0.2/0.2/0.2/0.2 + +0.0005/0.0005/0.0005/0.0005/0.0005/0.0005/0.0005 stat#-1"
+      },
+      "SennaQ": {
+        "TotalDamage": "5/30/55/80/105/130/155 + [StatByCoefficientCalculationPart?]",
+        "TotalHeal": "20/40/60/80/100/120/140 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "TotalSlow": "0.15/0.15/0.15/0.15/0.15/0.15/0.15 + +0.001/0.001/0.001/0.001/0.001/0.001/0.001 stat#-1 + [StatByCoefficientCalculationPart?]"
+      },
+      "SennaW": {
+        "Damage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "SennaPassive": {
+        "BonusOnHitDamage": "[StatByCoefficientCalculationPart?]",
+        "MSSteal": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{bb59ad08}": "[BuffCounterByNamedDataValueCalculationPart?]",
+        "BonusCurentHealthDamage": "[ByCharLevelBreakpointsCalculationPart?]",
+        "DebuffDuration": "[ByCharLevelBreakpointsCalculationPart?]",
+        "CriticalDamage": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Gwen": {
+      "GwenQ": {
+        "FinalSwipeDamage": "35/60/85/110/135/160/185 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "MiniSwipeDamage": "6.5/10/14/17/20/24/28 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#-1",
+        "MaxDamage": "[SumOfSubPartsCalculationPart?]"
+      },
+      "GwenW": {
+        "TotalResists": "20/22/24/26/28/30/32 + [StatByCoefficientCalculationPart?]"
+      },
+      "GwenE": {
+        "BonusAttackSpeed": "5/20/35/50/65/80/95",
+        "OnHitDamage": "15/15/15/15/15/15/15 + [StatByCoefficientCalculationPart?]"
+      },
+      "GwenR": {
+        "TotalDamage": "10/30/50/70/90/110/130 + [StatByCoefficientCalculationPart?]"
+      },
+      "GwenP": {
+        "HealingPercent": "0.5",
+        "{540bce84}": "1 + [StatByCoefficientCalculationPart?]",
+        "HealCap": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MonsterDamageCap": "3 + [StatByCoefficientCalculationPart?]",
+        "{5bade13c}": "[BuffCounterByCoefficientCalculationPart?]",
+        "ExecuteDamage": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Hecarim": {
+      "HecarimRamp": {
+        "MinDamage": "15/30/45/60/75/90/105 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      },
+      "HecarimRapidSlash": {
+        "Damage": "30/60/90/120/150/180/210 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att",
+        "RampageBonusDamagePerc": "3/3/3/3/3/3/3 + [StatByCoefficientCalculationPart?]"
+      },
+      "HecarimUlt": {
+        "DamageDone": "50/150/250/350/450/550/650 + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "HecarimW": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1",
+        "LeechAmount": "25/25/25/25/25/25/25"
+      },
+      "HecarimPassive": {
+        "BonusAD": "[StatBySubPartCalculationPart?]"
+      }
+    },
+    "Graves": {
+      "GravesChargeShot": {
+        "Damage": "125/275/425/575/725/875/1025 + [StatByCoefficientCalculationPart?]",
+        "FalloffDamage": "80/200/320/440/560/680/800 + [StatByCoefficientCalculationPart?]"
+      },
+      "GravesQLineSpell": {
+        "TotalDamage": "25/50/75/100/125/150/175 + +0.65/0.65/0.65/0.65/0.65/0.65/0.65 vit.att",
+        "TotalDetonationDamage": "35/80/125/170/215/260/305 + +0.4/0.55/0.7/0.85/1/1.1/1.3 vit.att"
+      },
+      "GravesSmokeGrenade": {
+        "ImpactDamage": "10/60/110/160/210/260/310 + [StatByCoefficientCalculationPart?]"
+      },
+      "GravesPassive": {
+        "SingleBulletDamage": "[StatBySubPartCalculationPart?]",
+        "CritDamageMult": "[ProductOfSubPartsCalculationPart?]",
+        "{549cda4d}": "[StatByCoefficientCalculationPart?]"
+      },
+      "GravesMove": {
+        "MRGrant": "4/7/10/13/16/19/22"
+      }
+    },
+    "Séraphine": {
+      "SeraphineW": {
+        "TotalShieldStrength": "40/60/80/100/120/140/160 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "WMSBonusTotal": "0.2/0.2/0.2/0.2/0.2/0.2/0.2 + +0.0002/0.0002/0.0002/0.0002/0.0002/0.0002/0.0002 stat#-1",
+        "WMissingHPHeal": "6/8/10/12/14/16/18"
+      },
+      "SeraphineE": {
+        "FinalDamage": "40/70/100/130/160/190/220 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "SeraphineQ": {
+        "ExplosionDamage": "35/60/85/110/135/160/185 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "SeraphinePassive": {
+        "AutoDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 stat#-1"
+      },
+      "SeraphineR": {
+        "R1TotalDamage": "100/150/200/250/300/350/400 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      }
+    },
+    "Ahri": {
+      "AhriPassive": {
+        "ChampionHeal": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MinionHeal": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "AhriW": {
+        "SingleFireDamage": "20/40/60/80/100/120/140 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "AhriR": {
+        "RCalculatedDamage": "25/75/125/175/225/275/325 + +?stat#-1"
+      },
+      "AhriQ": {
+        "TotalDamage": "10/35/60/85/110/135/160 + [StatByCoefficientCalculationPart?]"
+      },
+      "AhriE": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 stat#-1"
+      }
+    },
+    "Hwei": {
+      "HweiR": {
+        "Damage": "75/200/325/450/575/700/825 + [StatByCoefficientCalculationPart?]",
+        "DamageOverTime": "0/10/20/30/40/50/60 + [StatByCoefficientCalculationPart?]",
+        "TotalMaxDamage": "[SumOfSubPartsCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiE": {
+        "Tooltip_EQDamage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_EWDamage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_EEDamage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiEQ": {
+        "Damage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiEW": {
+        "Damage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiEE": {
+        "Damage": "30/70/110/150/190/230/270 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiWE": {
+        "OnHitDamage": "10/20/30/40/50/60/70 + [StatByCoefficientCalculationPart?]",
+        "{a14e3318}": "[SumOfSubPartsCalculationPart?]"
+      },
+      "HweiW": {
+        "Tooltip_WQMoveSpeed": "28/30/32/35/38/40/42 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_WWShieldAmount": "60/100/140/180/220/260/300 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_WWStartShieldAmount": "60/100/140/180/220/260/300 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_WEOnHitDamage": "10/20/30/40/50/60/70 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiWQ": {
+        "MoveSpeed": "28/30/32/35/38/40/42 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiWW": {
+        "ShieldAmount": "60/100/140/180/220/260/300 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "{20a3d822}": "60/100/140/180/220/260/300 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "HweiQE": {
+        "Damage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]",
+        "DamagePerSecond": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]",
+        "{a8f705ac}": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "HweiQQ": {
+        "Damage": "20/50/80/110/140/170/200 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiQW": {
+        "Damage": "35/60/85/110/135/160/185 + [StatByCoefficientCalculationPart?]"
+      },
+      "HweiQ": {
+        "Tooltip_QQDamage": "20/50/80/110/140/170/200 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_QWDamage": "35/60/85/110/135/160/185 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_QEDamage": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]",
+        "Tooltip_QEDamagePerSecond": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Sett": {
+      "SettQ": {
+        "MaxHealthDamageCalc": "0.01/0.01/0.01/0.01/0.01/0.01/0.01 + +5e-05/0.0001/0.00015/0.0002/0.00025/0.0003/0.00035 vit.att",
+        "BonusEnemyMaxHealthDamage": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "SettPassive": {
+        "HealingCalc": "[ByCharLevelFormulaCalculationPart?]",
+        "RightPunchBonus": "[ByCharLevelFormulaCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{7733e08c}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{a156fbdc}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "SettE": {
+        "DamageCalc": "30/50/70/90/110/130/150 + [StatByCoefficientCalculationPart?]",
+        "tooltipadratio_e": "[StatByCoefficientCalculationPart?]",
+        "MonsterBonus": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "SettR": {
+        "DamageCalc": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]",
+        "MaxHealthDamageCalc": "0.3/0.4/0.5/0.6/0.7/0.8/0.9",
+        "tooltipadratio_r": "[StatByCoefficientCalculationPart?]"
+      },
+      "SettW": {
+        "DamageCalc": "60/80/100/120/140/160/180",
+        "DamageConversion": "0.25/0.25/0.25/0.25/0.25/0.25/0.25 + [StatByCoefficientCalculationPart?]",
+        "MaxGrit": "+0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#12"
+      }
+    },
+    "Alistar": {
+      "AlistarPassive": {
+        "BaseHeal": "+0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#12"
+      },
+      "AlistarE": {
+        "TotalDamage": "80/80/110/140/170/200/230 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "AttackBonusDamage": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "Pulverize": {
+        "TotalDamage": "20/60/100/140/180/220/260 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "Headbutt": {
+        "TotalDamage": "0/55/110/165/220/275/330 + +1/1/1/1/1/1/1 stat#-1"
+      }
+    },
+    "Illaoi": {
+      "IllaoiE": {
+        "TimeBetweenVesselTentacleSlams": "[ByCharLevelBreakpointsCalculationPart?]",
+        "EchoPercent": "0.2/0.25/0.3/0.35/0.4/0.45/0.5 + +0.0008/0.0008/0.0008/0.0008/0.0008/0.0008/0.0008 vit.att",
+        "{87aff6dd}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "IllaoiQ": {
+        "TentacleDamageTotal": "[ByCharLevelInterpolationCalculationPart?] + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "DamageIncreaseTooltip": "[ByCharLevelInterpolationCalculationPart?] + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "IllaoiPassive": {
+        "SpawnCD": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "IllaoiW": {
+        "HealthPercentTotal": "2.5/3/3.5/4/4.5/5/5.5 + +0.035/0.035/0.035/0.035/0.035/0.035/0.035 vit.att",
+        "DashSpeed": "600/600/600/600/600/600/600 + [StatByCoefficientCalculationPart?]"
+      },
+      "IllaoiR": {
+        "DamageCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Heimerdinger": {
+      "HeimerdingerW": {
+        "Damage": "25/50/75/100/125/150/175 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "ExtraHitDamage": "5/10/15/20/25/30/35 + [StatByCoefficientCalculationPart?]",
+        "TotalDamage": "45/90/135/180/225/270/315 + [StatByCoefficientCalculationPart?]"
+      },
+      "HeimerdingerR": {
+        "QUltTurretHealth": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "QUltDamage": "60/80/100/120/140/160/180 + [StatByCoefficientCalculationPart?]",
+        "QUltDamageBeam": "60/100/140/180/220/260/300 + [StatByCoefficientCalculationPart?]",
+        "WUltDamage": "90/135/180/225/270/315/360 + [StatByCoefficientCalculationPart?]",
+        "{a8af07ef}": "19/32/45/58/71/84/97 + [StatByCoefficientCalculationPart?]",
+        "WUltTotalDamage": "0/503/7e+02/892/1.1e+03/1281/1.5e+03 + [StatByCoefficientCalculationPart?]",
+        "EUltDamage": "0/100/200/300/400/500/600 + [StatByCoefficientCalculationPart?]",
+        "RQTurretResists": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "HeimerdingerE": {
+        "Damage": "20/60/100/140/180/220/260 + [StatByCoefficientCalculationPart?]"
+      },
+      "HeimerdingerQ": {
+        "TurretHealth": "[ByCharLevelInterpolationCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "{f0517331}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{8109ae7b}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "KitCooldown": "20",
+        "BeamCooldown": "90",
+        "Damage": "3/7/11/15/19/23/27 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1",
+        "DamageBeam": "20/40/60/80/100/120/140 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1"
+      }
+    },
+    "Shaco": {
+      "HallucinateFull": {
+        "STDamage": "0/25/50/75/100/125/150 + [StatByCoefficientCalculationPart?]",
+        "AoEDamage": "0/10/20/30/40/50/60 + [StatByCoefficientCalculationPart?]",
+        "ExplosionTotalDamage": "75/150/225/300/375/450/525 + [StatByCoefficientCalculationPart?]"
+      },
+      "ShacoPassive": {
+        "MonsterDamageTooltip": "[StatBySubPartCalculationPart?] + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "BasicAttackDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att",
+        "ShivDamage": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "JackInTheBox": {
+        "AoEDamage": "5/10/15/20/25/30/35 + +0.12/0.12/0.12/0.12/0.12/0.12/0.12 stat#-1",
+        "STDamage": "10/25/40/55/70/85/100 + +0.18/0.18/0.18/0.18/0.18/0.18/0.18 stat#-1",
+        "TrapDuration": " + [StatByCoefficientCalculationPart?]"
+      },
+      "Deceive": {
+        "TotalDamage": "15/25/35/45/55/65/75 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att",
+        "QCritDamageMod": "[SumOfSubPartsCalculationPart?]"
+      },
+      "TwoShivPoison": {
+        "TotalDamage": "45/70/95/120/145/170/195 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      }
+    },
+    "Akshan": {
+      "AkshanPassive": {
+        "MS": "[ByCharLevelInterpolationCalculationPart?]",
+        "TotalShieldAmount": "[ByCharLevelInterpolationCalculationPart?] + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 vit.att",
+        "PassiveProcDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "SecondAutoDamage": "+0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att",
+        "PassiveCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkshanQ": {
+        "FinalDamage": "15/45/75/105/135/165/195 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att",
+        "TotalHaste": "0.2/0.2/0.2/0.2/0.2/0.2/0.2 + +0.0005/0.0005/0.0005/0.0005/0.0005/0.0005/0.0005 stat#-1"
+      },
+      "AkshanW": {
+        "SecondAutoDamage": "+0.4/0.46/0.52/0.58/0.64/0.7/0.76 vit.att"
+      },
+      "AkshanE": {
+        "DamageToDeal": "0/8/16/24/32/40/48 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att",
+        "{36ebd3cf}": "[StatByCoefficientCalculationPart?]"
+      },
+      "AkshanR": {
+        "DamagePerBulletWithCrit": "15/25/35/45/55/65/75 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 vit.att"
+      }
+    },
+    "Shen": {
+      "ShenQ": {
+        "BaseFlatDamage": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BasePercentHealth": "1.5/2/2.5/3/3.5/4/4.5 + [StatByCoefficientCalculationPart?]",
+        "EmpPercentHealth": "4.5/5/5.5/6/6.5/7/7.5 + [StatByCoefficientCalculationPart?]"
+      },
+      "ShenE": {
+        "energyrefund": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TauntDamage": "35/60/85/110/135/160/185 + +0.11/0.11/0.11/0.11/0.11/0.11/0.11 stat#12"
+      },
+      "ShenPassive": {
+        "{58a09e24}": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "ShieldCooldownReduction": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{87290189}": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{7e912bc4}": "[{f3cbe7b2}?]",
+        "{a7305d7f}": "[{f3cbe7b2}?]"
+      },
+      "ShenR": {
+        "Shield": "20/120/220/320/420/520/620 + [StatByCoefficientCalculationPart?] + +1.4/1.4/1.4/1.4/1.4/1.4/1.4 stat#-1"
+      }
+    },
+    "Ambessa": {
+      "AmbessaQ": {
+        "Calc_Damage_1_Max": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_1_Percent_Max": "0.035/0.04/0.045/0.05/0.055/0.06/0.065 + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_2_Max": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_2_Percent_Max": "0.035/0.04/0.045/0.05/0.055/0.06/0.065 + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_1_Min_Ratio": "0.5/0.5/0.5/0.5/0.5/0.5/0.5",
+        "Calc_Damage_2_Min_Ratio": "0.5/0.5/0.5/0.5/0.5/0.5/0.5",
+        "Calc_Damage_Monster_Flat_Bonus": "75",
+        "Calc_Damage_Monster_Percent_Cap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "AmbessaR": {
+        "Calc_Damage": "50/150/250/350/450/550/650 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 vit.att",
+        "Calc_Omnivamp": "0.12/0.15/0.17/0.2/0.22/0.25/0.28 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#18"
+      },
+      "AmbessaW": {
+        "Calc_Shield": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "Calc_Damage_Low": "25/50/75/100/125/150/175 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      },
+      "AmbessaE": {
+        "Calc_Damage_Flat": "20/40/60/80/100/120/140 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      }
+    },
+    "Shyvana": {
+      "ShyvanaR": {
+        "Damage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]",
+        "Calc_Bonus_Health": "50/150/250/350/450/550/650",
+        "{57d26a55}": "1050",
+        "TT_Fury_Mult": "3/3/3/3/3/3/3 + -1",
+        "TT_Fury_AoE_Penalty": "1 + [ProductOfSubPartsCalculationPart?]"
+      },
+      "ShyvanaQ": {
+        "Calc_Max_Health_Damage": "0.01/0.01/0.01/0.01/0.01/0.01/0.01 + +0.00011/0.00011/0.00011/0.00011/0.00011/0.00011/0.00011 vit.att",
+        "Calc_Damage": "?(BASE_DAMAGE) + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att + [StatByCoefficientCalculationPart?]",
+        "Calc_Max_Health_Monster_Minimum": "10",
+        "Calc_Max_Health_Monster_Maximum": "200",
+        "Calc_Monster_Bonus": "10/10/10/10/10/10/10",
+        "{aee2a1e8}": "1"
+      },
+      "ShyvanaE": {
+        "Damage": "35/50/65/80/95/110/125 + +0.55/0.6/0.65/0.7/0.75/0.8/0.85 stat#-1",
+        "DamagePerSecond": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "Calc_Multihit_Efficacy": "0.4",
+        "Calc_Slow": "0.3/0.3/0.3/0.3/0.3/0.3/0.3",
+        "Calc_Max_Health_Damage": "0.05/0.05/0.05/0.05/0.05/0.05/0.05",
+        "Calc_Max_Health_Monster_Minimum": "0",
+        "Calc_Max_Health_Monster_Maximum": "200"
+      },
+      "ShyvanaW": {
+        "Damage": "60/80/100/120/140/160/180 + [StatByCoefficientCalculationPart?]",
+        "MoveSpeed": "0.25/0.25/0.25/0.25/0.25/0.25/0.25",
+        "Calc_Shield": "40/60/80/100/120/140/160 + +0.12/0.12/0.12/0.12/0.12/0.12/0.12 stat#12",
+        "Calc_Heal_Min": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{f468ef05}": "[ByCharLevelInterpolationCalculationPart?]",
+        "{b35447ff}": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "ShyvanaPassive": {
+        "Calc_Bonus_Armor": "[BuffCounterByNamedDataValueCalculationPart?]",
+        "Calc_Bonus_MR": "[BuffCounterByNamedDataValueCalculationPart?]"
+      }
+    },
+    "Janna": {
+      "ReapTheWhirlwind": {
+        "HealPerSecond": "50/100/150/200/250/300/350 + [StatByCoefficientCalculationPart?]"
+      },
+      "EyeOfTheStorm": {
+        "TotalShield": "40/80/120/160/200/240/280 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "TotalAD": "5/10/15/20/25/30/35 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1"
+      },
+      "TailwindSelf": {
+        "MSToOnHitConversionRate": "0.3/0.3/0.3/0.3/0.3/0.3/0.3",
+        "BonusDamage": "+0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.dépl"
+      },
+      "HowlingGale": {
+        "MinimumDamage": "20/55/90/125/160/195/230 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "ExtraDamagePerSecondCharged": "5/10/15/20/25/30/35 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1",
+        "MaxDamage": "20/55/90/125/160/195/230 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + [ProductOfSubPartsCalculationPart?]",
+        "MaxKnockup": "0.5/0.5/0.5/0.5/0.5/0.5/0.5 + [ProductOfSubPartsCalculationPart?]"
+      },
+      "SowTheWind": {
+        "TotalMS": "0.05/0.06/0.07/0.08/0.09/0.1/0.11 + +0.0002/0.0002/0.0002/0.0002/0.0002/0.0002/0.0002 stat#-1",
+        "TotalDamage": "25/55/85/115/145/175/205 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalSlow": "16/20/24/28/32/36/40 + +0.06/0.06/0.06/0.06/0.06/0.06/0.06 stat#-1"
+      }
+    },
+    "Ivern": {
+      "IvernW": {
+        "TotalDamage": "12/20/28/35/42/50/58 + [StatByCoefficientCalculationPart?]",
+        "TotalAllyDamage": "5/10/15/20/25/30/35 + [StatByCoefficientCalculationPart?]"
+      },
+      "IvernP": {
+        "HarvestDuration": "[ByCharLevelBreakpointsCalculationPart?]",
+        "HealthCostPercent": "[ByCharLevelBreakpointsCalculationPart?]",
+        "{c6433908}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "IvernR": {
+        "TotalBonusResists": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalDaisyHP": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "TotalDaisyAD": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "TotalShockwaveDamage": "40/90/140/190/240/290/340 + [StatByCoefficientCalculationPart?]"
+      },
+      "IvernQ": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "IvernE": {
+        "TotalShield": "35/75/115/155/195/235/275 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalDamage": "50/70/90/110/130/150/170 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Jarvan IV": {
+      "JarvanIVMartialCadence": {
+        "TooltipCooldown": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "JarvanIVDragonStrike": {
+        "TotalDamage": "50/90/130/170/210/250/290 + [StatByCoefficientCalculationPart?]"
+      },
+      "JarvanIVCataclysm": {
+        "DamageCalc": "75/200/325/450/575/700/825 + [StatByCoefficientCalculationPart?]"
+      },
+      "JarvanIVGoldenAegis": {
+        "TotalShield": " + [StatByCoefficientCalculationPart?]",
+        "BonusShield": "[StatByCoefficientCalculationPart?]"
+      },
+      "JarvanIVDemacianStandard": {
+        "TotalDamage": " + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Singed": {
+      "PoisonTrail": {
+        "DamagePerSecond": "10/20/30/40/50/60/70 + +0.43/0.43/0.43/0.43/0.43/0.43/0.43 stat#-1"
+      },
+      "Fling": {
+        "BaseDamage": "50/50/60/70/80/90/100 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Irelia": {
+      "IreliaR": {
+        "MissileDamage": "50/125/200/275/350/425/500 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "ZoneDamage": "50/125/200/275/350/425/500 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "IreliaPassive": {
+        "SingleStackAS": "[ByCharLevelInterpolationCalculationPart?]",
+        "OnHitBonus": "[{b22609db}?] + [StatByCoefficientCalculationPart?]"
+      },
+      "IreliaE": {
+        "TotalDamage": "30/70/110/150/190/230/270 + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "IreliaW": {
+        "FinalPhysicalDR": "[ByCharLevelInterpolationCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MinDamageCalc": "0/10/20/30/40/50/60 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "MaxDamageCalc": "0/30/60/90/120/150/180 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "IreliaQ": {
+        "ChampionDamage": "-15/5/25/45/65/85/105 + [StatByCoefficientCalculationPart?]",
+        "MinionDamage": "-15/5/25/45/65/85/105 + [ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "HealAmount": "+0.08/0.09/0.1/0.11/0.12/0.13/0.14 vit.att"
+      }
+    },
+    "Sion": {
+      "SionE": {
+        "TotalDamage": "30/65/100/135/170/205/240 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1"
+      },
+      "SionW": {
+        "TotalShield": " + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1 + +0.06/0.08/0.1/0.12/0.14/0.16/0.18 stat#12",
+        "TotalDamage": " + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "SionR": {
+        "MinDamageTotal": "0/150/300/450/600/750/900 + [StatByCoefficientCalculationPart?]",
+        "MaxDamageTotal": "0/400/800/1200/1600/2000/2400 + [StatByCoefficientCalculationPart?]"
+      },
+      "SionQ": {
+        "MinDamageTotal": "20/40/60/80/100/120/140 + +0.3/0.4/0.5/0.6/0.7/0.8/0.9 vit.att",
+        "MaxDamageTotal": "25/90/155/220/285/350/415 + +0.9/1.2/1.5/1.8/2.1/2.4/2.7 vit.att"
+      }
+    },
+    "Sivir": {
+      "SivirQ": {
+        "TotalDamage": "35/60/85/110/135/160/185 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "PreCritDamage": "35/60/85/110/135/160/185 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att + [StatByCoefficientCalculationPart?]",
+        "CritScaling": "+0.4/0.4/0.4/0.4/0.4/0.4/0.4 crit"
+      },
+      "SivirPassive": {
+        "FlatMS": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "SivirW": {
+        "BounceDamage": "+0.38/0.4/0.43/0.45/0.47/0.5/0.52 vit.att",
+        "FirstTargetDamage": "[StatByCoefficientCalculationPart?]",
+        "TotalMaxDamage": "[SumOfSubPartsCalculationPart?]"
+      },
+      "SivirE": {
+        "TotalHeal": "+0.55/0.6/0.65/0.7/0.75/0.8/0.85 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      }
+    },
+    "Jax": {
+      "JaxPassive": {
+        "AttackSpeedPerStack": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BelvethVsJaxQuestRewardAttackSpeedPerStack": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "JaxW": {
+        "TotalDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?]"
+      },
+      "JaxR": {
+        "OnHitDamage": "20/75/130/185/240/295/350 + [StatByCoefficientCalculationPart?]",
+        "BaseArmor": "30/45/60/75/90/105/120 + [StatByCoefficientCalculationPart?]",
+        "BonusArmor": "15/20/25/30/35/40/45 + [StatByCoefficientCalculationPart?]",
+        "SwingDamageTotal": "25/100/175/250/325/400/475 + [StatByCoefficientCalculationPart?]"
+      },
+      "JaxE": {
+        "TotalDamage": "10/40/70/100/130/160/190 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "MaxPercentHealthDamage": "3.5/3.5/3.5/3.5/3.5/3.5/3.5",
+        "MonsterDamageCap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "JaxQ": {
+        "TotalDamage": "25/65/105/145/185/225/265 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Skarner": {
+      "SkarnerW": {
+        "InitialShield": "+0.08/0.08/0.08/0.08/0.08/0.08/0.08 stat#12",
+        "Damage": "30/50/70/90/110/130/150 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "SkarnerR": {
+        "Damage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "SkarnerE": {
+        "PinDamage": "0/30/60/90/120/150/180 + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 vit.att + +0.06/0.06/0.06/0.06/0.06/0.06/0.06 stat#12"
+      },
+      "SkarnerQ": {
+        "AbilityDamage": "0/10/20/30/40/50/60 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#12"
+      },
+      "SkarnerPassive": {
+        "PercentHealthDamage": "[ByCharLevelInterpolationCalculationPart?]",
+        "DamageMonsterCap": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Jayce": {
+      "JayceStaticField": {
+        "Damage": "80/140/200/260/320/380/440 + [StatByCoefficientCalculationPart?]"
+      },
+      "JayceShockBlast": {
+        "Damage": "39/80/121/162/203/244/285 + +1.3/1.3/1.3/1.3/1.3/1.3/1.3 vit.att"
+      },
+      "JayceThunderingBlow": {
+        "FlatDamage": "[StatByCoefficientCalculationPart?]"
+      },
+      "JayceHyperCharge": {
+        "ActualDamage": "+0.62/0.7/0.78/0.86/0.94/1/1.1 vit.att"
+      },
+      "JayceStanceHtG": {
+        "RangedFormShred": "[ByCharLevelBreakpointsCalculationPart?]",
+        "Damage": "[ByCharLevelBreakpointsCalculationPart?] + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att",
+        "Resists": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "JayceToTheSkies": {
+        "Damage": "10/60/110/160/210/260/310 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Aatrox": {
+      "AatroxQ": {
+        "QDamage": "-5/10/25/40/55/70/85 + +0.52/0.6/0.68/0.75/0.82/0.9/0.98 vit.att",
+        "QMinionDamage": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AatroxPassive": {
+        "PDamage": "[ByCharLevelInterpolationCalculationPart?]",
+        "PCooldown": "[ByCharLevelInterpolationCalculationPart?]",
+        "MonsterDamageCap": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "AatroxW": {
+        "WDamage": "20/30/40/50/60/70/80 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att"
+      },
+      "AatroxE": {
+        "TotalEVamp": "16/16/16/16/16/16/16 + +0.011/0.011/0.011/0.011/0.011/0.011/0.011 stat#12"
+      }
+    },
+    "Jhin": {
+      "JhinE": {
+        "TotalDamage": "-40/20/80/140/200/260/320 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "AmmoRechargeRateTooltip": "[SumOfSubPartsCalculationPart?]"
+      },
+      "JhinPassive": {
+        "FourthShotExecutePercent": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TotalADPercent": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "CritMoveSpeedPercent": "0.14 + +44%/44%/44%/44%/44%/44%/44% armure"
+      },
+      "JhinR": {
+        "DamageCalc": "0/64/128/192/256/320/384 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 vit.att"
+      },
+      "JhinW": {
+        "TotalDamage": "35/70/105/140/175/210/245 + [StatByCoefficientCalculationPart?]"
+      },
+      "JhinQ": {
+        "TotalDamage": "19/44/69/94/119/144/169 + +0.37/0.44/0.51/0.59/0.67/0.74/0.81 vit.att + [StatByCoefficientCalculationPart?]",
+        "TooltipMaxTargetsHit": "[SumOfSubPartsCalculationPart?]"
+      }
+    },
+    "Smolder": {
+      "SmolderW": {
+        "InitialDamage": "50/60/70/80/90/100/110 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att",
+        "ExplosionDamage": "-15/10/35/60/85/110/135 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SmolderQ": {
+        "TotalDamage": "50/60/70/80/90/100/110 + +1.3/1.3/1.3/1.3/1.3/1.3/1.3 vit.att",
+        "Tier2_NumberOfBlowback": "2/2/2/2/2/2/2 + [BuffCounterByCoefficientCalculationPart?]",
+        "Tier3_ExecuteThreshold": "6.5/6.5/6.5/6.5/6.5/6.5/6.5",
+        "Tier3_Burn": "[StatByCoefficientCalculationPart?] + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "SmolderR": {
+        "TotalDamage": "50/150/250/350/450/550/650 + +1/1/1/1/1/1/1 vit.att + [StatByCoefficientCalculationPart?]",
+        "MomHealCalc": "65/100/135/170/205/240/275 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SmolderE": {
+        "TotalNumberOfAttacks": "5/5/5/5/5/5/5 + [BuffCounterByNamedDataValueCalculationPart?]",
+        "DamagePerHit": "5/10/15/20/25/30/35 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 vit.att"
+      }
+    },
+    "Jinx": {
+      "JinxW": {
+        "TotalDamage": "-40/10/60/110/160/210/260 + +1.4/1.4/1.4/1.4/1.4/1.4/1.4 vit.att"
+      },
+      "JinxE": {
+        "TotalDamage": "40/90/140/190/240/290/340 + [StatByCoefficientCalculationPart?]"
+      },
+      "JinxQ": {
+        "RocketDamage": "+1.1/1.1/1.1/1.1/1.1/1.1/1.1 vit.att"
+      },
+      "JinxR": {
+        "DamageFloor": "5/20/35/50/65/80/95 + [StatByCoefficientCalculationPart?]",
+        "DamageMax": "50/200/350/500/650/800/950 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Sona": {
+      "SonaW": {
+        "TotalHeal": "15/30/45/60/75/90/105 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "TotalShield": "5/25/45/65/85/105/125 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1",
+        "TotalDiminuendoWeakenPercent": "0.25 + [StatByCoefficientCalculationPart?]"
+      },
+      "SonaE": {
+        "TotalSelfMovementSpeed": "0.2/0.2/0.2/0.2/0.2/0.2/0.2 + [StatByCoefficientCalculationPart?]",
+        "TotalAllyMovementSpeed": "0.08/0.1/0.12/0.14/0.16/0.18/0.2 + [StatByCoefficientCalculationPart?]",
+        "TotalTempoMoveSpeedSlow": "0.5 + [StatByCoefficientCalculationPart?]"
+      },
+      "SonaQ": {
+        "TotalDamage": "15/50/85/120/155/190/225 + [StatByCoefficientCalculationPart?]",
+        "TotalOnHitDamage": "5/10/15/20/25/30/35 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1",
+        "TotalStaccatoDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SonaPassive": {
+        "PowerChordDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "AccelerandoAHCurrent": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "SonaR": {
+        "TotalDamage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Soraka": {
+      "SorakaE": {
+        "TotalDamage": "45/70/95/120/145/170/195 + [StatByCoefficientCalculationPart?]"
+      },
+      "SorakaQ": {
+        "TotalDamage": "50/85/120/155/190/225/260 + [StatByCoefficientCalculationPart?]",
+        "TotalHot": "?(BaseHot) + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "SorakaR": {
+        "HealingCalc": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]"
+      },
+      "SorakaW": {
+        "TotalHeal": "70/90/110/130/150/170/190 + [StatByCoefficientCalculationPart?]",
+        "MinimumHealth": "+0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#12"
+      }
+    },
+    "Kalista": {
+      "KalistaPassiveBuff": {
+        "MoveSpeedMultiplier": "280 + [StatByCoefficientCalculationPart?]",
+        "{c3169619}": "[StatByCoefficientCalculationPart?] + 1",
+        "{091295b4}": "[StatByCoefficientCalculationPart?]",
+        "{5728f7e1}": "[ClampSubPartsCalculationPart?]"
+      },
+      "KalistaMysticShot": {
+        "TotalDamage": "-55/10/75/140/205/270/335 + +1/1/1/1/1/1/1 vit.att"
+      },
+      "KalistaExpungeWrapper": {
+        "NormalDamage": "-5/5/15/25/35/45/55 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 vit.att + +0.65/0.65/0.65/0.65/0.65/0.65/0.65 stat#-1",
+        "AdditionalDamage": "0/7/14/21/28/35/42 + +0.12/0.2/0.28/0.35/0.43/0.5/0.57 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalSlowAmount": "0.02/0.1/0.18/0.26/0.34/0.42/0.5 + +0.0005/0.0005/0.0005/0.0005/0.0005/0.0005/0.0005 stat#-1"
+      }
+    },
+    "Karma": {
+      "KarmaSolKimShield": {
+        "TotalShield": "30/80/130/180/230/280/330 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "KarmaQ": {
+        "{087bc3ca}": "0",
+        "{5d5198eb}": "1",
+        "TotalDamage": "10/60/110/160/210/260/310 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "KarmaSpiritBind": {
+        "InitialDamage": "15/40/65/90/115/140/165 + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1"
+      },
+      "KarmaPassive": {
+        "SpellMantraRefund": "4"
+      },
+      "KarmaMantra": {
+        "RQImpactDamage": "-20/40/100/160/220/280/340 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "RQFieldDamage": "-50/40/130/220/310/400/490 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "REBonusShield": "5/45/85/125/165/205/245 + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1",
+        "RWHealAmount": "17/17/17/17/17/17/17 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#-1"
+      }
+    },
+    "Sylas": {
+      "SylasPassive": {
+        "PassiveDamage": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveAoEDamage": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "SylasW": {
+        "MinDamage": "40/75/110/145/180/215/250 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1",
+        "MinHealing": "0/20/40/60/80/100/120 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#12"
+      },
+      "SylasR": {
+        "PerTargetCooldown": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "SylasQ": {
+        "Damage": "20/40/60/80/100/120/140 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "SlowAmountCalc": "0.1/0.15/0.2/0.25/0.3/0.35/0.4",
+        "ExplosionDamage": "5/60/115/170/225/280/335 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "SylasE": {
+        "Damage": "30/80/130/180/230/280/330 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Kai'Sa": {
+      "KaisaQ": {
+        "MaxDamageTotal": "[SumOfSubPartsCalculationPart?]",
+        "{b2bd0d2f}": "[SumOfSubPartsCalculationPart?]",
+        "TotalIndividualMissileDamage": "25/40/55/70/85/100/115 + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 vit.att + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      },
+      "KaisaE": {
+        "TotalMovespeed": "[ClampSubPartsCalculationPart?]",
+        "TotalCastTime": "[ClampSubPartsCalculationPart?]"
+      },
+      "KaisaPassive": {
+        "PBaseDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.12/0.12/0.12/0.12/0.12/0.12/0.12 stat#-1",
+        "PCurrentPerStackDamage": "[ByCharLevelInterpolationCalculationPart?] + +0.03/0.03/0.03/0.03/0.03/0.03/0.03 stat#-1",
+        "PExecutePercentage": "0.15/0.15/0.15/0.15/0.15/0.15/0.15 + +0.0006/0.0006/0.0006/0.0006/0.0006/0.0006/0.0006 stat#-1"
+      },
+      "KaisaW": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "KaisaR": {
+        "RCalculatedShieldValue": "50/70/90/110/130/150/170 + +0.45/0.9/1.4/1.8/2.2/2.7/3.2 vit.att + +1.2/1.2/1.2/1.2/1.2/1.2/1.2 stat#-1"
+      }
+    },
+    "Syndra": {
+      "SyndraE": {
+        "TotalDamage": "25/60/95/130/165/200/235 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "SyndraPassive": {
+        "StacksPerProc": "[ByCharLevelBreakpointsCalculationPart?]",
+        "ManaPerProc": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "SyndraR": {
+        "DamageCalc": "40/80/120/160/200/240/280 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      },
+      "SyndraQ": {
+        "TotalDamage": "45/80/115/150/185/220/255 + [StatByCoefficientCalculationPart?]"
+      },
+      "SyndraW": {
+        "ThrowDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?]",
+        "TotalSlowAmount": "25/25/25/25/25/25/25",
+        "TOOLTIPONLYPassiveBonusPercent": "12 + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Karthus": {
+      "KarthusLayWasteA1": {
+        "QDamage": "21/40/59/78/97/116/135 + +0.35/0.35/0.35/0.35/0.35/0.35/0.35 stat#-1"
+      },
+      "KarthusFallenOne": {
+        "TotalDamage": "50/200/350/500/650/800/950 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "KarthusDefile": {
+        "TotalDPS": "10/30/50/70/90/110/130 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1"
+      }
+    },
+    "Tahm Kench": {
+      "TahmKenchQ": {
+        "TotalDamage": "30/75/120/165/210/255/300 + [StatByCoefficientCalculationPart?]"
+      },
+      "TahmKenchW": {
+        "TotalDamage": "65/100/135/170/205/240/275 + [StatByCoefficientCalculationPart?]"
+      },
+      "TahmKenchPassive": {
+        "TotalDamage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]"
+      },
+      "TahmKenchRWrapper": {
+        "PercentHPDamage": "0.15/0.15/0.15/0.15/0.15/0.15/0.15 + [StatByCoefficientCalculationPart?]",
+        "TotalShield": "500/650/800/950/1100/1250/1400 + [StatByCoefficientCalculationPart?]",
+        "CDCalc": "[ProductOfSubPartsCalculationPart?]"
+      },
+      "TahmKenchE": {
+        "GreyHealthHealingRatio": "[ByCharLevelInterpolationCalculationPart?]",
+        "GreyHealthMaximum": "[StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Swain": {
+      "SwainR": {
+        "DamageCalc": "5/15/25/35/45/55/65 + +0.04/0.04/0.04/0.04/0.04/0.04/0.04 stat#-1",
+        "HealingCalc": "0/15/30/45/60/75/90 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#-1 + +0.015/0.015/0.015/0.015/0.015/0.015/0.015 stat#12",
+        "DemonflareDamageTotal": "50/150/250/350/450/550/650 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "SwainQ": {
+        "InitialDamage": "30/60/90/120/150/180/210 + +0.45/0.45/0.45/0.45/0.45/0.45/0.45 stat#-1"
+      },
+      "SwainE": {
+        "SecondaryDamage": "50/90/130/170/210/250/290 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "SwainPassive": {
+        "PassiveHealPercent": "[ByCharLevelInterpolationCalculationPart?]",
+        "MaxHealthGained": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "SwainW": {
+        "TotalDamage": "35/70/105/140/175/210/245 + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      }
+    },
+    "Kassadin": {
+      "ForcePulse": {
+        "TotalDamage": "40/70/100/130/160/190/220 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "NullLance": {
+        "TotalShield": "50/80/110/140/170/200/230 + [StatByCoefficientCalculationPart?]",
+        "TotalDamage": "35/65/95/125/155/185/215 + [StatByCoefficientCalculationPart?]"
+      },
+      "NetherBlade": {
+        "ActiveDamage": "25/50/75/100/125/150/175 + [StatByCoefficientCalculationPart?]",
+        "OnHitDamage": "25/25/25/25/25/25/25 + [StatByCoefficientCalculationPart?]"
+      },
+      "RiftWalk": {
+        "BaseDamage": "70/70/90/110/110/110/110 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1 + [AbilityResourceByCoefficientCalculationPart?]",
+        "BonusDamage": "35/35/45/55/55/55/55 + +0.07/0.07/0.07/0.07/0.07/0.07/0.07 stat#-1 + [AbilityResourceByCoefficientCalculationPart?]"
+      }
+    },
+    "Katarina": {
+      "KatarinaR": {
+        "DamageCalc": "12/25/38/50/62/75/88 + +0.19/0.19/0.19/0.19/0.19/0.19/0.19 stat#-1",
+        "ADDamageCalc": "[StatBySubPartCalculationPart?]"
+      },
+      "KatarinaQ": {
+        "TotalDamage": "45/80/115/150/185/220/255 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      },
+      "KatarinaEWrapper": {
+        "TotalDamage": "10/20/30/40/50/60/70 + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "{016cd4b3}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "TooltipDaggerReduction": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "KatarinaPassive": {
+        "TotalDamage": "[ByCharLevelFormulaCalculationPart?] + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att + [StatBySubPartCalculationPart?]",
+        "{e1ba6b0f}": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Kayle": {
+      "KayleE": {
+        "{266027bf}": "[StatByCoefficientCalculationPart?]",
+        "EPassiveTotalDamage": "15/15/20/25/30/35/40 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 vit.att",
+        "ActiveTotalExecuteDamage": "7.5/8/8.5/9/9.5/10/10 + [StatByCoefficientCalculationPart?]"
+      },
+      "KayleQ": {
+        "TotalDamage": "30/60/90/120/150/180/210 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      },
+      "KaylePassive": {
+        "EnrageTotalASPerStack": "6/6/6/6/6/6/6",
+        "PassiveWaveDamage": "[ByCharLevelBreakpointsCalculationPart?] + +0.25/0.25/0.25/0.25/0.25/0.25/0.25 stat#-1 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 vit.att"
+      },
+      "KayleW": {
+        "TotalHeal": "30/55/80/105/130/155/180 + [StatByCoefficientCalculationPart?]",
+        "TotalHaste": "0.2/0.24/0.28/0.32/0.36/0.4/0.44 + [StatByCoefficientCalculationPart?]"
+      },
+      "KayleR": {
+        "TotalDamage": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Akali": {
+      "AkaliW": {
+        "{955fbaa3}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkaliPWeapon": {
+        "EnergyRestore": "[ByCharLevelBreakpointsCalculationPart?]",
+        "Damage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveSpeedBonus": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkaliP": {
+        "EnergyRestore": "[ByCharLevelBreakpointsCalculationPart?]",
+        "Damage": "[ByCharLevelBreakpointsCalculationPart?] + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 vit.att + +0.55/0.55/0.55/0.55/0.55/0.55/0.55 stat#-1",
+        "PassiveSpeedBonus": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkaliPZoneGround": {
+        "EnergyRestore": "[ByCharLevelBreakpointsCalculationPart?]",
+        "Damage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveSpeedBonus": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkaliQSpellPassive": {
+        "EnergyRestore": "[ByCharLevelBreakpointsCalculationPart?]",
+        "Damage": "[ByCharLevelBreakpointsCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "PassiveSpeedBonus": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "AkaliQ": {
+        "Damage": "20/45/70/95/120/145/170 + +0.65/0.65/0.65/0.65/0.65/0.65/0.65 vit.att + +0.6/0.6/0.6/0.6/0.6/0.6/0.6 stat#-1"
+      },
+      "AkaliRb": {
+        "Cast2DamageMin": "0/70/140/210/280/350/420 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "AkaliR": {
+        "Cast1Damage": "0/110/220/330/440/550/660 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "Cast2DamageMin": "0/70/140/210/280/350/420 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1"
+      },
+      "AkaliE": {
+        "E1Damage": "0/70/140/210/280/350/420 + +1/1/1/1/1/1/1 vit.att + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 stat#-1",
+        "E2DamageCalc": "0/70/140/210/280/350/420 + +1/1/1/1/1/1/1 vit.att + +1.1/1.1/1.1/1.1/1.1/1.1/1.1 stat#-1"
+      }
+    },
+    "Talon": {
+      "TalonR": {
+        "Damage": "45/90/135/180/225/270/315 + [StatByCoefficientCalculationPart?]"
+      },
+      "TalonPassive": {
+        "BleedDamage": "[ByCharLevelInterpolationCalculationPart?] + +2.1/2.1/2.1/2.1/2.1/2.1/2.1 vit.att"
+      },
+      "TalonW": {
+        "TotalInitialDamage": "40/50/60/70/80/90/100 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 vit.att",
+        "TotalReturnDamage": "30/60/90/120/150/180/210 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 vit.att"
+      },
+      "TalonQ": {
+        "TotalHealing": "[ByCharLevelInterpolationCalculationPart?]",
+        "LeapDamage": "45/65/85/105/125/145/165 + +1/1/1/1/1/1/1 vit.att"
+      }
+    },
+    "Taric": {
+      "TaricPassive": {
+        "TotalDamage": "[ProductOfSubPartsCalculationPart?] + +15%/15%/15%/15%/15%/15%/15% AD",
+        "CDR": "[SumOfSubPartsCalculationPart?]"
+      },
+      "TaricW": {
+        "BonusArmor": "+5%/6%/7%/8%/9%/10%/11% AD"
+      },
+      "TaricQ": {
+        "StackCooldown": "15/15/15/15/15/15/15",
+        "HealingPerStack": "25/25/25/25/25/25/25 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#12",
+        "MaxStackHealing": "25/25/25/25/25/25/25 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#-1 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#12"
+      },
+      "TaricE": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Kayn": {
+      "KaynE": {
+        "TotalHealing": " + [StatByCoefficientCalculationPart?]"
+      },
+      "KaynW": {
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "KaynR": {
+        "Damage": "50/150/250/350/450/550/650 + [StatByCoefficientCalculationPart?]",
+        "SlayerDamage": "0.15/0.15/0.15/0.15/0.15/0.15/0.15 + +0.001/0.001/0.001/0.001/0.001/0.001/0.001 vit.att"
+      },
+      "KaynQ": {
+        "TotalDamage": " + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 vit.att",
+        "DarkinPercentDamage": "6/6/6/6/6/6/6 + +0.035/0.035/0.035/0.035/0.035/0.035/0.035 vit.att",
+        "DarkinFlatDamage": "[StatByCoefficientCalculationPart?]"
+      },
+      "KaynPassive": {
+        "KaynSlayerHealing": "0.25/0.25/0.25/0.25/0.25/0.25/0.25 + +5e-05/5e-05/5e-05/5e-05/5e-05/5e-05/5e-05 stat#12",
+        "KaynAssBonusDamage": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Taliyah": {
+      "TaliyahE": {
+        "ScatterDamage": "15/60/105/150/195/240/285 + [StatByCoefficientCalculationPart?]",
+        "DetonationDamage": "10/25/40/55/70/85/100 + [StatByCoefficientCalculationPart?]"
+      },
+      "TaliyahQ": {
+        "RockDamage": "38/55/72/90/1.1e+02/125/1.4e+02 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1",
+        "TotalBonusFlatMonsterDamage": "15/20/25/30/35/40/45"
+      },
+      "TaliyahPassive": {
+        "TotalMS": "[ByCharLevelBreakpointsCalculationPart?]"
+      }
+    },
+    "Teemo": {
+      "TeemoR": {
+        "TotalDamage": "75/200/325/450/575/700/825 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "TeemoE": {
+        "TickCalculatedDamage": "0/6/12/18/24/30/36 + +0.1/0.1/0.1/0.1/0.1/0.1/0.1 stat#-1 + +0.025/0.025/0.025/0.025/0.025/0.025/0.025 vit.att",
+        "ImpactCalculatedDamage": "-5/9/23/37/51/65/79 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 vit.att"
+      },
+      "TeemoQ": {
+        "CalculatedDamage": "35/80/125/170/215/260/305 + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1",
+        "{0f87e4ba}": "1.8/2/2.2/2.5/2.8/3/3.2"
+      }
+    },
+    "Thresh": {
+      "ThreshQ": {
+        "TotalDamage": "50/100/150/200/250/300/350 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 stat#-1"
+      },
+      "ThreshW": {
+        "TotalShield": "30/50/70/90/110/130/150 + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "ThreshE": {
+        "PAttackDamageMin": "[BuffCounterByCoefficientCalculationPart?]",
+        "PAttackDamageMax": "[BuffCounterByCoefficientCalculationPart?] + +0.6/0.9/1.2/1.5/1.8/2.1/2.4 vit.att",
+        "TotalDamage": " + +0.7/0.7/0.7/0.7/0.7/0.7/0.7 stat#-1"
+      },
+      "ThreshPassiveSouls": {
+        "CurrentSoulBonus": "[BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "ThreshRPenta": {
+        "TotalDamage": " + +1/1/1/1/1/1/1 stat#-1"
+      }
+    },
+    "Kennen": {
+      "KennenShurikenStorm": {
+        "PerTickDamageCalculated": "5/40/75/110/145/180/215 + +0.22/0.22/0.22/0.22/0.22/0.22/0.22 stat#-1"
+      },
+      "KennenLightningRush": {
+        "TotalDamage": "40/80/120/160/200/240/280 + [StatByCoefficientCalculationPart?]"
+      },
+      "KennenShurikenHurlMissile1": {
+        "TotalDamage": "25/75/125/175/225/275/325 + [StatByCoefficientCalculationPart?]"
+      },
+      "KennenBringTheLight": {
+        "TotalDamagePassive": "25/35/45/55/65/75/85 + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "TotalDamageActive": "45/70/95/120/145/170/195 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      }
+    },
+    "Tristana": {
+      "TristanaE": {
+        "PassiveDamage": "30/45/60/75/90/105/120 + [StatByCoefficientCalculationPart?]",
+        "ActiveDamage": "35/60/85/110/135/160/185 + [StatBySubPartCalculationPart?] + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "TristanaPassive": {
+        "BonusPassiveRange": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "TristanaR": {
+        "DamageCalc": "175/225/275/325/375/425/475 + [StatByCoefficientCalculationPart?] + +1/1/1/1/1/1/1 stat#-1"
+      },
+      "TristanaW": {
+        "LandingDamage": "35/70/105/140/175/210/245 + +1/1/1/1/1/1/1 vit.att + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      }
+    },
+    "Kindred": {
+      "KindredQ_URFWrapper": {
+        "TotalQAttackSpeed": " + [BuffCounterByCoefficientCalculationPart?]",
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "KindredQ": {
+        "TotalQAttackSpeed": " + [BuffCounterByCoefficientCalculationPart?]",
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "KindredW": {
+        "AttackHeal": "[ByCharLevelBreakpointsCalculationPart?]",
+        "BaseWolfDamage": "20/25/30/35/40/45/50 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 stat#-1",
+        "PercentWolfDamage": "0.015/0.015/0.015/0.015/0.015/0.015/0.015 + [BuffCounterByNamedDataValueCalculationPart?]"
+      },
+      "KindredPassiveManager": {
+        "QMarkBonus": "[BuffCounterByCoefficientCalculationPart?]",
+        "WMarkBonus": "[BuffCounterByCoefficientCalculationPart?]",
+        "EMarkBonus": "[BuffCounterByCoefficientCalculationPart?]"
+      },
+      "KindredEWrapper": {
+        "BaseBiteDamage": "50/80/110/140/170/200/230 + +1/1/1/1/1/1/1 vit.att",
+        "PercentBiteDamage": "0.05/0.05/0.05/0.05/0.05/0.05/0.05 + [BuffCounterByCoefficientCalculationPart?]",
+        "TotalSlow": "30/30/30/30/30/30/30 + +0.05/0.05/0.05/0.05/0.05/0.05/0.05 stat#-1"
+      }
+    },
+    "Kha'Zix": {
+      "KhazixQ": {
+        "{ba2719ef}": "1",
+        "{8b6fe763}": "0",
+        "BaseDamage": " + +1/1/1/1/1/1/1 vit.att"
+      },
+      "KhazixR": {
+        "{ba2719ef}": "1",
+        "{8b6fe763}": "0"
+      },
+      "KhazixE": {
+        "{ba2719ef}": "1",
+        "{8b6fe763}": "0",
+        "TotalDamage": " + [StatByCoefficientCalculationPart?]"
+      },
+      "KhazixW": {
+        "{ba2719ef}": "1",
+        "{8b6fe763}": "0",
+        "BaseDamage": " + [StatByCoefficientCalculationPart?]",
+        "HealAmount": "35/55/75/95/115/135/155 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 stat#-1"
+      },
+      "KhazixPassive": {
+        "TotalDamage": "[ByCharLevelFormulaCalculationPart?] + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att"
+      }
+    },
+    "Trundle": {
+      "TrundlePain": {
+        "TotalPercentHPDamage": "0.15/0.2/0.25/0.3/0.35/0.4/0.45 + +0.0002/0.0002/0.0002/0.0002/0.0002/0.0002/0.0002 stat#-1"
+      },
+      "TrundleDiseaseOverseer": {
+        "RegenPercent": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "TrundleTrollSmash": {
+        "TotalDamage": "-10/10/30/50/70/90/110 + +1/1.1/1.2/1.4/1.5/1.5/1.6 vit.att"
+      }
+    },
+    "Kled": {
+      "KledE": {
+        "TotalDamage": "10/35/60/85/110/135/160 + [StatByCoefficientCalculationPart?]"
+      },
+      "KledRiderQ": {
+        "TotalDamage": "20/35/50/65/80/95/110 + [StatByCoefficientCalculationPart?]",
+        "MountedQCalc": "5/30/55/80/105/130/155 + [StatByCoefficientCalculationPart?]",
+        "TOOLTIPAmmoRecharge": "20/18/16/14/12/10/8"
+      },
+      "KledQ": {
+        "TotalDamage": "5/30/55/80/105/130/155 + [StatByCoefficientCalculationPart?]",
+        "DismountedQDamage": "20/35/50/65/80/95/110 + [StatByCoefficientCalculationPart?]"
+      },
+      "KledR": {
+        "{31b91b32}": "[StatByCoefficientCalculationPart?]",
+        "{598e3ed3}": "2/4/6/8/10/12/14 + [StatByCoefficientCalculationPart?]",
+        "MaximumShield": "100/200/300/400/500/600/700 + [StatByCoefficientCalculationPart?]",
+        "MaximumChargeDamage": "2/4/6/8/10/12/14 + [StatByCoefficientCalculationPart?]",
+        "MinimumDamageTooltip": "2/4/6/8/10/12/14 + [StatByCoefficientCalculationPart?]"
+      },
+      "KledPassive": {
+        "DismountedMS": "[ByCharLevelBreakpointsCalculationPart?]",
+        "SkaarlHealth": "[ByCharLevelInterpolationCalculationPart?]",
+        "SkaarlRemountHealth": "[ByCharLevelBreakpointsCalculationPart?]",
+        "DismountedResistBonus": "4 + +0.01/0.01/0.01/0.01/0.01/0.01/0.01 stat#12",
+        "MountCooldown": "30/30/30/30/30/30/30",
+        "DismountedAttackPenalty": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "KledW": {
+        "PercentDamage": "4/4.5/5/5.5/6/6.5/7 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "Tryndamere": {
+      "TryndamereE": {
+        "TotalDamage": "40/80/120/160/200/240/280 + +1/1/1/1/1/1/1 vit.att + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "TryndamerePassive": {
+        "PassiveCritConversionTooltip": "0.5",
+        "{dc63b617}": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "TryndamereQ": {
+        "BaseHeal": "20/30/40/50/60/70/80 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1",
+        "HealPerFury": "0.05/0.5/0.95/1.4/1.9/2.3/2.8 + +0.012/0.012/0.012/0.012/0.012/0.012/0.012 stat#-1",
+        "MaximumHeal": "20/30/40/50/60/70/80 + +0.3/0.3/0.3/0.3/0.3/0.3/0.3 stat#-1 + [ProductOfSubPartsCalculationPart?]"
+      }
+    },
+    "Kog'Maw": {
+      "KogMawBioArcaneBarrage": {
+        "TotalHealthDamage": "2.2/3/3.8/4.5/5.2/6/6.8 + +0.015/0.015/0.015/0.015/0.015/0.015/0.015 stat#-1"
+      },
+      "KogMawLivingArtillery": {
+        "BaseDamageCalc": "60/100/140/180/220/260/300 + +0.35/0.35/0.4/0.45/0.45/0.45/0.45 stat#-1 + [StatByCoefficientCalculationPart?]"
+      },
+      "KogMawQ": {
+        "TotalDamage": "35/80/125/170/215/260/305 + +0.9/0.9/0.9/0.9/0.9/0.9/0.9 stat#-1"
+      },
+      "KogMawVoidOoze": {
+        "TotalDamage": "30/70/110/150/190/230/270 + +0.65/0.65/0.65/0.65/0.65/0.65/0.65 stat#-1"
+      },
+      "KogMawIcathianSurprise": {
+        "PassiveDamage": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "KogMawIcathianDisplay": {
+        "PassiveDamage": "[ByCharLevelInterpolationCalculationPart?]"
+      },
+      "KogMawIcathianSurpriseReady": {
+        "PassiveDamage": "[ByCharLevelInterpolationCalculationPart?]"
+      }
+    },
+    "Twisted Fate": {
+      "PickACard": {
+        "BlueDamage": "20/40/60/80/100/120/140 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "RedDamage": "15/30/45/60/75/90/105 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]",
+        "GoldDamage": "7.5/15/22/30/38/45/52 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?] + [StatBySubPartCalculationPart?]"
+      },
+      "WildCards": {
+        "TotalDamage": "15/60/105/150/195/240/285 + +0.5/0.5/0.5/0.5/0.5/0.5/0.5 vit.att + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 stat#-1"
+      },
+      "CardmasterStack": {
+        "BonusDamage": "40/65/90/115/140/165/190 + +0.2/0.2/0.2/0.2/0.2/0.2/0.2 vit.att + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1"
+      }
+    },
+    "K'Santé": {
+      "KSanteR": {
+        "TotalDamageSlamDown": "45/80/115/150/185/220/255 + [StatByCoefficientCalculationPart?]"
+      },
+      "KSanteP": {
+        "{281dd874}": "[ByCharLevelBreakpointsCalculationPart?]",
+        "PercentHealthDamage": "[{ee18a47b}?]",
+        "MaxHealthDamagePercent": "0.01/0.01/0.01/0.01/0.01/0.01/0.01 + +0%/0%/0%/0%/0%/0%/0% AD + +0%/0%/0%/0%/0%/0%/0% PV"
+      },
+      "KSanteEAllyDash": {
+        "TotalShield": "50/90/130/170/210/250/290 + [BuffCounterByCoefficientCalculationPart?]"
+      },
+      "KSanteE": {
+        "TotalShield": "40/80/120/160/200/240/280 + +0.15/0.15/0.15/0.15/0.15/0.15/0.15 stat#12"
+      },
+      "KSanteW": {
+        "TotalMaxHealthDamage": "0.08/0.08/0.08/0.08/0.08/0.08/0.08 + +0%/0%/0%/0%/0%/0%/0% AD + +0%/0%/0%/0%/0%/0%/0% PV"
+      },
+      "KSanteQ3": {
+        "{04324da6}": "0/15/30/45/60/75/90 + [StatByCoefficientCalculationPart?]",
+        "{cdd991ce}": "4/4/4/4/4/4/4 + [StatByCoefficientCalculationPart?]",
+        "RDamage": "15/35/55/75/95/115/135 + [StatByCoefficientCalculationPart?]",
+        "EmpoweredAttackDamage": "[StatByCoefficientCalculationPart?] + 20",
+        "BonusPercentHealth": "0.01/0.02/0.03/0.04/0.05/0.06/0.07 + [BuffCounterByNamedDataValueCalculationPart?]",
+        "BonusResistsTooltip": "[StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "BonusHealthTooltip": "[StatByCoefficientCalculationPart?]"
+      },
+      "KSanteQ": {
+        "BaseDamage": "40/70/100/130/160/190/220 + [StatByCoefficientCalculationPart?] + [StatByCoefficientCalculationPart?]",
+        "{9c9367bc}": "[BuffCounterByCoefficientCalculationPart?] + [BuffCounterByCoefficientCalculationPart?]"
+      },
+      "KSanteQ3Missile": {
+        "TotalDamage": "? + [StatByCoefficientCalculationPart?]"
+      }
+    },
+    "LeBlanc": {
+      "LeblancE": {
+        "InitialDamage": "30/50/70/90/110/130/150 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "DelayedDamage": "40/80/120/160/200/240/280 + +0.85/0.85/0.85/0.85/0.85/0.85/0.85 stat#-1"
+      },
+      "LeblancQ": {
+        "Damage": "40/65/90/115/140/165/190 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "MarkDamage": "40/65/90/115/140/165/190 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "BonusMinionDamage": "[ByCharLevelBreakpointsCalculationPart?]"
+      },
+      "LeblancW": {
+        "TotalDamage": "35/75/115/155/195/235/275 + +0.8/0.8/0.8/0.8/0.8/0.8/0.8 stat#-1"
+      },
+      "LeblancR": {
+        "RQ1Damage": "0/70/140/210/280/350/420 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "RQ2Damage": "0/140/280/420/560/700/840 + [StatByCoefficientCalculationPart?]",
+        "RWDamage": "0/150/300/450/600/750/900 + [StatByCoefficientCalculationPart?]",
+        "RE1Damage": "0/70/140/210/280/350/420 + +0.4/0.4/0.4/0.4/0.4/0.4/0.4 stat#-1",
+        "RE2Damage": "0/140/280/420/560/700/840 + [StatByCoefficientCalculationPart?]"
+      }
+    }
+  }
+}

@@ -1,39 +1,35 @@
-namespace LOLInfo.Views
+namespace LOLInfo.Views;
+
+using System.Windows;
+using System.Windows.Controls;
+
+using LOLInfo.IServices;
+using LOLInfo.IViewModels;
+
+/// <summary>
+/// Logique d'interaction pour DetailChampionPage.xaml
+/// </summary>
+public partial class DetailChampionPage : Page
 {
-    using System.Windows;
-    using System.Windows.Controls;
+    private readonly IDetailChampionViewModel _viewModel;
+    private readonly IViewManager _viewManager;
 
-    using LOLInfo.IViewModels;
-    using LOLInfo.Services;
-
-    /// <summary>
-    /// Logique d'interaction pour DetailChampionPage.xaml
-    /// </summary>
-    public partial class DetailChampionPage : Page
+    public DetailChampionPage(IViewManager viewManager, IDetailChampionViewModel viewModel)
     {
-        private readonly IDetailChampionViewModel _viewModel;
-        private readonly IViewManager _viewManager;
+        this.InitializeComponent();
+        this._viewModel   = viewModel;
+        this._viewManager = viewManager;
+        this.DataContext  = this._viewModel;
+        this.Loaded += this.OnLoaded;
+    }
 
-        public DetailChampionPage(IViewManager viewManager, IDetailChampionViewModel viewModel)
-        {
-            InitializeComponent();
-            _viewModel   = viewModel;
-            _viewManager = viewManager;
-            DataContext  = _viewModel;
+    private async void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        await this._viewModel.LoadAsync();
+    }
 
-            // Même pattern que AllChampionPage :
-            // LoadAsync() est déclenché une seule fois quand la page est affichée.
-            Loaded += OnLoaded;
-        }
-
-        private async void OnLoaded(object sender, RoutedEventArgs e)
-        {
-            await _viewModel.LoadAsync();
-        }
-
-        private void BackButton_OnClick(object sender, RoutedEventArgs e)
-        {
-            _viewManager.NavigateToAllChampion();
-        }
+    private void BackButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        this._viewManager.NavigateToAllChampion();
     }
 }

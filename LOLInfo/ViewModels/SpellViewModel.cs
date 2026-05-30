@@ -1,224 +1,136 @@
-namespace LOLInfo.ViewModels
+namespace LOLInfo.ViewModels;
+
+using System.Collections.Generic;
+using System.Linq;
+
+using LOLInfo.Models.CdragonModel;
+using LOLInfo.Models.RiotModel;
+
+/// <summary>
+/// Wrapper bindable pour un sort (actif ou passif).
+/// Unifie Passive et Spell dans un seul type pour le DataTemplate XAML.
+///
+/// Fabriques statiques :
+///   SpellViewModel.Empty("Q")            ← placeholder avant chargement
+///   SpellViewModel.FromPassive(passive)
+///   SpellViewModel.FromSpell("Q", spell)
+/// </summary>
+public class SpellViewModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    // ── Identité ──────────────────────────────────────────────────────────
 
-    using LOLInfo.Models.RiotModel;
+    /// <summary>Touche d'activation : "Passif", "Q", "W", "E", "R".</summary>
+    public string Key         { get; }
+    public string Name        { get; }
+    public string Description { get; }
+    public string IconPath    { get; }
 
-    /// <summary>
-    /// Wrapper bindable pour un sort (actif ou passif).
-    ///
-    /// Unifie Passive et Spell dans un seul type pour éviter la duplication
-    /// de DataTemplate en XAML. Les propriétés absentes du passif sont vides.
-    ///
-    /// Utiliser les fabriques statiques :
-    ///   SpellViewModel.FromPassive(passive)
-    ///   SpellViewModel.FromSpell("Q", spell)
-    ///   SpellViewModel.Empty("Q")        ← placeholder avant chargement
-    /// </summary>
-    public class SpellViewModel
+    /// <summary>True si ce sort est le passif du champion.</summary>
+    public bool IsPassive { get; }
+
+    // ── Tableau de progression par niveau ─────────────────────────────────
+
+    public IReadOnlyList<string> LevelHeaders =>
+        this.StatRows.Count > 0
+            ? Enumerable.Range(1, this.StatRows[0].Values.Count).Select(i => $"Niv {i}").ToList<string>()
+            : [];
+
+    public IReadOnlyList<SpellStatRow>          StatRows     { get; }
+    public IReadOnlyList<LeveltipRowViewModel>  LeveltipRows { get; }
+    public IReadOnlyList<FormulaRowViewModel>   FormulaRows  { get; private set; }
+
+    // ── Visibilité ────────────────────────────────────────────────────────
+
+    public bool HasStats    => this.StatRows.Count     > 0;
+    public bool HasLeveltip => this.LeveltipRows.Count > 0;
+    public bool HasFormulas => this.FormulaRows.Count  > 0;
+
+    // ── Constructeur privé ────────────────────────────────────────────────
+
+    private SpellViewModel(
+        string key,
+        string name,
+        string description,
+        string iconPath,
+        bool   isPassive,
+        IReadOnlyList<SpellStatRow>         statRows,
+        IReadOnlyList<LeveltipRowViewModel> leveltipRows)
     {
-        // ── Identité ─────────────────────────────────────────────────────
+        this.Key          = key;
+        this.Name         = name        ?? string.Empty;
+        this.Description  = description ?? string.Empty;
+        this.IconPath     = iconPath    ?? string.Empty;
+        this.IsPassive    = isPassive;
+        this.StatRows     = statRows;
+        this.LeveltipRows = leveltipRows;
+        this.FormulaRows  = [];
+    }
 
-        /// <summary>
-        /// Touche d'activation : "Passif", "Q", "W", "E", "R".
-        /// Affiché comme en-tête de l'onglet.
-        /// </summary>
-        public string Key { get; }
+    // ── Fabriques statiques ───────────────────────────────────────────────
 
-        /// <summary>Nom du sort (ex : "Orbe de la Décimation").</summary>
-        public string Name { get; }
+    public static SpellViewModel Empty(string key) =>
+        new(key, string.Empty, string.Empty, string.Empty, false, [], []);
 
-        /// <summary>Description courte du sort.</summary>
-        public string Description { get; }
+    public static SpellViewModel FromPassive(Passive passive) =>
+        new("Passif",
+            passive.Name        ?? string.Empty,
+            passive.Description ?? string.Empty,
+            passive.Image?.Full ?? string.Empty,
+            true, [], []);
 
-        /// <summary>
-        /// Nom du fichier image (ex : "AhriQ.png").
-        /// Passé à ImagePathConverter avec le bon ConverterParameter.
-        /// </summary>
-        public string IconPath { get; }
+    public static SpellViewModel FromSpell(string key, Spell spell) =>
+        new(key,
+            spell.Name        ?? string.Empty,
+            spell.Description ?? string.Empty,
+            spell.Image?.Full  ?? string.Empty,
+            false,
+            BuildStatRows(spell),
+            BuildLeveltipRows(spell));
 
-        /// <summary>True si ce sort est le passif du champion.</summary>
-        public bool IsPassive { get; }
+    // ── Enrichissement CDragon ────────────────────────────────────────────
 
-        // ── Tableau de progression par niveau ────────────────────────────
+    public SpellViewModel WithFormulas(Dictionary<string, SpellCalculation>? calculations)
+    {
+        if (calculations is null || calculations.Count == 0) return this;
 
-        /// <summary>
-        /// En-têtes de colonnes du tableau de progression.
-        ///
-        /// Calculé depuis la première ligne de StatRows.
-        ///
-        /// Exemples :
-        ///   Sort à 5 rangs (Q/W/E) → ["Niv 1", "Niv 2", "Niv 3", "Niv 4", "Niv 5"]
-        ///   Sort à 3 rangs (R)      → ["Niv 1", "Niv 2", "Niv 3"]
-        ///   Valeur constante        → ["Niv 1"]
-        /// </summary>
-        public IReadOnlyList<string> LevelHeaders =>
-            StatRows.Count > 0
-                ? Enumerable.Range(1, StatRows[0].Values.Count)
-                            .Select(i => $"Niv {i}")
-                            .ToList<string>()
-                : Array.Empty<string>();
+        var rows = calculations
+            .Where(kv => !string.IsNullOrWhiteSpace(kv.Value.Format()))
+            .Select(kv => new FormulaRowViewModel(kv.Key, kv.Value.Format()))
+            .ToList<FormulaRowViewModel>();
 
-        /// <summary>
-        /// Lignes du tableau de progression : recharge / coût / portée.
-        ///
-        /// Chaque SpellStatRow contient un label et une valeur par rang.
-        /// Les lignes avec une valeur nulle ou "0" sont filtrées.
-        /// Vide pour le passif (pas de stats) ou les placeholders Empty.
-        /// </summary>
-        public IReadOnlyList<SpellStatRow> StatRows { get; }
+        var clone = new SpellViewModel(this.Key, this.Name, this.Description, this.IconPath, this.IsPassive, this.StatRows, this.LeveltipRows);
+        clone.FormulaRows = rows;
+        return clone;
+    }
 
-        // ── Gain par niveau (leveltip) ────────────────────────────────────
+    // ── Construction interne ──────────────────────────────────────────────
 
-        /// <summary>
-        /// Lignes leveltip filtrées : ne contient que les lignes dont l'effect
-        /// est une valeur lisible (ex : "60/95/130/165/200").
-        ///
-        /// Les lignes avec des variables Riot non résolues
-        /// (ex : "{{ basedamage }} -> {{ basedamageNL }}") sont exclues car
-        /// l'API statique ne fournit pas les valeurs calculées.
-        /// </summary>
-        public IReadOnlyList<LeveltipRowViewModel> LeveltipRows { get; }
+    private static IReadOnlyList<SpellStatRow> BuildStatRows(Spell spell)
+    {
+        List<SpellStatRow> rows = [];
 
-        // ── Helpers de visibilité ─────────────────────────────────────────
+        if (!string.IsNullOrWhiteSpace(spell.CooldownBurn))
+            rows.Add(new SpellStatRow("⏱ Recharge", spell.CooldownBurn));
 
-        /// <summary>
-        /// True si le tableau de progression a au moins une ligne.
-        /// Utilisé pour afficher / masquer le bloc Stats.
-        /// </summary>
-        public bool HasStats => StatRows.Count > 0;
+        if (!string.IsNullOrWhiteSpace(spell.CostBurn) && spell.CostBurn != "0")
+            rows.Add(new SpellStatRow("💧 Coût", spell.CostBurn));
 
-        /// <summary>
-        /// True si au moins une ligne de leveltip lisible est disponible.
-        /// </summary>
-        public bool HasLeveltip => LeveltipRows.Count > 0;
+        if (!string.IsNullOrWhiteSpace(spell.RangeBurn) && spell.RangeBurn != "0")
+            rows.Add(new SpellStatRow("🎯 Portée", spell.RangeBurn));
 
-        // ── Constructeur privé ────────────────────────────────────────────
+        return rows;
+    }
 
-        private SpellViewModel(
-            string key,
-            string name,
-            string description,
-            string iconPath,
-            bool isPassive,
-            IReadOnlyList<SpellStatRow> statRows,
-            IReadOnlyList<LeveltipRowViewModel> leveltipRows)
-        {
-            Key          = key;
-            Name         = name         ?? string.Empty;
-            Description  = description  ?? string.Empty;
-            IconPath     = iconPath     ?? string.Empty;
-            IsPassive    = isPassive;
-            StatRows     = statRows;
-            LeveltipRows = leveltipRows;
-        }
+    private static IReadOnlyList<LeveltipRowViewModel> BuildLeveltipRows(Spell spell)
+    {
+        var labels  = spell.Leveltip?.Label;
+        var effects = spell.Leveltip?.Effect;
 
-        // ── Fabriques statiques ───────────────────────────────────────────
+        if (labels is null || effects is null || labels.Count == 0) return [];
 
-        /// <summary>
-        /// Placeholder vide utilisé avant que les données ne soient chargées.
-        /// Évite les ArgumentOutOfRangeException sur Spells[0..4] au premier
-        /// rendu WPF (avant la fin de LoadAsync).
-        /// </summary>
-        public static SpellViewModel Empty(string key) =>
-            new SpellViewModel(
-                key:          key,
-                name:         string.Empty,
-                description:  string.Empty,
-                iconPath:     string.Empty,
-                isPassive:    false,
-                statRows:     Array.Empty<SpellStatRow>(),
-                leveltipRows: Array.Empty<LeveltipRowViewModel>()
-            );
-
-        /// <summary>
-        /// Crée un SpellViewModel depuis le passif d'un champion.
-        /// Pas de cooldown, coût, portée ni leveltip pour le passif.
-        /// </summary>
-        public static SpellViewModel FromPassive(Passive passive) =>
-            new SpellViewModel(
-                key:          "Passif",
-                name:         passive.Name        ?? string.Empty,
-                description:  passive.Description ?? string.Empty,
-                iconPath:     passive.Image?.Full  ?? string.Empty,
-                isPassive:    true,
-                statRows:     Array.Empty<SpellStatRow>(),
-                leveltipRows: Array.Empty<LeveltipRowViewModel>()
-            );
-
-        /// <summary>
-        /// Crée un SpellViewModel depuis un sort actif.
-        /// </summary>
-        /// <param name="key">"Q", "W", "E" ou "R".</param>
-        /// <param name="spell">Données brutes de l'API Riot.</param>
-        public static SpellViewModel FromSpell(string key, Spell spell) =>
-            new SpellViewModel(
-                key:          key,
-                name:         spell.Name        ?? string.Empty,
-                description:  spell.Description ?? string.Empty,
-                iconPath:     spell.Image?.Full  ?? string.Empty,
-                isPassive:    false,
-                statRows:     BuildStatRows(spell),
-                leveltipRows: BuildLeveltipRows(spell)
-            );
-
-        // ── Construction interne ──────────────────────────────────────────
-
-        /// <summary>
-        /// Construit le tableau de progression depuis les BurnStrings de l'API.
-        ///
-        /// Riot fournit trois chaînes formatées "valeur/valeur/valeur" :
-        ///   CooldownBurn : "9/8/7/6/5"  → une valeur par rang
-        ///   CostBurn     : "55/65/75/85/95"
-        ///   RangeBurn    : "970"         → constante sur tous les rangs
-        ///
-        /// On filtre les valeurs nulles ou "0" (sort sans ressource / portée self).
-        /// </summary>
-        private static IReadOnlyList<SpellStatRow> BuildStatRows(Spell spell)
-        {
-            var rows = new List<SpellStatRow>();
-
-            // Recharge
-            if (!string.IsNullOrWhiteSpace(spell.CooldownBurn))
-                rows.Add(new SpellStatRow("⏱ Recharge", spell.CooldownBurn));
-
-            // Coût (filtrer "0" = sort sans ressource, ex : Garen)
-            if (!string.IsNullOrWhiteSpace(spell.CostBurn) && spell.CostBurn != "0")
-                rows.Add(new SpellStatRow("💧 Coût", spell.CostBurn));
-
-            // Portée (filtrer "0" = sort sans portée définie, ex : certains passifs)
-            if (!string.IsNullOrWhiteSpace(spell.RangeBurn) && spell.RangeBurn != "0")
-                rows.Add(new SpellStatRow("🎯 Portée", spell.RangeBurn));
-
-            return rows;
-        }
-
-        /// <summary>
-        /// Zippe Label et Effect du leveltip Riot en lignes lisibles.
-        ///
-        /// L'API Riot retourne deux listes parallèles :
-        ///   Label  = ["Dégâts",              "Délai de récupération"]
-        ///   Effect = ["{{ basedamage }}...",  "{{ cooldown }}..."]
-        ///
-        /// Les valeurs de type template (contenant "{{") ne sont pas résolues
-        /// dans l'API statique — elles sont filtrées ici.
-        /// Seules les lignes avec des valeurs numériques lisibles sont conservées,
-        /// ex : ["60/95/130/165/200", "13/12/11/10/9"].
-        /// </summary>
-        private static IReadOnlyList<LeveltipRowViewModel> BuildLeveltipRows(Spell spell)
-        {
-            var labels  = spell.Leveltip?.Label;
-            var effects = spell.Leveltip?.Effect;
-
-            if (labels is null || effects is null || labels.Count == 0)
-                return Array.Empty<LeveltipRowViewModel>();
-
-            return labels
-                .Zip(effects, (label, effect) => new LeveltipRowViewModel(label, effect))
-                .Where(row => !row.Effect.Contains("{{"))
-                .ToList();
-        }
+        return labels
+            .Zip(effects, (label, effect) => new LeveltipRowViewModel(label, effect))
+            .Where(row => !row.Effect.Contains("{{"))
+            .ToList();
     }
 }

@@ -1,111 +1,67 @@
-namespace LOLInfo.ViewModels
-{
-    using CommunityToolkit.Mvvm.Input;
+namespace LOLInfo.ViewModels;
 
-    using LOLInfo.Models;
-    using LOLInfo.Models.RiotModel;
-    using LOLInfo.Services.Storage;
+using CommunityToolkit.Mvvm.Input;
+
+using LOLInfo.IServices.Storage;
+using LOLInfo.Models;
+using LOLInfo.Models.RiotModel;
+
+/// <summary>
+/// Wrapper MVVM d'un Champion pour la liste de sélection.
+/// Encapsule l'état favori et la commande de bascule.
+/// </summary>
+public class ChampionListItemViewModel(Champion champion, IFavoritesService favoritesService) : BaseViewModel
+{
+    // ── Données du champion ───────────────────────────────────────────────
+
+    public Champion Champion { get; } = champion;
+
+    // ── Propriétés calculées (une seule fois à la construction) ──────────
+
+    public DamageTypeFilter DamageType { get; } = ComputeDamageType(champion);
+    public bool             IsRanged   { get; } = ComputeIsRanged(champion);
+
+    // ── Favori (C# 14 : field keyword) ───────────────────────────────────
 
     /// <summary>
-    /// Wrapper MVVM d'un Champion pour la liste de sélection.
-    /// Encapsule l'état favori et la commande de bascule,
-    /// évitant tout binding RelativeSource complexe dans le DataTemplate.
+    /// Indique si ce champion est en favori.
+    /// Initialisé depuis FavoritesService ; mis à jour par ToggleFavoriteCommand.
     /// </summary>
-    public class ChampionListItemViewModel : BaseViewModel
+    public bool IsFavorite
     {
-        private readonly IFavoritesService _favoritesService;
-
-        // ── Données du champion ───────────────────────────────────────────
-
-        /// <summary>Champion brut issu de l'API Riot.</summary>
-        public Champion Champion { get; }
-
-        // ── Propriétés calculées (filtrables, calculées une seule fois) ───
-
-        /// <summary>
-        /// Type de dégâts principal, dérivé des scores Info.Attack / Info.Magic (0-10).
-        /// Écart &gt;= 3 en faveur de l'un → AD ou AP, sinon → Mixte.
-        /// </summary>
-        public DamageTypeFilter DamageType { get; }
-
-        /// <summary>
-        /// Vrai si le champion est à distance (attackrange >= 300).
-        /// Faux s'il est mêlée ou si la stat est absente.
-        /// </summary>
-        public bool IsRanged { get; }
-
-        // ── Favori ────────────────────────────────────────────────────────
-
-        private bool _isFavorite;
-
-        /// <summary>
-        /// Indique si ce champion est en favori.
-        /// Mis à jour par ToggleFavoriteCommand et chargé depuis FavoritesService.
-        /// </summary>
-        public bool IsFavorite
+        get;
+        private set
         {
-            get => _isFavorite;
-            private set
-            {
-                _isFavorite = value;
-                OnPropertyChanged(nameof(IsFavorite));
-            }
+            if (field == value) return;
+            field = value;
+            this.OnPropertyChanged(nameof(IsFavorite));
         }
+    } = favoritesService.IsFavorite(champion.Id);
 
-        /// <summary>
-        /// Commande locale : bascule le statut favori et persiste via FavoritesService.
-        /// </summary>
-        public IRelayCommand ToggleFavoriteCommand { get; }
+    // ── Commande (lazy init — ne peut pas référencer this dans un initialiseur) ──
 
-        // ── Constructeur ─────────────────────────────────────────────────
+    private IRelayCommand? _toggleFavoriteCommand;
 
-        public ChampionListItemViewModel(Champion champion, IFavoritesService favoritesService)
-        {
-            Champion = champion;
-            _favoritesService = favoritesService;
+    /// <summary>Bascule le statut favori et persiste via FavoritesService.</summary>
+    public IRelayCommand ToggleFavoriteCommand =>
+        this._toggleFavoriteCommand ??= new RelayCommand(this.ToggleFavorite);
 
-            // Charge l'état initial depuis le service (lecture du JSON).
-            _isFavorite = favoritesService.IsFavorite(champion.Id);
+    // ── Logique ───────────────────────────────────────────────────────────
 
-            ToggleFavoriteCommand = new RelayCommand(ToggleFavorite);
+    private void ToggleFavorite() =>
+        this.IsFavorite = favoritesService.Toggle(champion.Id);
 
-            // Calculs dérivés : effectués une seule fois à la construction,
-            // mis en cache comme propriétés en lecture seule.
-            DamageType = ComputeDamageType(champion);
-            IsRanged   = ComputeIsRanged(champion);
-        }
-
-        // ── Logique privée ───────────────────────────────────────────────
-
-        private void ToggleFavorite()
-        {
-            IsFavorite = _favoritesService.Toggle(Champion.Id);
-        }
-
-        /// <summary>
-        /// Dérive le type de dégâts principal depuis les scores Info.Attack et Info.Magic.
-        /// Les scores vont de 0 à 10. Un écart de 3 ou plus indique une dominance claire.
-        /// Exemples : Caitlyn (9/0) → AD ; Lux (2/9) → AP ; Jax (7/4) → Mixte.
-        /// </summary>
-        private static DamageTypeFilter ComputeDamageType(Champion c)
-        {
-            var atk = c.Info?.Attack ?? 0;
-            var mag = c.Info?.Magic  ?? 0;
-
-            if (atk - mag >= 3) return DamageTypeFilter.AD;
-            if (mag - atk >= 3) return DamageTypeFilter.AP;
-            return DamageTypeFilter.Mixte;
-        }
-
-        /// <summary>
-        /// Dérive le type de portée depuis Stats["attackrange"].
-        /// Mêlée : portée &lt; 300 (ex : Garen = 175).
-        /// Distance : portée >= 300 (ex : Caitlyn = 650, Lux = 550).
-        /// </summary>
-        private static bool ComputeIsRanged(Champion c)
-        {
-            if (c.Stats is null) return false;
-            return c.Stats.TryGetValue("attackrange", out var range) && range >= 300;
-        }
+    private static DamageTypeFilter ComputeDamageType(Champion c)
+    {
+        var atk = c.Info?.Attack ?? 0;
+        var mag = c.Info?.Magic  ?? 0;
+        if (atk - mag >= 3) return DamageTypeFilter.AD;
+        if (mag - atk >= 3) return DamageTypeFilter.AP;
+        return DamageTypeFilter.Mixte;
     }
+
+    private static bool ComputeIsRanged(Champion c) =>
+        c.Stats is not null &&
+        c.Stats.TryGetValue("attackrange", out var range) &&
+        range >= 300;
 }

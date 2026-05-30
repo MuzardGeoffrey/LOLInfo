@@ -1,131 +1,139 @@
-namespace LOLInfo
+namespace LOLInfo;
+
+using System;
+using System.IO;
+using System.Windows;
+using System.Windows.Threading;
+
+using LOLInfo.IServices;
+using LOLInfo.IServices.Storage;
+using LOLInfo.IViewModels;
+using LOLInfo.Services;
+using LOLInfo.Services.Storage;
+using LOLInfo.ViewModels;
+
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+
+using Serilog;
+
+/// <summary>
+/// Interaction logic for App.xaml
+/// </summary>
+public partial class App : Application
 {
-    using System;
-    using System.IO;
-    using System.Windows;
-    using System.Windows.Threading;
+    public App()
+    {
+        InitializeSerilog();
+        this.Services = ConfigureServices();
+        this.InitializeComponent();
+    }
 
-    using LOLInfo.IViewModels;
-    using LOLInfo.Services;
-    using LOLInfo.Services.Storage;
-    using LOLInfo.ViewModels;
+    /// <summary>Gets the current <see cref="App"/> instance in use.</summary>
+    public new static App Current => (App)Application.Current;
 
-    using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Logging;
+    /// <summary>Gets the <see cref="IServiceProvider"/> instance to resolve application services.</summary>
+    public IServiceProvider Services { get; }
 
-    using Serilog;
+    // ── Logging ──────────────────────────────────────────────────────────
 
     /// <summary>
-    /// Interaction logic for App.xaml
+    /// Configure Serilog avant la construction du DI.
+    /// Fichier : %AppData%\LOLInfo\logs\lolinfo-YYYYMMDD.log
+    /// Rotation quotidienne, 7 fichiers conservés.
     /// </summary>
-    public partial class App : Application
+    private static void InitializeSerilog()
     {
-        public App()
+        var logDirectory = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "LOLInfo", "logs");
+
+        Directory.CreateDirectory(logDirectory);
+
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .WriteTo.File(
+                path: Path.Combine(logDirectory, "lolinfo-.log"),
+                rollingInterval: RollingInterval.Day,
+                retainedFileCountLimit: 7,
+                outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {SourceContext} — {Message:lj}{NewLine}{Exception}")
+            .CreateLogger();
+
+        Log.Information("=== LOLInfo démarrage ===");
+    }
+
+    // ── DI ───────────────────────────────────────────────────────────────
+
+    private static IServiceProvider ConfigureServices()
+    {
+        var services = new ServiceCollection();
+
+        // Logging : ILogger<T> disponible dans tous les services via injection
+        services.AddLogging(builder =>
         {
-            InitializeSerilog();
-            Services = ConfigureServices();
-            this.InitializeComponent();
-        }
+            builder.ClearProviders();
+            builder.AddSerilog(dispose: true);
+        });
 
-        /// <summary>Gets the current <see cref="App"/> instance in use.</summary>
-        public new static App Current => (App)Application.Current;
+        // Version DataDragon — initialisée au démarrage avant toute navigation
+        services.AddSingleton<IPatchVersionService, PatchVersionService>();
 
-        /// <summary>Gets the <see cref="IServiceProvider"/> instance to resolve application services.</summary>
-        public IServiceProvider Services { get; }
+        // Services réseau
+        services.AddSingleton<IRiotClient, RiotClient>();
+        services.AddSingleton<ICdragonClient, CdragonClient>();
 
-        // ── Logging ──────────────────────────────────────────────────────
+        // Stockage local
+        services.AddSingleton<IFavoritesService, FavoritesService>();
 
-        /// <summary>
-        /// Configure Serilog avant la construction du DI.
-        /// - Fichier : %AppData%\LOLInfo\logs\lolinfo-YYYYMMDD.log
-        /// - Rotation quotidienne, 7 fichiers conservés.
-        /// - SourceContext affiché pour identifier la classe qui logue.
-        /// </summary>
-        private static void InitializeSerilog()
-        {
-            var logDirectory = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-                "LOLInfo", "logs");
+        // Navigation
+        services.AddSingleton<IViewManager, ViewManager>();
 
-            Directory.CreateDirectory(logDirectory);
+        // ViewModels
+        services.AddTransient<IAllChampionViewModel, AllChampionViewModel>();
+        services.AddSingleton<MainViewModel>();
 
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.File(
-                    path: Path.Combine(logDirectory, "lolinfo-.log"),
-                    rollingInterval: RollingInterval.Day,
-                    retainedFileCountLimit: 7,
-                    outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff} [{Level:u3}] {SourceContext} — {Message:lj}{NewLine}{Exception}")
-                .CreateLogger();
+        return services.BuildServiceProvider();
+    }
 
-            Log.Information("=== LOLInfo démarrage ===");
-        }
+    // ── Cycle de vie ──────────────────────────────────────────────────────
 
-        // ── DI ───────────────────────────────────────────────────────────
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        base.OnStartup(e);
 
-        private static IServiceProvider ConfigureServices()
-        {
-            var services = new ServiceCollection();
+        this.DispatcherUnhandledException += OnDispatcherUnhandledException;
+        AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
 
-            // Logging : ILogger<T> disponible dans tous les services via injection
-            services.AddLogging(builder =>
-            {
-                builder.ClearProviders();
-                builder.AddSerilog(dispose: true);
-            });
+        // Récupère la version DataDragon courante avant la navigation.
+        // En cas d'échec réseau, DataDragonCdn.Version reste "latest".
+        this.Services.GetRequiredService<IPatchVersionService>()
+                .InitializeAsync()
+                .ContinueWith(_ =>
+                {
+                    Log.Information("Navigation initiale vers AllChampionPage");
+                    this.Dispatcher.Invoke(() =>
+                        this.Services.GetRequiredService<IViewManager>().NavigateToAllChampion());
+                });
+    }
 
-            // Services réseau
-            services.AddSingleton<IRiotClient, RiotClient>();
+    protected override void OnExit(ExitEventArgs e)
+    {
+        Log.Information("=== LOLInfo arrêt (code {ExitCode}) ===", e.ApplicationExitCode);
+        Log.CloseAndFlush();
+        base.OnExit(e);
+    }
 
-            // Stockage local
-            services.AddSingleton<IFavoritesService, FavoritesService>();
+    // ── Handlers exceptions non gérées ────────────────────────────────────
 
-            // Navigation
-            services.AddSingleton<IViewManager, ViewManager>();
+    private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+    {
+        Log.Fatal(e.Exception, "Exception non gérée sur le thread UI");
+    }
 
-            // ViewModels
-            services.AddTransient<IAllChampionViewModel, AllChampionViewModel>();
-            services.AddSingleton<MainViewModel>();
-
-            return services.BuildServiceProvider();
-        }
-
-        // ── Cycle de vie ──────────────────────────────────────────────────
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-            base.OnStartup(e);
-
-            // Capture les exceptions non gérées sur le thread UI
-            DispatcherUnhandledException += OnDispatcherUnhandledException;
-
-            // Capture les exceptions non gérées sur les threads background
-            AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
-
-            Log.Information("Navigation initiale vers AllChampionPage");
-            Services.GetRequiredService<IViewManager>().NavigateToAllChampion();
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            Log.Information("=== LOLInfo arrêt (code {ExitCode}) ===", e.ApplicationExitCode);
-            Log.CloseAndFlush();
-            base.OnExit(e);
-        }
-
-        // ── Handlers exceptions non gérées ───────────────────────────────
-
-        private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
-        {
-            Log.Fatal(e.Exception, "Exception non gérée sur le thread UI");
-            // On laisse l'application crasher (e.Handled = false par défaut)
-            // pour ne pas masquer des bugs — le log est suffisant pour diagnostiquer.
-        }
-
-        private static void OnDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
-        {
-            Log.Fatal(e.ExceptionObject as Exception, "Exception non gérée sur un thread background (IsTerminating={IsTerminating})", e.IsTerminating);
-            Log.CloseAndFlush();
-        }
+    private static void OnDomainUnhandledException(object sender, UnhandledExceptionEventArgs e)
+    {
+        Log.Fatal(e.ExceptionObject as Exception,
+            "Exception non gérée sur un thread background (IsTerminating={IsTerminating})", e.IsTerminating);
+        Log.CloseAndFlush();
     }
 }

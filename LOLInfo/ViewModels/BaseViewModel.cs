@@ -1,12 +1,5 @@
-﻿namespace LOLInfo.ViewModels
-{
-    using CommunityToolkit.Mvvm.ComponentModel;
+namespace LOLInfo.ViewModels;
 
-    /// <summary>
-    /// Base commune pour tous les ViewModels.
-    /// ObservableObject fournit déjà INotifyPropertyChanged et OnPropertyChanged().
-    /// </summary>
-    public class BaseViewModel : ObservableObject
-    {
-    }
-}
+using CommunityToolkit.Mvvm.ComponentModel;
+
+public class BaseViewModel : ObservableObject { }

@@ -1,402 +1,281 @@
-namespace LOLInfo.ViewModels
+namespace LOLInfo.ViewModels;
+
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Data;
+
+using LOLInfo.IServices;
+using LOLInfo.IServices.Storage;
+using LOLInfo.IViewModels;
+using LOLInfo.Models;
+using LOLInfo.Models.RiotModel;
+
+using Microsoft.Extensions.Logging;
+
+public class AllChampionViewModel(
+    IRiotClient httpRiot,
+    IFavoritesService favoritesService,
+    ILogger<AllChampionViewModel> logger) : BaseViewModel, IAllChampionViewModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Windows.Data;
+    private ObservableCollection<ChampionListItemViewModel> _items = [];
 
-    using LOLInfo.IViewModels;
-    using LOLInfo.Models;
-    using LOLInfo.Models.RiotModel;
-    using LOLInfo.Services;
-    using LOLInfo.Services.Storage;
+    // ── Vue triée + filtrée ───────────────────────────────────────────────
 
-    using Microsoft.Extensions.Logging;
+    private ICollectionView _championsView;
 
-    public class AllChampionViewModel : BaseViewModel, IAllChampionViewModel
+    public ICollectionView ChampionsView
     {
-        private readonly IViewManager _viewManager;
-        private readonly IRiotClient _httpRiot;
-        private readonly IFavoritesService _favoritesService;
-        private readonly ILogger<AllChampionViewModel> _logger;
+        get => this._championsView;
+        private set { this._championsView = value; this.OnPropertyChanged(nameof(ChampionsView)); }
+    }
 
-        private ObservableCollection<ChampionListItemViewModel> _items = new();
+    // ── Tri ───────────────────────────────────────────────────────────────
 
-        // ── Vue triée + filtrée exposée à la View ────────────────────────
+    public List<KeyValuePair<SortOption, string>> SortOptions { get; } =
+    [
+        new(SortOption.NomAZ,          "Nom A → Z"),
+        new(SortOption.NomZA,          "Nom Z → A"),
+        new(SortOption.DifficulteAsc,  "Difficulté ↑"),
+        new(SortOption.DifficulteDesc, "Difficulté ↓"),
+    ];
 
-        private ICollectionView _championsView;
+    private KeyValuePair<SortOption, string> _selectedSortOption = new(SortOption.NomAZ, "Nom A → Z");
 
-        public ICollectionView ChampionsView
+    public KeyValuePair<SortOption, string> SelectedSortOption
+    {
+        get => this._selectedSortOption;
+        set { this._selectedSortOption = value; this.OnPropertyChanged(nameof(SelectedSortOption)); this.ApplySort(); }
+    }
+
+    // ── Filtre : Favoris ──────────────────────────────────────────────────
+
+    public bool ShowFavoritesOnly
+    {
+        get;
+        set
         {
-            get => _championsView;
-            private set
-            {
-                _championsView = value;
-                OnPropertyChanged(nameof(ChampionsView));
-            }
+            field = value;
+            this.OnPropertyChanged(nameof(ShowFavoritesOnly));
+            logger.LogDebug("Filtre favoris : {Value}", value ? "activé" : "désactivé");
+            this.ChampionsView?.Refresh();
         }
+    }
 
-        // ── Tri ──────────────────────────────────────────────────────────
+    // ── Filtre : Nom ──────────────────────────────────────────────────────
 
-        public List<KeyValuePair<SortOption, string>> SortOptions { get; } = new()
+    public string NameFilter
+    {
+        get;
+        set
         {
-            new(SortOption.NomAZ,          "Nom A → Z"),
-            new(SortOption.NomZA,          "Nom Z → A"),
-            new(SortOption.DifficulteAsc,  "Difficulté ↑"),
-            new(SortOption.DifficulteDesc, "Difficulté ↓"),
+            field = value ?? string.Empty;
+            this.OnPropertyChanged(nameof(NameFilter));
+            logger.LogDebug("Filtre nom : '{NameFilter}'", field);
+            this.ChampionsView?.Refresh();
+        }
+    } = string.Empty;
+
+    // ── Filtre : Type de dégâts ───────────────────────────────────────────
+
+    public DamageTypeFilter SelectedDamageType
+    {
+        get;
+        set
+        {
+            field = value;
+            this.OnPropertyChanged(nameof(SelectedDamageType));
+            logger.LogDebug("Filtre dégâts : {Value}", value);
+            this.ChampionsView?.Refresh();
+        }
+    } = DamageTypeFilter.Tous;
+
+    // ── Filtre : Portée ───────────────────────────────────────────────────
+
+    public RangeTypeFilter SelectedRangeType
+    {
+        get;
+        set
+        {
+            field = value;
+            this.OnPropertyChanged(nameof(SelectedRangeType));
+            logger.LogDebug("Filtre portée : {Value}", value);
+            this.ChampionsView?.Refresh();
+        }
+    } = RangeTypeFilter.Tous;
+
+    // ── Filtre : Classes (Tags) ───────────────────────────────────────────
+
+    private List<FilterItemViewModel> _tagFilters = [];
+    public IReadOnlyList<FilterItemViewModel> TagFilters => this._tagFilters;
+
+    // ── Filtre : Ressources (Partype) ─────────────────────────────────────
+
+    private List<FilterItemViewModel> _partypeFilters = [];
+    public IReadOnlyList<FilterItemViewModel> PartypeFilters => this._partypeFilters;
+
+    // ── Filtre : Difficulté ───────────────────────────────────────────────
+
+    private int _difficultyMax = 10;
+
+    public int DifficultyMin
+    {
+        get;
+        set
+        {
+            var clamped = Math.Clamp(value, 0, this._difficultyMax);
+            if (field == clamped) return;
+            field = clamped;
+            this.OnPropertyChanged(nameof(DifficultyMin));
+            logger.LogDebug("Filtre difficulté min : {Value}", clamped);
+            this.ChampionsView?.Refresh();
+        }
+    }
+
+    public int DifficultyMax
+    {
+        get => this._difficultyMax;
+        set
+        {
+            var clamped = Math.Clamp(value, this.DifficultyMin, 10);
+            if (this._difficultyMax == clamped) return;
+            this._difficultyMax = clamped;
+            this.OnPropertyChanged(nameof(DifficultyMax));
+            logger.LogDebug("Filtre difficulté max : {Value}", clamped);
+            this.ChampionsView?.Refresh();
+        }
+    }
+
+    // ── Chargement ────────────────────────────────────────────────────────
+
+    public async Task GetAllChampions()
+    {
+        logger.LogDebug("Début du chargement de la liste des champions");
+
+        var champions = await httpRiot.GetAllChampions();
+
+        this._items = [];
+        foreach (var champion in champions)
+            this._items.Add(new ChampionListItemViewModel(champion, favoritesService));
+
+        this.BuildTagFilters(champions);
+        this.BuildPartypeFilters();
+
+        this.ChampionsView = CollectionViewSource.GetDefaultView(this._items);
+        this.ChampionsView.Filter = this.ApplyFilter;
+        this.ApplySort();
+
+        logger.LogInformation(
+            "Vue initialisée — {Count} champion(s), {Tags} classes, {Partypes} ressources",
+            this._items.Count, this._tagFilters.Count, this._partypeFilters.Count);
+    }
+
+    // ── Construction des filtres ──────────────────────────────────────────
+
+    private void BuildTagFilters(IEnumerable<Champion> champions)
+    {
+        var presentTags = champions
+            .SelectMany(c => c.Tags ?? Enumerable.Empty<string>())
+            .Distinct()
+            .ToHashSet();
+
+        var ordered = ChampionTags.CanonicalOrder
+            .Where(t => presentTags.Contains(t))
+            .Concat(presentTags.Except(ChampionTags.CanonicalOrder).OrderBy(t => t));
+
+        this._tagFilters = ordered.Select(tag => new FilterItemViewModel(tag)).ToList();
+        this.SubscribeToFilterItems(this._tagFilters);
+        this.OnPropertyChanged(nameof(TagFilters));
+        logger.LogDebug("TagFilters construits : {Tags}", string.Join(", ", this._tagFilters.Select(f => f.Label)));
+    }
+
+    private void BuildPartypeFilters()
+    {
+        this._partypeFilters = ChampionResources.CanonicalOrder
+            .Select(category => new FilterItemViewModel(category))
+            .ToList();
+        this.SubscribeToFilterItems(this._partypeFilters);
+        this.OnPropertyChanged(nameof(PartypeFilters));
+    }
+
+    private void SubscribeToFilterItems(IEnumerable<FilterItemViewModel> items)
+    {
+        foreach (var item in items)
+            item.PropertyChanged += this.OnFilterItemChanged;
+    }
+
+    private void OnFilterItemChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(FilterItemViewModel.IsSelected))
+        {
+            logger.LogDebug("Filtre item modifié : '{Label}' = {IsSelected}",
+                (sender as FilterItemViewModel)?.Label,
+                (sender as FilterItemViewModel)?.IsSelected);
+            this.ChampionsView?.Refresh();
+        }
+    }
+
+    // ── Tri ───────────────────────────────────────────────────────────────
+
+    private void ApplySort()
+    {
+        if (this.ChampionsView is not ListCollectionView listView) return;
+
+        logger.LogDebug("Application du tri : {Sort}", this.SelectedSortOption.Value);
+
+        listView.CustomSort = this.SelectedSortOption.Key switch
+        {
+            SortOption.NomAZ => Comparer<ChampionListItemViewModel>.Create(
+                (a, b) => StringComparer.OrdinalIgnoreCase.Compare(a.Champion.Name, b.Champion.Name)),
+
+            SortOption.NomZA => Comparer<ChampionListItemViewModel>.Create(
+                (a, b) => StringComparer.OrdinalIgnoreCase.Compare(b.Champion.Name, a.Champion.Name)),
+
+            SortOption.DifficulteAsc => Comparer<ChampionListItemViewModel>.Create(
+                (a, b) => (a.Champion.Info?.Difficulty ?? 0).CompareTo(b.Champion.Info?.Difficulty ?? 0)),
+
+            SortOption.DifficulteDesc => Comparer<ChampionListItemViewModel>.Create(
+                (a, b) => (b.Champion.Info?.Difficulty ?? 0).CompareTo(a.Champion.Info?.Difficulty ?? 0)),
+
+            _ => null,
         };
+    }
 
-        private KeyValuePair<SortOption, string> _selectedSortOption;
+    // ── Filtre central ────────────────────────────────────────────────────
 
-        public KeyValuePair<SortOption, string> SelectedSortOption
+    private bool ApplyFilter(object obj)
+    {
+        if (obj is not ChampionListItemViewModel item) return false;
+
+        if (this.ShowFavoritesOnly && !item.IsFavorite) return false;
+        if (this.SelectedDamageType != DamageTypeFilter.Tous && item.DamageType != this.SelectedDamageType) return false;
+        if (this.SelectedRangeType == RangeTypeFilter.Melee &&  item.IsRanged) return false;
+        if (this.SelectedRangeType == RangeTypeFilter.Range && !item.IsRanged) return false;
+
+        var difficulty = item.Champion.Info?.Difficulty ?? 0;
+        if (difficulty < this.DifficultyMin || difficulty > this.DifficultyMax) return false;
+
+        var selectedTags = this._tagFilters.Where(f => f.IsSelected).ToList();
+        if (selectedTags.Count > 0)
         {
-            get => _selectedSortOption;
-            set
-            {
-                _selectedSortOption = value;
-                OnPropertyChanged(nameof(SelectedSortOption));
-                ApplySort();
-            }
+            var championTags = item.Champion.Tags ?? [];
+            if (!selectedTags.Any(f => championTags.Contains(f.Label))) return false;
         }
 
-        // ── Filtre : Favoris ─────────────────────────────────────────────
-
-        private bool _showFavoritesOnly;
-
-        public bool ShowFavoritesOnly
+        var selectedPartypes = this._partypeFilters.Where(f => f.IsSelected).ToList();
+        if (selectedPartypes.Count > 0)
         {
-            get => _showFavoritesOnly;
-            set
-            {
-                _showFavoritesOnly = value;
-                OnPropertyChanged(nameof(ShowFavoritesOnly));
-                _logger.LogDebug("Filtre favoris : {Value}", value ? "activé" : "désactivé");
-                ChampionsView?.Refresh();
-            }
+            var category = ChampionResources.GetCategory(item.Champion.Partype);
+            if (!selectedPartypes.Any(f => f.Label == category)) return false;
         }
 
-        // ── Filtre : Nom ─────────────────────────────────────────────────
+        if (!string.IsNullOrEmpty(this.NameFilter) &&
+            !(item.Champion.Name?.Contains(this.NameFilter, StringComparison.OrdinalIgnoreCase) ?? false))
+            return false;
 
-        private string _nameFilter = string.Empty;
-
-        public string NameFilter
-        {
-            get => _nameFilter;
-            set
-            {
-                _nameFilter = value ?? string.Empty;
-                OnPropertyChanged(nameof(NameFilter));
-                _logger.LogDebug("Filtre nom : '{NameFilter}'", _nameFilter);
-                ChampionsView?.Refresh();
-            }
-        }
-
-        // ── Filtre : Type de dégâts ──────────────────────────────────────
-
-        private DamageTypeFilter _selectedDamageType = DamageTypeFilter.Tous;
-
-        public DamageTypeFilter SelectedDamageType
-        {
-            get => _selectedDamageType;
-            set
-            {
-                _selectedDamageType = value;
-                OnPropertyChanged(nameof(SelectedDamageType));
-                _logger.LogDebug("Filtre dégâts : {Value}", value);
-                ChampionsView?.Refresh();
-            }
-        }
-
-        // ── Filtre : Portée ──────────────────────────────────────────────
-
-        private RangeTypeFilter _selectedRangeType = RangeTypeFilter.Tous;
-
-        public RangeTypeFilter SelectedRangeType
-        {
-            get => _selectedRangeType;
-            set
-            {
-                _selectedRangeType = value;
-                OnPropertyChanged(nameof(SelectedRangeType));
-                _logger.LogDebug("Filtre portée : {Value}", value);
-                ChampionsView?.Refresh();
-            }
-        }
-
-        // ── Filtre : Classes (Tags) ───────────────────────────────────────
-
-        private List<FilterItemViewModel> _tagFilters = new();
-
-        /// <summary>
-        /// Construit après le chargement des champions.
-        /// Chaque item représente un tag Riot (Fighter, Mage, etc.).
-        /// La View bind une CheckBox sur chaque item.IsSelected.
-        /// </summary>
-        public IReadOnlyList<FilterItemViewModel> TagFilters => _tagFilters;
-
-        // ── Filtre : Ressources (Partype) ────────────────────────────────
-
-        private List<FilterItemViewModel> _partypeFilters = new();
-
-        /// <summary>
-        /// Construit après le chargement des champions.
-        /// Chaque item représente un type de ressource (Mana, Energy, None…).
-        /// </summary>
-        public IReadOnlyList<FilterItemViewModel> PartypeFilters => _partypeFilters;
-
-        // ── Filtre : Difficulté ───────────────────────────────────────────
-
-        private int _difficultyMin = 0;
-
-        /// <summary>
-        /// Borne inférieure du filtre difficulté (0-10).
-        /// Si DifficultyMin > valeur d'un champion, il est masqué.
-        /// </summary>
-        public int DifficultyMin
-        {
-            get => _difficultyMin;
-            set
-            {
-                // On s'assure que Min ne dépasse pas Max
-                var clamped = Math.Clamp(value, 0, _difficultyMax);
-                if (_difficultyMin == clamped) return;
-                _difficultyMin = clamped;
-                OnPropertyChanged(nameof(DifficultyMin));
-                _logger.LogDebug("Filtre difficulté min : {Value}", clamped);
-                ChampionsView?.Refresh();
-            }
-        }
-
-        private int _difficultyMax = 10;
-
-        /// <summary>
-        /// Borne supérieure du filtre difficulté (0-10).
-        /// Si DifficultyMax < valeur d'un champion, il est masqué.
-        /// </summary>
-        public int DifficultyMax
-        {
-            get => _difficultyMax;
-            set
-            {
-                // On s'assure que Max ne descend pas sous Min
-                var clamped = Math.Clamp(value, _difficultyMin, 10);
-                if (_difficultyMax == clamped) return;
-                _difficultyMax = clamped;
-                OnPropertyChanged(nameof(DifficultyMax));
-                _logger.LogDebug("Filtre difficulté max : {Value}", clamped);
-                ChampionsView?.Refresh();
-            }
-        }
-
-        // ── Constructeur ──────────────────────────────────────────────────
-
-        public AllChampionViewModel(IViewManager viewManager, IRiotClient httpRiot, IFavoritesService favoritesService, ILogger<AllChampionViewModel> logger)
-        {
-            _viewManager = viewManager;
-            _httpRiot = httpRiot;
-            _favoritesService = favoritesService;
-            _logger = logger;
-
-            _selectedSortOption = SortOptions[0];
-            _logger.LogDebug("AllChampionViewModel initialisé — tri par défaut : {Sort}", _selectedSortOption.Value);
-        }
-
-        // ── Chargement ───────────────────────────────────────────────────
-
-        public async Task GetAllChampions()
-        {
-            _logger.LogDebug("Début du chargement de la liste des champions");
-
-            var champions = await _httpRiot.GetAllChampions();
-
-            _items = new ObservableCollection<ChampionListItemViewModel>();
-            foreach (var champion in champions)
-                _items.Add(new ChampionListItemViewModel(champion, _favoritesService));
-
-            // Construction des listes de filtres à partir des données réelles
-            BuildTagFilters(champions);
-            BuildPartypeFilters();
-
-            ChampionsView = CollectionViewSource.GetDefaultView(_items);
-            ChampionsView.Filter = ApplyFilter;
-
-            ApplySort();
-
-            _logger.LogInformation(
-                "Vue initialisée — {Count} champion(s), {Tags} classes, {Partypes} ressources",
-                _items.Count, _tagFilters.Count, _partypeFilters.Count);
-        }
-
-        // ── Construction des filtres multi-sélection ─────────────────────
-
-        /// <summary>
-        /// Extrait tous les tags distincts présents dans la liste chargée,
-        /// dans l'ordre canonique Riot, puis s'abonne à leurs changements.
-        /// </summary>
-        private void BuildTagFilters(IEnumerable<Champion> champions)
-        {
-            // Ordre canonique défini dans ChampionTags.CanonicalOrder (Models/ChampionTags.cs).
-            // Modifiez ce fichier pour changer l'ordre ou ajouter des tags.
-            var canonicalOrder = ChampionTags.CanonicalOrder;
-
-            // On extrait les tags présents dans les données (au cas où Riot en ajouterait)
-            var presentTags = champions
-                .SelectMany(c => c.Tags ?? Enumerable.Empty<string>())
-                .Distinct()
-                .ToHashSet();
-
-            // On construit dans l'ordre canonique, puis on ajoute les éventuels inconnus
-            var ordered = canonicalOrder
-                .Where(t => presentTags.Contains(t))
-                .Concat(presentTags.Except(canonicalOrder).OrderBy(t => t));
-
-            _tagFilters = ordered
-                .Select(tag => new FilterItemViewModel(tag))
-                .ToList();
-
-            SubscribeToFilterItems(_tagFilters);
-            OnPropertyChanged(nameof(TagFilters));
-
-            _logger.LogDebug("TagFilters construits : {Tags}", string.Join(", ", _tagFilters.Select(f => f.Label)));
-        }
-
-        /// <summary>
-        /// Construit les 4 catégories de ressources définies dans ChampionResources.cs.
-        /// L'ordre et les libellés sont centralisés dans ChampionResources.CanonicalOrder.
-        /// Le mapping partype API → catégorie est géré par ChampionResources.GetCategory().
-        /// </summary>
-        private void BuildPartypeFilters()
-        {
-            _partypeFilters = ChampionResources.CanonicalOrder
-                .Select(category => new FilterItemViewModel(category))
-                .ToList();
-
-            SubscribeToFilterItems(_partypeFilters);
-            OnPropertyChanged(nameof(PartypeFilters));
-
-            _logger.LogDebug("PartypeFilters construits : {Partypes}", string.Join(", ", _partypeFilters.Select(f => f.Label)));
-        }
-
-        /// <summary>
-        /// S'abonne au PropertyChanged de chaque FilterItemViewModel.
-        /// Quand IsSelected change sur n'importe quel item,
-        /// on appelle Refresh() pour mettre à jour la vue.
-        ///
-        /// C'est le pattern Observer : le parent (ce ViewModel) observe
-        /// ses enfants (les FilterItemViewModel) pour réagir à leurs changements.
-        /// </summary>
-        private void SubscribeToFilterItems(IEnumerable<FilterItemViewModel> items)
-        {
-            foreach (var item in items)
-            {
-                item.PropertyChanged += OnFilterItemChanged;
-            }
-        }
-
-        private void OnFilterItemChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(FilterItemViewModel.IsSelected))
-            {
-                _logger.LogDebug("Filtre item modifié : '{Label}' = {IsSelected}",
-                    (sender as FilterItemViewModel)?.Label,
-                    (sender as FilterItemViewModel)?.IsSelected);
-
-                ChampionsView?.Refresh();
-            }
-        }
-
-        // ── Tri ──────────────────────────────────────────────────────────
-
-        private void ApplySort()
-        {
-            if (ChampionsView is not ListCollectionView listView) return;
-
-            _logger.LogDebug("Application du tri : {Sort}", SelectedSortOption.Value);
-
-            listView.CustomSort = SelectedSortOption.Key switch
-            {
-                SortOption.NomAZ => Comparer<ChampionListItemViewModel>.Create(
-                    (a, b) => string.Compare(a.Champion.Name, b.Champion.Name, StringComparison.OrdinalIgnoreCase)),
-
-                SortOption.NomZA => Comparer<ChampionListItemViewModel>.Create(
-                    (a, b) => string.Compare(b.Champion.Name, a.Champion.Name, StringComparison.OrdinalIgnoreCase)),
-
-                SortOption.DifficulteAsc => Comparer<ChampionListItemViewModel>.Create(
-                    (a, b) => (a.Champion.Info?.Difficulty ?? 0).CompareTo(b.Champion.Info?.Difficulty ?? 0)),
-
-                SortOption.DifficulteDesc => Comparer<ChampionListItemViewModel>.Create(
-                    (a, b) => (b.Champion.Info?.Difficulty ?? 0).CompareTo(a.Champion.Info?.Difficulty ?? 0)),
-
-                _ => null
-            };
-        }
-
-        // ── Filtre central ────────────────────────────────────────────────
-
-        /// <summary>
-        /// Prédicat central appelé pour chaque item à chaque Refresh().
-        /// Retourne true = visible, false = masqué.
-        ///
-        /// Combinaison AND entre les groupes de filtres :
-        ///   un champion doit passer TOUS les filtres actifs.
-        ///
-        /// Au sein des multi-sélections (tags, partype) : logique OR
-        ///   → le champion est visible s'il correspond À AU MOINS UNE des cases cochées.
-        ///   → si aucune case n'est cochée, le filtre est inactif (tout visible).
-        ///
-        /// Ordre : du test le plus rapide (bool) au plus coûteux (LINQ/string).
-        /// </summary>
-        private bool ApplyFilter(object obj)
-        {
-            if (obj is not ChampionListItemViewModel item) return false;
-
-            // 1. Favori
-            if (ShowFavoritesOnly && !item.IsFavorite)
-                return false;
-
-            // 2. Type de dégâts
-            if (SelectedDamageType != DamageTypeFilter.Tous && item.DamageType != SelectedDamageType)
-                return false;
-
-            // 3. Portée
-            if (SelectedRangeType == RangeTypeFilter.Melee &&  item.IsRanged) return false;
-            if (SelectedRangeType == RangeTypeFilter.Range && !item.IsRanged) return false;
-
-            // 4. Difficulté — filtre inactif si les bornes sont au maximum (0-10)
-            var difficulty = item.Champion.Info?.Difficulty ?? 0;
-            if (difficulty < DifficultyMin || difficulty > DifficultyMax)
-                return false;
-
-            // 5. Classes (Tags) — logique OR, inactif si aucune case cochée
-            var selectedTags = _tagFilters.Where(f => f.IsSelected).ToList();
-            if (selectedTags.Count > 0)
-            {
-                var championTags = item.Champion.Tags ?? new List<string>();
-                // Le champion doit avoir AU MOINS UN tag parmi ceux sélectionnés
-                if (!selectedTags.Any(f => championTags.Contains(f.Label)))
-                    return false;
-            }
-
-            // 6. Ressources — logique OR, inactif si aucune case cochée.
-            //    ChampionResources.GetCategory() traduit le partype brut de l'API
-            //    ("None", "Energy"…) en catégorie d'affichage ("Aucun", "Énergie"…).
-            var selectedPartypes = _partypeFilters.Where(f => f.IsSelected).ToList();
-            if (selectedPartypes.Count > 0)
-            {
-                var category = ChampionResources.GetCategory(item.Champion.Partype);
-                if (!selectedPartypes.Any(f => f.Label == category))
-                    return false;
-            }
-
-            // 7. Nom
-            if (!string.IsNullOrEmpty(NameFilter) &&
-                !(item.Champion.Name?.Contains(NameFilter, StringComparison.OrdinalIgnoreCase) ?? false))
-                return false;
-
-            return true;
-        }
+        return true;
     }
 }

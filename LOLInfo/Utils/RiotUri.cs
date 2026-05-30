@@ -1,13 +1,19 @@
-﻿namespace LOLInfo.Utils
+namespace LOLInfo.Utils
 {
+    /// <summary>
+    /// Fournit les URL de l'API DataDragon pour les données de jeu.
+    ///
+    /// Les URL sont construites dynamiquement depuis <see cref="DataDragonCdn.Version"/>,
+    /// laquelle est mise à jour au démarrage par <c>PatchVersionService</c>.
+    ///
+    /// Plus besoin de modifier ce fichier à chaque nouveau patch.
+    /// </summary>
     public static class RiotUri
     {
-        private const string PathApiRiot = "https://ddragon.leagueoflegends.com/cdn/14.11.1/data/fr_FR/";
+        /// <summary>URL de la liste complète des champions (fr_FR).</summary>
+        public static string GENERAL() => DataDragonCdn.GeneralDataUrl();
 
-        private const string PathGeneral = "champion.json";
-
-        public static string DETAIL(string championName) => $"{PathApiRiot}champion/{championName}.json";
-
-        public static string GENERAL() => $"{PathApiRiot}{PathGeneral}";
+        /// <summary>URL du détail d'un champion spécifique.</summary>
+        public static string DETAIL(string championName) => DataDragonCdn.ChampionDetailUrl(championName);
     }
 }

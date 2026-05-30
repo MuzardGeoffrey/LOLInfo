@@ -1,136 +1,123 @@
-namespace LOLInfo.ViewModels
+namespace LOLInfo.ViewModels;
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+using LOLInfo.IServices;
+using LOLInfo.IViewModels;
+using LOLInfo.Models.CdragonModel;
+using LOLInfo.Models.RiotModel;
+
+using Microsoft.Extensions.Logging;
+
+public class DetailChampionViewModel(
+    IViewManager viewManager,
+    IRiotClient httpRiot,
+    ICdragonClient cdragon,
+    string championName,
+    ILogger<DetailChampionViewModel> logger) : BaseViewModel, IDetailChampionViewModel
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    // ── Identité ──────────────────────────────────────────────────────────
 
-    using LOLInfo.IViewModels;
-    using LOLInfo.Models.RiotModel;
-    using LOLInfo.Services;
+    public string ChampionName { get; } = championName;
 
-    using Microsoft.Extensions.Logging;
+    // ── Champion chargé ───────────────────────────────────────────────────
 
-    public class DetailChampionViewModel : BaseViewModel, IDetailChampionViewModel
+    public Champion? Champion
     {
-        private readonly IViewManager _viewManager;
-        private readonly IRiotClient _httpRiot;
-        private readonly ILogger<DetailChampionViewModel> _logger;
-
-        // ── Identité ─────────────────────────────────────────────────────
-
-        public string ChampionName { get; }
-
-        // ── Champion chargé ───────────────────────────────────────────────
-
-        private Champion? _champion;
-
-        /// <summary>
-        /// Null tant que LoadAsync() n'a pas terminé.
-        /// Quand la propriété est définie, OnPropertyChanged notifie la View
-        /// et BuildSpells() construit la liste des sorts.
-        /// </summary>
-        public Champion? Champion
+        get;
+        private set
         {
-            get => _champion;
-            private set
-            {
-                _champion = value;
-                OnPropertyChanged(nameof(Champion));
-                BuildSpells();
-            }
+            field = value;
+            this.OnPropertyChanged(nameof(Champion));
+        }
+    }
+
+    // ── Sorts ─────────────────────────────────────────────────────────────
+
+    private List<SpellViewModel> _spells =
+    [
+        SpellViewModel.Empty("Passif"),
+        SpellViewModel.Empty("Q"),
+        SpellViewModel.Empty("W"),
+        SpellViewModel.Empty("E"),
+        SpellViewModel.Empty("R"),
+    ];
+
+    public IReadOnlyList<SpellViewModel> Spells => this._spells;
+
+    // ── Chargement ────────────────────────────────────────────────────────
+
+    public async Task LoadAsync()
+    {
+        logger.LogInformation("Chargement du champion '{Name}'", this.ChampionName);
+
+        try
+        {
+            var riotTask    = httpRiot.GetChampionDetail(this.ChampionName);
+            var cdragonTask = cdragon.GetSpellCalculationsAsync(this.ChampionName);
+
+            await Task.WhenAll(riotTask, cdragonTask);
+
+            this.Champion = riotTask.Result;
+            var cdragonCalcs = cdragonTask.Result;
+
+            logger.LogInformation(
+                "Champion '{Name}' chargé — {SpellCount} sort(s), {SkinCount} skin(s), {CalcSpellCount} sort(s) CDragon",
+                this.Champion?.Name, this._spells.Count, this.Champion?.Skins?.Count ?? 0, cdragonCalcs.Count);
+
+            this.BuildSpells(cdragonCalcs);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Erreur lors du chargement du champion '{Name}'", this.ChampionName);
+        }
+    }
+
+    // ── Construction des sorts ────────────────────────────────────────────
+
+    private void BuildSpells(Dictionary<string, Dictionary<string, SpellCalculation>>? cdragonCalcs = null)
+    {
+        this._spells = [];
+        if (this.Champion is null) return;
+
+        var normalizedName = this.Champion.Id ?? string.Empty;
+
+        if (this.Champion.Passive is not null)
+        {
+            this._spells.Add(SpellViewModel.FromPassive(this.Champion.Passive));
+            logger.LogDebug("Passif '{Name}' ajouté", this.Champion.Passive.Name);
         }
 
-        // ── Sorts ─────────────────────────────────────────────────────────
+        string[] keys   = ["Q", "W", "E", "R"];
+        var spells = this.Champion.Spells ?? [];
 
-        // Les 5 placeholders évitent les ArgumentOutOfRangeException quand WPF
-        // évalue Spells[0..4] avant la fin de LoadAsync().
-        // BuildSpells() les remplacera par les données réelles une fois chargées.
-        private List<SpellViewModel> _spells = new()
+        foreach (var (key, spell) in keys.Zip(spells))
         {
-            SpellViewModel.Empty("Passif"),
-            SpellViewModel.Empty("Q"),
-            SpellViewModel.Empty("W"),
-            SpellViewModel.Empty("E"),
-            SpellViewModel.Empty("R"),
-        };
+            var vm = SpellViewModel.FromSpell(key, spell);
 
-        /// <summary>
-        /// Passif + Q + W + E + R, dans l'ordre, prêts pour l'affichage.
-        /// Initialisé avec des placeholders vides, puis remplacé par LoadAsync().
-        /// </summary>
-        public IReadOnlyList<SpellViewModel> Spells => _spells;
+            if (cdragonCalcs is not null)
+            {
+                var cdragonKey = $"{normalizedName}{key}";
+                if (cdragonCalcs.TryGetValue(cdragonKey, out var calcs))
+                {
+                    vm = vm.WithFormulas(calcs);
+                    logger.LogDebug("[CDragon] {FormulaCount} formule(s) pour {Key} ({CdragonKey})",
+                        calcs.Count, key, cdragonKey);
+                }
+                else
+                {
+                    logger.LogDebug("[CDragon] Aucune formule trouvée pour {Key} ({CdragonKey})", key, cdragonKey);
+                }
+            }
 
-        // ── Constructeur ──────────────────────────────────────────────────
-
-        public DetailChampionViewModel(
-            IViewManager viewManager,
-            IRiotClient httpRiot,
-            string championName,
-            ILogger<DetailChampionViewModel> logger)
-        {
-            _viewManager  = viewManager;
-            _httpRiot     = httpRiot;
-            _logger       = logger;
-            ChampionName  = championName;
+            this._spells.Add(vm);
+            logger.LogDebug("Sort {Key} '{Name}' ajouté — {RowCount} leveltip, {FormulaCount} formule(s) CDragon",
+                key, spell.Name, vm.LeveltipRows.Count, vm.FormulaRows.Count);
         }
 
-        // ── Chargement ───────────────────────────────────────────────────
-
-        /// <summary>
-        /// Appelé depuis DetailChampionPage.Loaded.
-        /// Charge les données du champion puis met à jour Champion,
-        /// ce qui déclenche BuildSpells() via le setter.
-        /// </summary>
-        public async Task LoadAsync()
-        {
-            _logger.LogInformation("Chargement du champion '{Name}'", ChampionName);
-
-            try
-            {
-                Champion = await _httpRiot.GetChampionDetail(ChampionName);
-
-                _logger.LogInformation(
-                    "Champion '{Name}' chargé — {SpellCount} sort(s), {SkinCount} skin(s)",
-                    Champion?.Name, _spells.Count, Champion?.Skins?.Count ?? 0);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Erreur lors du chargement du champion '{Name}'", ChampionName);
-            }
-        }
-
-        // ── Construction des sorts ────────────────────────────────────────
-
-        /// <summary>
-        /// Construit la liste Passif + Q + W + E + R depuis les données brutes.
-        /// Appelé automatiquement par le setter de Champion.
-        /// </summary>
-        private void BuildSpells()
-        {
-            _spells = new List<SpellViewModel>();
-
-            if (_champion is null) return;
-
-            // Passif
-            if (_champion.Passive is not null)
-            {
-                _spells.Add(SpellViewModel.FromPassive(_champion.Passive));
-                _logger.LogDebug("Passif '{Name}' ajouté", _champion.Passive.Name);
-            }
-
-            // Sorts actifs dans l'ordre Q/W/E/R
-            var keys  = new[] { "Q", "W", "E", "R" };
-            var spells = _champion.Spells ?? new List<Spell>();
-
-            foreach (var (key, spell) in keys.Zip(spells))
-            {
-                _spells.Add(SpellViewModel.FromSpell(key, spell));
-                _logger.LogDebug("Sort {Key} '{Name}' ajouté — {RowCount} ligne(s) leveltip",
-                    key, spell.Name, SpellViewModel.FromSpell(key, spell).LeveltipRows.Count);
-            }
-
-            OnPropertyChanged(nameof(Spells));
-        }
+        this.OnPropertyChanged(nameof(Spells));
     }
 }

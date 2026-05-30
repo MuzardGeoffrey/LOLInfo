@@ -1,112 +1,104 @@
-namespace LOLInfo.Services.Storage
+namespace LOLInfo.Services.Storage;
+
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+using LOLInfo.IServices.Storage;
+
+using Microsoft.Extensions.Logging;
+
+/// <summary>
+/// Persiste la liste des champions favoris dans un fichier JSON local.
+/// Chemin : %AppData%\LOLInfo\favorites.json
+/// </summary>
+public class FavoritesService(ILogger<FavoritesService> logger) : IFavoritesService
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text.Json;
+    // Non-readonly : redirigé par les tests via réflexion vers un fichier temporaire.
+    private static string FilePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "LOLInfo",
+        "favorites.json");
 
-    using Microsoft.Extensions.Logging;
+    private readonly HashSet<string> _favorites = LoadFavorites(logger);
 
-    /// <summary>
-    /// Persiste la liste des champions favoris dans un fichier JSON local.
-    /// Chemin : %AppData%\LOLInfo\favorites.json
-    /// </summary>
-    public class FavoritesService : IFavoritesService
+    // ── Lecture ───────────────────────────────────────────────────────────
+
+    public bool IsFavorite(string? championId) =>
+        !string.IsNullOrEmpty(championId) && this._favorites.Contains(championId);
+
+    public IReadOnlyCollection<string> GetAll() => this._favorites;
+
+    // ── Écriture ──────────────────────────────────────────────────────────
+
+    public bool Toggle(string championId)
     {
-        private static readonly string FilePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
-            "LOLInfo",
-            "favorites.json");
-
-        private readonly ILogger<FavoritesService> _logger;
-        private readonly HashSet<string> _favorites;
-
-        public FavoritesService(ILogger<FavoritesService> logger)
+        if (string.IsNullOrEmpty(championId))
         {
-            _logger = logger;
-            _favorites = Load();
+            logger.LogWarning("Toggle appelé avec un championId null ou vide");
+            return false;
         }
 
-        // ── Lecture ───────────────────────────────────────────────────────
-
-        public bool IsFavorite(string championId)
-            => !string.IsNullOrEmpty(championId) && _favorites.Contains(championId);
-
-        public IReadOnlyCollection<string> GetAll() => _favorites;
-
-        // ── Écriture ──────────────────────────────────────────────────────
-
-        public bool Toggle(string championId)
+        bool isFavorite;
+        if (this._favorites.Contains(championId))
         {
-            if (string.IsNullOrEmpty(championId))
-            {
-                _logger.LogWarning("Toggle appelé avec un championId null ou vide");
-                return false;
-            }
-
-            bool isFavorite;
-            if (_favorites.Contains(championId))
-            {
-                _favorites.Remove(championId);
-                isFavorite = false;
-                _logger.LogInformation("Champion '{ChampionId}' retiré des favoris", championId);
-            }
-            else
-            {
-                _favorites.Add(championId);
-                isFavorite = true;
-                _logger.LogInformation("Champion '{ChampionId}' ajouté aux favoris", championId);
-            }
-
-            Save();
-            return isFavorite;
+            this._favorites.Remove(championId);
+            isFavorite = false;
+            logger.LogInformation("Champion '{ChampionId}' retiré des favoris", championId);
+        }
+        else
+        {
+            this._favorites.Add(championId);
+            isFavorite = true;
+            logger.LogInformation("Champion '{ChampionId}' ajouté aux favoris", championId);
         }
 
-        // ── Persistance ───────────────────────────────────────────────────
+        this.Save();
+        return isFavorite;
+    }
 
-        private HashSet<string> Load()
+    // ── Persistance ───────────────────────────────────────────────────────
+
+    private static HashSet<string> LoadFavorites(ILogger logger)
+    {
+        logger.LogDebug("Chargement des favoris depuis {FilePath}", FilePath);
+        try
         {
-            _logger.LogDebug("Chargement des favoris depuis {FilePath}", FilePath);
-
-            try
+            if (!File.Exists(FilePath))
             {
-                if (!File.Exists(FilePath))
-                {
-                    _logger.LogInformation("Fichier favoris absent, démarrage avec une liste vide ({FilePath})", FilePath);
-                    return new HashSet<string>();
-                }
-
-                var json = File.ReadAllText(FilePath);
-                var favorites = JsonSerializer.Deserialize<HashSet<string>>(json) ?? new HashSet<string>();
-                _logger.LogInformation("{Count} favori(s) chargé(s) depuis {FilePath}", favorites.Count, FilePath);
-                return favorites;
+                logger.LogInformation("Fichier favoris absent, démarrage avec une liste vide ({FilePath})", FilePath);
+                return [];
             }
-            catch (JsonException ex)
-            {
-                _logger.LogError(ex, "Fichier favoris corrompu ({FilePath}) — démarrage avec une liste vide", FilePath);
-                return new HashSet<string>();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Impossible de lire le fichier favoris ({FilePath}) — démarrage avec une liste vide", FilePath);
-                return new HashSet<string>();
-            }
+            var json      = File.ReadAllText(FilePath);
+            var favorites = JsonSerializer.Deserialize<HashSet<string>>(json) ?? [];
+            logger.LogInformation("{Count} favori(s) chargé(s) depuis {FilePath}", favorites.Count, FilePath);
+            return favorites;
         }
-
-        private void Save()
+        catch (JsonException ex)
         {
-            _logger.LogDebug("Sauvegarde de {Count} favori(s) dans {FilePath}", _favorites.Count, FilePath);
+            logger.LogError(ex, "Fichier favoris corrompu ({FilePath}) — démarrage avec une liste vide", FilePath);
+            return [];
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Impossible de lire le fichier favoris ({FilePath})", FilePath);
+            return [];
+        }
+    }
 
-            try
-            {
-                Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
-                File.WriteAllText(FilePath, JsonSerializer.Serialize(_favorites));
-                _logger.LogDebug("Favoris sauvegardés avec succès");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Impossible de sauvegarder les favoris dans {FilePath} — les modifications seront perdues à la prochaine session", FilePath);
-            }
+    private void Save()
+    {
+        logger.LogDebug("Sauvegarde de {Count} favori(s) dans {FilePath}", this._favorites.Count, FilePath);
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(FilePath)!);
+            File.WriteAllText(FilePath, JsonSerializer.Serialize(this._favorites));
+            logger.LogDebug("Favoris sauvegardés avec succès");
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Impossible de sauvegarder les favoris dans {FilePath}", FilePath);
         }
     }
 }
