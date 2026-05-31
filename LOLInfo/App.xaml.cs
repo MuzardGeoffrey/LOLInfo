@@ -25,12 +25,14 @@ public partial class App : Application
 {
     public App()
     {
-        // Applique la langue de l'application AVANT toute lecture de ressource
-        // ou tout appel réseau (locale des données Riot). Point unique : AppLocalization.
-        AppLocalization.ApplyDefaultCulture();
-
         InitializeSerilog();
         this.Services = ConfigureServices();
+
+        // Applique la langue mémorisée (ou le défaut au premier lancement) AVANT
+        // tout rendu de page ou appel réseau localisé (locale des données Riot).
+        var language = this.Services.GetRequiredService<ILanguageService>();
+        AppLocalization.ApplyCulture(language.CurrentLanguage);
+
         this.InitializeComponent();
     }
 
@@ -89,6 +91,7 @@ public partial class App : Application
 
         // Stockage local
         services.AddSingleton<IFavoritesService, FavoritesService>();
+        services.AddSingleton<ILanguageService, LanguageService>();
 
         // Navigation
         services.AddSingleton<IViewManager, ViewManager>();
