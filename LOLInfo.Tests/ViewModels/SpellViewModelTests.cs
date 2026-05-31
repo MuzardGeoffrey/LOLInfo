@@ -268,7 +268,7 @@ namespace LOLInfo.Tests.ViewModels
             var enriched = vm.WithFormulas(calcs);
 
             Assert.AreEqual(1, enriched.FormulaRows.Count);
-            Assert.AreEqual("BaseDamage", enriched.FormulaRows[0].Label);
+            Assert.AreEqual("Base Damage", enriched.FormulaRows[0].Label); // nom de calcul humanisé
             Assert.AreEqual("100", enriched.FormulaRows[0].Formula);
         }
 

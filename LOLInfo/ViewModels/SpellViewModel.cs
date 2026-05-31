@@ -107,7 +107,7 @@ public class SpellViewModel
 
         var rows = calculations
             .Where(kv => !string.IsNullOrWhiteSpace(kv.Value.Format()))
-            .Select(kv => new FormulaRowViewModel(kv.Key, kv.Value.Format()))
+            .Select(kv => new FormulaRowViewModel(RiotText.Humanize(kv.Key), kv.Value.Format()))
             .ToList<FormulaRowViewModel>();
 
         var clone = new SpellViewModel(this.Key, this.Name, this.Description, this.IconPath, this.IsPassive, this.StatRows, this.LeveltipRows)

@@ -58,5 +58,36 @@ namespace LOLInfo.Tests.CdragonModel
             // Avant le fix : "?". Après : les vraies valeurs par rang.
             Assert.AreEqual("0/30/60/90/120/150/180", calcs["TotalDamage"].Format());
         }
+
+        [TestMethod]
+        public void Parser_BaseDamagePlusApRatio_FormatsWithSinglePlus()
+        {
+            // Base (NamedDataValue) + ratio AP (StatByNamedDataValue sans mStat → AP).
+            // Doit donner "base + ratio%" — un seul '+', pas de "++".
+            const string json =
+                """
+                {
+                  "mSpell": {
+                    "DataValues": [
+                      { "name": "BaseDamage", "values": [60,95,130,165,200], "__type": "SpellDataValue" },
+                      { "name": "APRatio",    "values": [0.8,0.8,0.8,0.8,0.8], "__type": "SpellDataValue" }
+                    ],
+                    "mSpellCalculations": {
+                      "TotalDamage": {
+                        "mFormulaParts": [
+                          { "__type": "NamedDataValueCalculationPart", "mDataValue": "BaseDamage" },
+                          { "__type": "StatByNamedDataValueCalculationPart", "mDataValue": "APRatio" }
+                        ]
+                      }
+                    }
+                  }
+                }
+                """;
+
+            var wrapper = JsonSerializer.Deserialize<CdragonSpellObjectRaw>(json);
+            var calcs = CdragonChampionParser.ParseCalculations(wrapper!.SpellData);
+
+            Assert.AreEqual("60/95/130/165/200 + 80% PA", calcs["TotalDamage"].Format());
+        }
     }
 }

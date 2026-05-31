@@ -11,21 +11,21 @@ namespace LOLInfo.Tests.CdragonModel.Parts
         public void Format_IntegerPercent_NoDecimal()
         {
             var part = new AbilityResourceCoefficientPart(0.02);
-            Assert.AreEqual("+2% ressource", part.Format());
+            Assert.AreEqual("2% ressource", part.Format());
         }
 
         [TestMethod]
         public void Format_FractionalPercent_ShowsDecimals()
         {
             var part = new AbilityResourceCoefficientPart(0.025);
-            Assert.AreEqual("+2.5% ressource", part.Format());
+            Assert.AreEqual("2.5% ressource", part.Format());
         }
 
         [TestMethod]
         public void Format_ZeroCoeff_ShowsZero()
         {
             var part = new AbilityResourceCoefficientPart(0.0);
-            Assert.AreEqual("+0% ressource", part.Format());
+            Assert.AreEqual("0% ressource", part.Format());
         }
 
         [TestMethod]

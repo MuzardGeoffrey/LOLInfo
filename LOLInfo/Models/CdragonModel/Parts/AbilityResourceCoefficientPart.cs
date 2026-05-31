@@ -17,7 +17,8 @@ public class AbilityResourceCoefficientPart(double coefficient) : IFormulaPart
     {
         var pct    = this.Coefficient * 100;
         var pctStr = pct == (int)pct ? $"{(int)pct}%" : $"{pct.ToString("0.##", CultureInfo.InvariantCulture)}%";
-        return $"+{pctStr} {Resources.Formula_Resource}";
+        // Pas de '+' interne : la jointure (SpellCalculation.Format) l'ajoute déjà.
+        return $"{pctStr} {Resources.Formula_Resource}";
     }
 
     public double Evaluate(SpellContext context) => 0; // Phase 2

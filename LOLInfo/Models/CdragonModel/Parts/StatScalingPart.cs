@@ -21,17 +21,22 @@ public class StatScalingPart(
 
     public string Format()
     {
-        if (this.Ratios.Count == 0) return $"+? {this.Stat.ToLabel(this.Formula)}";
+        if (this.Ratios.Count == 0) return $"? {this.Stat.ToLabel(this.Formula)}";
 
         bool isPercent = this.Stat is
             ChampionStat.AbilityPower or ChampionStat.AttackDamage or
             ChampionStat.Armor        or ChampionStat.MagicResist   or
             ChampionStat.Health       or ChampionStat.Mana;
 
+        // Collapse si le ratio est identique à tous les rangs (ex : 0.8/0.8/0.8 → "80%").
+        IReadOnlyList<double> ranks = this.Ratios.Count > 1 && this.Ratios.All(r => r == this.Ratios[0])
+            ? new[] { this.Ratios[0] }
+            : this.Ratios;
+
         string ratioStr;
         if (isPercent)
         {
-            ratioStr = string.Join("/", this.Ratios.Select(r =>
+            ratioStr = string.Join("/", ranks.Select(r =>
             {
                 double pct = r * 100.0;
                 return pct == Math.Truncate(pct) ? ((int)pct).ToString() : pct.ToString("0.#", CultureInfo.InvariantCulture);
@@ -39,11 +44,12 @@ public class StatScalingPart(
         }
         else
         {
-            ratioStr = string.Join("/", this.Ratios.Select(r =>
+            ratioStr = string.Join("/", ranks.Select(r =>
                 r == Math.Truncate(r) ? ((int)r).ToString() : r.ToString("0.##", CultureInfo.InvariantCulture)));
         }
 
-        return $"+{ratioStr} {this.Stat.ToLabel(this.Formula)}";
+        // Pas de '+' ici : la jointure des parts (SpellCalculation.Format) l'ajoute déjà.
+        return $"{ratioStr} {this.Stat.ToLabel(this.Formula)}";
     }
 
     public double Evaluate(SpellContext context) =>

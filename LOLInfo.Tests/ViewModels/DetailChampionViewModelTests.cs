@@ -162,7 +162,7 @@ namespace LOLInfo.Tests.ViewModels
 
             var qSpell = vm.Spells[1]; // Q est à l'index 1
             Assert.IsTrue(qSpell.HasFormulas);
-            Assert.AreEqual("BaseDamage", qSpell.FormulaRows[0].Label);
+            Assert.AreEqual("Base Damage", qSpell.FormulaRows[0].Label); // nom de calcul humanisé
         }
 
         [TestMethod]

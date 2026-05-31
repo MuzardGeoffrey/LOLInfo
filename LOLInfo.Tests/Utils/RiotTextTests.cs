@@ -26,5 +26,14 @@ namespace LOLInfo.Tests.Utils
         [TestMethod]
         public void CleanDescription_NoTag_TrimmedButUnchanged()
             => Assert.AreEqual("Orbe", RiotText.CleanDescription("  Orbe  "));
+
+        [DataTestMethod]
+        [DataRow("TotalDamage", "Total Damage")]
+        [DataRow("totalDamage", "Total Damage")]
+        [DataRow("RegenCalc", "Regen Calc")]
+        [DataRow("NumberOfStrikes", "Number Of Strikes")]
+        [DataRow("Damage", "Damage")]
+        public void Humanize_SplitsCamelCase(string input, string expected)
+            => Assert.AreEqual(expected, RiotText.Humanize(input));
     }
 }
