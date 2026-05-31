@@ -46,7 +46,6 @@ namespace LOLInfo.Tests.ViewModels
                        .ReturnsAsync(cdragonCalcs ?? new Dictionary<string, Dictionary<string, SpellCalculation>>());
 
             return new DetailChampionViewModel(
-                new Mock<IViewManager>().Object,
                 mockRiot.Object,
                 mockCdragon.Object,
                 champion.Id ?? "Ahri",
@@ -225,7 +224,6 @@ namespace LOLInfo.Tests.ViewModels
                        .ReturnsAsync(new Dictionary<string, Dictionary<string, SpellCalculation>>());
 
             var vm = new DetailChampionViewModel(
-                new Mock<IViewManager>().Object,
                 mockRiot.Object,
                 mockCdragon.Object,
                 "Ahri",

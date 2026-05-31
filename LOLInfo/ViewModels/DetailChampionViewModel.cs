@@ -13,7 +13,6 @@ using LOLInfo.Models.RiotModel;
 using Microsoft.Extensions.Logging;
 
 public class DetailChampionViewModel(
-    IViewManager viewManager,
     IRiotClient httpRiot,
     ICdragonClient cdragon,
     string championName,

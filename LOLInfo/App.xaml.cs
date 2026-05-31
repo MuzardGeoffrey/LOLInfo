@@ -97,7 +97,7 @@ public partial class App : Application
 
     // ── Cycle de vie ──────────────────────────────────────────────────────
 
-    protected override void OnStartup(StartupEventArgs e)
+    protected override async void OnStartup(StartupEventArgs e)
     {
         base.OnStartup(e);
 
@@ -106,14 +106,17 @@ public partial class App : Application
 
         // Récupère la version DataDragon courante avant la navigation.
         // En cas d'échec réseau, DataDragonCdn.Version reste "latest".
-        this.Services.GetRequiredService<IPatchVersionService>()
-                .InitializeAsync()
-                .ContinueWith(_ =>
-                {
-                    Log.Information("Navigation initiale vers AllChampionPage");
-                    this.Dispatcher.Invoke(() =>
-                        this.Services.GetRequiredService<IViewManager>().NavigateToAllChampion());
-                });
+        try
+        {
+            await this.Services.GetRequiredService<IPatchVersionService>().InitializeAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "Échec de l'initialisation de la version DataDragon — poursuite avec la version par défaut");
+        }
+
+        Log.Information("Navigation initiale vers AllChampionPage");
+        this.Services.GetRequiredService<IViewManager>().NavigateToAllChampion();
     }
 
     protected override void OnExit(ExitEventArgs e)

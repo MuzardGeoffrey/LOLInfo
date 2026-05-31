@@ -21,7 +21,12 @@ public partial class AllChampionPage : Page
         this._viewManager = viewManager;
         this._viewModel   = allChampionViewModel;
         this.DataContext  = this._viewModel;
-        this._viewModel.GetAllChampions();
+        this.Loaded += this.OnLoaded;
+    }
+
+    private async void OnLoaded(object sender, RoutedEventArgs e)
+    {
+        await this._viewModel.GetAllChampions();
     }
 
     private void ButtonChampion_OnClick(object sender, RoutedEventArgs e)

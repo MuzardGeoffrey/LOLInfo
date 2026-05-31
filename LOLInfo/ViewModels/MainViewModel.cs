@@ -15,9 +15,9 @@ public class MainViewModel : BaseViewModel
         this._viewManager.PropertyChanged += this.OnViewManagerPropertyChanged;
     }
 
-    public Page CurrentPage => this._viewManager.CurrentPage;
+    public Page? CurrentPage => this._viewManager.CurrentPage;
 
-    private void OnViewManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+    private void OnViewManagerPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(IViewManager.CurrentPage))
             this.OnPropertyChanged(nameof(CurrentPage));

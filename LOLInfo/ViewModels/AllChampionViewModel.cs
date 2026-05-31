@@ -25,7 +25,9 @@ public class AllChampionViewModel(
 
     // ── Vue triée + filtrée ───────────────────────────────────────────────
 
-    private ICollectionView _championsView;
+    // Initialisée à une vue vide pour garantir un contrat non-null avant le chargement.
+    private ICollectionView _championsView =
+        CollectionViewSource.GetDefaultView(new ObservableCollection<ChampionListItemViewModel>());
 
     public ICollectionView ChampionsView
     {
@@ -186,6 +188,7 @@ public class AllChampionViewModel(
             .Where(t => presentTags.Contains(t))
             .Concat(presentTags.Except(ChampionTags.CanonicalOrder).OrderBy(t => t));
 
+        this.UnsubscribeFromFilterItems(this._tagFilters);
         this._tagFilters = ordered.Select(tag => new FilterItemViewModel(tag)).ToList();
         this.SubscribeToFilterItems(this._tagFilters);
         this.OnPropertyChanged(nameof(TagFilters));
@@ -194,6 +197,7 @@ public class AllChampionViewModel(
 
     private void BuildPartypeFilters()
     {
+        this.UnsubscribeFromFilterItems(this._partypeFilters);
         this._partypeFilters = ChampionResources.CanonicalOrder
             .Select(category => new FilterItemViewModel(category))
             .ToList();
@@ -207,7 +211,13 @@ public class AllChampionViewModel(
             item.PropertyChanged += this.OnFilterItemChanged;
     }
 
-    private void OnFilterItemChanged(object sender, PropertyChangedEventArgs e)
+    private void UnsubscribeFromFilterItems(IEnumerable<FilterItemViewModel> items)
+    {
+        foreach (var item in items)
+            item.PropertyChanged -= this.OnFilterItemChanged;
+    }
+
+    private void OnFilterItemChanged(object? sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(FilterItemViewModel.IsSelected))
         {

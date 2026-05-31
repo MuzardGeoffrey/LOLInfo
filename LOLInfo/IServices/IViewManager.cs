@@ -5,7 +5,7 @@ using System.Windows.Controls;
 
 public interface IViewManager : INotifyPropertyChanged
 {
-    Page CurrentPage { get; }
+    Page? CurrentPage { get; }
     void NavigateToAllChampion();
     void NavigateToDetail(string championName);
 }

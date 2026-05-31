@@ -15,7 +15,7 @@ using Microsoft.Extensions.Logging;
 
 public class RiotClient(ILogger<RiotClient> logger) : IRiotClient
 {
-    private readonly HttpClient _client = new();
+    private static readonly HttpClient _client = new() { Timeout = TimeSpan.FromSeconds(30) };
 
     public async Task<ObservableCollection<Champion>> GetAllChampions()
     {
@@ -24,7 +24,7 @@ public class RiotClient(ILogger<RiotClient> logger) : IRiotClient
 
         try
         {
-            var response = await this._client.GetFromJsonAsync<JsonRiotFormat>(url);
+            var response = await _client.GetFromJsonAsync<JsonRiotFormat>(url);
             var champions = response?.ChampionsList?.Values.ToList();
 
             if (champions is null || champions.Count == 0)
@@ -55,7 +55,7 @@ public class RiotClient(ILogger<RiotClient> logger) : IRiotClient
 
         try
         {
-            var response = await this._client.GetFromJsonAsync<JsonRiotFormat>(url);
+            var response = await _client.GetFromJsonAsync<JsonRiotFormat>(url);
             var champion = response?.ChampionsList?.Values.FirstOrDefault();
 
             if (champion is null)

@@ -1,5 +1,6 @@
 namespace LOLInfo.Services;
 
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
@@ -12,11 +13,11 @@ using LOLInfo.Views;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-public class ViewManager(ILogger<ViewManager> logger) : IViewManager
+public class ViewManager(IServiceProvider services, ILogger<ViewManager> logger) : IViewManager
 {
-    private Page _currentPage;
+    private Page? _currentPage;
 
-    public Page CurrentPage
+    public Page? CurrentPage
     {
         get => this._currentPage;
         private set { this._currentPage = value; this.OnPropertyChanged(nameof(CurrentPage)); }
@@ -26,8 +27,8 @@ public class ViewManager(ILogger<ViewManager> logger) : IViewManager
     {
         logger.LogInformation("Navigation vers AllChampionPage");
         this.CurrentPage = new AllChampionPage(
-            App.Current.Services.GetRequiredService<IViewManager>(),
-            App.Current.Services.GetRequiredService<IAllChampionViewModel>());
+            this,
+            services.GetRequiredService<IAllChampionViewModel>());
         logger.LogDebug("AllChampionPage instanciée et définie comme page courante");
     }
 
@@ -35,22 +36,18 @@ public class ViewManager(ILogger<ViewManager> logger) : IViewManager
     {
         logger.LogInformation("Navigation vers DetailChampionPage — champion : '{ChampionName}'", championName);
 
-        var detailViewModel = new DetailChampionViewModel(
-            App.Current.Services.GetRequiredService<IViewManager>(),
-            App.Current.Services.GetRequiredService<IRiotClient>(),
-            App.Current.Services.GetRequiredService<ICdragonClient>(),
-            championName,
-            App.Current.Services.GetRequiredService<ILogger<DetailChampionViewModel>>());
+        // championName est un argument runtime : ActivatorUtilities résout les autres
+        // dépendances (IRiotClient, ICdragonClient, ILogger) depuis le conteneur.
+        var detailViewModel = ActivatorUtilities.CreateInstance<DetailChampionViewModel>(
+            services, championName);
 
-        this.CurrentPage = new DetailChampionPage(
-            App.Current.Services.GetRequiredService<IViewManager>(),
-            detailViewModel);
+        this.CurrentPage = new DetailChampionPage(this, detailViewModel);
 
         logger.LogDebug("DetailChampionPage instanciée pour '{ChampionName}'", championName);
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    public event PropertyChangedEventHandler? PropertyChanged;
 
-    protected void OnPropertyChanged([CallerMemberName] string name = null) =>
+    protected void OnPropertyChanged([CallerMemberName] string? name = null) =>
         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 }

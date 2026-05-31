@@ -10,7 +10,7 @@ using LOLInfo.ViewModels;
 
 public interface IAllChampionViewModel
 {
-    /// <summary>Vue triée et filtrée de la liste des champions.</summary>
+    /// <summary>Vue triée et filtrée de la liste des champions (vide avant le chargement).</summary>
     ICollectionView ChampionsView { get; }
 
     // ── Tri ──────────────────────────────────────────────────────────────

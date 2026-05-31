@@ -48,8 +48,11 @@ public class ChampionListItemViewModel(Champion champion, IFavoritesService favo
 
     // ── Logique ───────────────────────────────────────────────────────────
 
-    private void ToggleFavorite() =>
-        this.IsFavorite = favoritesService.Toggle(champion.Id);
+    private void ToggleFavorite()
+    {
+        if (this.Champion.Id is null) return;
+        this.IsFavorite = favoritesService.Toggle(this.Champion.Id);
+    }
 
     private static DamageTypeFilter ComputeDamageType(Champion c)
     {
