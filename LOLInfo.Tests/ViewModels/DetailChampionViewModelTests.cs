@@ -3,6 +3,7 @@ namespace LOLInfo.Tests.ViewModels
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LOLInfo.IServices;
+    using LOLInfo.IViewModels;
     using LOLInfo.Models.CdragonModel;
     using LOLInfo.Models.CdragonModel.Parts;
     using LOLInfo.Models.RiotModel;
@@ -35,7 +36,8 @@ namespace LOLInfo.Tests.ViewModels
 
         private static DetailChampionViewModel CreateVm(
             Champion champion,
-            Dictionary<string, Dictionary<string, SpellCalculation>>? cdragonCalcs = null)
+            Dictionary<string, Dictionary<string, SpellCalculation>>? cdragonCalcs = null,
+            System.Collections.Generic.IReadOnlyList<ItemViewModel>? availableItems = null)
         {
             var mockRiot = new Mock<IRiotClient>();
             mockRiot.Setup(r => r.GetChampionDetail(It.IsAny<string>()))
@@ -45,9 +47,13 @@ namespace LOLInfo.Tests.ViewModels
             mockCdragon.Setup(c => c.GetSpellCalculationsAsync(It.IsAny<string>()))
                        .ReturnsAsync(cdragonCalcs ?? new Dictionary<string, Dictionary<string, SpellCalculation>>());
 
+            var mockItems = new Mock<IItemsViewModel>();
+            mockItems.Setup(i => i.AllItems).Returns(availableItems ?? new List<ItemViewModel>());
+
             return new DetailChampionViewModel(
                 mockRiot.Object,
                 mockCdragon.Object,
+                mockItems.Object,
                 champion.Id ?? "Ahri",
                 NullLogger<DetailChampionViewModel>.Instance);
         }
@@ -226,6 +232,7 @@ namespace LOLInfo.Tests.ViewModels
             var vm = new DetailChampionViewModel(
                 mockRiot.Object,
                 mockCdragon.Object,
+                new Mock<IItemsViewModel>().Object,
                 "Ahri",
                 NullLogger<DetailChampionViewModel>.Instance);
 
@@ -261,7 +268,7 @@ namespace LOLInfo.Tests.ViewModels
             await vm.LoadAsync();
 
             Assert.AreEqual(18, vm.Levels.Count);
-            Assert.AreEqual(11, vm.ChampionStats.Count);
+            Assert.AreEqual(13, vm.ChampionStats.Count);
 
             // Première ligne = PV. Au niveau 1 = base (600).
             Assert.AreEqual("600", vm.ChampionStats[0].Value);
@@ -269,6 +276,59 @@ namespace LOLInfo.Tests.ViewModels
             // Changer de niveau recalcule : niv 18 → 600 + 100*17 = 2300.
             vm.SelectedLevel = 18;
             Assert.AreEqual("2300", vm.ChampionStats[0].Value);
+        }
+
+        [TestMethod]
+        public async Task EquipItem_ModifiesChampionStats_AndUnequipReverts()
+        {
+            var champion = MakeFullChampion();
+            champion.Stats = new Dictionary<string, double> { ["attackdamage"] = 60 };
+
+            var infinityEdge = ItemViewModel.From(new Item
+            {
+                Id = "3031",
+                Name = "Infinity Edge",
+                Description = string.Empty,
+                Stats = new Dictionary<string, double> { ["FlatPhysicalDamageMod"] = 70 },
+            });
+
+            var vm = CreateVm(champion, availableItems: new[] { infinityEdge });
+            await vm.LoadAsync();
+
+            // Index 6 = Dégâts d'attaque. Sans objet : base 60.
+            Assert.AreEqual("60", vm.ChampionStats[6].Value);
+
+            vm.ItemToEquip = infinityEdge;
+            vm.EquipSelected();
+
+            Assert.AreEqual(1, vm.EquippedItems.Count);
+            Assert.AreEqual("130", vm.ChampionStats[6].Value); // 60 + 70
+
+            vm.Unequip(infinityEdge);
+            Assert.AreEqual(0, vm.EquippedItems.Count);
+            Assert.AreEqual("60", vm.ChampionStats[6].Value);
+        }
+
+        [TestMethod]
+        public async Task EquipItem_StopsAtSixItems()
+        {
+            var champion = MakeFullChampion();
+            champion.Stats = new Dictionary<string, double> { ["attackdamage"] = 60 };
+
+            ItemViewModel Boot(int i) => ItemViewModel.From(new Item
+            {
+                Id = i.ToString(), Name = "Item " + i, Description = string.Empty,
+                Stats = new Dictionary<string, double> { ["FlatPhysicalDamageMod"] = 10 },
+            });
+
+            var vm = CreateVm(champion);
+            await vm.LoadAsync();
+
+            for (int i = 0; i < 8; i++) { vm.ItemToEquip = Boot(i); vm.EquipSelected(); }
+
+            Assert.AreEqual(6, vm.EquippedItems.Count, "Au plus 6 objets");
+            Assert.IsFalse(vm.CanEquipMore);
+            Assert.AreEqual("120", vm.ChampionStats[6].Value); // 60 + 6*10
         }
 
         [TestMethod]

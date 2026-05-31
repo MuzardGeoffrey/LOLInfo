@@ -33,6 +33,17 @@ public partial class DetailChampionPage : Page
         this._viewManager.NavigateToAllChampion();
     }
 
+    private void EquipItem_OnClick(object sender, RoutedEventArgs e)
+    {
+        this._viewModel.EquipSelected();
+    }
+
+    private void UnequipItem_OnClick(object sender, RoutedEventArgs e)
+    {
+        if (sender is FrameworkElement { DataContext: ViewModels.ItemViewModel item })
+            this._viewModel.Unequip(item);
+    }
+
     private void NextSkinButton_OnClick(object sender, RoutedEventArgs e)
     {
         this._viewModel.SelectNextSkin();

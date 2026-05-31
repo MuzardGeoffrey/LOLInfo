@@ -451,11 +451,13 @@
                 <Grid Background="#F5F5F5" Margin="16">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />  <!-- Sélecteur de niveau -->
+                        <RowDefinition Height="Auto" />  <!-- Sélecteur d'objet à équiper -->
+                        <RowDefinition Height="Auto" />  <!-- Objets équipés -->
                         <RowDefinition Height="*" />     <!-- Liste des stats -->
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="0" Orientation="Horizontal"
-                                VerticalAlignment="Center" Margin="0,0,0,14">
+                                VerticalAlignment="Center" Margin="0,0,0,10">
                         <TextBlock Text="{x:Static props:Resources.StatPage_Level}"
                                    FontSize="13" FontWeight="SemiBold"
                                    VerticalAlignment="Center" Margin="0,0,8,0" />
@@ -464,7 +466,43 @@
                                   SelectedItem="{Binding SelectedLevel, Mode=TwoWay}" />
                     </StackPanel>
 
-                    <ItemsControl Grid.Row="1" ItemsSource="{Binding ChampionStats}">
+                    <!-- Sélecteur d'objet à équiper (éditable : taper pour filtrer) -->
+                    <StackPanel Grid.Row="1" Orientation="Horizontal"
+                                VerticalAlignment="Center" Margin="0,0,0,8">
+                        <ComboBox Width="220" IsEditable="True" IsTextSearchEnabled="True"
+                                  ItemsSource="{Binding AvailableItems}"
+                                  DisplayMemberPath="Name"
+                                  TextSearch.TextPath="Name"
+                                  SelectedItem="{Binding ItemToEquip, Mode=TwoWay}" />
+                        <Button Content="{x:Static props:Resources.ItemPage_Equip}"
+                                Click="EquipItem_OnClick"
+                                IsEnabled="{Binding CanEquipMore}"
+                                Padding="10,3" Margin="8,0,0,0" Cursor="Hand" />
+                    </StackPanel>
+
+                    <!-- Objets équipés (clic sur une icône = retirer) -->
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,12">
+                        <TextBlock Text="{x:Static props:Resources.StatPage_Equipped}"
+                                   FontSize="12" Foreground="#777" VerticalAlignment="Center" Margin="0,0,8,0" />
+                        <ItemsControl ItemsSource="{Binding EquippedItems}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate><WrapPanel Orientation="Horizontal" /></ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type vm:ItemViewModel}">
+                                    <Button Click="UnequipItem_OnClick" ToolTip="{Binding Name}"
+                                            Background="Transparent" BorderBrush="#CCC" BorderThickness="1"
+                                            Padding="1" Margin="0,0,4,0" Cursor="Hand">
+                                        <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.ITEM}"
+                                               utils:CachedImage.SourcePath="{Binding ImagePath}"
+                                               Width="34" Height="34" />
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <ItemsControl Grid.Row="3" ItemsSource="{Binding ChampionStats}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate DataType="{x:Type vm:ChampionStatRow}">
                                 <Border Padding="0,4" BorderBrush="#E0E0E0" BorderThickness="0,0,0,1">

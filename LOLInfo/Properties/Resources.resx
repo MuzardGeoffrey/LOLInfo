@@ -354,4 +354,10 @@
   <data name="ItemPage_Search" xml:space="preserve">
     <value>Rechercher un objet</value>
   </data>
+  <data name="ItemPage_Equip" xml:space="preserve">
+    <value>Équiper</value>
+  </data>
+  <data name="StatPage_Equipped" xml:space="preserve">
+    <value>Objets équipés</value>
+  </data>
 </root>

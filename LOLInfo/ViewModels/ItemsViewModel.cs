@@ -31,6 +31,8 @@ public class ItemsViewModel(IItemClient client, ILogger<ItemsViewModel> logger) 
 
     public bool IsLoaded { get; private set; }
 
+    public IReadOnlyList<ItemViewModel> AllItems => this._items;
+
     public string NameFilter
     {
         get;

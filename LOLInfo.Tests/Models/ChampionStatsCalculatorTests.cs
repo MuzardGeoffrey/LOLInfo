@@ -49,7 +49,7 @@ namespace LOLInfo.Tests.Models
         {
             var stats = new Dictionary<string, double> { ["hp"] = 600 };
             var result = ChampionStatsCalculator.Compute(stats, 1);
-            Assert.AreEqual(11, result.Count);
+            Assert.AreEqual(13, result.Count);
             Assert.IsTrue(result.Any(r => r.Kind == ChampionStatKind.Health));
             Assert.IsTrue(result.Any(r => r.Kind == ChampionStatKind.AttackSpeed));
         }
@@ -62,6 +62,34 @@ namespace LOLInfo.Tests.Models
             var high = ChampionStatsCalculator.Compute(stats, 99)[0].Value;  // borné à 18 → 2300
             Assert.AreEqual(600.0,  low,  1e-6);
             Assert.AreEqual(2300.0, high, 1e-6);
+        }
+
+        [TestMethod]
+        public void Compute_WithItemBonuses_AddsFlatAndPercent()
+        {
+            var stats = new Dictionary<string, double>
+            {
+                ["attackdamage"] = 60, ["attackspeed"] = 0.625, ["movespeed"] = 340, ["hp"] = 600,
+            };
+            var items = new Dictionary<string, double>
+            {
+                ["FlatPhysicalDamageMod"] = 70,
+                ["FlatMagicDamageMod"]    = 80,
+                ["FlatHPPoolMod"]         = 200,
+                ["PercentAttackSpeedMod"] = 0.40,
+                ["PercentLifeStealMod"]   = 0.12,
+                ["FlatMovementSpeedMod"]  = 45,
+            };
+
+            var r = ChampionStatsCalculator.Compute(stats, 1, items);
+            double Val(ChampionStatKind k) => r.First(x => x.Kind == k).Value;
+
+            Assert.AreEqual(130.0, Val(ChampionStatKind.AttackDamage), 1e-6); // 60 + 70
+            Assert.AreEqual(80.0,  Val(ChampionStatKind.AbilityPower), 1e-6); // 0 + 80
+            Assert.AreEqual(800.0, Val(ChampionStatKind.Health),       1e-6); // 600 + 200
+            Assert.AreEqual(0.625 * 1.40, Val(ChampionStatKind.AttackSpeed), 1e-9); // niv1 + 40%
+            Assert.AreEqual(0.12,  Val(ChampionStatKind.LifeSteal),    1e-9);
+            Assert.AreEqual(385.0, Val(ChampionStatKind.MoveSpeed),    1e-6); // 340 + 45
         }
 
         [TestMethod]

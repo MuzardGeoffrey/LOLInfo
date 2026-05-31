@@ -21,11 +21,14 @@ public class ItemViewModel
     public string Effects   { get; }
     public IReadOnlyList<ChampionStatRow> Stats { get; }
 
+    /// <summary>Stats brutes DataDragon (pour agréger les objets équipés sur un champion).</summary>
+    public IReadOnlyDictionary<string, double> RawStats { get; }
+
     public bool HasStats   => this.Stats.Count > 0;
     public bool HasEffects => !string.IsNullOrWhiteSpace(this.Effects);
 
     private ItemViewModel(string id, string name, string imagePath, int gold, string effects,
-                          IReadOnlyList<ChampionStatRow> stats)
+                          IReadOnlyList<ChampionStatRow> stats, IReadOnlyDictionary<string, double> rawStats)
     {
         this.Id        = id;
         this.Name      = name;
@@ -33,6 +36,7 @@ public class ItemViewModel
         this.Gold      = gold;
         this.Effects   = effects;
         this.Stats     = stats;
+        this.RawStats  = rawStats;
     }
 
     public static ItemViewModel From(Item item)
@@ -51,7 +55,8 @@ public class ItemViewModel
             item.Image?.Full ?? string.Empty,
             item.Gold?.Total ?? 0,
             RiotText.StripHtml(item.Description),
-            rows);
+            rows,
+            item.Stats ?? new Dictionary<string, double>());
     }
 
     // ── Mapping des clés de stats DataDragon → libellé localisé ───────────────

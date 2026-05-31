@@ -406,6 +406,14 @@ namespace LOLInfo.Properties {
             get { return ResourceManager.GetString("ItemPage_Search", resourceCulture); }
         }
 
+        public static string ItemPage_Equip {
+            get { return ResourceManager.GetString("ItemPage_Equip", resourceCulture); }
+        }
+
+        public static string StatPage_Equipped {
+            get { return ResourceManager.GetString("StatPage_Equipped", resourceCulture); }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Niv {0}.
         /// </summary>

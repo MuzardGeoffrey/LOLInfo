@@ -10,6 +10,9 @@ public interface IItemsViewModel : INotifyPropertyChanged
     /// <summary>Vue filtrée des objets (recherche par nom).</summary>
     ICollectionView ItemsView { get; }
 
+    /// <summary>Tous les objets chargés (pour l'équipement sur un champion).</summary>
+    System.Collections.Generic.IReadOnlyList<ItemViewModel> AllItems { get; }
+
     /// <summary>Filtre de recherche par nom.</summary>
     string NameFilter { get; set; }
 

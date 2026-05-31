@@ -13,10 +13,12 @@ public enum ChampionStatKind
     Armor,
     MagicResist,
     AttackDamage,
+    AbilityPower,
     AttackSpeed,
+    CritChance,
+    LifeSteal,
     MoveSpeed,
     AttackRange,
-    CritChance,
 }
 
 /// <summary>Une statistique calculée pour un niveau donné.</summary>
@@ -52,29 +54,48 @@ public static class ChampionStatsCalculator
         stats.TryGetValue(key, out var v) ? v : 0;
 
     /// <summary>
-    /// Calcule toutes les stats du champion au niveau demandé (borné à [1, 18]).
+    /// Calcule toutes les stats du champion au niveau demandé (borné à [1, 18]),
+    /// en ajoutant éventuellement les bonus des objets équipés.
+    /// <paramref name="itemBonuses"/> agrège les stats brutes des objets
+    /// (clés DataDragon : "FlatPhysicalDamageMod", "PercentAttackSpeedMod"…).
     /// Retourne une liste vide si <paramref name="stats"/> est null.
     /// </summary>
     public static IReadOnlyList<ChampionStatValue> Compute(
-        IReadOnlyDictionary<string, double>? stats, int level)
+        IReadOnlyDictionary<string, double>? stats,
+        int level,
+        IReadOnlyDictionary<string, double>? itemBonuses = null)
     {
         if (stats is null) return [];
 
         level = Math.Clamp(level, MinLevel, MaxLevel);
 
+        double Item(string key) =>
+            itemBonuses is not null && itemBonuses.TryGetValue(key, out var v) ? v : 0;
+
+        // Vitesse d'attaque : base*(1+croissance) + base*Σ(%AS objets).
+        var baseAttackSpeed = Get(stats, "attackspeed");
+        var attackSpeed = AttackSpeed(baseAttackSpeed, Get(stats, "attackspeedperlevel"), level)
+                          + baseAttackSpeed * Item("PercentAttackSpeedMod");
+
+        // Vitesse de déplacement : (base + Σ plat) * (1 + Σ %).
+        var moveSpeed = (Get(stats, "movespeed") + Item("FlatMovementSpeedMod"))
+                        * (1 + Item("PercentMovementSpeedMod"));
+
         return
         [
-            new(ChampionStatKind.Health,       PerLevel(Get(stats, "hp"),           Get(stats, "hpperlevel"),           level)),
-            new(ChampionStatKind.HealthRegen,  PerLevel(Get(stats, "hpregen"),      Get(stats, "hpregenperlevel"),      level)),
-            new(ChampionStatKind.Mana,         PerLevel(Get(stats, "mp"),           Get(stats, "mpperlevel"),           level)),
-            new(ChampionStatKind.ManaRegen,    PerLevel(Get(stats, "mpregen"),      Get(stats, "mpregenperlevel"),      level)),
-            new(ChampionStatKind.Armor,        PerLevel(Get(stats, "armor"),        Get(stats, "armorperlevel"),        level)),
-            new(ChampionStatKind.MagicResist,  PerLevel(Get(stats, "spellblock"),   Get(stats, "spellblockperlevel"),   level)),
-            new(ChampionStatKind.AttackDamage, PerLevel(Get(stats, "attackdamage"), Get(stats, "attackdamageperlevel"), level)),
-            new(ChampionStatKind.AttackSpeed,  AttackSpeed(Get(stats, "attackspeed"), Get(stats, "attackspeedperlevel"), level)),
-            new(ChampionStatKind.MoveSpeed,    Get(stats, "movespeed")),
+            new(ChampionStatKind.Health,       PerLevel(Get(stats, "hp"),           Get(stats, "hpperlevel"),           level) + Item("FlatHPPoolMod")),
+            new(ChampionStatKind.HealthRegen,  PerLevel(Get(stats, "hpregen"),      Get(stats, "hpregenperlevel"),      level) + Item("FlatHPRegenMod")),
+            new(ChampionStatKind.Mana,         PerLevel(Get(stats, "mp"),           Get(stats, "mpperlevel"),           level) + Item("FlatMPPoolMod")),
+            new(ChampionStatKind.ManaRegen,    PerLevel(Get(stats, "mpregen"),      Get(stats, "mpregenperlevel"),      level) + Item("FlatMPRegenMod")),
+            new(ChampionStatKind.Armor,        PerLevel(Get(stats, "armor"),        Get(stats, "armorperlevel"),        level) + Item("FlatArmorMod")),
+            new(ChampionStatKind.MagicResist,  PerLevel(Get(stats, "spellblock"),   Get(stats, "spellblockperlevel"),   level) + Item("FlatSpellBlockMod")),
+            new(ChampionStatKind.AttackDamage, PerLevel(Get(stats, "attackdamage"), Get(stats, "attackdamageperlevel"), level) + Item("FlatPhysicalDamageMod")),
+            new(ChampionStatKind.AbilityPower, Item("FlatMagicDamageMod")),
+            new(ChampionStatKind.AttackSpeed,  attackSpeed),
+            new(ChampionStatKind.CritChance,   PerLevel(Get(stats, "crit"), Get(stats, "critperlevel"), level) + Item("FlatCritChanceMod")),
+            new(ChampionStatKind.LifeSteal,    Item("PercentLifeStealMod")),
+            new(ChampionStatKind.MoveSpeed,    moveSpeed),
             new(ChampionStatKind.AttackRange,  Get(stats, "attackrange")),
-            new(ChampionStatKind.CritChance,   PerLevel(Get(stats, "crit"),         Get(stats, "critperlevel"),         level)),
         ];
     }
 }

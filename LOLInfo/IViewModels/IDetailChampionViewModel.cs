@@ -38,8 +38,26 @@ public interface IDetailChampionViewModel
     /// <summary>Niveau choisi pour le calcul des stats.</summary>
     int SelectedLevel { get; set; }
 
-    /// <summary>Stats du champion au niveau sélectionné.</summary>
+    /// <summary>Stats du champion au niveau sélectionné (objets équipés inclus).</summary>
     IReadOnlyList<ChampionStatRow> ChampionStats { get; }
+
+    /// <summary>Objets disponibles à l'équipement.</summary>
+    IReadOnlyList<ItemViewModel> AvailableItems { get; }
+
+    /// <summary>Objets actuellement équipés.</summary>
+    System.Collections.ObjectModel.ObservableCollection<ItemViewModel> EquippedItems { get; }
+
+    /// <summary>Objet choisi dans le sélecteur.</summary>
+    ItemViewModel? ItemToEquip { get; set; }
+
+    /// <summary>True s'il reste de la place pour un objet.</summary>
+    bool CanEquipMore { get; }
+
+    /// <summary>Équipe l'objet sélectionné.</summary>
+    void EquipSelected();
+
+    /// <summary>Retire un objet équipé.</summary>
+    void Unequip(ItemViewModel item);
 
     /// <summary>Déclenche le chargement des données depuis l'API.</summary>
     Task LoadAsync();
