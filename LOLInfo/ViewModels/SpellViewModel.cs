@@ -1,10 +1,13 @@
 namespace LOLInfo.ViewModels;
 
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 
+using LOLInfo.Models;
 using LOLInfo.Models.CdragonModel;
 using LOLInfo.Models.RiotModel;
+using LOLInfo.Properties;
 
 /// <summary>
 /// Wrapper bindable pour un sort (actif ou passif).
@@ -32,7 +35,9 @@ public class SpellViewModel
 
     public IReadOnlyList<string> LevelHeaders =>
         this.StatRows.Count > 0
-            ? Enumerable.Range(1, this.StatRows[0].Values.Count).Select(i => $"Niv {i}").ToList<string>()
+            ? Enumerable.Range(1, this.StatRows[0].Values.Count)
+                .Select(i => string.Format(CultureInfo.CurrentCulture, Resources.Spell_LevelHeader, i))
+                .ToList<string>()
             : [];
 
     public IReadOnlyList<SpellStatRow>          StatRows     { get; }
@@ -72,7 +77,7 @@ public class SpellViewModel
         new(key, string.Empty, string.Empty, string.Empty, false, [], []);
 
     public static SpellViewModel FromPassive(Passive passive) =>
-        new("Passif",
+        new(SpellKeys.Passive,
             passive.Name        ?? string.Empty,
             passive.Description ?? string.Empty,
             passive.Image?.Full ?? string.Empty,
@@ -110,13 +115,13 @@ public class SpellViewModel
         List<SpellStatRow> rows = [];
 
         if (!string.IsNullOrWhiteSpace(spell.CooldownBurn))
-            rows.Add(new SpellStatRow("⏱ Recharge", spell.CooldownBurn));
+            rows.Add(new SpellStatRow(Resources.Spell_Cooldown, spell.CooldownBurn));
 
         if (!string.IsNullOrWhiteSpace(spell.CostBurn) && spell.CostBurn != "0")
-            rows.Add(new SpellStatRow("💧 Coût", spell.CostBurn));
+            rows.Add(new SpellStatRow(Resources.Spell_Cost, spell.CostBurn));
 
         if (!string.IsNullOrWhiteSpace(spell.RangeBurn) && spell.RangeBurn != "0")
-            rows.Add(new SpellStatRow("🎯 Portée", spell.RangeBurn));
+            rows.Add(new SpellStatRow(Resources.Spell_Range, spell.RangeBurn));
 
         return rows;
     }

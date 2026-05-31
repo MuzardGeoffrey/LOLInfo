@@ -98,4 +98,214 @@
 	<resheader name="writer">
 		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
 	</resheader>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Barre d'outils (AllChampionPage)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Toolbar_Sort" xml:space="preserve">
+		<value>Trier :</value>
+	</data>
+	<data name="Toolbar_Favorites" xml:space="preserve">
+		<value>Favoris</value>
+	</data>
+	<data name="Toolbar_Damage" xml:space="preserve">
+		<value>Dégâts :</value>
+	</data>
+	<data name="Toolbar_Range" xml:space="preserve">
+		<value>Portée :</value>
+	</data>
+	<data name="Toolbar_Classes" xml:space="preserve">
+		<value>Classes :</value>
+	</data>
+	<data name="Toolbar_Difficulty" xml:space="preserve">
+		<value>Difficulté :</value>
+	</data>
+	<data name="Toolbar_Resource" xml:space="preserve">
+		<value>Ressource :</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Filtres Dégâts / Portée (libellés purement visuels)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Filter_All" xml:space="preserve">
+		<value>Tous</value>
+	</data>
+	<data name="Filter_Damage_AD" xml:space="preserve">
+		<value>AD</value>
+	</data>
+	<data name="Filter_Damage_AP" xml:space="preserve">
+		<value>AP</value>
+	</data>
+	<data name="Filter_Damage_Mixed" xml:space="preserve">
+		<value>Mixte</value>
+	</data>
+	<data name="Filter_Range_Melee" xml:space="preserve">
+		<value>Mêlée</value>
+	</data>
+	<data name="Filter_Range_Ranged" xml:space="preserve">
+		<value>Distance</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Options de tri (AllChampionViewModel)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Sort_NameAsc" xml:space="preserve">
+		<value>Nom A → Z</value>
+	</data>
+	<data name="Sort_NameDesc" xml:space="preserve">
+		<value>Nom Z → A</value>
+	</data>
+	<data name="Sort_DifficultyAsc" xml:space="preserve">
+		<value>Difficulté ↑</value>
+	</data>
+	<data name="Sort_DifficultyDesc" xml:space="preserve">
+		<value>Difficulté ↓</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Page de détail (DetailChampionPage)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Detail_Tab_Spells" xml:space="preserve">
+		<value>Sorts</value>
+	</data>
+	<data name="Detail_Tab_General" xml:space="preserve">
+		<value>Général</value>
+	</data>
+	<data name="Detail_Tab_Stats" xml:space="preserve">
+		<value>Stats</value>
+	</data>
+	<data name="Detail_Back" xml:space="preserve">
+		<value>← Retour</value>
+	</data>
+	<data name="Detail_LevelGain" xml:space="preserve">
+		<value>Gain par niveau</value>
+	</data>
+	<data name="Detail_Formulas" xml:space="preserve">
+		<value>Formules (CDragon)</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Libellés de sorts (SpellViewModel)
+	     {0} dans Spell_LevelHeader = numéro de rang
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Spell_Cooldown" xml:space="preserve">
+		<value>⏱ Recharge</value>
+	</data>
+	<data name="Spell_Cost" xml:space="preserve">
+		<value>💧 Coût</value>
+	</data>
+	<data name="Spell_Range" xml:space="preserve">
+		<value>🎯 Portée</value>
+	</data>
+	<data name="Spell_LevelHeader" xml:space="preserve">
+		<value>Niv {0}</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Classes de champions (filtre) — affichage. La clé de correspondance
+	     reste la valeur brute de l'API Riot (voir ChampionTags).
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Tag_Fighter" xml:space="preserve">
+		<value>Combattant</value>
+	</data>
+	<data name="Tag_Tank" xml:space="preserve">
+		<value>Tank</value>
+	</data>
+	<data name="Tag_Mage" xml:space="preserve">
+		<value>Mage</value>
+	</data>
+	<data name="Tag_Assassin" xml:space="preserve">
+		<value>Assassin</value>
+	</data>
+	<data name="Tag_Marksman" xml:space="preserve">
+		<value>Tireur</value>
+	</data>
+	<data name="Tag_Support" xml:space="preserve">
+		<value>Support</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Ressources de champions (filtre) — affichage. La clé de correspondance
+	     reste la catégorie canonique (voir ChampionResources).
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Resource_Mana" xml:space="preserve">
+		<value>Mana</value>
+	</data>
+	<data name="Resource_None" xml:space="preserve">
+		<value>Aucun</value>
+	</data>
+	<data name="Resource_Energy" xml:space="preserve">
+		<value>Énergie</value>
+	</data>
+	<data name="Resource_Other" xml:space="preserve">
+		<value>Autre</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Statistiques (formules CDragon — ChampionStat.ToLabel)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Stat_AttackDamage" xml:space="preserve">
+		<value>AD</value>
+	</data>
+	<data name="Stat_AttackSpeed" xml:space="preserve">
+		<value>vit. attaque</value>
+	</data>
+	<data name="Stat_AbilityPower" xml:space="preserve">
+		<value>PA</value>
+	</data>
+	<data name="Stat_Armor" xml:space="preserve">
+		<value>armure</value>
+	</data>
+	<data name="Stat_MagicResist" xml:space="preserve">
+		<value>RM</value>
+	</data>
+	<data name="Stat_Health" xml:space="preserve">
+		<value>PV</value>
+	</data>
+	<data name="Stat_MovementSpeed" xml:space="preserve">
+		<value>vit. dépl.</value>
+	</data>
+	<data name="Stat_CritChance" xml:space="preserve">
+		<value>chance crit.</value>
+	</data>
+	<data name="Stat_HealthRegen" xml:space="preserve">
+		<value>régén. PV</value>
+	</data>
+	<data name="Stat_Mana" xml:space="preserve">
+		<value>mana</value>
+	</data>
+	<data name="Stat_ManaRegen" xml:space="preserve">
+		<value>régén. mana</value>
+	</data>
+	<data name="Stat_AbilityHaste" xml:space="preserve">
+		<value>hâte</value>
+	</data>
+	<data name="Stat_Unknown" xml:space="preserve">
+		<value>stat inconnue</value>
+	</data>
+	<data name="StatSuffix_Base" xml:space="preserve">
+		<value> (base)</value>
+	</data>
+	<data name="StatSuffix_Bonus" xml:space="preserve">
+		<value> bonus</value>
+	</data>
+
+	<!-- ══════════════════════════════════════════════════════════════════
+	     Fragments de formules CDragon (Parts)
+	     ══════════════════════════════════════════════════════════════════ -->
+	<data name="Formula_Resource" xml:space="preserve">
+		<value>ressource</value>
+	</data>
+	<data name="Formula_PerLevel" xml:space="preserve">
+		<value>(par niv.)</value>
+	</data>
+	<data name="Formula_LevelRange" xml:space="preserve">
+		<value>(niv. 1→18)</value>
+	</data>
+	<data name="Formula_Level3" xml:space="preserve">
+		<value>(niv.1/9/18)</value>
+	</data>
+	<data name="Formula_Level2" xml:space="preserve">
+		<value>(niv.1/18)</value>
+	</data>
 </root>

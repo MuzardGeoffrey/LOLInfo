@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using LOLInfo.IServices;
 using LOLInfo.IViewModels;
+using LOLInfo.Models;
 using LOLInfo.Models.CdragonModel;
 using LOLInfo.Models.RiotModel;
 
@@ -38,11 +39,11 @@ public class DetailChampionViewModel(
 
     private List<SpellViewModel> _spells =
     [
-        SpellViewModel.Empty("Passif"),
-        SpellViewModel.Empty("Q"),
-        SpellViewModel.Empty("W"),
-        SpellViewModel.Empty("E"),
-        SpellViewModel.Empty("R"),
+        SpellViewModel.Empty(SpellKeys.Passive),
+        SpellViewModel.Empty(SpellKeys.Q),
+        SpellViewModel.Empty(SpellKeys.W),
+        SpellViewModel.Empty(SpellKeys.E),
+        SpellViewModel.Empty(SpellKeys.R),
     ];
 
     public IReadOnlyList<SpellViewModel> Spells => this._spells;
@@ -90,7 +91,7 @@ public class DetailChampionViewModel(
             logger.LogDebug("Passif '{Name}' ajouté", this.Champion.Passive.Name);
         }
 
-        string[] keys   = ["Q", "W", "E", "R"];
+        string[] keys   = SpellKeys.Active;
         var spells = this.Champion.Spells ?? [];
 
         foreach (var (key, spell) in keys.Zip(spells))

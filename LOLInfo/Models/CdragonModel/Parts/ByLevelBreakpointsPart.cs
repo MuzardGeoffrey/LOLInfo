@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
+using LOLInfo.Properties;
+
 public class ByLevelBreakpointsPart(double level1Value, IReadOnlyList<(int Level, double Bonus)> breakpoints) : IFormulaPart
 {
     public double Level1Value { get; } = level1Value;
@@ -21,7 +23,7 @@ public class ByLevelBreakpointsPart(double level1Value, IReadOnlyList<(int Level
             values.Add(cumul);
         }
 
-        return string.Join("→", values.Select(FormatVal)) + " (par niv.)";
+        return string.Join("→", values.Select(FormatVal)) + " " + Resources.Formula_PerLevel;
     }
 
     private static string FormatVal(double v) =>

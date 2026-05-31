@@ -13,6 +13,7 @@ using LOLInfo.IServices.Storage;
 using LOLInfo.IViewModels;
 using LOLInfo.Models;
 using LOLInfo.Models.RiotModel;
+using LOLInfo.Properties;
 
 using Microsoft.Extensions.Logging;
 
@@ -39,13 +40,13 @@ public class AllChampionViewModel(
 
     public List<KeyValuePair<SortOption, string>> SortOptions { get; } =
     [
-        new(SortOption.NomAZ,          "Nom A → Z"),
-        new(SortOption.NomZA,          "Nom Z → A"),
-        new(SortOption.DifficulteAsc,  "Difficulté ↑"),
-        new(SortOption.DifficulteDesc, "Difficulté ↓"),
+        new(SortOption.NomAZ,          Resources.Sort_NameAsc),
+        new(SortOption.NomZA,          Resources.Sort_NameDesc),
+        new(SortOption.DifficulteAsc,  Resources.Sort_DifficultyAsc),
+        new(SortOption.DifficulteDesc, Resources.Sort_DifficultyDesc),
     ];
 
-    private KeyValuePair<SortOption, string> _selectedSortOption = new(SortOption.NomAZ, "Nom A → Z");
+    private KeyValuePair<SortOption, string> _selectedSortOption = new(SortOption.NomAZ, Resources.Sort_NameAsc);
 
     public KeyValuePair<SortOption, string> SelectedSortOption
     {
@@ -189,7 +190,7 @@ public class AllChampionViewModel(
             .Concat(presentTags.Except(ChampionTags.CanonicalOrder).OrderBy(t => t));
 
         this.UnsubscribeFromFilterItems(this._tagFilters);
-        this._tagFilters = ordered.Select(tag => new FilterItemViewModel(tag)).ToList();
+        this._tagFilters = ordered.Select(tag => new FilterItemViewModel(tag, ChampionTags.GetLabel(tag))).ToList();
         this.SubscribeToFilterItems(this._tagFilters);
         this.OnPropertyChanged(nameof(TagFilters));
         logger.LogDebug("TagFilters construits : {Tags}", string.Join(", ", this._tagFilters.Select(f => f.Label)));
@@ -199,7 +200,7 @@ public class AllChampionViewModel(
     {
         this.UnsubscribeFromFilterItems(this._partypeFilters);
         this._partypeFilters = ChampionResources.CanonicalOrder
-            .Select(category => new FilterItemViewModel(category))
+            .Select(category => new FilterItemViewModel(category, ChampionResources.GetLabel(category)))
             .ToList();
         this.SubscribeToFilterItems(this._partypeFilters);
         this.OnPropertyChanged(nameof(PartypeFilters));
@@ -272,14 +273,14 @@ public class AllChampionViewModel(
         if (selectedTags.Count > 0)
         {
             var championTags = item.Champion.Tags ?? [];
-            if (!selectedTags.Any(f => championTags.Contains(f.Label))) return false;
+            if (!selectedTags.Any(f => championTags.Contains(f.Key))) return false;
         }
 
         var selectedPartypes = this._partypeFilters.Where(f => f.IsSelected).ToList();
         if (selectedPartypes.Count > 0)
         {
             var category = ChampionResources.GetCategory(item.Champion.Partype);
-            if (!selectedPartypes.Any(f => f.Label == category)) return false;
+            if (!selectedPartypes.Any(f => f.Key == category)) return false;
         }
 
         if (!string.IsNullOrEmpty(this.NameFilter) &&

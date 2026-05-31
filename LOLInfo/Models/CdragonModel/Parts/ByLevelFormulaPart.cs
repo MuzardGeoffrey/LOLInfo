@@ -3,6 +3,8 @@ namespace LOLInfo.Models.CdragonModel.Parts;
 using System.Collections.Generic;
 using System.Globalization;
 
+using LOLInfo.Properties;
+
 public class ByLevelFormulaPart(IReadOnlyList<double> values) : IFormulaPart
 {
     public IReadOnlyList<double> Values { get; } = values;
@@ -17,8 +19,8 @@ public class ByLevelFormulaPart(IReadOnlyList<double> values) : IFormulaPart
 
         return (v9, v18) switch
         {
-            (not null, not null) => $"{v1}/{v9}/{v18} (niv.1/9/18)",
-            (null, not null)     => $"{v1}/{v18} (niv.1/18)",
+            (not null, not null) => $"{v1}/{v9}/{v18} {Resources.Formula_Level3}",
+            (null, not null)     => $"{v1}/{v18} {Resources.Formula_Level2}",
             _                    => v1,
         };
     }

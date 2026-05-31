@@ -16,7 +16,7 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public class PatchVersionService(ILogger<PatchVersionService> logger) : IPatchVersionService
 {
-    private const string VersionsUrl = "https://ddragon.leagueoflegends.com/api/versions.json";
+    private const string VersionsUrl = DataDragonCdn.VersionsUrl;
     private static readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(10) };
 
     public string CurrentVersion { get; private set; } = DataDragonCdn.DefaultVersion;

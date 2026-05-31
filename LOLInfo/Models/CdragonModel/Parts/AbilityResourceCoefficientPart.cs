@@ -2,6 +2,8 @@ namespace LOLInfo.Models.CdragonModel.Parts;
 
 using System.Globalization;
 
+using LOLInfo.Properties;
+
 /// <summary>
 /// AbilityResourceByCoefficientCalculationPart — scaling sur la ressource du champion
 /// (mana, énergie, rage…) multiplié par un coefficient.
@@ -15,7 +17,7 @@ public class AbilityResourceCoefficientPart(double coefficient) : IFormulaPart
     {
         var pct    = this.Coefficient * 100;
         var pctStr = pct == (int)pct ? $"{(int)pct}%" : $"{pct.ToString("0.##", CultureInfo.InvariantCulture)}%";
-        return $"+{pctStr} ressource";
+        return $"+{pctStr} {Resources.Formula_Resource}";
     }
 
     public double Evaluate(SpellContext context) => 0; // Phase 2

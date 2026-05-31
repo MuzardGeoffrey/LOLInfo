@@ -1,5 +1,7 @@
 namespace LOLInfo.Utils
 {
+    using LOLInfo.Localization;
+
     /// <summary>
     /// Constructeur d'URL pour le CDN DataDragon de Riot.
     ///
@@ -14,19 +16,29 @@ namespace LOLInfo.Utils
     ///
     /// "latest" est accepté par le CDN Riot et retourne toujours les assets de
     /// la dernière version — utile comme fallback si l'API versions.json est injoignable.
+    ///
+    /// La locale des données (fr_FR, en_US…) provient de <see cref="AppLocalization.DataLocale"/>,
+    /// elle-même déduite de la langue de l'application. Un seul endroit à changer.
     /// </summary>
     public static class DataDragonCdn
     {
         /// <summary>Alias Riot qui résout toujours vers la version la plus récente.</summary>
         public const string DefaultVersion = "latest";
 
-        private const string Base = "https://ddragon.leagueoflegends.com/cdn";
+        /// <summary>Racine du CDN DataDragon.</summary>
+        public const string Base = "https://ddragon.leagueoflegends.com/cdn";
+
+        /// <summary>Liste des versions de patch disponibles (JSON, le plus récent en premier).</summary>
+        public const string VersionsUrl = "https://ddragon.leagueoflegends.com/api/versions.json";
 
         /// <summary>
         /// Version courante du patch DataDragon (ex : "14.11.1").
         /// Initialisée par <c>PatchVersionService</c> au démarrage.
         /// </summary>
         public static string Version { get; set; } = DefaultVersion;
+
+        /// <summary>Locale des données Riot (fr_FR, en_US…), suit la langue de l'application.</summary>
+        public static string DataLocale => AppLocalization.DataLocale;
 
         // ── URL builders ──────────────────────────────────────────────────
 
@@ -53,12 +65,12 @@ namespace LOLInfo.Utils
 
         // ── API data ──────────────────────────────────────────────────────
 
-        /// <summary>URL de la liste de tous les champions (langue fr_FR).</summary>
+        /// <summary>URL de la liste de tous les champions (langue <see cref="DataLocale"/>).</summary>
         public static string GeneralDataUrl()
-            => $"{Base}/{Version}/data/fr_FR/champion.json";
+            => $"{Base}/{Version}/data/{DataLocale}/champion.json";
 
         /// <summary>URL du détail d'un champion spécifique.</summary>
         public static string ChampionDetailUrl(string championName)
-            => $"{Base}/{Version}/data/fr_FR/champion/{championName}.json";
+            => $"{Base}/{Version}/data/{DataLocale}/champion/{championName}.json";
     }
 }

@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
       xmlns:models="clr-namespace:LOLInfo.Models"
+      xmlns:props="clr-namespace:LOLInfo.Properties"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="900"
       Title="AllChampionPage">
@@ -93,7 +94,7 @@
 
                 <!-- Tri -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Trier :" Style="{StaticResource FilterLabelStyle}" />
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Sort}" Style="{StaticResource FilterLabelStyle}" />
                     <ComboBox Width="140" VerticalAlignment="Center"
                               ItemsSource="{Binding SortOptions}"
                               SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
@@ -108,7 +109,7 @@
                               Padding="10,4" Cursor="Hand">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="★" Foreground="#F5A623" FontSize="13" Margin="0,0,5,0" VerticalAlignment="Center" />
-                        <TextBlock Text="Favoris" FontSize="12" VerticalAlignment="Center" />
+                        <TextBlock Text="{x:Static props:Resources.Toolbar_Favorites}" FontSize="12" VerticalAlignment="Center" />
                     </StackPanel>
                 </ToggleButton>
 
@@ -116,20 +117,20 @@
 
                 <!-- Filtre Dégâts -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Dégâts :" Style="{StaticResource FilterLabelStyle}" />
-                    <RadioButton Content="Tous"  Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Damage}" Style="{StaticResource FilterLabelStyle}" />
+                    <RadioButton Content="{x:Static props:Resources.Filter_All}"  Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.Tous}}" />
-                    <RadioButton Content="AD"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
+                    <RadioButton Content="{x:Static props:Resources.Filter_Damage_AD}"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.AD}}" />
-                    <RadioButton Content="AP"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
+                    <RadioButton Content="{x:Static props:Resources.Filter_Damage_AP}"    Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.AP}}" />
-                    <RadioButton Content="Mixte" Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
+                    <RadioButton Content="{x:Static props:Resources.Filter_Damage_Mixed}" Style="{StaticResource FilterRadioStyle}" GroupName="DamageFilter"
                                  IsChecked="{Binding SelectedDamageType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:DamageTypeFilter.Mixte}}" />
@@ -139,16 +140,16 @@
 
                 <!-- Filtre Portée -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Portée :" Style="{StaticResource FilterLabelStyle}" />
-                    <RadioButton Content="Tous"     Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Range}" Style="{StaticResource FilterLabelStyle}" />
+                    <RadioButton Content="{x:Static props:Resources.Filter_All}"     Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Tous}}" />
-                    <RadioButton Content="Mêlée"    Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
+                    <RadioButton Content="{x:Static props:Resources.Filter_Range_Melee}"    Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Melee}}" />
-                    <RadioButton Content="Distance" Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
+                    <RadioButton Content="{x:Static props:Resources.Filter_Range_Ranged}" Style="{StaticResource FilterRadioStyle}" GroupName="RangeFilter"
                                  IsChecked="{Binding SelectedRangeType, Mode=TwoWay,
                                              Converter={StaticResource EnumToBoolConverter},
                                              ConverterParameter={x:Static models:RangeTypeFilter.Range}}" />
@@ -176,7 +177,7 @@
                       - AllChampionViewModel reçoit la notification → Refresh()
                 -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Classes :" Style="{StaticResource FilterLabelStyle}" />
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Classes}" Style="{StaticResource FilterLabelStyle}" />
                     <ItemsControl ItemsSource="{Binding TagFilters}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -208,7 +209,7 @@
                     reçoit un double converti automatiquement en int par WPF.
                 -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
-                    <TextBlock Text="Difficulté :" Style="{StaticResource FilterLabelStyle}" />
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Difficulty}" Style="{StaticResource FilterLabelStyle}" />
 
                     <TextBlock Style="{StaticResource FilterLabelStyle}" Margin="0,0,4,0"
                                Text="{Binding DifficultyMin}" />
@@ -231,7 +232,7 @@
 
                 <!-- ── Ressources (Partype) ───────────────────────────── -->
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <TextBlock Text="Ressource :" Style="{StaticResource FilterLabelStyle}" />
+                    <TextBlock Text="{x:Static props:Resources.Toolbar_Resource}" Style="{StaticResource FilterLabelStyle}" />
                     <ItemsControl ItemsSource="{Binding PartypeFilters}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

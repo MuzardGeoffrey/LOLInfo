@@ -1,5 +1,7 @@
 namespace LOLInfo.Models.CdragonModel;
 
+using LOLInfo.Properties;
+
 public enum ChampionStat
 {
     Unknown       = 0,
@@ -30,25 +32,25 @@ public static class ChampionStatExtensions
     {
         string statName = stat switch
         {
-            ChampionStat.AttackDamage  => "AD",
-            ChampionStat.AttackSpeed   => "vit. attaque",
-            ChampionStat.AbilityPower  => "PA",
-            ChampionStat.Armor         => "armure",
-            ChampionStat.MagicResist   => "RM",
-            ChampionStat.Health        => "PV",
-            ChampionStat.MovementSpeed => "vit. dépl.",
-            ChampionStat.CritChance    => "chance crit.",
-            ChampionStat.HealthRegen   => "régén. PV",
-            ChampionStat.Mana          => "mana",
-            ChampionStat.ManaRegen     => "régén. mana",
-            ChampionStat.AbilityHaste  => "hâte",
-            _                          => "stat inconnue",
+            ChampionStat.AttackDamage  => Resources.Stat_AttackDamage,
+            ChampionStat.AttackSpeed   => Resources.Stat_AttackSpeed,
+            ChampionStat.AbilityPower  => Resources.Stat_AbilityPower,
+            ChampionStat.Armor         => Resources.Stat_Armor,
+            ChampionStat.MagicResist   => Resources.Stat_MagicResist,
+            ChampionStat.Health        => Resources.Stat_Health,
+            ChampionStat.MovementSpeed => Resources.Stat_MovementSpeed,
+            ChampionStat.CritChance    => Resources.Stat_CritChance,
+            ChampionStat.HealthRegen   => Resources.Stat_HealthRegen,
+            ChampionStat.Mana          => Resources.Stat_Mana,
+            ChampionStat.ManaRegen     => Resources.Stat_ManaRegen,
+            ChampionStat.AbilityHaste  => Resources.Stat_AbilityHaste,
+            _                          => Resources.Stat_Unknown,
         };
 
         string formulaSuffix = formula switch
         {
-            StatFormula.Base  => " (base)",
-            StatFormula.Bonus => " bonus",
+            StatFormula.Base  => Resources.StatSuffix_Base,
+            StatFormula.Bonus => Resources.StatSuffix_Bonus,
             _                 => string.Empty,
         };
 

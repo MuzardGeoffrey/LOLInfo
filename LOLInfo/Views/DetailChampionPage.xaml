@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
       xmlns:vm="clr-namespace:LOLInfo.ViewModels"
+      xmlns:props="clr-namespace:LOLInfo.Properties"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="900"
       Title="DetailChampionPage">
@@ -167,7 +168,7 @@
                     -->
                     <StackPanel Visibility="{Binding HasLeveltip, Converter={StaticResource BoolToVis}}">
 
-                        <TextBlock Text="Gain par niveau"
+                        <TextBlock Text="{x:Static props:Resources.Detail_LevelGain}"
                                    FontSize="13"
                                    FontWeight="SemiBold"
                                    Margin="0,0,0,6" />
@@ -212,7 +213,7 @@
                     <StackPanel Visibility="{Binding HasFormulas, Converter={StaticResource BoolToVis}}"
                                 Margin="0,8,0,0">
 
-                        <TextBlock Text="Formules (CDragon)"
+                        <TextBlock Text="{x:Static props:Resources.Detail_Formulas}"
                                    FontSize="13"
                                    FontWeight="SemiBold"
                                    Margin="0,0,0,6" />
@@ -286,7 +287,7 @@
 
                 <Button Grid.Column="2"
                         x:Name="BackButton"
-                        Content="← Retour"
+                        Content="{x:Static props:Resources.Detail_Back}"
                         Click="BackButton_OnClick"
                         VerticalAlignment="Center"
                         Padding="12,6"
@@ -299,7 +300,7 @@
 
         <!-- ── Onglets ─────────────────────────────────────────────────── -->
         <TabControl Grid.Row="1" Margin="0">
-            <TabItem Header="Sorts">
+            <TabItem Header="{x:Static props:Resources.Detail_Tab_Spells}">
                 <!--
                     Onglet Sorts : TabControl secondaire avec onglets à gauche.
                     Chaque onglet est lié à un SpellViewModel de la liste Spells.
@@ -364,7 +365,7 @@
                 </TabControl>
             </TabItem>
 
-            <TabItem Header="Général">
+            <TabItem Header="{x:Static props:Resources.Detail_Tab_General}">
                 <Grid Background="#F5F5F5" Margin="16">
                     <StackPanel>
                         <TextBlock Text="{Binding Champion.Blurb}"
@@ -375,7 +376,7 @@
                 </Grid>
             </TabItem>
 
-            <TabItem Header="Stats">
+            <TabItem Header="{x:Static props:Resources.Detail_Tab_Stats}">
                 <Grid Background="#F5F5F5" />
             </TabItem>
 

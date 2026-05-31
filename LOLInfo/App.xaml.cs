@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using LOLInfo.IServices;
 using LOLInfo.IServices.Storage;
 using LOLInfo.IViewModels;
+using LOLInfo.Localization;
 using LOLInfo.Services;
 using LOLInfo.Services.Storage;
 using LOLInfo.ViewModels;
@@ -24,6 +25,10 @@ public partial class App : Application
 {
     public App()
     {
+        // Applique la langue de l'application AVANT toute lecture de ressource
+        // ou tout appel réseau (locale des données Riot). Point unique : AppLocalization.
+        AppLocalization.ApplyDefaultCulture();
+
         InitializeSerilog();
         this.Services = ConfigureServices();
         this.InitializeComponent();

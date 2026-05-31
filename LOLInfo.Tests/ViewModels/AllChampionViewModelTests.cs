@@ -248,7 +248,7 @@ namespace LOLInfo.Tests.ViewModels
             var (vm, _) = CreateVm(SampleChampions());
             await vm.GetAllChampions();
 
-            var mageFilter = vm.TagFilters.FirstOrDefault(f => f.Label == "Mage");
+            var mageFilter = vm.TagFilters.FirstOrDefault(f => f.Key == ChampionTags.Mage);
             Assert.IsNotNull(mageFilter);
             mageFilter!.IsSelected = true;
 
