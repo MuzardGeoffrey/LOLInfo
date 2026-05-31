@@ -11,7 +11,6 @@
       Title="AllChampionPage">
 
     <Page.Resources>
-        <utils:ImagePathConverter x:Key="ImagePathConverter" />
         <utils:EnumToBoolConverter x:Key="EnumToBoolConverter" />
 
         <!-- Style du bouton étoile -->
@@ -276,9 +275,8 @@
                                         Click="ButtonChampion_OnClick"
                                         Padding="6" ToolTip="{Binding Champion.Title}">
                                     <StackPanel>
-                                        <Image Source="{Binding Champion.Image.Full,
-                                                        Converter={StaticResource ImagePathConverter},
-                                                        ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
+                                        <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.MINIATURE}"
+                                               utils:CachedImage.SourcePath="{Binding Champion.Image.Full}"
                                                Width="60" Height="60" Margin="0,0,0,4" />
                                         <TextBlock Text="{Binding Champion.Name}"
                                                    HorizontalAlignment="Center"

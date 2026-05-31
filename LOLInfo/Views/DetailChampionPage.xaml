@@ -11,8 +11,6 @@
       Title="DetailChampionPage">
 
     <Page.Resources>
-        <utils:ImagePathConverter x:Key="ImagePathConverter" />
-
         <!--
             BooleanToVisibilityConverter est fourni par WPF.
             Il transforme true → Visible, false → Collapsed.
@@ -51,9 +49,8 @@
                                 Passif et sorts actifs utilisent désormais le même dossier spell/.
                                 Plus besoin de différencier IsPassive pour le chemin d'image.
                             -->
-                            <Image Source="{Binding IconPath,
-                                           Converter={StaticResource ImagePathConverter},
-                                           ConverterParameter={x:Static utils:ImageConstant.SPELL}}" />
+                            <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.SPELL}"
+                                   utils:CachedImage.SourcePath="{Binding IconPath}" />
                         </Border>
 
                         <!-- Nom + description -->
@@ -272,9 +269,8 @@
                 </Grid.ColumnDefinitions>
 
                 <Image Grid.Column="0"
-                       Source="{Binding Champion.Image.Full,
-                                Converter={StaticResource ImagePathConverter},
-                                ConverterParameter={x:Static utils:ImageConstant.MINIATURE}}"
+                       utils:CachedImage.Kind="{x:Static utils:ImageConstant.MINIATURE}"
+                       utils:CachedImage.SourcePath="{Binding Champion.Image.Full}"
                        Width="56" Height="56"
                        Margin="0,0,12,0" />
 
@@ -394,35 +390,43 @@
                         <Image Grid.Column="0"
                                Opacity="0.4"
                                Margin="0,16,8,16"
-                               Source="{Binding PreviousSkin.SkinPath,
-                                        Converter={StaticResource ImagePathConverter},
-                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               utils:CachedImage.Kind="{x:Static utils:ImageConstant.SKIN}"
+                               utils:CachedImage.SourcePath="{Binding PreviousSkin.SkinPath}"
                                VerticalAlignment="Center" />
 
                         <!-- Skin courant -->
                         <Image Grid.Column="1"
-                               Source="{Binding SelectedSkin.SkinPath,
-                                        Converter={StaticResource ImagePathConverter},
-                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               utils:CachedImage.Kind="{x:Static utils:ImageConstant.SKIN}"
+                               utils:CachedImage.SourcePath="{Binding SelectedSkin.SkinPath}"
                                HorizontalAlignment="Center" VerticalAlignment="Center" />
 
                         <!-- Aperçu suivant (réduit + estompé) -->
                         <Image Grid.Column="2"
                                Opacity="0.4"
                                Margin="8,16,0,16"
-                               Source="{Binding NextSkin.SkinPath,
-                                        Converter={StaticResource ImagePathConverter},
-                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               utils:CachedImage.Kind="{x:Static utils:ImageConstant.SKIN}"
+                               utils:CachedImage.SourcePath="{Binding NextSkin.SkinPath}"
                                VerticalAlignment="Center" />
                     </Grid>
 
-                    <!-- Nom du skin -->
-                    <TextBlock Grid.Row="2"
-                               Text="{Binding SelectedSkin.DisplayName}"
-                               HorizontalAlignment="Center"
-                               FontSize="14" FontWeight="SemiBold"
-                               Foreground="#333" Margin="0,8,0,0"
-                               Visibility="{Binding HasSkins, Converter={StaticResource BoolToVis}}" />
+                    <!-- Nom du skin + badge chromas -->
+                    <StackPanel Grid.Row="2"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,8,0,0"
+                                Visibility="{Binding HasSkins, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding SelectedSkin.DisplayName}"
+                                   FontSize="14" FontWeight="SemiBold"
+                                   Foreground="#333" VerticalAlignment="Center" />
+
+                        <!-- Affiché seulement si le skin courant a des chromas -->
+                        <Border Margin="8,0,0,0" Padding="6,2" CornerRadius="3"
+                                Background="#E8E0F5" VerticalAlignment="Center"
+                                Visibility="{Binding SelectedSkin.HasChromas, Converter={StaticResource BoolToVis}}">
+                            <TextBlock Text="{x:Static props:Resources.Skin_ChromasAvailable}"
+                                       FontSize="11" Foreground="#5B3FA0" />
+                        </Border>
+                    </StackPanel>
 
                     <!-- Navigation -->
                     <StackPanel Grid.Row="3"

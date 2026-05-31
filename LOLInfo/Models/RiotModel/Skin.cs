@@ -15,4 +15,12 @@ public class Skin
 
     [JsonPropertyName("chromas")]
     public bool? Chromas { get; set; }
+
+    /// <summary>
+    /// Num du skin parent si cette entrée est une <b>variante de couleur (chroma)</b>.
+    /// Null pour un vrai skin. DataDragon liste les chromas comme des skins à part
+    /// entière ; ce champ permet de les distinguer.
+    /// </summary>
+    [JsonPropertyName("parentSkin")]
+    public int? ParentSkin { get; set; }
 }

@@ -294,4 +294,7 @@
   <data name="Previous" xml:space="preserve">
     <value>Previous</value>
   </data>
+  <data name="Skin_ChromasAvailable" xml:space="preserve">
+    <value>🎨 Chromas available</value>
+  </data>
 </root>

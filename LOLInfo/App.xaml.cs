@@ -92,6 +92,7 @@ public partial class App : Application
         // Stockage local
         services.AddSingleton<IFavoritesService, FavoritesService>();
         services.AddSingleton<ILanguageService, LanguageService>();
+        services.AddSingleton<IImageCacheService, ImageCacheService>();
 
         // Navigation
         services.AddSingleton<IViewManager, ViewManager>();
@@ -111,6 +112,11 @@ public partial class App : Application
 
         this.DispatcherUnhandledException += OnDispatcherUnhandledException;
         AppDomain.CurrentDomain.UnhandledException += OnDomainUnhandledException;
+
+        // Purge en arrière-plan les images en cache inutilisées depuis > 30 jours
+        // (icônes d'anciens patchs). Non bloquant pour le démarrage.
+        var imageCache = this.Services.GetRequiredService<IImageCacheService>();
+        _ = Task.Run(() => imageCache.PurgeOldFiles(TimeSpan.FromDays(30)));
 
         // Récupère la version DataDragon courante avant la navigation.
         // En cas d'échec réseau, DataDragonCdn.Version reste "latest".

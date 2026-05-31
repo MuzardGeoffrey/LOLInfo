@@ -322,6 +322,15 @@ namespace LOLInfo.Properties {
         }
         
         /// <summary>
+        ///   Recherche une chaîne localisée semblable à 🎨 Chromas disponibles.
+        /// </summary>
+        public static string Skin_ChromasAvailable {
+            get {
+                return ResourceManager.GetString("Skin_ChromasAvailable", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Recherche une chaîne localisée semblable à Niv {0}.
         /// </summary>
         public static string Spell_LevelHeader {

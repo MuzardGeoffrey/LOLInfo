@@ -121,12 +121,16 @@ public class DetailChampionViewModel(
     private void BuildSkins()
     {
         this._skins = this.Champion?.Skins is { } skins
-            ? skins.Select(skin => new SkinViewModel
-            {
-                Num          = skin.Num ?? 0,
-                ChampionId   = this.ChampionName,
-                DisplayName  = DisplaySkinName(skin, this.Champion),
-            }).ToList()
+            // Exclut les chromas (variantes de couleur) : DataDragon les liste comme
+            // des skins, mais ils portent un parentSkin et n'ont pas de splash propre.
+            ? skins.Where(skin => skin.ParentSkin is null)
+                   .Select(skin => new SkinViewModel
+                   {
+                       Num          = skin.Num ?? 0,
+                       ChampionId   = this.ChampionName,
+                       DisplayName  = DisplaySkinName(skin, this.Champion),
+                       HasChromas   = skin.Chromas ?? false,
+                   }).ToList()
             : [];
 
         // Affiche le premier skin (skin de base) par défaut.

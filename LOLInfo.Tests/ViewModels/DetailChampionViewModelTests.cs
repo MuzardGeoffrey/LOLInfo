@@ -247,6 +247,49 @@ namespace LOLInfo.Tests.ViewModels
         }
 
         [TestMethod]
+        public async Task BuildSkins_ExcludesChromaVariants()
+        {
+            // Reproduit le cas Ahri : un vrai skin + ses chromas (parentSkin renseigné).
+            var champion = MakeFullChampion();
+            champion.Skins = new List<Skin>
+            {
+                new() { Num = 0,  Name = "default" },
+                new() { Num = 27, Name = "Spirit Blossom Ahri", Chromas = true },
+                new() { Num = 29, Name = "Spirit Blossom Ahri (Aquamarine)", ParentSkin = 27 },
+                new() { Num = 30, Name = "Spirit Blossom Ahri (Pearl)",      ParentSkin = 27 },
+                new() { Num = 88, Name = "Spirit Blossom Springs Ahri" },
+            };
+
+            var vm = CreateVm(champion);
+            await vm.LoadAsync();
+
+            // Seuls les vrais skins sont retenus (chromas exclus), ordre préservé.
+            Assert.AreEqual(3, vm.Skins.Count);
+            Assert.AreEqual(0,  vm.Skins[0].Num);
+            Assert.AreEqual(27, vm.Skins[1].Num);
+            Assert.AreEqual(88, vm.Skins[2].Num);
+        }
+
+        [TestMethod]
+        public async Task BuildSkins_MapsChromasFlag()
+        {
+            var champion = MakeFullChampion();
+            champion.Skins = new List<Skin>
+            {
+                new() { Num = 0, Name = "default", Chromas = false },
+                new() { Num = 1, Name = "Skin avec chromas", Chromas = true },
+                new() { Num = 2, Name = "Skin sans flag", Chromas = null },
+            };
+
+            var vm = CreateVm(champion);
+            await vm.LoadAsync();
+
+            Assert.IsFalse(vm.Skins[0].HasChromas);
+            Assert.IsTrue(vm.Skins[1].HasChromas);
+            Assert.IsFalse(vm.Skins[2].HasChromas, "Chromas null doit être traité comme false");
+        }
+
+        [TestMethod]
         public async Task LoadAsync_SelectsFirstSkinByDefault()
         {
             var vm = CreateVm(MakeChampionWithSkins(3));
