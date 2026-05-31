@@ -63,6 +63,14 @@ namespace LOLInfo.Utils
         public static string ChampionUrl(string filename)
             => $"{Base}/{Version}/img/champion/{filename}";
 
+        /// <summary>
+        /// URL du splash art d'un skin. À la différence des icônes, les splash
+        /// arts ne sont PAS versionnés (pas de {version} dans le chemin).
+        /// Ex : SkinUrl("Ahri_0.jpg") → "https://…/cdn/img/champion/splash/Ahri_0.jpg"
+        /// </summary>
+        public static string SkinUrl(string filename)
+            => $"{Base}/img/champion/splash/{filename}";
+
         // ── API data ──────────────────────────────────────────────────────
 
         /// <summary>URL de la liste de tous les champions (langue <see cref="DataLocale"/>).</summary>

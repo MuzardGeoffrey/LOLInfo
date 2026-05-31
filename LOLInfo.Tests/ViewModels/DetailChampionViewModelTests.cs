@@ -233,5 +233,109 @@ namespace LOLInfo.Tests.ViewModels
             await vm.LoadAsync();
             Assert.IsNull(vm.Champion);
         }
+
+        // ── Skins ──────────────────────────────────────────────────────────
+
+        private static Champion MakeChampionWithSkins(int skinCount, string id = "Ahri")
+        {
+            var champion = MakeFullChampion(id);
+            var skins = new List<Skin> { new() { Num = 0, Name = "default" } };
+            for (int i = 1; i < skinCount; i++)
+                skins.Add(new Skin { Num = i, Name = $"Skin {i}" });
+            champion.Skins = skins;
+            return champion;
+        }
+
+        [TestMethod]
+        public async Task LoadAsync_SelectsFirstSkinByDefault()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(3));
+            await vm.LoadAsync();
+
+            Assert.IsTrue(vm.HasSkins);
+            Assert.AreEqual(3, vm.Skins.Count);
+            Assert.IsNotNull(vm.SelectedSkin);
+            Assert.AreEqual(0, vm.SelectedSkin!.Num);
+        }
+
+        [TestMethod]
+        public async Task BaseSkin_DisplayName_IsChampionName()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(2, id: "Ahri"));
+            await vm.LoadAsync();
+
+            // Le skin de base ("default") prend le nom du champion.
+            Assert.AreEqual("Ahri", vm.SelectedSkin!.DisplayName);
+        }
+
+        [TestMethod]
+        public async Task SkinPath_IsChampionIdUnderscoreNum()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(3, id: "Ahri"));
+            await vm.LoadAsync();
+
+            Assert.AreEqual("Ahri_0.jpg", vm.SelectedSkin!.SkinPath);
+            Assert.AreEqual("Ahri_1.jpg", vm.NextSkin!.SkinPath);
+        }
+
+        [TestMethod]
+        public async Task SelectNextSkin_AdvancesAndLoopsToFirst()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(3));
+            await vm.LoadAsync();
+
+            vm.SelectNextSkin();
+            Assert.AreEqual(1, vm.SelectedSkin!.Num);
+
+            vm.SelectNextSkin();
+            Assert.AreEqual(2, vm.SelectedSkin!.Num);
+
+            vm.SelectNextSkin(); // dernier → revient au premier (boucle)
+            Assert.AreEqual(0, vm.SelectedSkin!.Num);
+        }
+
+        [TestMethod]
+        public async Task SelectPreviousSkin_FromFirst_LoopsToLast()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(3));
+            await vm.LoadAsync();
+
+            vm.SelectPreviousSkin(); // premier → revient au dernier (boucle)
+            Assert.AreEqual(2, vm.SelectedSkin!.Num);
+        }
+
+        [TestMethod]
+        public async Task Previews_PointToNeighbours_WithLooping()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(3));
+            await vm.LoadAsync();
+
+            // Skin courant = 0 → précédent boucle sur le dernier (2), suivant = 1.
+            Assert.AreEqual(2, vm.PreviousSkin!.Num);
+            Assert.AreEqual(1, vm.NextSkin!.Num);
+        }
+
+        [TestMethod]
+        public async Task Previews_AreNull_WhenSingleSkin()
+        {
+            var vm = CreateVm(MakeChampionWithSkins(1));
+            await vm.LoadAsync();
+
+            Assert.IsNull(vm.PreviousSkin);
+            Assert.IsNull(vm.NextSkin);
+        }
+
+        [TestMethod]
+        public async Task HasSkins_False_WhenNoSkins()
+        {
+            var champion = MakeFullChampion();
+            champion.Skins = null;
+
+            var vm = CreateVm(champion);
+            await vm.LoadAsync();
+
+            Assert.IsFalse(vm.HasSkins);
+            Assert.IsNull(vm.SelectedSkin);
+        }
     }
 }

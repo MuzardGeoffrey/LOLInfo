@@ -37,6 +37,7 @@ namespace LOLInfo.Utils
                     ImageConstant.SPELL     => DataDragonCdn.SpellUrl(imagePath),
                     ImageConstant.PASSIVE   => DataDragonCdn.PassiveUrl(imagePath),
                     ImageConstant.MINIATURE => DataDragonCdn.ChampionUrl(imagePath),
+                    ImageConstant.SKIN => DataDragonCdn.SkinUrl(imagePath),
                     _                       => string.Empty,
                 };
 
@@ -74,5 +75,6 @@ namespace LOLInfo.Utils
         public const string PASSIVE   = "passive";
         public const string SPELL     = "spell";
         public const string MINIATURE = "miniature";
+        public const string SKIN = "skin";
     }
 }

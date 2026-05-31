@@ -103,8 +103,10 @@ public class SpellViewModel
             .Select(kv => new FormulaRowViewModel(kv.Key, kv.Value.Format()))
             .ToList<FormulaRowViewModel>();
 
-        var clone = new SpellViewModel(this.Key, this.Name, this.Description, this.IconPath, this.IsPassive, this.StatRows, this.LeveltipRows);
-        clone.FormulaRows = rows;
+        var clone = new SpellViewModel(this.Key, this.Name, this.Description, this.IconPath, this.IsPassive, this.StatRows, this.LeveltipRows)
+        {
+            FormulaRows = rows
+        };
         return clone;
     }
 

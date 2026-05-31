@@ -32,4 +32,14 @@ public partial class DetailChampionPage : Page
     {
         this._viewManager.NavigateToAllChampion();
     }
+
+    private void NextSkinButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        this._viewModel.SelectNextSkin();
+    }
+
+    private void PreviousSkinButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        this._viewModel.SelectPreviousSkin();
+    }
 }

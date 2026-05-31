@@ -254,8 +254,10 @@
     <!-- ── Layout principal ──────────────────────────────────────────────── -->
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />  <!-- En-tête champion -->
-            <RowDefinition Height="*" />     <!-- Onglets -->
+            <RowDefinition Height="Auto" />
+            <!-- En-tête champion -->
+            <RowDefinition Height="*" />
+            <!-- Onglets -->
         </Grid.RowDefinitions>
 
         <!-- ── En-tête : icône + nom + titre ──────────────────────────── -->
@@ -367,11 +369,75 @@
 
             <TabItem Header="{x:Static props:Resources.Detail_Tab_General}">
                 <Grid Background="#F5F5F5" Margin="16">
-                    <StackPanel>
-                        <TextBlock Text="{Binding Champion.Blurb}"
-                                   TextWrapping="Wrap"
-                                   FontSize="13"
-                                   Foreground="#333" />
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />  <!-- Lore -->
+                        <RowDefinition Height="*" />     <!-- Carrousel de skins -->
+                        <RowDefinition Height="Auto" />  <!-- Nom du skin -->
+                        <RowDefinition Height="Auto" />  <!-- Boutons -->
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Text="{Binding Champion.Blurb}"
+                               TextWrapping="Wrap" FontSize="13" Foreground="#333"
+                               Margin="0,0,0,12" />
+
+                    <!-- ── Carrousel : aperçu précédent · skin courant · aperçu suivant ── -->
+                    <Grid Grid.Row="1"
+                          Visibility="{Binding HasSkins, Converter={StaticResource BoolToVis}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="2*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Aperçu précédent (réduit + estompé) -->
+                        <Image Grid.Column="0"
+                               Opacity="0.4"
+                               Margin="0,16,8,16"
+                               Source="{Binding PreviousSkin.SkinPath,
+                                        Converter={StaticResource ImagePathConverter},
+                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               VerticalAlignment="Center" />
+
+                        <!-- Skin courant -->
+                        <Image Grid.Column="1"
+                               Source="{Binding SelectedSkin.SkinPath,
+                                        Converter={StaticResource ImagePathConverter},
+                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                        <!-- Aperçu suivant (réduit + estompé) -->
+                        <Image Grid.Column="2"
+                               Opacity="0.4"
+                               Margin="8,16,0,16"
+                               Source="{Binding NextSkin.SkinPath,
+                                        Converter={StaticResource ImagePathConverter},
+                                        ConverterParameter={x:Static utils:ImageConstant.SKIN}}"
+                               VerticalAlignment="Center" />
+                    </Grid>
+
+                    <!-- Nom du skin -->
+                    <TextBlock Grid.Row="2"
+                               Text="{Binding SelectedSkin.DisplayName}"
+                               HorizontalAlignment="Center"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="#333" Margin="0,8,0,0"
+                               Visibility="{Binding HasSkins, Converter={StaticResource BoolToVis}}" />
+
+                    <!-- Navigation -->
+                    <StackPanel Grid.Row="3"
+                                Orientation="Horizontal"
+                                HorizontalAlignment="Center"
+                                Margin="0,8,0,0"
+                                Visibility="{Binding HasSkins, Converter={StaticResource BoolToVis}}">
+                        <Button x:Name="previousButton"
+                                Content="{x:Static props:Resources.Previous}"
+                                Click="PreviousSkinButton_OnClick"
+                                Padding="12,6" Margin="0,0,8,0" Cursor="Hand" />
+                        <Button x:Name="nextButton"
+                                Content="{x:Static props:Resources.Next}"
+                                Click="NextSkinButton_OnClick"
+                                Padding="12,6" Cursor="Hand" />
                     </StackPanel>
                 </Grid>
             </TabItem>

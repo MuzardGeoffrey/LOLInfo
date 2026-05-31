@@ -21,7 +21,9 @@ using Microsoft.Extensions.Logging;
 /// </summary>
 public class LanguageService : ILanguageService
 {
-    // Non-readonly : redirigé par les tests via réflexion vers un fichier temporaire.
+    // Non-readonly volontairement : redirigé par les tests via réflexion vers un
+    // fichier temporaire (cf. FavoritesService). Ne pas ajouter 'readonly' —
+    // l'écriture par réflexion d'un champ initonly lève une exception sur .NET.
     private static string FilePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "LOLInfo",

@@ -1,239 +1,297 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!--
-		Traductions anglaises. Culture détectée automatiquement depuis le suffixe
-		".en" du nom de fichier → assembly satellite "en".
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Pour ajouter une langue : dupliquer ce fichier en Resources.<culture>.resx
-		(ex : Resources.es.resx), traduire les <value>, puis l'ajouter au .csproj
-		comme EmbeddedResource. Aucun changement de code requis.
-	-->
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-
-	<!-- Toolbar -->
-	<data name="Toolbar_Sort" xml:space="preserve">
-		<value>Sort:</value>
-	</data>
-	<data name="Toolbar_Favorites" xml:space="preserve">
-		<value>Favorites</value>
-	</data>
-	<data name="Toolbar_Damage" xml:space="preserve">
-		<value>Damage:</value>
-	</data>
-	<data name="Toolbar_Range" xml:space="preserve">
-		<value>Range:</value>
-	</data>
-	<data name="Toolbar_Classes" xml:space="preserve">
-		<value>Classes:</value>
-	</data>
-	<data name="Toolbar_Difficulty" xml:space="preserve">
-		<value>Difficulty:</value>
-	</data>
-	<data name="Toolbar_Resource" xml:space="preserve">
-		<value>Resource:</value>
-	</data>
-
-	<!-- Damage / Range filters -->
-	<data name="Filter_All" xml:space="preserve">
-		<value>All</value>
-	</data>
-	<data name="Filter_Damage_AD" xml:space="preserve">
-		<value>AD</value>
-	</data>
-	<data name="Filter_Damage_AP" xml:space="preserve">
-		<value>AP</value>
-	</data>
-	<data name="Filter_Damage_Mixed" xml:space="preserve">
-		<value>Mixed</value>
-	</data>
-	<data name="Filter_Range_Melee" xml:space="preserve">
-		<value>Melee</value>
-	</data>
-	<data name="Filter_Range_Ranged" xml:space="preserve">
-		<value>Ranged</value>
-	</data>
-
-	<!-- Sort options -->
-	<data name="Sort_NameAsc" xml:space="preserve">
-		<value>Name A → Z</value>
-	</data>
-	<data name="Sort_NameDesc" xml:space="preserve">
-		<value>Name Z → A</value>
-	</data>
-	<data name="Sort_DifficultyAsc" xml:space="preserve">
-		<value>Difficulty ↑</value>
-	</data>
-	<data name="Sort_DifficultyDesc" xml:space="preserve">
-		<value>Difficulty ↓</value>
-	</data>
-
-	<!-- Detail page -->
-	<data name="Detail_Tab_Spells" xml:space="preserve">
-		<value>Spells</value>
-	</data>
-	<data name="Detail_Tab_General" xml:space="preserve">
-		<value>General</value>
-	</data>
-	<data name="Detail_Tab_Stats" xml:space="preserve">
-		<value>Stats</value>
-	</data>
-	<data name="Detail_Back" xml:space="preserve">
-		<value>← Back</value>
-	</data>
-	<data name="Detail_LevelGain" xml:space="preserve">
-		<value>Per-level gain</value>
-	</data>
-	<data name="Detail_Formulas" xml:space="preserve">
-		<value>Formulas (CDragon)</value>
-	</data>
-
-	<!-- Spell labels -->
-	<data name="Spell_Cooldown" xml:space="preserve">
-		<value>⏱ Cooldown</value>
-	</data>
-	<data name="Spell_Cost" xml:space="preserve">
-		<value>💧 Cost</value>
-	</data>
-	<data name="Spell_Range" xml:space="preserve">
-		<value>🎯 Range</value>
-	</data>
-	<data name="Spell_LevelHeader" xml:space="preserve">
-		<value>Lvl {0}</value>
-	</data>
-
-	<!-- Champion classes (filter) -->
-	<data name="Tag_Fighter" xml:space="preserve">
-		<value>Fighter</value>
-	</data>
-	<data name="Tag_Tank" xml:space="preserve">
-		<value>Tank</value>
-	</data>
-	<data name="Tag_Mage" xml:space="preserve">
-		<value>Mage</value>
-	</data>
-	<data name="Tag_Assassin" xml:space="preserve">
-		<value>Assassin</value>
-	</data>
-	<data name="Tag_Marksman" xml:space="preserve">
-		<value>Marksman</value>
-	</data>
-	<data name="Tag_Support" xml:space="preserve">
-		<value>Support</value>
-	</data>
-
-	<!-- Champion resources (filter) -->
-	<data name="Resource_Mana" xml:space="preserve">
-		<value>Mana</value>
-	</data>
-	<data name="Resource_None" xml:space="preserve">
-		<value>None</value>
-	</data>
-	<data name="Resource_Energy" xml:space="preserve">
-		<value>Energy</value>
-	</data>
-	<data name="Resource_Other" xml:space="preserve">
-		<value>Other</value>
-	</data>
-
-	<!-- Stats (CDragon formulas — ChampionStat.ToLabel) -->
-	<data name="Stat_AttackDamage" xml:space="preserve">
-		<value>AD</value>
-	</data>
-	<data name="Stat_AttackSpeed" xml:space="preserve">
-		<value>attack speed</value>
-	</data>
-	<data name="Stat_AbilityPower" xml:space="preserve">
-		<value>AP</value>
-	</data>
-	<data name="Stat_Armor" xml:space="preserve">
-		<value>armor</value>
-	</data>
-	<data name="Stat_MagicResist" xml:space="preserve">
-		<value>MR</value>
-	</data>
-	<data name="Stat_Health" xml:space="preserve">
-		<value>HP</value>
-	</data>
-	<data name="Stat_MovementSpeed" xml:space="preserve">
-		<value>move speed</value>
-	</data>
-	<data name="Stat_CritChance" xml:space="preserve">
-		<value>crit chance</value>
-	</data>
-	<data name="Stat_HealthRegen" xml:space="preserve">
-		<value>HP regen</value>
-	</data>
-	<data name="Stat_Mana" xml:space="preserve">
-		<value>mana</value>
-	</data>
-	<data name="Stat_ManaRegen" xml:space="preserve">
-		<value>mana regen</value>
-	</data>
-	<data name="Stat_AbilityHaste" xml:space="preserve">
-		<value>haste</value>
-	</data>
-	<data name="Stat_Unknown" xml:space="preserve">
-		<value>unknown stat</value>
-	</data>
-	<data name="StatSuffix_Base" xml:space="preserve">
-		<value> (base)</value>
-	</data>
-	<data name="StatSuffix_Bonus" xml:space="preserve">
-		<value> bonus</value>
-	</data>
-
-	<!-- CDragon formula fragments -->
-	<data name="Formula_Resource" xml:space="preserve">
-		<value>resource</value>
-	</data>
-	<data name="Formula_PerLevel" xml:space="preserve">
-		<value>(per lvl)</value>
-	</data>
-	<data name="Formula_LevelRange" xml:space="preserve">
-		<value>(lvl 1→18)</value>
-	</data>
-	<data name="Formula_Level3" xml:space="preserve">
-		<value>(lvl 1/9/18)</value>
-	</data>
-	<data name="Formula_Level2" xml:space="preserve">
-		<value>(lvl 1/18)</value>
-	</data>
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Toolbar_Sort" xml:space="preserve">
+    <value>Sort:</value>
+  </data>
+  <data name="Toolbar_Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="Toolbar_Damage" xml:space="preserve">
+    <value>Damage:</value>
+  </data>
+  <data name="Toolbar_Range" xml:space="preserve">
+    <value>Range:</value>
+  </data>
+  <data name="Toolbar_Classes" xml:space="preserve">
+    <value>Classes:</value>
+  </data>
+  <data name="Toolbar_Difficulty" xml:space="preserve">
+    <value>Difficulty:</value>
+  </data>
+  <data name="Toolbar_Resource" xml:space="preserve">
+    <value>Resource:</value>
+  </data>
+  <data name="Filter_All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Filter_Damage_AD" xml:space="preserve">
+    <value>AD</value>
+  </data>
+  <data name="Filter_Damage_AP" xml:space="preserve">
+    <value>AP</value>
+  </data>
+  <data name="Filter_Damage_Mixed" xml:space="preserve">
+    <value>Mixed</value>
+  </data>
+  <data name="Filter_Range_Melee" xml:space="preserve">
+    <value>Melee</value>
+  </data>
+  <data name="Filter_Range_Ranged" xml:space="preserve">
+    <value>Ranged</value>
+  </data>
+  <data name="Sort_NameAsc" xml:space="preserve">
+    <value>Name A → Z</value>
+  </data>
+  <data name="Sort_NameDesc" xml:space="preserve">
+    <value>Name Z → A</value>
+  </data>
+  <data name="Sort_DifficultyAsc" xml:space="preserve">
+    <value>Difficulty ↑</value>
+  </data>
+  <data name="Sort_DifficultyDesc" xml:space="preserve">
+    <value>Difficulty ↓</value>
+  </data>
+  <data name="Detail_Tab_Spells" xml:space="preserve">
+    <value>Spells</value>
+  </data>
+  <data name="Detail_Tab_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Detail_Tab_Stats" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="Detail_Back" xml:space="preserve">
+    <value>← Back</value>
+  </data>
+  <data name="Detail_LevelGain" xml:space="preserve">
+    <value>Per-level gain</value>
+  </data>
+  <data name="Detail_Formulas" xml:space="preserve">
+    <value>Formulas (CDragon)</value>
+  </data>
+  <data name="Spell_Cooldown" xml:space="preserve">
+    <value>⏱ Cooldown</value>
+  </data>
+  <data name="Spell_Cost" xml:space="preserve">
+    <value>💧 Cost</value>
+  </data>
+  <data name="Spell_Range" xml:space="preserve">
+    <value>🎯 Range</value>
+  </data>
+  <data name="Spell_LevelHeader" xml:space="preserve">
+    <value>Lvl {0}</value>
+  </data>
+  <data name="Tag_Fighter" xml:space="preserve">
+    <value>Fighter</value>
+  </data>
+  <data name="Tag_Tank" xml:space="preserve">
+    <value>Tank</value>
+  </data>
+  <data name="Tag_Mage" xml:space="preserve">
+    <value>Mage</value>
+  </data>
+  <data name="Tag_Assassin" xml:space="preserve">
+    <value>Assassin</value>
+  </data>
+  <data name="Tag_Marksman" xml:space="preserve">
+    <value>Marksman</value>
+  </data>
+  <data name="Tag_Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="Resource_Mana" xml:space="preserve">
+    <value>Mana</value>
+  </data>
+  <data name="Resource_None" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Resource_Energy" xml:space="preserve">
+    <value>Energy</value>
+  </data>
+  <data name="Resource_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Stat_AttackDamage" xml:space="preserve">
+    <value>AD</value>
+  </data>
+  <data name="Stat_AttackSpeed" xml:space="preserve">
+    <value>attack speed</value>
+  </data>
+  <data name="Stat_AbilityPower" xml:space="preserve">
+    <value>AP</value>
+  </data>
+  <data name="Stat_Armor" xml:space="preserve">
+    <value>armor</value>
+  </data>
+  <data name="Stat_MagicResist" xml:space="preserve">
+    <value>MR</value>
+  </data>
+  <data name="Stat_Health" xml:space="preserve">
+    <value>HP</value>
+  </data>
+  <data name="Stat_MovementSpeed" xml:space="preserve">
+    <value>move speed</value>
+  </data>
+  <data name="Stat_CritChance" xml:space="preserve">
+    <value>crit chance</value>
+  </data>
+  <data name="Stat_HealthRegen" xml:space="preserve">
+    <value>HP regen</value>
+  </data>
+  <data name="Stat_Mana" xml:space="preserve">
+    <value>mana</value>
+  </data>
+  <data name="Stat_ManaRegen" xml:space="preserve">
+    <value>mana regen</value>
+  </data>
+  <data name="Stat_AbilityHaste" xml:space="preserve">
+    <value>haste</value>
+  </data>
+  <data name="Stat_Unknown" xml:space="preserve">
+    <value>unknown stat</value>
+  </data>
+  <data name="StatSuffix_Base" xml:space="preserve">
+    <value> (base)</value>
+  </data>
+  <data name="StatSuffix_Bonus" xml:space="preserve">
+    <value> bonus</value>
+  </data>
+  <data name="Formula_Resource" xml:space="preserve">
+    <value>resource</value>
+  </data>
+  <data name="Formula_PerLevel" xml:space="preserve">
+    <value>(per lvl)</value>
+  </data>
+  <data name="Formula_LevelRange" xml:space="preserve">
+    <value>(lvl 1→18)</value>
+  </data>
+  <data name="Formula_Level3" xml:space="preserve">
+    <value>(lvl 1/9/18)</value>
+  </data>
+  <data name="Formula_Level2" xml:space="preserve">
+    <value>(lvl 1/18)</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
 </root>
