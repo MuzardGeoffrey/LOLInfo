@@ -2,6 +2,7 @@ namespace LOLInfo.ViewModels;
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ using LOLInfo.IViewModels;
 using LOLInfo.Models;
 using LOLInfo.Models.CdragonModel;
 using LOLInfo.Models.RiotModel;
+using LOLInfo.Properties;
 
 using Microsoft.Extensions.Logging;
 
@@ -86,6 +88,71 @@ public class DetailChampionViewModel(
             ? null
             : this._skins[(this.CurrentIndex + 1) % this._skins.Count];
 
+    // ── Stats par niveau ──────────────────────────────────────────────────
+
+    /// <summary>Niveaux sélectionnables (1 à 18).</summary>
+    public IReadOnlyList<int> Levels { get; } =
+        Enumerable.Range(ChampionStatsCalculator.MinLevel, ChampionStatsCalculator.MaxLevel).ToList();
+
+    private int _selectedLevel = ChampionStatsCalculator.MinLevel;
+
+    /// <summary>Niveau choisi pour l'affichage des stats (1 à 18).</summary>
+    public int SelectedLevel
+    {
+        get => this._selectedLevel;
+        set
+        {
+            var clamped = Math.Clamp(value, ChampionStatsCalculator.MinLevel, ChampionStatsCalculator.MaxLevel);
+            if (this._selectedLevel == clamped) return;
+            this._selectedLevel = clamped;
+            this.OnPropertyChanged(nameof(SelectedLevel));
+            this.BuildStats();
+        }
+    }
+
+    private IReadOnlyList<ChampionStatRow> _championStats = [];
+
+    /// <summary>Stats du champion calculées pour <see cref="SelectedLevel"/>.</summary>
+    public IReadOnlyList<ChampionStatRow> ChampionStats => this._championStats;
+
+    private void BuildStats()
+    {
+        this._championStats = ChampionStatsCalculator
+            .Compute(this.Champion?.Stats, this._selectedLevel)
+            .Select(s => new ChampionStatRow(LabelFor(s.Kind), FormatValue(s)))
+            .ToList();
+        this.OnPropertyChanged(nameof(ChampionStats));
+    }
+
+    private static string LabelFor(ChampionStatKind kind) => kind switch
+    {
+        ChampionStatKind.Health       => Resources.StatLabel_Health,
+        ChampionStatKind.HealthRegen  => Resources.StatLabel_HealthRegen,
+        ChampionStatKind.Mana         => Resources.StatLabel_Mana,
+        ChampionStatKind.ManaRegen    => Resources.StatLabel_ManaRegen,
+        ChampionStatKind.Armor        => Resources.StatLabel_Armor,
+        ChampionStatKind.MagicResist  => Resources.StatLabel_MagicResist,
+        ChampionStatKind.AttackDamage => Resources.StatLabel_AttackDamage,
+        ChampionStatKind.AttackSpeed  => Resources.StatLabel_AttackSpeed,
+        ChampionStatKind.MoveSpeed    => Resources.StatLabel_MoveSpeed,
+        ChampionStatKind.AttackRange  => Resources.StatLabel_AttackRange,
+        ChampionStatKind.CritChance   => Resources.StatLabel_CritChance,
+        _                             => kind.ToString(),
+    };
+
+    private static string FormatValue(ChampionStatValue s)
+    {
+        var c = CultureInfo.CurrentCulture;
+        return s.Kind switch
+        {
+            ChampionStatKind.AttackSpeed => s.Value.ToString("0.###", c),
+            ChampionStatKind.CritChance  => s.Value.ToString("0.#", c) + " %",
+            ChampionStatKind.Health or ChampionStatKind.Mana or
+            ChampionStatKind.MoveSpeed or ChampionStatKind.AttackRange
+                                         => Math.Round(s.Value).ToString("0", c),
+            _                            => s.Value.ToString("0.#", c),
+        };
+    }
 
     // ── Chargement ────────────────────────────────────────────────────────
 
@@ -111,6 +178,8 @@ public class DetailChampionViewModel(
 
             logger.LogInformation("Construction des skins");
             this.BuildSkins();
+
+            this.BuildStats();
         }
         catch (Exception ex)
         {

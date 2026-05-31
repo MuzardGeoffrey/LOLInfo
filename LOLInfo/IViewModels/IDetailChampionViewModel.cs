@@ -32,6 +32,15 @@ public interface IDetailChampionViewModel
     /// <summary>Aperçu du skin suivant (boucle). Null si moins de 2 skins.</summary>
     SkinViewModel? NextSkin { get; }
 
+    /// <summary>Niveaux sélectionnables (1 à 18).</summary>
+    IReadOnlyList<int> Levels { get; }
+
+    /// <summary>Niveau choisi pour le calcul des stats.</summary>
+    int SelectedLevel { get; set; }
+
+    /// <summary>Stats du champion au niveau sélectionné.</summary>
+    IReadOnlyList<ChampionStatRow> ChampionStats { get; }
+
     /// <summary>Déclenche le chargement des données depuis l'API.</summary>
     Task LoadAsync();
 

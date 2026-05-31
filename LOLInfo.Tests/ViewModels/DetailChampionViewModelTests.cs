@@ -247,6 +247,31 @@ namespace LOLInfo.Tests.ViewModels
         }
 
         [TestMethod]
+        public async Task ChampionStats_BuiltOnLoad_AndRebuiltOnLevelChange()
+        {
+            var champion = MakeFullChampion();
+            champion.Stats = new Dictionary<string, double>
+            {
+                ["hp"] = 600, ["hpperlevel"] = 100,
+                ["attackspeed"] = 0.625, ["attackspeedperlevel"] = 2,
+                ["movespeed"] = 340, ["attackrange"] = 175,
+            };
+
+            var vm = CreateVm(champion);
+            await vm.LoadAsync();
+
+            Assert.AreEqual(18, vm.Levels.Count);
+            Assert.AreEqual(11, vm.ChampionStats.Count);
+
+            // Première ligne = PV. Au niveau 1 = base (600).
+            Assert.AreEqual("600", vm.ChampionStats[0].Value);
+
+            // Changer de niveau recalcule : niv 18 → 600 + 100*17 = 2300.
+            vm.SelectedLevel = 18;
+            Assert.AreEqual("2300", vm.ChampionStats[0].Value);
+        }
+
+        [TestMethod]
         public async Task BuildSpells_AttachesPassiveFormulas_FromCdragonPassiveKey()
         {
             var champion = MakeFullChampion("Ahri");

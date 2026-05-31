@@ -330,6 +330,54 @@ namespace LOLInfo.Properties {
             }
         }
 
+        public static string StatPage_Level {
+            get { return ResourceManager.GetString("StatPage_Level", resourceCulture); }
+        }
+
+        public static string StatLabel_Health {
+            get { return ResourceManager.GetString("StatLabel_Health", resourceCulture); }
+        }
+
+        public static string StatLabel_HealthRegen {
+            get { return ResourceManager.GetString("StatLabel_HealthRegen", resourceCulture); }
+        }
+
+        public static string StatLabel_Mana {
+            get { return ResourceManager.GetString("StatLabel_Mana", resourceCulture); }
+        }
+
+        public static string StatLabel_ManaRegen {
+            get { return ResourceManager.GetString("StatLabel_ManaRegen", resourceCulture); }
+        }
+
+        public static string StatLabel_Armor {
+            get { return ResourceManager.GetString("StatLabel_Armor", resourceCulture); }
+        }
+
+        public static string StatLabel_MagicResist {
+            get { return ResourceManager.GetString("StatLabel_MagicResist", resourceCulture); }
+        }
+
+        public static string StatLabel_AttackDamage {
+            get { return ResourceManager.GetString("StatLabel_AttackDamage", resourceCulture); }
+        }
+
+        public static string StatLabel_AttackSpeed {
+            get { return ResourceManager.GetString("StatLabel_AttackSpeed", resourceCulture); }
+        }
+
+        public static string StatLabel_MoveSpeed {
+            get { return ResourceManager.GetString("StatLabel_MoveSpeed", resourceCulture); }
+        }
+
+        public static string StatLabel_AttackRange {
+            get { return ResourceManager.GetString("StatLabel_AttackRange", resourceCulture); }
+        }
+
+        public static string StatLabel_CritChance {
+            get { return ResourceManager.GetString("StatLabel_CritChance", resourceCulture); }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Niv {0}.
         /// </summary>

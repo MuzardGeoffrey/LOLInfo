@@ -297,4 +297,40 @@
   <data name="Skin_ChromasAvailable" xml:space="preserve">
     <value>🎨 Chromas available</value>
   </data>
+  <data name="StatPage_Level" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="StatLabel_Health" xml:space="preserve">
+    <value>Health</value>
+  </data>
+  <data name="StatLabel_HealthRegen" xml:space="preserve">
+    <value>Health regen / 5s</value>
+  </data>
+  <data name="StatLabel_Mana" xml:space="preserve">
+    <value>Mana</value>
+  </data>
+  <data name="StatLabel_ManaRegen" xml:space="preserve">
+    <value>Mana regen / 5s</value>
+  </data>
+  <data name="StatLabel_Armor" xml:space="preserve">
+    <value>Armor</value>
+  </data>
+  <data name="StatLabel_MagicResist" xml:space="preserve">
+    <value>Magic resist</value>
+  </data>
+  <data name="StatLabel_AttackDamage" xml:space="preserve">
+    <value>Attack damage</value>
+  </data>
+  <data name="StatLabel_AttackSpeed" xml:space="preserve">
+    <value>Attack speed</value>
+  </data>
+  <data name="StatLabel_MoveSpeed" xml:space="preserve">
+    <value>Move speed</value>
+  </data>
+  <data name="StatLabel_AttackRange" xml:space="preserve">
+    <value>Attack range</value>
+  </data>
+  <data name="StatLabel_CritChance" xml:space="preserve">
+    <value>Crit chance</value>
+  </data>
 </root>
