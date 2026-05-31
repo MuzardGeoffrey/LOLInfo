@@ -70,7 +70,7 @@ public class SpellViewModel
     {
         this.Key          = key;
         this.Name         = name        ?? string.Empty;
-        this.Description  = description ?? string.Empty;
+        this.Description  = RiotText.CleanDescription(description);
         this.IconPath     = iconPath    ?? string.Empty;
         this.IsPassive    = isPassive;
         this.StatRows     = statRows;

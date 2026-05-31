@@ -163,7 +163,7 @@ namespace LOLInfo.Tests.CdragonModel
                     {
                         FormulaParts = new List<CdragonFormulaPartRaw>
                         {
-                            new() { Type = "StatByNamedDataValueCalculationPart", Stat = 3, StatFormula = 2, DataValue = "APRatio" }
+                            new() { Type = "StatByNamedDataValueCalculationPart", Stat = 0, StatFormula = 2, DataValue = "APRatio" }
                         }
                     }
                 }
@@ -171,6 +171,34 @@ namespace LOLInfo.Tests.CdragonModel
 
             var result = CdragonChampionParser.ParseCalculations(raw);
             Assert.IsInstanceOfType(result["Calc"].Parts[0], typeof(StatScalingPart));
+            var part = (StatScalingPart)result["Calc"].Parts[0];
+            Assert.AreEqual(ChampionStat.AbilityPower, part.Stat);
+        }
+
+        [TestMethod]
+        public void ParseCalculations_StatByNamedDataValue_AbsentStat_DefaultsToAbilityPower()
+        {
+            // mStat omis dans le JSON = AbilityPower (0). Le ratio NE doit PAS être perdu.
+            var raw = new CdragonSpellRaw
+            {
+                DataValues = new List<CdragonDataValue>
+                {
+                    new() { Name = "APRatio", Values = new List<double> { 0.8 } }
+                },
+                SpellCalculations = new Dictionary<string, CdragonSpellCalculationRaw>
+                {
+                    ["Calc"] = new CdragonSpellCalculationRaw
+                    {
+                        FormulaParts = new List<CdragonFormulaPartRaw>
+                        {
+                            new() { Type = "StatByNamedDataValueCalculationPart", DataValue = "APRatio" } // pas de Stat
+                        }
+                    }
+                }
+            };
+
+            var result = CdragonChampionParser.ParseCalculations(raw);
+            Assert.AreEqual(1, result["Calc"].Parts.Count);
             var part = (StatScalingPart)result["Calc"].Parts[0];
             Assert.AreEqual(ChampionStat.AbilityPower, part.Stat);
         }
@@ -350,7 +378,7 @@ namespace LOLInfo.Tests.CdragonModel
             var partRaw = new CdragonFormulaPartRaw
             {
                 Type = "StatBySubPartCalculationPart",
-                Stat = 3,
+                Stat = 0,
                 StatFormula = 2,
                 SubPart = new CdragonFormulaPartRaw { Type = "NumberCalculationPart", Number = 0.45 }
             };

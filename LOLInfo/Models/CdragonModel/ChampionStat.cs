@@ -2,21 +2,31 @@ namespace LOLInfo.Models.CdragonModel;
 
 using LOLInfo.Properties;
 
+/// <summary>
+/// Statistiques de champion. Les valeurs correspondent à l'enum <c>mStat</c> de
+/// CDragon (utilisé dans les <c>StatBy…CalculationPart</c>), vérifié sur l'ensemble
+/// des champions :
+///   0=AP, 1=Armure, 2=AD, 4=Vit. attaque, 6=RM, 7=Vit. dépl., 8=Crit, 12=PV.
+/// Quand <c>mStat</c> est ABSENT dans le JSON, la valeur par défaut est 0 (AP).
+/// </summary>
 public enum ChampionStat
 {
-    Unknown       = 0,
-    AttackDamage  = 1,
-    AttackSpeed   = 2,
-    AbilityPower  = 3,
-    Armor         = 4,
-    MagicResist   = 5,
-    Health        = 6,
+    Unknown       = -1,
+    AbilityPower  = 0,
+    Armor         = 1,
+    AttackDamage  = 2,
+    AttackSpeed   = 4,
+    MagicResist   = 6,
     MovementSpeed = 7,
     CritChance    = 8,
-    HealthRegen   = 9,
-    Mana          = 10,
-    ManaRegen     = 11,
-    AbilityHaste  = 12,
+    Health        = 12,
+
+    // Stats non rencontrées dans les ratios CDragon : valeurs synthétiques
+    // (servent seulement à l'affichage/aux tests, ne correspondent à aucun mStat réel).
+    Mana          = 100,
+    ManaRegen     = 101,
+    HealthRegen   = 102,
+    AbilityHaste  = 103,
 }
 
 public enum StatFormula

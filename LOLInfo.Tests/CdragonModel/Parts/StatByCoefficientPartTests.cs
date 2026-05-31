@@ -10,15 +10,16 @@ namespace LOLInfo.Tests.CdragonModel.Parts
         [TestMethod]
         public void Format_AP_ShowsPercent()
         {
-            // coeff=0.30, stat=3 (AP), formula=2 (Total) → "+30% PA"
-            var part = new StatByCoefficientPart(0.30, 3, 2);
+            // coeff=0.30, stat=0 (AP), formula=2 (Total) → "+30% PA"
+            var part = new StatByCoefficientPart(0.30, 0, 2);
             Assert.AreEqual("+30% PA", part.Format());
         }
 
         [TestMethod]
         public void Format_AD_Bonus_ShowsBonusSuffix()
         {
-            var part = new StatByCoefficientPart(0.60, 1, 1);
+            // coeff=0.60, stat=2 (AD), formula=1 (Bonus)
+            var part = new StatByCoefficientPart(0.60, 2, 1);
             Assert.AreEqual("+60% AD bonus", part.Format());
         }
 
@@ -33,7 +34,7 @@ namespace LOLInfo.Tests.CdragonModel.Parts
         [TestMethod]
         public void Format_IntegerPercent_NoDecimal()
         {
-            var part = new StatByCoefficientPart(0.50, 3, 2);
+            var part = new StatByCoefficientPart(0.50, 0, 2);
             Assert.AreEqual("+50% PA", part.Format());
         }
 
@@ -41,7 +42,7 @@ namespace LOLInfo.Tests.CdragonModel.Parts
         public void Format_FractionalPercent_ShowsDecimals()
         {
             // 0.025 → "+2.5% PA"
-            var part = new StatByCoefficientPart(0.025, 3, 2);
+            var part = new StatByCoefficientPart(0.025, 0, 2);
             Assert.AreEqual("+2.5% PA", part.Format());
         }
     }

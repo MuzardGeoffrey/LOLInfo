@@ -78,12 +78,15 @@ public class CdragonSpellRaw
 
 /// <summary>
 /// Une entrée DataValues dans le bin.json CDragon.
-/// Exemple : { "mName": "BaseDamage", "mValues": [60, 95, 130, 165, 200] }
+/// Structure réelle (CDragon actuel) :
+///   { "name": "BaseDamage", "values": [0, 30, 60, 90, 120, 150, 180], "__type": "SpellDataValue" }
+/// Les clés sont "name"/"values" (et NON "mName"/"mValues") — c'est ce mauvais
+/// mapping qui faisait que toutes les valeurs ressortaient vides (formules « ? »).
 /// </summary>
 public class CdragonDataValue
 {
-    [JsonPropertyName("mName")]   public string? Name   { get; set; }
-    [JsonPropertyName("mValues")] public List<double>? Values { get; set; }
+    [JsonPropertyName("name")]   public string? Name   { get; set; }
+    [JsonPropertyName("values")] public List<double>? Values { get; set; }
 }
 
 /// <summary>Un calcul de sort brut : liste de parties de formule.</summary>

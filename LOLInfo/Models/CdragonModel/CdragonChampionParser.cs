@@ -65,13 +65,15 @@ public static class CdragonChampionParser
                 ? new NamedDataValuePart(raw.DataValue, dataValues)
                 : null,
 
+        // mStat absent → 0 (AbilityPower) : CDragon l'omet quand c'est la stat par
+        // défaut. NE PAS exiger raw.Stat.HasValue, sinon tous les ratios AP sont perdus.
         "StatByNamedDataValueCalculationPart" =>
-            raw.Stat.HasValue && raw.DataValue is not null
-                ? new StatScalingPart(raw.Stat.Value, raw.StatFormula ?? 2, raw.DataValue, dataValues)
+            raw.DataValue is not null
+                ? new StatScalingPart(raw.Stat ?? 0, raw.StatFormula ?? 2, raw.DataValue, dataValues)
                 : null,
 
         "StatByCoefficientCalculationPart" =>
-            new StatByCoefficientPart(raw.Coefficient ?? 0, raw.Stat ?? -1, raw.StatFormula ?? 2),
+            new StatByCoefficientPart(raw.Coefficient ?? 0, raw.Stat ?? 0, raw.StatFormula ?? 2),
 
         "ByCharLevelBreakpointsCalculationPart" =>
             new ByLevelBreakpointsPart(
@@ -105,7 +107,7 @@ public static class CdragonChampionParser
         "StatBySubPartCalculationPart" =>
             raw.SubPart is not null
                 ? new StatBySubPartPart(
-                    (ChampionStat)(raw.Stat ?? -1),
+                    (ChampionStat)(raw.Stat ?? 0),
                     raw.StatFormula ?? 2,
                     BuildPart(raw.SubPart, effectAmount, dataValues, logger) ?? new UnknownPart("null"))
                 : null,

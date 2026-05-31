@@ -247,6 +247,26 @@ namespace LOLInfo.Tests.ViewModels
         }
 
         [TestMethod]
+        public async Task BuildSpells_AttachesPassiveFormulas_FromCdragonPassiveKey()
+        {
+            var champion = MakeFullChampion("Ahri");
+            var calcs = new Dictionary<string, Dictionary<string, SpellCalculation>>
+            {
+                ["AhriPassive"] = new()
+                {
+                    ["RegenCalc"] = new SpellCalculation("RegenCalc", new IFormulaPart[] { new NumberPart(100) }),
+                },
+            };
+
+            var vm = CreateVm(champion, calcs);
+            await vm.LoadAsync();
+
+            var passive = vm.Spells[0];
+            Assert.AreEqual("Passif", passive.Key);
+            Assert.IsTrue(passive.HasFormulas, "Le passif doit afficher ses formules CDragon");
+        }
+
+        [TestMethod]
         public async Task BuildSkins_ExcludesChromaVariants()
         {
             // Reproduit le cas Ahri : un vrai skin + ses chromas (parentSkin renseigné).

@@ -167,8 +167,17 @@ public class DetailChampionViewModel(
 
         if (this.Champion.Passive is not null)
         {
-            this._spells.Add(SpellViewModel.FromPassive(this.Champion.Passive));
-            logger.LogDebug("Passif '{Name}' ajouté", this.Champion.Passive.Name);
+            var passiveVm = SpellViewModel.FromPassive(this.Champion.Passive);
+
+            // Le passif a souvent des calculs CDragon (ex : Garen RegenCalc).
+            // Clé CDragon = "<Id>Passive" ; repli sur toute clé finissant par "Passive".
+            var passiveCalcs = FindPassiveCalcs(cdragonCalcs, normalizedName);
+            if (passiveCalcs is not null)
+                passiveVm = passiveVm.WithFormulas(passiveCalcs);
+
+            this._spells.Add(passiveVm);
+            logger.LogDebug("Passif '{Name}' ajouté — {FormulaCount} formule(s) CDragon",
+                this.Champion.Passive.Name, passiveVm.FormulaRows.Count);
         }
 
         string[] keys   = SpellKeys.Active;
@@ -199,6 +208,21 @@ public class DetailChampionViewModel(
         }
 
         this.OnPropertyChanged(nameof(Spells));
+    }
+
+    /// <summary>
+    /// Retrouve les calculs CDragon du passif : essaie "&lt;Id&gt;Passive",
+    /// puis n'importe quelle clé se terminant par "Passive".
+    /// </summary>
+    private static Dictionary<string, SpellCalculation>? FindPassiveCalcs(
+        Dictionary<string, Dictionary<string, SpellCalculation>>? calcs, string normalizedName)
+    {
+        if (calcs is null) return null;
+
+        if (calcs.TryGetValue($"{normalizedName}Passive", out var direct)) return direct;
+
+        var key = calcs.Keys.FirstOrDefault(k => k.EndsWith("Passive", StringComparison.OrdinalIgnoreCase));
+        return key is not null ? calcs[key] : null;
     }
 
     /// <summary>Passe au skin suivant ; revient au premier après le dernier (boucle).</summary>
