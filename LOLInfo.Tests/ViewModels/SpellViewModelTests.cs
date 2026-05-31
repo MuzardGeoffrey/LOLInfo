@@ -113,6 +113,21 @@ namespace LOLInfo.Tests.ViewModels
         }
 
         [TestMethod]
+        public void FromPassive_ImageKind_IsPassive()
+        {
+            // Le passif est servi depuis /img/passive/, pas /img/spell/.
+            var vm = SpellViewModel.FromPassive(MakePassive());
+            Assert.AreEqual(LOLInfo.Utils.ImageConstant.PASSIVE, vm.ImageKind);
+        }
+
+        [TestMethod]
+        public void FromSpell_ImageKind_IsSpell()
+        {
+            var vm = SpellViewModel.FromSpell("Q", MakeSpell());
+            Assert.AreEqual(LOLInfo.Utils.ImageConstant.SPELL, vm.ImageKind);
+        }
+
+        [TestMethod]
         public void FromPassive_NoStatRows()
         {
             var vm = SpellViewModel.FromPassive(MakePassive());

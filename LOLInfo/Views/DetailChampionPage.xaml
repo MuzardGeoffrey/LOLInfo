@@ -46,10 +46,11 @@
                                 BorderBrush="#444"
                                 BorderThickness="1">
                             <!--
-                                Passif et sorts actifs utilisent désormais le même dossier spell/.
-                                Plus besoin de différencier IsPassive pour le chemin d'image.
+                                Le dossier CDN diffère selon le type : le passif est dans
+                                /img/passive/, les sorts actifs dans /img/spell/. Kind suit
+                                donc SpellViewModel.ImageKind (basé sur IsPassive).
                             -->
-                            <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.SPELL}"
+                            <Image utils:CachedImage.Kind="{Binding ImageKind}"
                                    utils:CachedImage.SourcePath="{Binding IconPath}" />
                         </Border>
 

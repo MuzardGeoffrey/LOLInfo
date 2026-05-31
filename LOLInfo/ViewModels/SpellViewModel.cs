@@ -8,6 +8,7 @@ using LOLInfo.Models;
 using LOLInfo.Models.CdragonModel;
 using LOLInfo.Models.RiotModel;
 using LOLInfo.Properties;
+using LOLInfo.Utils;
 
 /// <summary>
 /// Wrapper bindable pour un sort (actif ou passif).
@@ -30,6 +31,12 @@ public class SpellViewModel
 
     /// <summary>True si ce sort est le passif du champion.</summary>
     public bool IsPassive { get; }
+
+    /// <summary>
+    /// Dossier d'image CDN selon le type : le passif est servi depuis /img/passive/,
+    /// les sorts actifs depuis /img/spell/ (dossiers distincts sur DataDragon).
+    /// </summary>
+    public string ImageKind => this.IsPassive ? ImageConstant.PASSIVE : ImageConstant.SPELL;
 
     // ── Tableau de progression par niveau ─────────────────────────────────
 
