@@ -27,6 +27,23 @@ namespace LOLInfo.Tests.Utils
         public void CleanDescription_NoTag_TrimmedButUnchanged()
             => Assert.AreEqual("Orbe", RiotText.CleanDescription("  Orbe  "));
 
+        [TestMethod]
+        public void StripHtml_RemovesTags_KeepsText()
+        {
+            var r = RiotText.StripHtml("<mainText><stats>AD</stats><br>Inflige des <b>dégâts</b>.</mainText>");
+            Assert.IsFalse(r.Contains("<"));
+            StringAssert.Contains(r, "AD");
+            StringAssert.Contains(r, "Inflige des dégâts.");
+        }
+
+        [TestMethod]
+        public void StripHtml_DecodesEntities()
+            => Assert.AreEqual("a & b", RiotText.StripHtml("a &amp; b"));
+
+        [TestMethod]
+        public void StripHtml_NullOrEmpty_ReturnsEmpty()
+            => Assert.AreEqual(string.Empty, RiotText.StripHtml(null));
+
         [DataTestMethod]
         [DataRow("TotalDamage", "Total Damage")]
         [DataRow("totalDamage", "Total Damage")]

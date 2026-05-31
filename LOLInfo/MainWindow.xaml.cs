@@ -1,4 +1,4 @@
-﻿namespace LOLInfo
+namespace LOLInfo
 {
     using System.Windows;
 
@@ -16,6 +16,16 @@
             InitializeComponent();
             // DataContext résolu depuis le conteneur DI (MainViewModel délègue CurrentPage à IViewManager)
             this.DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
+        }
+
+        /// <summary>Sélectionne l'objet cliqué dans la grille (panneau de détail).</summary>
+        private void ItemButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is FrameworkElement { DataContext: ItemViewModel item }
+                && this.DataContext is MainViewModel main)
+            {
+                main.Items.SelectedItem = item;
+            }
         }
     }
 }

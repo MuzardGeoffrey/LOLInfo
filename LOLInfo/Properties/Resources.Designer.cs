@@ -378,6 +378,34 @@ namespace LOLInfo.Properties {
             get { return ResourceManager.GetString("StatLabel_CritChance", resourceCulture); }
         }
 
+        public static string StatLabel_AbilityPower {
+            get { return ResourceManager.GetString("StatLabel_AbilityPower", resourceCulture); }
+        }
+
+        public static string StatLabel_LifeSteal {
+            get { return ResourceManager.GetString("StatLabel_LifeSteal", resourceCulture); }
+        }
+
+        public static string Tab_Champions {
+            get { return ResourceManager.GetString("Tab_Champions", resourceCulture); }
+        }
+
+        public static string Tab_Items {
+            get { return ResourceManager.GetString("Tab_Items", resourceCulture); }
+        }
+
+        public static string ItemPage_Cost {
+            get { return ResourceManager.GetString("ItemPage_Cost", resourceCulture); }
+        }
+
+        public static string ItemPage_Effects {
+            get { return ResourceManager.GetString("ItemPage_Effects", resourceCulture); }
+        }
+
+        public static string ItemPage_Search {
+            get { return ResourceManager.GetString("ItemPage_Search", resourceCulture); }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Niv {0}.
         /// </summary>

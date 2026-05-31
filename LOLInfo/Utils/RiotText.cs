@@ -1,5 +1,6 @@
 namespace LOLInfo.Utils
 {
+    using System.Net;
     using System.Text.RegularExpressions;
 
     /// <summary>
@@ -14,6 +15,10 @@ namespace LOLInfo.Utils
         // Frontières de mots en camel/PascalCase : "TotalDamage" → "Total Damage".
         private static readonly Regex CamelBoundary =
             new(@"(?<=[a-z0-9])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])", RegexOptions.Compiled);
+
+        private static readonly Regex ListItemTag = new(@"<\s*li\s*>", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+        private static readonly Regex AnyTag      = new(@"<[^>]+>", RegexOptions.Compiled);
+        private static readonly Regex BlankLines  = new(@"\n{3,}", RegexOptions.Compiled);
 
         /// <summary>
         /// Remplace les balises &lt;br&gt; par des sauts de ligne propres et
@@ -34,6 +39,23 @@ namespace LOLInfo.Utils
             if (string.IsNullOrWhiteSpace(name)) return string.Empty;
             var spaced = CamelBoundary.Replace(name, " ");
             return char.ToUpperInvariant(spaced[0]) + spaced[1..];
+        }
+
+        /// <summary>
+        /// Convertit une description HTML Riot (objets) en texte lisible : &lt;br&gt; et
+        /// &lt;li&gt; deviennent des sauts de ligne, toutes les autres balises sont retirées,
+        /// et les entités HTML sont décodées. Null/vide → vide.
+        /// </summary>
+        public static string StripHtml(string? text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+
+            var s = BrTag.Replace(text, "\n");
+            s = ListItemTag.Replace(s, "\n• ");
+            s = AnyTag.Replace(s, string.Empty);
+            s = WebUtility.HtmlDecode(s);
+            s = BlankLines.Replace(s, "\n\n");
+            return s.Trim();
         }
     }
 }

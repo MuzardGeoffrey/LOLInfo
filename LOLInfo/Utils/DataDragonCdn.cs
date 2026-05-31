@@ -71,6 +71,10 @@ namespace LOLInfo.Utils
         public static string SkinUrl(string filename)
             => $"{Base}/img/champion/splash/{filename}";
 
+        /// <summary>URL de l'icône d'un objet. Ex : ItemUrl("3031.png").</summary>
+        public static string ItemUrl(string filename)
+            => $"{Base}/{Version}/img/item/{filename}";
+
         // ── API data ──────────────────────────────────────────────────────
 
         /// <summary>URL de la liste de tous les champions (langue <see cref="DataLocale"/>).</summary>
@@ -80,5 +84,9 @@ namespace LOLInfo.Utils
         /// <summary>URL du détail d'un champion spécifique.</summary>
         public static string ChampionDetailUrl(string championName)
             => $"{Base}/{Version}/data/{DataLocale}/champion/{championName}.json";
+
+        /// <summary>URL de la liste de tous les objets (langue <see cref="DataLocale"/>).</summary>
+        public static string ItemDataUrl()
+            => $"{Base}/{Version}/data/{DataLocale}/item.json";
     }
 }

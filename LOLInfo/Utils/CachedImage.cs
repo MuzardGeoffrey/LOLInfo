@@ -91,6 +91,7 @@ namespace LOLInfo.Utils
             ImageConstant.PASSIVE   => DataDragonCdn.PassiveUrl(filename),
             ImageConstant.MINIATURE => DataDragonCdn.ChampionUrl(filename),
             ImageConstant.SKIN      => DataDragonCdn.SkinUrl(filename),
+            ImageConstant.ITEM      => DataDragonCdn.ItemUrl(filename),
             _ => null,
         };
 

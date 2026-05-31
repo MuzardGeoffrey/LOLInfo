@@ -333,4 +333,25 @@
   <data name="StatLabel_CritChance" xml:space="preserve">
     <value>Crit chance</value>
   </data>
+  <data name="StatLabel_AbilityPower" xml:space="preserve">
+    <value>Ability power</value>
+  </data>
+  <data name="StatLabel_LifeSteal" xml:space="preserve">
+    <value>Life steal</value>
+  </data>
+  <data name="Tab_Champions" xml:space="preserve">
+    <value>Champions</value>
+  </data>
+  <data name="Tab_Items" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="ItemPage_Cost" xml:space="preserve">
+    <value>Cost</value>
+  </data>
+  <data name="ItemPage_Effects" xml:space="preserve">
+    <value>Effects</value>
+  </data>
+  <data name="ItemPage_Search" xml:space="preserve">
+    <value>Search an item</value>
+  </data>
 </root>

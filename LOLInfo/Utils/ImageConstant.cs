@@ -10,5 +10,6 @@ namespace LOLInfo.Utils
         public const string SPELL     = "spell";
         public const string MINIATURE = "miniature";
         public const string SKIN      = "skin";
+        public const string ITEM      = "item";
     }
 }

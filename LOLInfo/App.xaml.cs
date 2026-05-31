@@ -88,6 +88,7 @@ public partial class App : Application
         // Services réseau
         services.AddSingleton<IRiotClient, RiotClient>();
         services.AddSingleton<ICdragonClient, CdragonClient>();
+        services.AddSingleton<IItemClient, ItemClient>();
 
         // Stockage local
         services.AddSingleton<IFavoritesService, FavoritesService>();
@@ -99,6 +100,7 @@ public partial class App : Application
 
         // ViewModels
         services.AddTransient<IAllChampionViewModel, AllChampionViewModel>();
+        services.AddSingleton<IItemsViewModel, ItemsViewModel>();
         services.AddSingleton<MainViewModel>();
 
         return services.BuildServiceProvider();
@@ -131,6 +133,9 @@ public partial class App : Application
 
         Log.Information("Navigation initiale vers AllChampionPage");
         this.Services.GetRequiredService<IViewManager>().NavigateToAllChampion();
+
+        // Précharge les objets en arrière-plan pour l'onglet Objets.
+        _ = this.Services.GetRequiredService<IItemsViewModel>().LoadAsync();
     }
 
     protected override void OnExit(ExitEventArgs e)
