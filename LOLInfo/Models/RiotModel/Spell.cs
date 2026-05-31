@@ -22,14 +22,16 @@ public class Spell
     [JsonPropertyName("maxrank")]
     public int? Maxrank { get; set; }
 
+    // double et non int : certaines valeurs sont décimales (ex : Akali Q = 1.5,
+    // Akali E = 14.5). Un int ferait échouer toute la désérialisation du champion.
     [JsonPropertyName("cooldown")]
-    public List<int>? Cooldown { get; set; }
+    public List<double>? Cooldown { get; set; }
 
     [JsonPropertyName("cooldownBurn")]
     public string? CooldownBurn { get; set; }
 
     [JsonPropertyName("cost")]
-    public List<int>? Cost { get; set; }
+    public List<double>? Cost { get; set; }
 
     [JsonPropertyName("costBurn")]
     public string? CostBurn { get; set; }
@@ -43,7 +45,7 @@ public class Spell
     // → List<List<int>?>  : liste dont le premier élément peut être null,
     //   les suivants étant des listes d'entiers.
     [JsonPropertyName("effect")]
-    public List<List<int>?>? Effect { get; set; }
+    public List<List<double>?>? Effect { get; set; }
 
     // effectBurn[0] = null  (même convention que effect)
     // effectBurn[1..] = "valeur" (chaîne formatée par niveau)
@@ -61,7 +63,7 @@ public class Spell
     public string? Maxammo { get; set; }
 
     [JsonPropertyName("range")]
-    public List<int>? Range { get; set; }
+    public List<double>? Range { get; set; }
 
     [JsonPropertyName("rangeBurn")]
     public string? RangeBurn { get; set; }
