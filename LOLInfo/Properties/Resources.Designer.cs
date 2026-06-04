@@ -402,6 +402,10 @@ namespace LOLInfo.Properties {
             get { return ResourceManager.GetString("ItemPage_Effects", resourceCulture); }
         }
 
+        public static string ItemPage_BuildPath {
+            get { return ResourceManager.GetString("ItemPage_BuildPath", resourceCulture); }
+        }
+
         public static string ItemPage_Search {
             get { return ResourceManager.GetString("ItemPage_Search", resourceCulture); }
         }
@@ -412,6 +416,34 @@ namespace LOLInfo.Properties {
 
         public static string StatPage_Equipped {
             get { return ResourceManager.GetString("StatPage_Equipped", resourceCulture); }
+        }
+
+        public static string Toolbar_GameMode {
+            get { return ResourceManager.GetString("Toolbar_GameMode", resourceCulture); }
+        }
+
+        public static string GameMode_NormalRanked {
+            get { return ResourceManager.GetString("GameMode_NormalRanked", resourceCulture); }
+        }
+
+        public static string GameMode_Aram {
+            get { return ResourceManager.GetString("GameMode_Aram", resourceCulture); }
+        }
+
+        public static string GameMode_Arena {
+            get { return ResourceManager.GetString("GameMode_Arena", resourceCulture); }
+        }
+
+        public static string ItemSort_CostAsc {
+            get { return ResourceManager.GetString("ItemSort_CostAsc", resourceCulture); }
+        }
+
+        public static string ItemSort_CostDesc {
+            get { return ResourceManager.GetString("ItemSort_CostDesc", resourceCulture); }
+        }
+
+        public static string Toolbar_StatFilter {
+            get { return ResourceManager.GetString("Toolbar_StatFilter", resourceCulture); }
         }
 
         /// <summary>

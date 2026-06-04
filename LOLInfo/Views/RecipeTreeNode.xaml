@@ -1,0 +1,79 @@
+<UserControl x:Class="LOLInfo.Views.RecipeTreeNode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:utils="clr-namespace:LOLInfo.Utils"
+             xmlns:views="clr-namespace:LOLInfo.Views"
+             mc:Ignorable="d"
+             d:DesignHeight="200" d:DesignWidth="200">
+
+    <!--
+        Affichage récursif de l'arbre de fabrication (cf. ItemRecipeNode) :
+          • le nœud (icône) en haut, centré ;
+          • un trait vertical descendant vers la « barre de bus » ;
+          • la rangée des composants, chacun rappelant ce même contrôle (récursion).
+        Les composants occupent des cellules de largeur égale (UniformGrid) pour que
+        la barre horizontale reste continue et que chaque descente tombe au centre
+        de son sous-arbre. Le DataContext attendu est un ItemRecipeNode.
+    -->
+
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        <SolidColorBrush x:Key="ConnectorBrush" Color="#C8941E" />
+    </UserControl.Resources>
+
+    <StackPanel HorizontalAlignment="Center">
+
+        <!-- Icône du nœud -->
+        <Border BorderBrush="{StaticResource ConnectorBrush}" BorderThickness="1"
+                CornerRadius="3" Padding="2" Background="#2A2F3A"
+                HorizontalAlignment="Center" ToolTip="{Binding Name}">
+            <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.ITEM}"
+                   utils:CachedImage.SourcePath="{Binding ImagePath}"
+                   Width="40" Height="40" />
+        </Border>
+
+        <!-- Trait vertical du parent vers la barre des composants -->
+        <Rectangle Width="2" Height="12" Fill="{StaticResource ConnectorBrush}"
+                   HorizontalAlignment="Center"
+                   Visibility="{Binding HasComponents, Converter={StaticResource BoolToVis}}" />
+
+        <!-- Rangée des composants (cellules de largeur égale) -->
+        <ItemsControl ItemsSource="{Binding Components}"
+                      Visibility="{Binding HasComponents, Converter={StaticResource BoolToVis}}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel VerticalAlignment="Top">
+                        <!-- Connecteur : demi-barres horizontales (bus) + descente verticale -->
+                        <Grid Height="12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!-- Demi-barre gauche : masquée pour le 1er composant -->
+                            <Rectangle Grid.Column="0" Height="2" Fill="{StaticResource ConnectorBrush}"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding ShowLeftBar, Converter={StaticResource BoolToVis}}" />
+                            <!-- Demi-barre droite : masquée pour le dernier composant -->
+                            <Rectangle Grid.Column="1" Height="2" Fill="{StaticResource ConnectorBrush}"
+                                       VerticalAlignment="Top"
+                                       Visibility="{Binding ShowRightBar, Converter={StaticResource BoolToVis}}" />
+                            <!-- Descente verticale du bus vers le composant (au centre de la cellule) -->
+                            <Rectangle Grid.ColumnSpan="2" Width="2" Fill="{StaticResource ConnectorBrush}"
+                                       HorizontalAlignment="Center" />
+                        </Grid>
+
+                        <!-- Récursion : le composant est lui-même un sous-arbre -->
+                        <views:RecipeTreeNode DataContext="{Binding}" Margin="10,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+</UserControl>

@@ -18,6 +18,9 @@ public class Item
     [JsonPropertyName("gold")]        public ItemGold? Gold      { get; set; }
     [JsonPropertyName("tags")]        public List<string>? Tags  { get; set; }
 
+    /// <summary>Identifiants des composants directs (recette). Sert à construire l'arbre de fabrication.</summary>
+    [JsonPropertyName("from")]        public List<string>? From  { get; set; }
+
     /// <summary>Stats brutes (ex : "FlatPhysicalDamageMod" → 70, "PercentAttackSpeedMod" → 0.25).</summary>
     [JsonPropertyName("stats")]       public Dictionary<string, double>? Stats { get; set; }
 

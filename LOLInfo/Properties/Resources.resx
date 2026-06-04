@@ -351,6 +351,9 @@
   <data name="ItemPage_Effects" xml:space="preserve">
     <value>Effets</value>
   </data>
+  <data name="ItemPage_BuildPath" xml:space="preserve">
+    <value>Composition</value>
+  </data>
   <data name="ItemPage_Search" xml:space="preserve">
     <value>Rechercher un objet</value>
   </data>
@@ -359,5 +362,26 @@
   </data>
   <data name="StatPage_Equipped" xml:space="preserve">
     <value>Objets équipés</value>
+  </data>
+  <data name="Toolbar_GameMode" xml:space="preserve">
+    <value>Mode :</value>
+  </data>
+  <data name="GameMode_NormalRanked" xml:space="preserve">
+    <value>Normal/Classé</value>
+  </data>
+  <data name="GameMode_Aram" xml:space="preserve">
+    <value>ARAM</value>
+  </data>
+  <data name="GameMode_Arena" xml:space="preserve">
+    <value>Arena</value>
+  </data>
+  <data name="ItemSort_CostAsc" xml:space="preserve">
+    <value>Coût ↑</value>
+  </data>
+  <data name="ItemSort_CostDesc" xml:space="preserve">
+    <value>Coût ↓</value>
+  </data>
+  <data name="Toolbar_StatFilter" xml:space="preserve">
+    <value>Stats :</value>
   </data>
 </root>

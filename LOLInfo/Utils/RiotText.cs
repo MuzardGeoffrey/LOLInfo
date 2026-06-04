@@ -20,6 +20,10 @@ namespace LOLInfo.Utils
         private static readonly Regex AnyTag      = new(@"<[^>]+>", RegexOptions.Compiled);
         private static readonly Regex BlankLines  = new(@"\n{3,}", RegexOptions.Compiled);
 
+        // Bloc <stats>…</stats> d'une description d'objet (résumé des statistiques).
+        private static readonly Regex StatsBlock =
+            new(@"<stats>(.*?)</stats>", RegexOptions.IgnoreCase | RegexOptions.Singleline | RegexOptions.Compiled);
+
         /// <summary>
         /// Remplace les balises &lt;br&gt; par des sauts de ligne propres et
         /// retire les espaces superflus. Null/vide → chaîne vide.
@@ -39,6 +43,18 @@ namespace LOLInfo.Utils
             if (string.IsNullOrWhiteSpace(name)) return string.Empty;
             var spaced = CamelBoundary.Replace(name, " ");
             return char.ToUpperInvariant(spaced[0]) + spaced[1..];
+        }
+
+        /// <summary>
+        /// Extrait le résumé de statistiques (&lt;stats&gt;…&lt;/stats&gt;) d'une description
+        /// d'objet, débarrassé de ses balises. Certaines stats (ex : régénération de base
+        /// du mana) n'existent que là, pas dans le champ <c>stats</c> structuré. Null/vide → vide.
+        /// </summary>
+        public static string ExtractStatsBlock(string? description)
+        {
+            if (string.IsNullOrEmpty(description)) return string.Empty;
+            var m = StatsBlock.Match(description);
+            return m.Success ? StripHtml(m.Groups[1].Value) : string.Empty;
         }
 
         /// <summary>
