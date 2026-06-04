@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:utils="clr-namespace:LOLInfo.Utils"
       xmlns:vm="clr-namespace:LOLInfo.ViewModels"
+      xmlns:views="clr-namespace:LOLInfo.Views"
       xmlns:props="clr-namespace:LOLInfo.Properties"
       mc:Ignorable="d"
       d:DesignHeight="600" d:DesignWidth="900"
@@ -469,11 +470,12 @@
                     <!-- Sélecteur d'objet à équiper (éditable : taper pour filtrer) -->
                     <StackPanel Grid.Row="1" Orientation="Horizontal"
                                 VerticalAlignment="Center" Margin="0,0,0,8">
-                        <ComboBox Width="220" IsEditable="True" IsTextSearchEnabled="True"
-                                  ItemsSource="{Binding AvailableItems}"
-                                  DisplayMemberPath="Name"
-                                  TextSearch.TextPath="Name"
-                                  SelectedItem="{Binding ItemToEquip, Mode=TwoWay}" />
+                        <views:AutoCompleteBox Width="220" VerticalAlignment="Center"
+                                               ItemsSource="{Binding EquipSuggestions}"
+                                               TextMemberPath="Name"
+                                               Text="{Binding EquipQuery, Mode=TwoWay}"
+                                               SelectedItem="{Binding ItemToEquip, Mode=TwoWay}"
+                                               Placeholder="{x:Static props:Resources.ItemPage_Search}" />
                         <Button Content="{x:Static props:Resources.ItemPage_Equip}"
                                 Click="EquipItem_OnClick"
                                 IsEnabled="{Binding CanEquipMore}"

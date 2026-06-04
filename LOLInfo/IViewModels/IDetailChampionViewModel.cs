@@ -44,6 +44,12 @@ public interface IDetailChampionViewModel
     /// <summary>Objets disponibles à l'équipement.</summary>
     IReadOnlyList<ItemViewModel> AvailableItems { get; }
 
+    /// <summary>Suggestions d'autocomplétion du sélecteur d'objet à équiper.</summary>
+    IReadOnlyList<ItemViewModel> EquipSuggestions { get; }
+
+    /// <summary>Texte courant du sélecteur d'objet à équiper.</summary>
+    string EquipQuery { get; set; }
+
     /// <summary>Objets actuellement équipés.</summary>
     System.Collections.ObjectModel.ObservableCollection<ItemViewModel> EquippedItems { get; }
 

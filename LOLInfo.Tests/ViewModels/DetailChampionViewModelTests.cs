@@ -49,6 +49,7 @@ namespace LOLInfo.Tests.ViewModels
 
             var mockItems = new Mock<IItemsViewModel>();
             mockItems.Setup(i => i.AllItems).Returns(availableItems ?? new List<ItemViewModel>());
+            mockItems.Setup(i => i.SearchSuggestions).Returns(availableItems ?? new List<ItemViewModel>());
 
             return new DetailChampionViewModel(
                 mockRiot.Object,
@@ -307,6 +308,38 @@ namespace LOLInfo.Tests.ViewModels
             vm.Unequip(infinityEdge);
             Assert.AreEqual(0, vm.EquippedItems.Count);
             Assert.AreEqual("60", vm.ChampionStats[6].Value);
+        }
+
+        [TestMethod]
+        public async Task EquipSelected_ClearsSelector_AfterEquipping()
+        {
+            var champion = MakeFullChampion();
+            champion.Stats = new Dictionary<string, double> { ["attackdamage"] = 60 };
+
+            var ie = ItemViewModel.From(new Item
+            {
+                Id = "3031", Name = "Infinity Edge", Description = string.Empty,
+                Stats = new Dictionary<string, double> { ["FlatPhysicalDamageMod"] = 70 },
+            });
+
+            var vm = CreateVm(champion, availableItems: new[] { ie });
+            await vm.LoadAsync();
+
+            vm.EquipQuery = "Infinity";
+            vm.ItemToEquip = ie;
+            vm.EquipSelected();
+
+            Assert.AreEqual(1, vm.EquippedItems.Count);
+            Assert.IsNull(vm.ItemToEquip);
+            Assert.AreEqual(string.Empty, vm.EquipQuery);
+        }
+
+        [TestMethod]
+        public void EquipSuggestions_ComeFromItemsViewModel()
+        {
+            var ie = ItemViewModel.From(new Item { Id = "3031", Name = "Infinity Edge" });
+            var vm = CreateVm(MakeFullChampion(), availableItems: new[] { ie });
+            Assert.AreEqual(1, vm.EquipSuggestions.Count);
         }
 
         [TestMethod]
