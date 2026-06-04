@@ -58,12 +58,14 @@
                     <Border DockPanel.Dock="Top" Background="#F5F5F5" BorderBrush="#E0E0E0"
                             BorderThickness="1" CornerRadius="3" Padding="8,5" Margin="0,0,0,8">
                         <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <!-- Recherche par nom -->
+                            <!-- Recherche par nom (avec autocomplétion) -->
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
                                 <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,6,0" />
-                                <TextBox Width="160" VerticalAlignment="Center"
-                                         Tag="{x:Static props:Resources.ItemPage_Search}"
-                                         Text="{Binding NameFilter, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                <views:AutoCompleteBox Width="200" VerticalAlignment="Center"
+                                                       Text="{Binding NameFilter, Mode=TwoWay}"
+                                                       ItemsSource="{Binding SearchSuggestions}"
+                                                       TextMemberPath="Name"
+                                                       Placeholder="{x:Static props:Resources.ItemPage_Search}" />
                             </StackPanel>
 
                             <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />

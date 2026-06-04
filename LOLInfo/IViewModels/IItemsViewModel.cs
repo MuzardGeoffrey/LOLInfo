@@ -24,6 +24,9 @@ public interface IItemsViewModel : INotifyPropertyChanged
     /// <summary>Filtres de statistiques (multi-sélection, combinés en ET).</summary>
     IReadOnlyList<FilterItemViewModel> StatFilters { get; }
 
+    /// <summary>Objets proposés en autocomplétion de la recherche.</summary>
+    IReadOnlyList<ItemViewModel> SearchSuggestions { get; }
+
     /// <summary>Options de tri proposées (nom, coût, par statistique).</summary>
     IReadOnlyList<ItemSortOption> SortOptions { get; }
 

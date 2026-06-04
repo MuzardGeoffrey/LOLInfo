@@ -1,0 +1,32 @@
+<UserControl x:Class="LOLInfo.Views.AutoCompleteBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             x:Name="Root" d:DesignHeight="26" d:DesignWidth="200">
+    <Grid>
+        <TextBox x:Name="PART_TextBox"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding Text, ElementName=Root, UpdateSourceTrigger=PropertyChanged}"
+                 PreviewKeyDown="TextBox_PreviewKeyDown"
+                 LostKeyboardFocus="TextBox_LostFocus" />
+
+        <!-- Texte indicatif (placeholder) affiché quand le champ est vide -->
+        <TextBlock x:Name="PART_Placeholder" IsHitTestVisible="False"
+                   Margin="5,0,0,0" VerticalAlignment="Center" Foreground="#999999"
+                   Text="{Binding Placeholder, ElementName=Root}" />
+
+        <Popup x:Name="PART_Popup" StaysOpen="False" AllowsTransparency="True"
+               Placement="Bottom" PlacementTarget="{Binding ElementName=PART_TextBox}"
+               Width="{Binding ActualWidth, ElementName=PART_TextBox}">
+            <Border Background="White" BorderBrush="#CCCCCC" BorderThickness="1"
+                    SnapsToDevicePixels="True">
+                <ListBox x:Name="PART_List" BorderThickness="0" MaxHeight="240"
+                         DisplayMemberPath="{Binding TextMemberPath, ElementName=Root}"
+                         PreviewMouseLeftButtonUp="List_MouseUp"
+                         PreviewKeyDown="List_PreviewKeyDown" />
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

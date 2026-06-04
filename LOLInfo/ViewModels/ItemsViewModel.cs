@@ -131,6 +131,13 @@ public class ItemsViewModel : BaseViewModel, IItemsViewModel
         set { field = value; this.OnPropertyChanged(nameof(SelectedItem)); }
     }
 
+    // ── Suggestions de recherche (autocomplétion) ──────────────────────────────
+
+    private IReadOnlyList<ItemViewModel> _searchSuggestions = [];
+
+    /// <summary>Objets proposés en autocomplétion : noms distincts, hors objets obsolètes.</summary>
+    public IReadOnlyList<ItemViewModel> SearchSuggestions => this._searchSuggestions;
+
     // ── Filtre : statistiques (multi-sélection, ET) ────────────────────────────
 
     private readonly List<FilterItemViewModel> _statFilters;
@@ -161,6 +168,15 @@ public class ItemsViewModel : BaseViewModel, IItemsViewModel
 
         foreach (var item in this._items)
             item.SetRecipe(ItemRecipeNode.Build(item, byId));
+
+        // Suggestions d'autocomplétion : un objet par nom, hors obsolètes, triés.
+        this._searchSuggestions = this._items
+            .Where(i => i.IsOnAnyMap)
+            .GroupBy(i => i.Name, StringComparer.OrdinalIgnoreCase)
+            .Select(g => g.First())
+            .OrderBy(i => i.Name, StringComparer.OrdinalIgnoreCase)
+            .ToList();
+        this.OnPropertyChanged(nameof(SearchSuggestions));
 
         this.RebuildKeptIds();
         this.ItemsView = CollectionViewSource.GetDefaultView(this._items);
