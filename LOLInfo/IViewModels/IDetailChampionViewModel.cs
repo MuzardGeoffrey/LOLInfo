@@ -41,26 +41,17 @@ public interface IDetailChampionViewModel
     /// <summary>Stats du champion au niveau sélectionné (objets équipés inclus).</summary>
     IReadOnlyList<ChampionStatRow> ChampionStats { get; }
 
-    /// <summary>Objets disponibles à l'équipement.</summary>
-    IReadOnlyList<ItemViewModel> AvailableItems { get; }
-
-    /// <summary>Suggestions d'autocomplétion du sélecteur d'objet à équiper.</summary>
-    IReadOnlyList<ItemViewModel> EquipSuggestions { get; }
-
-    /// <summary>Texte courant du sélecteur d'objet à équiper.</summary>
-    string EquipQuery { get; set; }
+    /// <summary>Navigateur d'objets partagé (grille + filtres + détail) pour la sélection.</summary>
+    IItemsViewModel Items { get; }
 
     /// <summary>Objets actuellement équipés.</summary>
     System.Collections.ObjectModel.ObservableCollection<ItemViewModel> EquippedItems { get; }
 
-    /// <summary>Objet choisi dans le sélecteur.</summary>
-    ItemViewModel? ItemToEquip { get; set; }
-
     /// <summary>True s'il reste de la place pour un objet.</summary>
     bool CanEquipMore { get; }
 
-    /// <summary>Équipe l'objet sélectionné.</summary>
-    void EquipSelected();
+    /// <summary>Équipe l'objet sélectionné dans le navigateur (<see cref="Items"/>).</summary>
+    void EquipCurrent();
 
     /// <summary>Retire un objet équipé.</summary>
     void Unequip(ItemViewModel item);

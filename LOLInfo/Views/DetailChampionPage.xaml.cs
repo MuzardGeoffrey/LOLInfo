@@ -35,7 +35,7 @@ public partial class DetailChampionPage : Page
 
     private void EquipItem_OnClick(object sender, RoutedEventArgs e)
     {
-        this._viewModel.EquipSelected();
+        this._viewModel.EquipCurrent();
     }
 
     private void UnequipItem_OnClick(object sender, RoutedEventArgs e)

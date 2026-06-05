@@ -121,18 +121,12 @@ public class DetailChampionViewModel(
 
     public const int MaxItems = 6;
 
-    /// <summary>Tous les objets disponibles à l'équipement (recherche dans le sélecteur).</summary>
-    public IReadOnlyList<ItemViewModel> AvailableItems => items.AllItems;
-
-    /// <summary>Suggestions d'autocomplétion du sélecteur (réutilise celles des objets).</summary>
-    public IReadOnlyList<ItemViewModel> EquipSuggestions => items.SearchSuggestions;
-
-    /// <summary>Texte courant du sélecteur d'objet à équiper (lié à l'autocomplétion).</summary>
-    public string EquipQuery
-    {
-        get;
-        set { field = value ?? string.Empty; this.OnPropertyChanged(nameof(EquipQuery)); }
-    } = string.Empty;
+    /// <summary>
+    /// Navigateur d'objets partagé (onglet Objets) : la page Stats y branche la même
+    /// interface de sélection (grille + filtres + détail). L'objet à équiper est
+    /// <see cref="IItemsViewModel.SelectedItem"/>.
+    /// </summary>
+    public IItemsViewModel Items => items;
 
     /// <summary>Objets équipés sur le champion (max <see cref="MaxItems"/>).</summary>
     public ObservableCollection<ItemViewModel> EquippedItems { get; } = [];
@@ -140,20 +134,12 @@ public class DetailChampionViewModel(
     /// <summary>True s'il reste de la place pour équiper un objet.</summary>
     public bool CanEquipMore => this.EquippedItems.Count < MaxItems;
 
-    /// <summary>Objet choisi dans le sélecteur, prêt à être équipé.</summary>
-    public ItemViewModel? ItemToEquip
+    /// <summary>Équipe l'objet sélectionné dans le navigateur et recalcule les stats.</summary>
+    public void EquipCurrent()
     {
-        get;
-        set { field = value; this.OnPropertyChanged(nameof(ItemToEquip)); }
-    }
-
-    /// <summary>Équipe <see cref="ItemToEquip"/> et recalcule les stats.</summary>
-    public void EquipSelected()
-    {
-        if (this.ItemToEquip is null || !this.CanEquipMore) return;
-        this.EquippedItems.Add(this.ItemToEquip);
-        this.ItemToEquip = null;
-        this.EquipQuery = string.Empty; // vide le sélecteur après équipement
+        var selected = items.SelectedItem;
+        if (selected is null || !this.CanEquipMore) return;
+        this.EquippedItems.Add(selected);
         this.OnPropertyChanged(nameof(CanEquipMore));
         this.BuildStats();
     }

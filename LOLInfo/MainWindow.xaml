@@ -3,41 +3,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:utils="clr-namespace:LOLInfo.Utils"
         xmlns:props="clr-namespace:LOLInfo.Properties"
         xmlns:views="clr-namespace:LOLInfo.Views"
         xmlns:vm="clr-namespace:LOLInfo.ViewModels"
-        xmlns:models="clr-namespace:LOLInfo.Models"
         mc:Ignorable="d"
         Title="LolInfo" Height="600" Width="1000">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis" />
-        <utils:EnumToBoolConverter x:Key="EnumToBool" />
-
-        <!-- Libellé de section dans la barre d'outils Objets -->
-        <Style x:Key="ItemFilterLabel" TargetType="TextBlock">
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Margin"            Value="0,0,6,0" />
-            <Setter Property="FontSize"          Value="12" />
-            <Setter Property="Foreground"        Value="#555555" />
-        </Style>
-
-        <!-- Boutons radio de mode de jeu -->
-        <Style x:Key="ItemFilterRadio" TargetType="RadioButton">
-            <Setter Property="Margin"            Value="0,0,6,0" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize"          Value="12" />
-            <Setter Property="Cursor"            Value="Hand" />
-        </Style>
-
-        <!-- Cases à cocher de filtre par statistique -->
-        <Style x:Key="ItemFilterCheck" TargetType="CheckBox">
-            <Setter Property="Margin"            Value="0,2,12,2" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="FontSize"          Value="12" />
-            <Setter Property="Cursor"            Value="Hand" />
-        </Style>
-
         <!-- Élément du sélecteur de langue : drapeau (vectoriel) + endonyme -->
         <DataTemplate x:Key="LanguageItemTemplate" DataType="{x:Type vm:LanguageOption}">
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -89,182 +60,27 @@
 
     <Grid>
         <TabControl>
-        <!-- ── Onglet Champions (navigation liste → détail inchangée) ──────── -->
-        <TabItem Header="{x:Static props:Resources.Tab_Champions}">
-            <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
-        </TabItem>
+            <!-- ── Onglet Champions (navigation liste → détail inchangée) ──────── -->
+            <TabItem Header="{x:Static props:Resources.Tab_Champions}">
+                <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
+            </TabItem>
 
-        <!-- ── Onglet Objets ───────────────────────────────────────────────── -->
-        <TabItem Header="{x:Static props:Resources.Tab_Items}">
-            <Grid DataContext="{Binding Items}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="2*" MinWidth="260" />
-                </Grid.ColumnDefinitions>
+            <!-- ── Onglet Objets : navigateur (gauche) + détail (droite) ───────── -->
+            <TabItem Header="{x:Static props:Resources.Tab_Items}">
+                <Grid DataContext="{Binding Items}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="3*" />
+                        <ColumnDefinition Width="2*" MinWidth="260" />
+                    </Grid.ColumnDefinitions>
 
-                <!-- Liste des objets (barre d'outils + grille d'icônes) -->
-                <DockPanel Grid.Column="0" Margin="8">
-                    <Border DockPanel.Dock="Top" Background="#F5F5F5" BorderBrush="#E0E0E0"
-                            BorderThickness="1" CornerRadius="3" Padding="8,5" Margin="0,0,0,8">
-                        <WrapPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <!-- Recherche par nom (avec autocomplétion) -->
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
-                                <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,6,0" />
-                                <views:AutoCompleteBox Width="200" VerticalAlignment="Center"
-                                                       Text="{Binding NameFilter, Mode=TwoWay}"
-                                                       ItemsSource="{Binding SearchSuggestions}"
-                                                       TextMemberPath="Name"
-                                                       Placeholder="{x:Static props:Resources.ItemPage_Search}" />
-                            </StackPanel>
+                    <views:ItemBrowserControl Grid.Column="0" Margin="8" />
 
-                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
-
-                            <!-- Filtre : mode de jeu -->
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,12,0">
-                                <TextBlock Text="{x:Static props:Resources.Toolbar_GameMode}" Style="{StaticResource ItemFilterLabel}" />
-                                <RadioButton Content="{x:Static props:Resources.Filter_All}" Style="{StaticResource ItemFilterRadio}" GroupName="GameModeFilter"
-                                             IsChecked="{Binding SelectedGameMode, Mode=TwoWay,
-                                                         Converter={StaticResource EnumToBool},
-                                                         ConverterParameter={x:Static models:GameModeFilter.Tous}}" />
-                                <RadioButton Content="{x:Static props:Resources.GameMode_NormalRanked}" Style="{StaticResource ItemFilterRadio}" GroupName="GameModeFilter"
-                                             IsChecked="{Binding SelectedGameMode, Mode=TwoWay,
-                                                         Converter={StaticResource EnumToBool},
-                                                         ConverterParameter={x:Static models:GameModeFilter.NormalClasse}}" />
-                                <RadioButton Content="{x:Static props:Resources.GameMode_Aram}" Style="{StaticResource ItemFilterRadio}" GroupName="GameModeFilter"
-                                             IsChecked="{Binding SelectedGameMode, Mode=TwoWay,
-                                                         Converter={StaticResource EnumToBool},
-                                                         ConverterParameter={x:Static models:GameModeFilter.Aram}}" />
-                                <RadioButton Content="{x:Static props:Resources.GameMode_Arena}" Style="{StaticResource ItemFilterRadio}" GroupName="GameModeFilter"
-                                             IsChecked="{Binding SelectedGameMode, Mode=TwoWay,
-                                                         Converter={StaticResource EnumToBool},
-                                                         ConverterParameter={x:Static models:GameModeFilter.Arena}}" />
-                            </StackPanel>
-
-                            <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Margin="0,0,12,0" />
-
-                            <!-- Tri (par nom, coût ou statistique) -->
-                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                                <TextBlock Text="{x:Static props:Resources.Toolbar_Sort}" Style="{StaticResource ItemFilterLabel}" />
-                                <ComboBox Width="130" VerticalAlignment="Center"
-                                          ItemsSource="{Binding SortOptions}"
-                                          SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}"
-                                          DisplayMemberPath="Label" />
-                            </StackPanel>
-                        </WrapPanel>
+                    <Border Grid.Column="1" Background="#F7F7F7" BorderBrush="#E0E0E0"
+                            BorderThickness="1,0,0,0" Padding="14">
+                        <views:ItemDetailControl DataContext="{Binding SelectedItem}" />
                     </Border>
-
-                    <!-- Filtre par statistique (multi-sélection, combiné en ET) -->
-                    <Border DockPanel.Dock="Top" Background="#FAFAFA" BorderBrush="#E0E0E0"
-                            BorderThickness="1" CornerRadius="3" Padding="8,5" Margin="0,0,0,8">
-                        <DockPanel>
-                            <TextBlock DockPanel.Dock="Left" VerticalAlignment="Center"
-                                       Text="{x:Static props:Resources.Toolbar_StatFilter}"
-                                       Style="{StaticResource ItemFilterLabel}" />
-                            <ItemsControl ItemsSource="{Binding StatFilters}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type vm:FilterItemViewModel}">
-                                        <CheckBox Content="{Binding Label}"
-                                                  IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                                  Style="{StaticResource ItemFilterCheck}" />
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </DockPanel>
-                    </Border>
-
-                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding ItemsView}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type vm:ItemViewModel}">
-                                    <Button Click="ItemButton_OnClick"
-                                            ToolTip="{Binding Name}"
-                                            Background="Transparent" BorderThickness="1"
-                                            BorderBrush="#DDD" Padding="2" Margin="3" Cursor="Hand">
-                                        <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.ITEM}"
-                                               utils:CachedImage.SourcePath="{Binding ImagePath}"
-                                               Width="40" Height="40" />
-                                    </Button>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </DockPanel>
-
-                <!-- Panneau de détail de l'objet sélectionné -->
-                <Border Grid.Column="1" Background="#F7F7F7" BorderBrush="#E0E0E0"
-                        BorderThickness="1,0,0,0" Padding="14"
-                        DataContext="{Binding SelectedItem}">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto">
-                        <StackPanel>
-                            <!-- En-tête : icône + nom + coût -->
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
-                                <Image utils:CachedImage.Kind="{x:Static utils:ImageConstant.ITEM}"
-                                       utils:CachedImage.SourcePath="{Binding ImagePath}"
-                                       Width="48" Height="48" Margin="0,0,10,0" VerticalAlignment="Top" />
-                                <StackPanel VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Name}" FontSize="16" FontWeight="Bold"
-                                               TextWrapping="Wrap" />
-                                    <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                                        <TextBlock Text="{x:Static props:Resources.ItemPage_Cost}"
-                                                   Foreground="#777" Margin="0,0,4,0" />
-                                        <TextBlock Text="{Binding Gold}" FontWeight="SemiBold" Foreground="#C8941E" />
-                                        <TextBlock Text=" 🪙" />
-                                    </StackPanel>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <!-- Stats -->
-                            <ItemsControl ItemsSource="{Binding Stats}"
-                                          Visibility="{Binding HasStats, Converter={StaticResource BoolToVis}}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type vm:ChampionStatRow}">
-                                        <Grid Margin="0,2">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="60" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding Value}"
-                                                       FontWeight="SemiBold" Foreground="#1A7F37" />
-                                            <TextBlock Grid.Column="1" Text="{Binding Label}" Foreground="#444" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-
-                            <!-- Effets -->
-                            <TextBlock Text="{x:Static props:Resources.ItemPage_Effects}"
-                                       FontWeight="SemiBold" Margin="0,12,0,4"
-                                       Visibility="{Binding HasEffects, Converter={StaticResource BoolToVis}}" />
-                            <TextBlock Text="{Binding Effects}" TextWrapping="Wrap" Foreground="#444"
-                                       FontSize="12"
-                                       Visibility="{Binding HasEffects, Converter={StaticResource BoolToVis}}" />
-
-                            <!-- Arbre de fabrication (recette) -->
-                            <StackPanel Margin="0,4,0,0"
-                                        Visibility="{Binding HasRecipe, Converter={StaticResource BoolToVis}}">
-                                <TextBlock Text="{x:Static props:Resources.ItemPage_BuildPath}"
-                                           FontWeight="SemiBold" Margin="0,14,0,8" />
-                                <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                                              VerticalScrollBarVisibility="Disabled">
-                                    <views:RecipeTreeNode DataContext="{Binding Recipe}"
-                                                          HorizontalAlignment="Left" />
-                                </ScrollViewer>
-                            </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
-                </Border>
-            </Grid>
-        </TabItem>
+                </Grid>
+            </TabItem>
         </TabControl>
 
         <!-- Sélecteur de langue (haut-droite) : drapeau + endonyme. Le changement
