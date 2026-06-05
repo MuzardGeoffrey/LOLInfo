@@ -446,6 +446,18 @@ namespace LOLInfo.Properties {
             get { return ResourceManager.GetString("Toolbar_StatFilter", resourceCulture); }
         }
 
+        public static string Language_Tooltip {
+            get { return ResourceManager.GetString("Language_Tooltip", resourceCulture); }
+        }
+
+        public static string Language_RestartTitle {
+            get { return ResourceManager.GetString("Language_RestartTitle", resourceCulture); }
+        }
+
+        public static string Language_RestartPrompt {
+            get { return ResourceManager.GetString("Language_RestartPrompt", resourceCulture); }
+        }
+
         /// <summary>
         ///   Recherche une chaîne localisée semblable à Niv {0}.
         /// </summary>

@@ -384,4 +384,13 @@
   <data name="Toolbar_StatFilter" xml:space="preserve">
     <value>Stats:</value>
   </data>
+  <data name="Language_Tooltip" xml:space="preserve">
+    <value>Display and data language</value>
+  </data>
+  <data name="Language_RestartTitle" xml:space="preserve">
+    <value>Change language</value>
+  </data>
+  <data name="Language_RestartPrompt" xml:space="preserve">
+    <value>The application will restart to apply the new language.</value>
+  </data>
 </root>

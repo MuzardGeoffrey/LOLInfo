@@ -42,6 +42,18 @@ public partial class App : Application
     /// <summary>Gets the <see cref="IServiceProvider"/> instance to resolve application services.</summary>
     public IServiceProvider Services { get; }
 
+    /// <summary>
+    /// Relance l'application (nouveau processus puis arrêt du courant). Utilisé après
+    /// un changement de langue : la culture et les données Riot sont rechargées au
+    /// démarrage, et les ressources XAML (<c>{x:Static}</c>) relues dans la nouvelle langue.
+    /// </summary>
+    public void Restart()
+    {
+        var path = Environment.ProcessPath;
+        if (path is not null) System.Diagnostics.Process.Start(path);
+        this.Shutdown();
+    }
+
     // ── Logging ──────────────────────────────────────────────────────────
 
     /// <summary>

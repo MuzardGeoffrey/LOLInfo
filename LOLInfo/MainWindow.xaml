@@ -37,9 +37,58 @@
             <Setter Property="FontSize"          Value="12" />
             <Setter Property="Cursor"            Value="Hand" />
         </Style>
+
+        <!-- Élément du sélecteur de langue : drapeau (vectoriel) + endonyme -->
+        <DataTemplate x:Key="LanguageItemTemplate" DataType="{x:Type vm:LanguageOption}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Grid Width="22" Height="14" Margin="0,0,8,0" ClipToBounds="True" SnapsToDevicePixels="True">
+                    <!-- France : tricolore -->
+                    <Grid x:Name="FlagFr" Visibility="Collapsed">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Fill="#0055A4" />
+                        <Rectangle Grid.Column="1" Fill="#FFFFFF" />
+                        <Rectangle Grid.Column="2" Fill="#EF4135" />
+                    </Grid>
+                    <!-- Royaume-Uni (anglais) : Union Jack -->
+                    <Grid x:Name="FlagEn" Visibility="Collapsed" ClipToBounds="True">
+                        <Rectangle Fill="#012169" />
+                        <Rectangle Fill="#FFFFFF" Width="27" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform><RotateTransform Angle="32" /></Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="#FFFFFF" Width="27" Height="5" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform><RotateTransform Angle="-32" /></Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="#C8102E" Width="27" Height="2" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform><RotateTransform Angle="32" /></Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="#C8102E" Width="27" Height="2" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                            <Rectangle.RenderTransform><RotateTransform Angle="-32" /></Rectangle.RenderTransform>
+                        </Rectangle>
+                        <Rectangle Fill="#FFFFFF" Width="6" HorizontalAlignment="Center" />
+                        <Rectangle Fill="#FFFFFF" Height="6" VerticalAlignment="Center" />
+                        <Rectangle Fill="#C8102E" Width="3.5" HorizontalAlignment="Center" />
+                        <Rectangle Fill="#C8102E" Height="3.5" VerticalAlignment="Center" />
+                    </Grid>
+                </Grid>
+                <TextBlock Text="{Binding NativeName}" VerticalAlignment="Center" />
+            </StackPanel>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Code}" Value="fr">
+                    <Setter TargetName="FlagFr" Property="Visibility" Value="Visible" />
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Code}" Value="en">
+                    <Setter TargetName="FlagEn" Property="Visibility" Value="Visible" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
     </Window.Resources>
 
-    <TabControl>
+    <Grid>
+        <TabControl>
         <!-- ── Onglet Champions (navigation liste → détail inchangée) ──────── -->
         <TabItem Header="{x:Static props:Resources.Tab_Champions}">
             <Frame Content="{Binding CurrentPage}" NavigationUIVisibility="Hidden" />
@@ -216,5 +265,18 @@
                 </Border>
             </Grid>
         </TabItem>
-    </TabControl>
+        </TabControl>
+
+        <!-- Sélecteur de langue (haut-droite) : drapeau + endonyme. Le changement
+             persiste la langue et propose un redémarrage pour l'appliquer. -->
+        <ComboBox x:Name="LanguageSelector"
+                  HorizontalAlignment="Right" VerticalAlignment="Top"
+                  Margin="0,3,8,0" MinWidth="130" Panel.ZIndex="10"
+                  ItemsSource="{Binding Languages}"
+                  ItemTemplate="{StaticResource LanguageItemTemplate}"
+                  SelectedValuePath="Code"
+                  SelectedValue="{Binding CurrentLanguageCode, Mode=OneWay}"
+                  SelectionChanged="LanguageSelector_SelectionChanged"
+                  ToolTip="{x:Static props:Resources.Language_Tooltip}" />
+    </Grid>
 </Window>

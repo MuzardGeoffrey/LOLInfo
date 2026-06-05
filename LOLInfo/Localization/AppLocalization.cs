@@ -37,6 +37,20 @@ public static class AppLocalization
         ["fr"] = "fr_FR",
     };
 
+    /// <summary>
+    /// Nom de chaque langue dans sa propre langue (endonyme), pour le sélecteur.
+    /// Ajouter une langue = ajouter une entrée ici (et un drapeau dans le template XAML).
+    /// </summary>
+    private static readonly Dictionary<string, string> NativeNameByCulture = new()
+    {
+        ["en"] = "English",
+        ["fr"] = "Français",
+    };
+
+    /// <summary>Endonyme de la langue (ex : "fr" → "Français"). Inconnu ⇒ le code lui-même.</summary>
+    public static string NativeName(string cultureName) =>
+        NativeNameByCulture.TryGetValue(cultureName, out var name) ? name : cultureName;
+
     /// <summary>Langues proposées par l'application (codes culture .NET).</summary>
     public static IReadOnlyList<string> SupportedCultures { get; } =
         DataLocaleByCulture.Keys.ToArray();
